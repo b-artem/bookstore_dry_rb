@@ -32,7 +32,7 @@ development:
   username: rails_user
 
   # The password associated with the postgres role (username).
-  password: <%= ENV['BOOKSTORE_DATABASE_PASSWORD_DEV'] %>
+  password: ghtY769kgTrsdfkj
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -59,7 +59,7 @@ test:
   <<: *default
   database: bookstore_test
   username: rails_user
-  password: <%= ENV['BOOKSTORE_DATABASE_PASSWORD_TEST'] %>
+  password: ghtY769kgTrsdfkj
   host: localhost
 
 # As with config/secrets.yml, you never want to store sensitive information,
