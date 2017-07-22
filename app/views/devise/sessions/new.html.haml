@@ -3,6 +3,7 @@
   %a.general-login-icon{href: "#"}
     %i.fa.fa-facebook-official
   %p.general-login-text or
+  
 = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
   .form-group.mb-30
     = f.label :email, "Enter Email", class: "control-label input-label"
