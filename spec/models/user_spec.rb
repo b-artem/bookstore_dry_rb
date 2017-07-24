@@ -14,10 +14,19 @@ RSpec.describe User, type: :model do
 
   context ':email' do
     it { is_expected.to validate_presence_of(:email) }
-    it { is_expected.to validate_presence_of(:email) }
+    # it { is_expected.to allow_value('http://foo.com').for(:email) }
   end
 
   context ':password' do
+    # Should be masked.
+    # Minimum 8 letters, at least 1 uppercase, at least 1 lowercase, at least 1 number.
+    # Mustn't contain spaces inside
+    # Spaces at the beginning and at the end should be cut off.
+
     it { is_expected.to validate_presence_of(:password) }
+    it { is_expected.to validate_length_of(:password).is_at_least(8) }
+
+
+
   end
 end
