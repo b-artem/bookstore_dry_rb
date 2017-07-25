@@ -1,0 +1,125 @@
+.text-center
+  %h3.general-login-title Log In
+  %a.general-login-icon{href: "#"}
+    %i.fa.fa-facebook-official
+  %p.general-login-text or
+  
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
+  .form-group.mb-30
+    = f.label :email, "Enter Email", class: "control-label input-label"
+    = f.email_field :email, class: "form-control", id: "email", autofocus: "true", placeholder: "Enter Email"
+
+  .form-group.mb-30
+    = f.label :password, "Password", class: "control-label input-label"
+    = f.password_field :password, id: "password", class: "form-control", placeholder: "Password"
+    = render "devise/shared/forgot_password"
+
+  - if devise_mapping.rememberable?
+    .form-group.checkbox.text-center.mb-30
+      %label.checkbox-label
+        = f.check_box :remember_me, class: "checkbox-input", hidden: "true"
+        %span.checkbox-icon
+          %i.fa.fa-check
+        %span.checkbox-text Remember me
+
+  .text-center
+    = f.submit "Log in", class: "btn btn-default mb-20"
+
+%p.general-sign-text.text-center
+  Don’t have an Account?
+  = render "devise/shared/links"
+
+
+
+-# %form.general-form
+-#   .form-group.mb-30
+-#     %label.control-label.input-label{for: "email"} Enter Email
+-#     %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
+-#   .form-group.mb-30
+-#     %label.control-label.input-label{for: "password"} Password
+-#     %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
+-#     %a.help-block.in-gold-500{href: "#"} Forgot password?
+-#   .form-group.mb-30
+-#     %label.control-label.input-label{for: "confirm"} Confirm Password
+-#     %input#confirm.form-control{name:"confirm", type: "password", placeholder: "Confirm Password"}
+-#   .form-group.checkbox.text-center.mb-30
+-#     %label.checkbox-label
+-#       %input.checkbox-input{type: "checkbox", hidden: "true"}
+-#       %span.checkbox-icon
+-#         %i.fa.fa-check
+-#       %span.checkbox-text Remember me
+-#   .text-center
+-#     %button.btn.btn-default.mb-20 Back to Store
+-# %p.general-sign-text.text-center
+-#   Don’t have an Account?
+-#   %a.in-gold-500{href: "#"} Sign Up
+
+
+
+-# DEVISE DEFAULT
+
+-# <h2>Log in</h2>
+
+-# <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+-#   <div class="field">
+-#     <%= f.label :email %><br />
+-#     <%= f.email_field :email, autofocus: true %>
+-#   </div>
+-#
+-#   <div class="field">
+-#     <%= f.label :password %><br />
+-#     <%= f.password_field :password, autocomplete: "off" %>
+-#   </div>
+-#
+-#   <% if devise_mapping.rememberable? -%>
+-#     <div class="field">
+-#       <%= f.check_box :remember_me %>
+-#       <%= f.label :remember_me %>
+-#     </div>
+-#   <% end -%>
+-#
+-#   <div class="actions">
+-#     <%= f.submit "Log in" %>
+-#   </div>
+-# <% end %>
+-#
+-# <%= render "devise/shared/links" %>
+
+
+
+
+
+
+
+
+-# FIRST TRY
+
+-# .text-center
+-#   %h3.general-login-title Log In
+-#   %a.general-login-icon{href: "#"}
+-#     %i.fa.fa-facebook-official
+-#   %p.general-login-text or
+-# %form.general-form
+-#   .form-group.mb-30
+-#     %label.control-label.input-label{for: "email"} Enter Email
+-#     %input#email.form-control{name: "email", type: "email", placeholder: "Enter Email", autofocus: true}
+-#
+-#   .form-group.mb-30
+-#     %label.control-label.input-label{for: "password"} Password
+-#     %input#password.form-control{name: "password", type: "password", placeholder: "Password"}
+-#     %a.help-block.in-gold-500{href: "#"} Forgot password?
+-#
+-#   - if devise_mapping.rememberable?
+-#     .form-group.checkbox.text-center.mb-30
+-#       %label.checkbox-label
+-#         %input.checkbox-input{type: "checkbox", name: "remember_me", hidden: "true"}
+-#         %span.checkbox-icon
+-#           %i.fa.fa-check
+-#         %span.checkbox-text Remember me
+-#
+-#   .text-center
+-#     %button.btn.btn-default.mb-20{type: "submit"} Log in
+-# %p.general-sign-text.text-center
+-#   Don’t have an Account?
+-#   = render "devise/shared/links"     # Have to remove forgot password?
+  -# %a.in-gold-500{href: "#"} Sign Up
