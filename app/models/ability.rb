@@ -6,7 +6,7 @@ class Ability
     if user && user.role == "admin"
       can :access, :rails_admin       # only allow admin users to access Rails Admin
       can :dashboard                  # allow access to dashboard
-      can :manage, :all             # allow superadmins to do anything
+      can :manage, :all             # allow admins to do anything
     else
       can :read, :all               # allow everyone to read everything
     end
