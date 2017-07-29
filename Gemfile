@@ -7,10 +7,13 @@ end
 
 gem 'cancancan', '~> 2.0'
 gem 'devise', '~> 4.3'
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'haml-rails', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use postgresql as the database for Active Record
+gem 'omniauth', '~> 1.6', '>= 1.6.1'
+gem 'omniauth-facebook', '~> 4.0'
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725095750) do
+ActiveRecord::Schema.define(version: 20170729191755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,13 @@ ActiveRecord::Schema.define(version: 20170725095750) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role", default: "user"
+    t.string "omniauth_provider"
+    t.string "omniauth_uid"
+    t.string "image_url"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["omniauth_provider", "omniauth_uid"], name: "index_users_on_omniauth_provider_and_omniauth_uid", unique: true
+    t.index ["omniauth_provider"], name: "index_users_on_omniauth_provider"
+    t.index ["omniauth_uid"], name: "index_users_on_omniauth_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

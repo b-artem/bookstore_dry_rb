@@ -1,9 +1,9 @@
 .text-center
   %h3.general-login-title Log In
-  %a.general-login-icon{href: "#"}
+  %a.general-login-icon{href: "#{user_facebook_omniauth_authorize_path}"}
     %i.fa.fa-facebook-official
   %p.general-login-text or
-  
+
 = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
   .form-group.mb-30
     = f.label :email, "Enter Email", class: "control-label input-label"
