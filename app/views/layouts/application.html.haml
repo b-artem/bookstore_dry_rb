@@ -69,6 +69,10 @@
 
     %main.container.general-main-wrap
 
+      - if flash
+        .warning= flash[:warning]
+        .notice= flash[:notice]
+
       %p.notice= notice
       %p.alert= alert
 
