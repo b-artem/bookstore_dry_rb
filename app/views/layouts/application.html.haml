@@ -63,7 +63,8 @@
                     %a{href: "#"} Web design
                   %li.divider{role: "separator"}
                   %li
-                    %a{href: "#{destroy_user_session_path}", method: :delete} Log out
+                    = link_to('Log out', destroy_user_session_path, method: :delete)
+                    -# %a{href: "#"} Log out
               %li
                 %a{href: "#"} My account
 
