@@ -16,4 +16,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
     devise_parameter_sanitizer.permit(:account_update, keys: [:role])
   end
+
+  def after_sign_in_path_for(resource)
+    # binding.pry
+    request.env['omniauth.origin'] || root_path
+  end
 end

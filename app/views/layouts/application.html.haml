@@ -51,7 +51,8 @@
           .hidden-xs
             %ul.nav.navbar-nav
               %li
-                %a{href: "#"} Home
+                = link_to 'Home', root_path
+                -# %a{href: "#"} Home
               %li.dropdown
                 %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
                 %ul.dropdown-menu
@@ -63,11 +64,17 @@
                     %a{href: "#"} Web design
                   %li.divider{role: "separator"}
                   %li
-                    %a{href: "#"} Log out
+                    = link_to('Log out', destroy_user_session_path, method: :delete)
+                    -# %a{href: "#"} Log out
               %li
                 %a{href: "#"} My account
 
     %main.container.general-main-wrap
+
+      - if flash
+        .warning= flash[:warning]
+        .notice= flash[:notice]
+        .alert= flash[:alert]
 
       %p.notice= notice
       %p.alert= alert
