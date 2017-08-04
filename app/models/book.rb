@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+  has_and_belongs_to_many :authors
+  has_and_belongs_to_many :categories
+
   validates :title, :description, :price, :image_url, :publication_year,
             :dimensions, :materials, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
