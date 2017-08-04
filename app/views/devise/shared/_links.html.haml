@@ -3,7 +3,7 @@
   %br
 
 - if devise_mapping.registerable? && controller_name != 'registrations'
-  = link_to "Sign up", new_registration_path(resource_name), class: "in-gold-500"
+  = link_to t('.sign_up'), new_registration_path(resource_name), class: "in-gold-500"
   %br
 
 - if devise_mapping.confirmable? && controller_name != 'confirmations'

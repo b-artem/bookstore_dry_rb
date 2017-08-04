@@ -1,19 +1,20 @@
 .text-center
-  %h3.general-login-title Log In
+  %h3.general-login-title #{ t('.sign_in') }
   -# %a.general-login-icon{href: "#{user_facebook_omniauth_authorize_path}"}
   -#   %i.fa.fa-facebook-official
   = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
     %i.fa.fa-facebook-official
-  %p.general-login-text or
+  %p.general-login-text #{ t '.or' }
 
 = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
   .form-group.mb-30
-    = f.label :email, "Enter Email", class: "control-label input-label"
-    = f.email_field :email, class: "form-control", id: "email", autofocus: "true", placeholder: "Enter Email"
+    = f.label :email, t('.enter_email'), class: "control-label input-label"
+    = f.email_field :email, class: "form-control", id: "email", autofocus: "true",
+                    placeholder: t('.enter_email')
 
   .form-group.mb-30
-    = f.label :password, "Password", class: "control-label input-label"
-    = f.password_field :password, id: "password", class: "form-control", placeholder: "Password"
+    = f.label :password, t('.password'), class: "control-label input-label"
+    = f.password_field :password, id: "password", class: "form-control", placeholder: t('.password')
     = render "devise/shared/forgot_password"
 
   - if devise_mapping.rememberable?
@@ -22,13 +23,13 @@
         = f.check_box :remember_me, class: "checkbox-input", hidden: "true"
         %span.checkbox-icon
           %i.fa.fa-check
-        %span.checkbox-text Remember me
+        %span.checkbox-text #{ t '.remember_me' }
 
   .text-center
-    = f.submit "Log in", class: "btn btn-default mb-20"
+    = f.submit t('.sign_in'), class: "btn btn-default mb-20"
 
 %p.general-sign-text.text-center
-  Don’t have an Account?
+  = t '.dont_have_an_account'
   = render "devise/shared/links"
 
 

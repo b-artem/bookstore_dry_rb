@@ -30,4 +30,28 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  layouts:
+    application:
+      home: 'Home'
+      shop: 'Shop'
+      mobile_development: 'Mobile development'
+      photo: 'Photo'
+      web_design: 'Web design'
+      logout: 'Log out'
+      my_account: 'My account'
+      orders: 'Orders'
+      settings: 'Settings'
+  devise:
+    shared:
+      links:
+        sign_up: 'Sign up'
+      forgot_password:
+        forgot_your_password: "Forgot password?"
+    sessions:
+      new:
+        or: 'or'
+        enter_email: 'Enter Email'
+        password: 'Password'
+        remember_me: 'Remember me'
+        sign_in: 'Log in'
+        dont_have_an_account: Don’t have an Account?
