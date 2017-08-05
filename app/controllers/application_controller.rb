@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :set_locale_from_params
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # rescue_from CanCan::AccessDenied do |exception|
@@ -18,7 +19,20 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    # binding.pry
     request.env['omniauth.origin'] || root_path
+  end
+
+  def set_locale_from_params
+    return unless params[:locale]
+    if I18n.available_locales.map(&:to_s).include?(params[:locale])
+      I18n.locale = params[:locale]
+    else
+      flash.now[:notice] = "#{params[:locale]} translation not available"
+      logger.error flash.now[:notice]
+    end
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
   end
 end
