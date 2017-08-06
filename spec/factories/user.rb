@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
-    email { '' }
-    password { '' }
+    email { 'johndoe@example.com' }
+    password { '12345678' }
 
     # factory :admin do
     #   admin true

@@ -6,7 +6,8 @@
     %i.fa.fa-facebook-official
   %p.general-login-text #{ t '.or' }
 
-= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
+= form_for(resource, as: resource_name, url: session_path(resource_name), 
+            html: { class: "general-form" }) do |f|
   .form-group.mb-30
     = f.label :email, t('.enter_email'), class: "control-label input-label"
     = f.email_field :email, class: "form-control", id: "email", autofocus: "true",
