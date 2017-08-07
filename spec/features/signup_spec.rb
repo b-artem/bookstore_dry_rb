@@ -3,7 +3,7 @@ require 'support/factory_girl'
 
 feature 'Signup' do
   let(:password) { Faker::Internet.password(8) }
-  before { visit new_user_registration_path }
+  background { visit new_user_registration_path }
 
   scenario 'User registers successfully via register form' do
     within 'form#new_user' do
