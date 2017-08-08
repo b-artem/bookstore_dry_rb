@@ -1,9 +1,10 @@
-# require 'rspec/rails'
+require 'rails_helper'
 
-# RSpec.configure do |config|
-#   config.include Warden::Test::Helpers
-#   # config.include Devise::Test::ControllerHelpers#, :type => :controller
-#   # # config.extend ControllerMacros, :type => :controller
-#   # # config.include Devise::Test::IntegrationHelpers#, type: :feature
-#
-# end
+require 'devise'
+
+RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Warden::Test::Helpers
+end
