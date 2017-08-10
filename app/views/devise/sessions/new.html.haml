@@ -4,18 +4,19 @@
   -#   %i.fa.fa-facebook-official
   = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
     %i.fa.fa-facebook-official
-  %p.general-login-text #{ t '.or' }
+  %p.general-login-text #{ t 'devise.or' }
 
-= form_for(resource, as: resource_name, url: session_path(resource_name), 
+= form_for(resource, as: resource_name, url: session_path(resource_name),
             html: { class: "general-form" }) do |f|
   .form-group.mb-30
-    = f.label :email, t('.enter_email'), class: "control-label input-label"
+    = f.label :email, t('devise.enter_email'), class: "control-label input-label"
     = f.email_field :email, class: "form-control", id: "email", autofocus: "true",
-                    placeholder: t('.enter_email')
+                    placeholder: t('devise.enter_email')
 
   .form-group.mb-30
-    = f.label :password, t('.password'), class: "control-label input-label"
-    = f.password_field :password, id: "password", class: "form-control", placeholder: t('.password')
+    = f.label :password, t('devise.password'), class: "control-label input-label"
+    = f.password_field :password, id: "password", class: "form-control",
+                        placeholder: t('devise.password')
     = render "devise/shared/forgot_password"
 
   - if devise_mapping.rememberable?

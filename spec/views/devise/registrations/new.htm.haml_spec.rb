@@ -1,7 +1,7 @@
 require 'support/factory_girl'
 require 'support/i18n'
 
-describe 'devise/sessions/new.html.haml', type: :view do
+describe 'devise/registrations/new.html.haml', type: :view do
   # necessary for stubbing resource and resource_name
   before :all do
     RSpec.configure do |config|
@@ -27,8 +27,8 @@ describe 'devise/sessions/new.html.haml', type: :view do
     render
   end
 
-  it 'has Log in text' do
-    expect(rendered).to have_text t('devise.sessions.new.sign_in')
+  it 'has Sign Up text' do
+    expect(rendered).to have_text t('devise.registrations.new.sign_up')
   end
 
   it 'has Facebook login icon' do
@@ -47,20 +47,15 @@ describe 'devise/sessions/new.html.haml', type: :view do
     expect(rendered).to have_selector '#password'
   end
 
-  it 'has Forgot password link' do
-    expect(rendered).to have_link t('devise.shared.forgot_password.forgot_your_password')
+  it 'has confirm password field' do
+    expect(rendered).to have_selector '#confirm-password'
   end
 
-  it 'has Remember me checkbox' do
-    expect(rendered).to have_css 'span.checkbox-icon'
-    expect(rendered).to have_text t('devise.sessions.new.remember_me')
+  it 'has Sign Up button' do
+    expect(rendered).to have_button t('devise.registrations.new.sign_up')
   end
 
-  it 'has Log in button' do
-    expect(rendered).to have_button t('devise.sessions.new.sign_in')
-  end
-
-  it 'has Sign up link' do
-    expect(rendered).to have_link 'Sign up'
+  it 'has Sign in link' do
+    expect(rendered).to have_link t('devise.sessions.new.sign_in')
   end
 end
