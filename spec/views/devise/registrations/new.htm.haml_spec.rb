@@ -55,7 +55,7 @@ describe 'devise/registrations/new.html.haml', type: :view do
     expect(rendered).to have_button t('devise.registrations.new.sign_up')
   end
 
-  it 'has Sign in link__' do
+  it 'has Sign in link' do
     expect(rendered).to have_link t('devise.sessions.new.sign_in')
   end
 end

@@ -12,14 +12,24 @@ describe Devise::SessionsController, type: :controller do
   end
 
   describe 'GET #new' do
-    context 'when password is valid' do
-      before { login_as(user, :scope => :user) }
-
-      it "returns a success response" do
-        expect(response).to be_success
-      end
-
-      it { is_expected.to redirect_to root_url }
+    it "returns a success response" do
+      expect(response).to be_success
     end
+
+    # it { is_expected.to redirect_to root_url }
+  end
+
+  describe "POST #create" do
+    before do
+      post :create
+    end
+
+    context "with valid password" do
+      # it { is_expected.to change(Session, :count).by(1) }
+
+      # it { is_expected.to redirect_to root_url }
+    end
+
+    context "with invalid password"
   end
 end
