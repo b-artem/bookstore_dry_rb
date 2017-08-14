@@ -1,33 +1,36 @@
 .text-center
-  %h3.general-login-title Sign Up
+  %h3.general-login-title #{ t '.sign_up' }
   -# %a.general-login-icon{href: "#"}
   = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
     %i.fa.fa-facebook-official
-  %p.general-login-text or
+  %p.general-login-text #{ t 'devise.or' }
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "general-form" }) do |f|
   = devise_error_messages!
 
   .form-group.mb-30
-    = f.label :email, "Enter Email", class: "control-label input-label"
-    = f.email_field :email, class: "form-control", id: "email", autofocus: "true", placeholder: "Enter Email"
+    = f.label :email, t('devise.enter_email'), class: "control-label input-label"
+    = f.email_field :email, class: "form-control", id: "email",
+                    autofocus: "true", placeholder: t('devise.enter_email')
 
   .form-group.mb-30
-    = f.label :password, "Password", class: "control-label input-label"
+    = f.label :password, t('devise.password'), class: "control-label input-label"
     -# - if @minimum_password_length
     -#   %em #{@minimum_password_length} characters minimum
     -#   %br
-    = f.password_field :password, id: "password", class: "form-control", placeholder: "Password"
+    = f.password_field :password, id: "password", class: "form-control",
+                        placeholder: t('devise.password')
 
   .form-group.mb-30
-    = f.label :password_confirmation, "Confirm Password", class: "control-label input-label"
-    = f.password_field :password_confirmation, id: "confirm-password", class: "form-control", placeholder: "Confirm Password"
-
+    = f.label :password_confirmation, t('.confirm_password'),
+              class: "control-label input-label"
+    = f.password_field :password_confirmation, id: "confirm-password",
+                        class: "form-control", placeholder: t('.confirm_password')
   .text-center
-    = f.submit "Sign Up", class: "btn btn-default mb-20"
+    = f.submit t('.sign_up'), class: "btn btn-default mb-20"
 
 %p.general-sign-text.text-center
-  Have an Account?
+  = t '.have_an_account'
   = render "devise/shared/links"
 
 
