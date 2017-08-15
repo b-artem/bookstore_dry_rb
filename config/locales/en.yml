@@ -41,6 +41,9 @@ en:
       my_account: 'My account'
       orders: 'Orders'
       settings: 'Settings'
+  books:
+    show:
+      back_to_results: 'Back to results'
   devise:
     or: 'or'
     enter_email: 'Enter Email'
