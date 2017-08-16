@@ -7,6 +7,7 @@ end
 
 gem 'cancancan', '~> 2.0'
 gem 'devise', '~> 4.3'
+gem 'draper', '~> 3.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'haml-rails', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
