@@ -25,7 +25,8 @@
         = book.authors_names
       .row
         .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10 €32.90
+          %p.h1.in-gold-500.mt-10
+            = number_to_currency(@book.price)
         .col-xs-5.col-md-3
           .input-group.general-position
             %a.input-link{href: "#"}
@@ -34,24 +35,25 @@
             %a.input-link{href: "#"}
               %i.fa.fa-plus.line-height-40
         .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position Add to Cart
+          %button.btn.btn-default.pull-right.general-position
+            = t '.add_to_cart'
       .general-info-wrap.divider-lg
-        %p Description
+        %p #{t '.description'}
         %p.lead.small.line-height-2
-          Smashing Book 5: Real-Life Responsive Web Design is our brand new, upcoming book with smart front-end techniques and design patterns derived from real-life responsive projects. With 13 chapters on responsive workflow, SVG, Flexbox, Web fonts, responsive images, responsive email, content strategy, debugging ...
+          = truncate(@book.description, length: 500)
           %a.in-gold-500.ml-10{href: "#"} Read More
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Year of publication
+          %p.pull-left #{t '.publication_year'}
           %p.lead.small.pull-right 2016
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Dimensions
-          %p.lead.small.pull-right H:6.4\" x W: 0.9\" x D: 5.0
+          %p.pull-left #{t '.dimensions'}
+          %p.lead.small.pull-right #{@book.dimensions}
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Materials
-          %p.lead.small.pull-right Hardcove, glossy paper
+          %p.lead.small.pull-right #{@book.materials}
   .mb-80
     %h3.in-gold-500.mb-25 Reviews (3)
     .general-message-wrap.divider-lg

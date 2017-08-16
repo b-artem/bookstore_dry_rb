@@ -30,6 +30,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  number:
+    currency:
+      format:
+        unit:      "$"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format:    "%u%n"
   layouts:
     application:
       home: 'Home'
@@ -44,6 +52,10 @@ en:
   books:
     show:
       back_to_results: 'Back to results'
+      add_to_cart: 'Add to Cart'
+      description: 'Description'
+      publication_year: 'Year of publication'
+      dimensions: 'Dimensions'
   devise:
     or: 'or'
     enter_email: 'Enter Email'
