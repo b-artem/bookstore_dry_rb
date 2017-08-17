@@ -3,115 +3,32 @@
     %ol.carousel-indicators
       %li.active{'data-target': "#slider", 'data-slide-to': "0"}
       %li{'data-target': "#slider", 'data-slide-to': "1"}
+      %li{'data-target': "#slider", 'data-slide-to': "2"}
     .carousel-inner{role: "listbox"}
       .item.active
-        .row
-          .col-sm-5
-            .general-img-wrap
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-          .col-sm-7
-            .mb-60
-              %h1 Real-Life Responsive Web Design
-              %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
-              %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
-              .general-align
-                %button.disabled.btn Buy Now
-      .item
-        .row
-          .col-sm-5
-            .general-img-wrap
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-          .col-sm-7
-            .mb-60
-              %h1 Real-Life Responsive Web Design
-              %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
-              %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
-              .general-align
-                %button.btn.btn-primary Buy Now
+        = render partial: 'latest', object: latest.first
+      - (1..latest.count-1).each do |index|
+        .item
+          = render partial: 'latest', object: latest[index]
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
-      %span.sr-only Previous
+      %span.sr-only= t '.previous'
     %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
       %span.icon-next{'aria-hidden': "true"}
-      %span.sr-only Next
+      %span.sr-only= t '.next'
   .container
   .jumbotron.text-center.mb-0
-    %h2.h1 #{ t '.welcome' }
+    %h2.h1= t '.welcome'
     .mb-res-50
-      %p #{ t '.about_us' }
+      %p= t '.about_us'
     = button_to t('.get_started'), books_path, method: :get, class: 'btn btn-default'
   .mb-35
-    %h3 #{ t '.best_sellers' }
+    %h3= t '.best_sellers'
     .row
       = render partial: 'best_sellers', object: best_sellers
-    -# .row
-    -#   .col-sm-6.col-md-3
-    -#     .general-thumb-wrap
-    -#       .thumbnail.general-thumbnail
-    -#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    -#         .thumb-hover
-    -#           .general-thumb-link-wrap
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-shopping-cart.thumb-icon
-    -#     .mb-35
-    -#       .clearfix
-    -#         %p.pull-right.font-16.in-gold-500 #{ best_sellers.first.price }
-    -#         %p.title.mr-55 Android Programming for Beginners
-    -#       %span.divider-sm
-    -#       %p.lead.small John Horton
-    -#   .col-sm-6.col-md-3
-    -#     .general-thumb-wrap
-    -#       .thumbnail.general-thumbnail.disabled
-    -#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    -#         .thumb-hover
-    -#           .general-thumb-link-wrap
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-shopping-cart.thumb-icon
-    -#     .mb-35
-    -#       .clearfix
-    -#         %p.pull-right.font-16.in-gold-500 €28.50
-    -#         %p.title.mr-55 Android Programming for Beginners
-    -#       %span.divider-sm
-    -#       %p.lead.small John Horton
-    -#   .col-sm-6.col-md-3
-    -#     .general-thumb-wrap
-    -#       .thumbnail.general-thumbnail
-    -#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    -#         .thumb-hover
-    -#           .general-thumb-link-wrap
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-shopping-cart.thumb-icon
-    -#     .mb-35
-    -#       .clearfix
-    -#         %p.pull-right.font-16.in-gold-500 €28.50
-    -#         %p.title.mr-55 Android Programming for Beginners
-    -#       %span.divider-sm
-    -#       %p.lead.small John Horton
-    -#   .col-sm-6.col-md-3
-    -#     .general-thumb-wrap
-    -#       .thumbnail.general-thumbnail
-    -#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    -#         .thumb-hover
-    -#           .general-thumb-link-wrap
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-    -#             %a.thumb-hover-link{href: "#"}
-    -#               %i.fa.fa-shopping-cart.thumb-icon
-    -#     .mb-35
-    -#       .clearfix
-    -#         %p.pull-right.font-16.in-gold-500 €28.50
-    -#         %p.title.mr-55 Android Programming for Beginners
-    -#       %span.divider-sm
-    -#       %p.lead.small John Horton
 
 
 - if current_user
-  .p #{current_user.email}
+  .p= current_user.email
   - if current_user.image_url
     = image_tag current_user.image_url

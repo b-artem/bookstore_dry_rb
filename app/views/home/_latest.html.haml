@@ -1,0 +1,52 @@
+.row
+  .col-sm-5
+    .general-img-wrap
+      = image_tag latest.image_url, class: 'img-shadow general-thumbnail-img',
+                alt: "design-book"
+      -# %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+  .col-sm-7
+    .mb-60
+      %h1= latest.title
+      %p.lead= latest.short_description
+      %p.lead.small= latest.authors_names
+      .general-align
+        -# %button.disabled.btn= t 'buy_now'
+        %button.btn.btn-primary= t '.buy_now'
+
+
+-# .item.active
+-#   .row
+-#     .col-sm-5
+-#       .general-img-wrap
+-#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+-#     .col-sm-7
+-#       .mb-60
+-#         %h1 Real-Life Responsive Web Design1
+-#         %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
+-#         %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+-#         .general-align
+-#           %button.disabled.btn Buy Now
+-# .item
+-#   .row
+-#     .col-sm-5
+-#       .general-img-wrap
+-#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+-#     .col-sm-7
+-#       .mb-60
+-#         %h1 Real-Life Responsive Web Design2
+-#         %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
+-#         %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+-#         .general-align
+-#           %button.btn.btn-primary Buy Now
+-# .item
+-#   .row
+-#     .col-sm-5
+-#       .general-img-wrap
+-#         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+-#     .col-sm-7
+-#       .mb-60
+-#         %h1 Real-Life Responsive Web Design3
+-#         %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
+-#         %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+-#         .general-align
+-#           %button.btn.btn-primary Buy Now

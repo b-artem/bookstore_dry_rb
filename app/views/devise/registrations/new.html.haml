@@ -1,9 +1,9 @@
 .text-center
-  %h3.general-login-title #{ t '.sign_up' }
+  %h3.general-login-title= t '.sign_up'
   -# %a.general-login-icon{href: "#"}
   = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
     %i.fa.fa-facebook-official
-  %p.general-login-text #{ t 'devise.or' }
+  %p.general-login-text= t 'devise.or'
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "general-form" }) do |f|
   = devise_error_messages!

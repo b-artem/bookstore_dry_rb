@@ -36,7 +36,7 @@
           %button.btn.btn-default.pull-right.general-position
             = t '.add_to_cart'
       .general-info-wrap.divider-lg
-        %p #{t '.description'}
+        %p= t '.description'
         %p.lead.small.line-height-2
           = book.short_description
           - if @book.description.length > 500
@@ -45,16 +45,16 @@
                       onclick: "readMore('read-more-#{@book.id}', #{@book.description}); return false;"
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left #{t '.publication_year'}
-          %p.lead.small.pull-right #{ @book.publication_year }
+          %p.pull-left= t '.publication_year'
+          %p.lead.small.pull-right= @book.publication_year
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left #{t '.dimensions'}
-          %p.lead.small.pull-right #{@book.dimensions}
+          %p.pull-left= t '.dimensions'
+          %p.lead.small.pull-right= @book.dimensions
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left #{t '.materials'}
-          %p.lead.small.pull-right #{@book.materials}
+          %p.pull-left= t '.materials'
+          %p.lead.small.pull-right= @book.materials
   .mb-80
     %h3.in-gold-500.mb-25 #{t '.reviews'} (3)
     .general-message-wrap.divider-lg

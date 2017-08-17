@@ -56,6 +56,10 @@ en:
                 the five best we can find to share with our members.'
       get_started: 'Get Started'
       best_sellers: 'Best Sellers'
+      previous: 'Previous'
+      next: 'Next'
+    latest:
+      buy_now: 'Buy Now'
   books:
     show:
       back_to_results: 'Back to results'
