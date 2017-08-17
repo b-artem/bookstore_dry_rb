@@ -56,6 +56,9 @@ en:
       description: 'Description'
       publication_year: 'Year of publication'
       dimensions: 'Dimensions'
+      read_more: 'Read More'
+      materials: 'Materials'
+      reviews: 'Reviews'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

@@ -40,22 +40,25 @@
       .general-info-wrap.divider-lg
         %p #{t '.description'}
         %p.lead.small.line-height-2
-          = truncate(@book.description, length: 500)
-          %a.in-gold-500.ml-10{href: "#"} Read More
+          = book.short_description
+          - if @book.description.length > 500
+            = link_to t('.read_more'), '', id: "read-more-#{@book.id}",
+                      class: 'in-gold-500 ml-10',
+                      onclick: "readMore('read-more-#{@book.id}', #{@book.description}); return false;"
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t '.publication_year'}
-          %p.lead.small.pull-right 2016
+          %p.lead.small.pull-right #{ @book.publication_year }
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t '.dimensions'}
           %p.lead.small.pull-right #{@book.dimensions}
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Materials
+          %p.pull-left #{t '.materials'}
           %p.lead.small.pull-right #{@book.materials}
   .mb-80
-    %h3.in-gold-500.mb-25 Reviews (3)
+    %h3.in-gold-500.mb-25 #{t '.reviews'} (3)
     .general-message-wrap.divider-lg
       .clearfix
         %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
@@ -88,7 +91,6 @@
             %i.fa.fa-star.rate-star
             %i.fa.fa-star.rate-star.rate-empty
           %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
-
 
 
 

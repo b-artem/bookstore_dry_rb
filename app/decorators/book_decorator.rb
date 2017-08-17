@@ -6,6 +6,10 @@ class BookDecorator < Draper::Decorator
     authors.map(&:name).join(', ')
   end
 
+  def short_description
+    h.truncate(description, length: 500)
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
