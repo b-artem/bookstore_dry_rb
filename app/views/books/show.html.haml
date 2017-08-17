@@ -8,11 +8,9 @@
       .product-gallery
         .mb-20
           = image_tag @book.image_url, class: 'img-responsive'
-          -# %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
         .images.clearfix
           = link_to @book.image_url, class: 'img-link' do
             = image_tag @book.image_url
-          -# %a.img-link{href: "#"}
           -#   %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
           = link_to @book.image_url, class: 'img-link' do
             = image_tag @book.image_url

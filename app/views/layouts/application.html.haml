@@ -47,7 +47,7 @@
                   %li
                     %a.collapse-link{href: "#"} #{ t '.web_design' }
               %li
-                %a{href: "#"} My account
+                %a{href: "#"} #{ t '.my_account' }
           .hidden-xs
             %ul.nav.navbar-nav
               %li
@@ -71,13 +71,14 @@
 
     %main.container.general-main-wrap
 
-      - if flash
+      - if flash.any?
         .warning= flash[:warning]
         .notice= flash[:notice]
         .alert= flash[:alert]
 
-      %p.notice= notice
-      %p.alert= alert
+      - if flash.any?
+        %p.notice= notice
+        %p.alert= alert
 
       = yield
 
