@@ -1,5 +1,6 @@
 module BooksHelper
   def best_sellers(quantity = 4)
+    # HAVE TO CHANGE IT
     Book.order('price DESC').limit(quantity).decorate
   end
 

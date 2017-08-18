@@ -36,18 +36,20 @@
               %span{'aria-hidden': "true"} &times;
             %ul.nav.navbar-nav
               %li
-                %a{href: "#"} #{ t '.home' }
+                = link_to t('.home'), root_path
               %li
                 %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} #{ t '.shop' }
                 %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-                  %li
-                    %a.collapse-link{href: "#"} #{ t '.mobile_development' }
-                  %li
-                    %a.collapse-link{href: "#"} #{ t '.photo' }
-                  %li
-                    %a.collapse-link{href: "#"} #{ t '.web_design' }
-              %li
-                %a{href: "#"} #{ t '.my_account' }
+                  %li= link_to t('books.categories.mobile_development'), '#',
+                              class: 'collapse-link'
+                  -# %a.collapse-link{href: "#"} Mobile development
+                  %li= link_to t('books.categories.photo'), '#',
+                              class: 'collapse-link'
+                  %li= link_to t('books.categories.web_design'), '#',
+                              class: 'collapse-link'
+                  %li= link_to t('books.categories.web_development'), '#',
+                              class: 'collapse-link'
+              %li= link_to t('.my_account'), '#'
           .hidden-xs
             %ul.nav.navbar-nav
               %li
@@ -56,18 +58,14 @@
               %li.dropdown
                 %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} #{ t '.shop' }
                 %ul.dropdown-menu
-                  %li
-                    %a{href: "#"} #{ t '.mobile_development' }
-                  %li
-                    %a{href: "#"} #{ t '.photo' }
-                  %li
-                    %a{href: "#"} #{ t '.web_design' }
+                  %li= link_to t('books.categories.mobile_development'), '#'
+                  -# %a{href: "#"} #{ t '.mobile_development' }
+                  %li= link_to t('books.categories.photo'), '#'
+                  %li= link_to t('books.categories.web_design'), '#'
+                  %li= link_to t('books.categories.web_development'), '#'
                   %li.divider{role: "separator"}
-                  %li
-                    = link_to(t('.logout'), destroy_user_session_path, method: :delete)
-                    -# %a{href: "#"} Log out
-              %li
-                %a{href: "#"} #{ t('.my_account') }
+                  %li= link_to t('.logout'), destroy_user_session_path, method: :delete
+              %li= link_to t('.my_account'), '#'
 
     %main.container.general-main-wrap
 
@@ -87,14 +85,11 @@
         .row
           .col-sm-9
             %ul.list-inline.general-align.mb-25
-              %li
-                %a.nav-link{href: "#"} #{ t '.home' }
-              %li
-                %a.nav-link{href: "#"} #{ t '.shop' }
-              %li
-                %a.nav-link{href: "#"} #{ t '.orders' }
-              %li
-                %a.nav-link{href: "#"} #{ t '.settings' }
+              %li= link_to t('.home'), root_path, class: 'nav-link'
+              -# %a.nav-link{href: "#"}
+              %li= link_to t('.shop'), '#', class: 'nav-link'
+              %li= link_to t('.orders'), '#', class: 'nav-link'
+              %li= link_to t('.settings'), '#', class: 'nav-link'
           .col-sm-3
             %p.general-nav-mail support@bookstore.com
             %p.general-nav-number (555)-555-5555

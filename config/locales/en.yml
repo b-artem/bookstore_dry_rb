@@ -42,9 +42,6 @@ en:
     application:
       home: 'Home'
       shop: 'Shop'
-      mobile_development: 'Mobile development'
-      photo: 'Photo'
-      web_design: 'Web design'
       logout: 'Log out'
       my_account: 'My account'
       orders: 'Orders'
@@ -61,6 +58,18 @@ en:
     latest:
       buy_now: 'Buy Now'
   books:
+    categories:
+      all: 'All'
+      mobile_development: 'Mobile development'
+      photo: 'Photo'
+      web_design: 'Web design'
+      web_development: 'Web development'
+    index:
+      catalog: 'Catalog'
+      newest_first: 'Newest first'
+      popular_first: 'Popular first'
+      price_low_to_high: 'Price: Low to high'
+      price_high_to_low: 'Price: High to low'
     show:
       back_to_results: 'Back to results'
       add_to_cart: 'Add to Cart'
