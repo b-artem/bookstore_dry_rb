@@ -1,0 +1,29 @@
+%li.mr-35
+  = link_to request.query_parameters.merge({category: 'all'}),
+            class: 'filter-link' do
+    = t('books.categories.all')
+    %span.badge.general-badge= Book.count
+-# %li.mr-35
+-#   %a.filter-link{href: "#"}
+-#     All
+-#     %span.badge.general-badge 135
+%li.mr-35
+  = link_to request.query_parameters.merge({category: 'mobile_development'}),
+            class: 'filter-link' do
+    = t('books.categories.mobile_development')
+    %span.badge.general-badge= Book.mobile_development.count
+%li.mr-35
+  = link_to request.query_parameters.merge({category: 'photo'}),
+            class: 'filter-link' do
+    = t('books.categories.photo')
+    %span.badge.general-badge= Book.photo.count
+%li.mr-35
+  = link_to request.query_parameters.merge({category: 'web_design'}),
+            class: 'filter-link' do
+    = t('books.categories.web_design')
+    %span.badge.general-badge= Book.web_design.count
+%li.mr-35
+  = link_to request.query_parameters.merge({category: 'web_development'}),
+            class: 'filter-link' do
+    = t('books.categories.web_development')
+    %span.badge.general-badge= Book.web_development.count
