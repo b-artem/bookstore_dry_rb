@@ -42,7 +42,7 @@
           - if @book.description.length > 500
             = link_to t('.read_more'), '', id: "read-more-#{@book.id}",
                       class: 'in-gold-500 ml-10',
-                      onclick: "readMore('read-more-#{@book.id}', #{@book.description}); return false;"
+                      onclick: "readMore('#{book.full_description}'); return false;"
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t '.publication_year'
@@ -89,9 +89,6 @@
             %i.fa.fa-star.rate-star
             %i.fa.fa-star.rate-star.rate-empty
           %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
-
-
-
 
 
 

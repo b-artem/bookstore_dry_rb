@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
 
-  CATEGORIES = %w[mobile_development photo web_design web_development]
+  CATEGORIES = %w[mobile_development photo web_design web_development].freeze
+
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :categories
 

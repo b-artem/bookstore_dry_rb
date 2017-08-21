@@ -10,6 +10,10 @@ class BookDecorator < Draper::Decorator
     h.truncate(description, length: 500)
   end
 
+  def full_description
+    h.truncate(description, length: 10000).gsub(/\s+/, " ")
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
