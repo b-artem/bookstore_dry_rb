@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :books
+  resources :reviews, except: [:index, :show, :destroy]
   get 'home/index'
   root 'home#index'
 

@@ -28,7 +28,8 @@
   .mb-120
     .row
       -# Collection?
-      = render partial: 'books', object: @books.order('created_at DESC')
+      = render @books
+      -# = render partial: 'books', object: @books.order('created_at DESC')
       = paginate @books
       -# = page_entries_info @books
     .text-center
