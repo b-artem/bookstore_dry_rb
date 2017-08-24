@@ -34,8 +34,28 @@ RailsAdmin.config do |config|
     delete
     show_in_app
 
+    state
+
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+  end
+
+  config.model 'Review' do
+    list do
+      scopes [:new_, :processed]
+      field :user
+      field :book
+      field :title
+      field :text
+      field :created_at
+      field :status, :state
+    end
+
+    state({
+      events: {approve: 'btn-success', reject: 'btn-danger'},
+      states: {unprocessed: 'label-warning', rejected: 'label-danger', approved: 'label-success'}
+      # disable: [:dead] # disable some events so they are not shown.
+    })
   end
 end
