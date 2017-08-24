@@ -9,6 +9,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.12.2)
+      concurrent-ruby (~> 1.0)
     actioncable (5.1.2)
       actionpack (= 5.1.2)
       nio4r (~> 2.0)
@@ -316,6 +318,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (~> 4.12, >= 4.12.2)
   cancancan (~> 2.0)
   capybara (~> 2.14, >= 2.14.4)
   coffee-rails (~> 4.2)

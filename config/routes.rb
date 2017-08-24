@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :books
-  resources :reviews, except: [:index, :show, :destroy]
+  resources :books do
+    # Do I  really need  #new action?
+    resources :reviews, except: [:index, :show, :destroy]
+  end
   get 'home/index'
   root 'home#index'
 

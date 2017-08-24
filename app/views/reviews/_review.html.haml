@@ -9,31 +9,35 @@
           .general-message-verified Verified Reviewer
           .general-message-name= "#{review.user.email} Name"
       .mb-15
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
+      - if review.score
+        - review.score.times do
+          %i.fa.fa-star.rate-star
       %p= review.text
 
+  -# .reviews
+  -#   .star-rating
+  -#   Blafgh
 
 
-.general-message-wrap.divider-lg
-  .clearfix
-    %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-    .ml-70
-      %div
-        .general-message-date.hidden-xs 11/11/16
-        .max-240
-          .general-message-verified Verified Reviewer
-          .general-message-name Rita J. Lewis
-      .mb-15
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-      %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
+
+
+
+-# .general-message-wrap.divider-lg
+-#   .clearfix
+-#     %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+-#     .ml-70
+-#       %div
+-#         .general-message-date.hidden-xs 11/11/16
+-#         .max-240
+-#           .general-message-verified Verified Reviewer
+-#           .general-message-name Rita J. Lewis
+-#       .mb-15
+-#         %i.fa.fa-star.rate-star
+-#         %i.fa.fa-star.rate-star
+-#         %i.fa.fa-star.rate-star
+-#         %i.fa.fa-star.rate-star
+-#         %i.fa.fa-star.rate-star
+-#       %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
 -# .general-message-wrap.divider-lg
 -#   .clearfix
 -#     %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M

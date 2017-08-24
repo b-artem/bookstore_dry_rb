@@ -84,6 +84,10 @@ en:
       read_more: 'Read More'
       materials: 'Materials'
       reviews: 'Reviews'
+      write_a_review: 'Write a Review'
+      review_title: 'Title'
+      review_text: 'Review'
+      post_review: 'Post'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

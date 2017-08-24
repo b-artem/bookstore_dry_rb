@@ -1,26 +1,34 @@
 class ReviewsController < ApplicationController
+  # Do I really need #new action?
   before_action :set_review, only: [:show, :edit, :update]
   decorates_assigned :book
-  
+
   def show
   end
 
   def new
-    @review = Review.new
+    # @book = Book.find(params[:book_id])
+    # @review = Review.new
   end
 
   def edit
   end
 
   def create
+    @book = Book.find(params[:book_id])
     @review = Review.new(review_params)
+    @review.book = @book
+    @review.status = 'unprocessed'
+
+    @review.user = current_user
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to @review.book,
+                      notice: 'Thanks for Review. It will be published as soon as Admin will approve it.' }
         format.json { render :show, status: :created, location: @review }
       else
-        format.html { render :new }
+        format.html { redirect_to @book, flash: { errors: @review.errors } }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end

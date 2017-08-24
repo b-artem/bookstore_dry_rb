@@ -1,3 +1,6 @@
+- content_for :javascripts do
+  = javascript_include_tag 'reviews/raty', 'data-turbolinks-track': 'reload'
+
 %main.container
   = link_to request.referer.present? ? request.referer : books_path,
             class: 'general-back-link' do
@@ -58,11 +61,30 @@
   .mb-80
     %h3.in-gold-500.mb-25= "#{t '.reviews'} (#{@book.reviews.count})"
     - if @book.reviews.any?
-      = render @book.reviews
+      = render @book.reviews.order('created_at DESC')
 
+      - if user_signed_in?
+        = t '.write_a_review'
+        = form_for [@book, @book.reviews.build] do |f|
+          - if flash[:errors]
+            #error_explanation
+              %h2= "#{pluralize(flash[:errors].count, "error")} prohibited this review from being saved:"
+              %ul
+                - flash[:errors].each do |error|
+                  %li= error.join ' '
+          .field
+            = f.label :score
+            #star-rating
+            -# = f.number_field :score, id: "star-rating"
+          .field
+            = f.label t('.review_title')
+            = f.text_field :title
+          .field
+            = f.label t('.review_text')
+            = f.text_area :text
 
-
-
+          .actions
+            = f.submit t('.post_review')
 
 -# %p#notice= notice
 -#
