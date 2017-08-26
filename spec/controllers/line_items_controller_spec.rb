@@ -73,6 +73,22 @@ RSpec.describe LineItemsController, type: :controller do
   end
 
   describe "POST #create" do
+    let(:line_item) { create :line_item }
+    # subject { -> { line_item.create } }
+
+    it "creates a new LineItem" do
+      expect {
+        post :create, params: {line_item: valid_attributes}, session: valid_session
+      }.to change(LineItem, :count).by(1)
+    end
+
+
+
+
+
+
+
+
     context "with valid params" do
       it "creates a new LineItem" do
         expect {

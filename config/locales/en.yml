@@ -88,6 +88,13 @@ en:
       review_title: 'Title'
       review_text: 'Review'
       post_review: 'Post'
+  carts:
+    show:
+      cart: 'Cart'
+      product: 'Product'
+      price: 'Price'
+      quantity: 'Quantity'
+      subtotal: 'SubTotal'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

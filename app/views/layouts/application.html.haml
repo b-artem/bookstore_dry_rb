@@ -86,15 +86,10 @@
               %li= link_to t('.my_account'), '#'
 
     %main.container.general-main-wrap
-
+    
       - if flash.any?
-        .warning= flash[:warning]
-        .notice= flash[:notice]
-        .alert= flash[:alert]
-
-      - if flash.any?
-        %p.notice= notice
-        %p.alert= alert
+        %p#notice= notice
+        %p#alert= alert
 
       = yield
 
