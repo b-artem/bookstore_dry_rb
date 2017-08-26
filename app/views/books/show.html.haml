@@ -36,8 +36,10 @@
             %a.input-link{href: "#"}
               %i.fa.fa-plus.line-height-40
         .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position
-            = t '.add_to_cart'
+          = button_to t('.add_to_cart'), line_items_path(@book),
+                      class: 'btn btn-default pull-right general-position'
+          -# %button.btn.btn-default.pull-right.general-position
+          -#   = t '.add_to_cart'
       .general-info-wrap.divider-lg
         %p= t '.description'
         %p.lead.small.line-height-2
