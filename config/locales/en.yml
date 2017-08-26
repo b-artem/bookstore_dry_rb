@@ -30,17 +30,64 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  number:
+    currency:
+      format:
+        unit:      "$"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format:    "%u%n"
   layouts:
     application:
       home: 'Home'
       shop: 'Shop'
-      mobile_development: 'Mobile development'
-      photo: 'Photo'
-      web_design: 'Web design'
       logout: 'Log out'
       my_account: 'My account'
       orders: 'Orders'
       settings: 'Settings'
+  home:
+    index:
+      welcome: 'Welcome to our amazing Bookstore!'
+      about_us: 'We pore through hundreds of new books each month and select
+                the five best we can find to share with our members.'
+      get_started: 'Get Started'
+      best_sellers: 'Best Sellers'
+      previous: 'Previous'
+      next: 'Next'
+    latest:
+      buy_now: 'Buy Now'
+  books:
+    categories:
+      all: 'All'
+      mobile_development: 'Mobile development'
+      photo: 'Photo'
+      web_design: 'Web design'
+      web_development: 'Web development'
+      filter_by_category: 'Filter by category'
+    index:
+      catalog: 'Catalog'
+      newest_first: 'Newest first'
+      popular_first: 'Popular first'
+      price_low_to_high: 'Price: Low to high'
+      price_high_to_low: 'Price: High to low'
+      title_a_z: 'Title: A - Z'
+      title_z_a: 'Title: Z - A'
+      sort_by: 'Sort by'
+      view_more: 'View More'
+    show:
+      back_to_results: 'Back to results'
+      add_to_cart: 'Add to Cart'
+      description: 'Description'
+      publication_year: 'Year of publication'
+      dimensions: 'Dimensions'
+      read_more: 'Read More'
+      materials: 'Materials'
+      reviews: 'Reviews'
+      write_a_review: 'Write a Review'
+      review_title: 'Title'
+      review_text: 'Review'
+      post_review: 'Post'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

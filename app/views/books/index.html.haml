@@ -1,33 +1,77 @@
-%h1 Listing books
+%main.container
+  %h1.general-title-margin= t '.catalog'
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+          = t '.newest_first'
+          %i.fa.fa-angle-down.dropdown-icon.pull-right
+        %ul.dropdown-menu
+          = render 'sort_by'
+    %ul.list-inline.pt-10.mb-25.mr-240
+      = render 'categories_filter'
+  .dropdowns.mb-25.visible-xs
+    %p.lead.small.mb-10= t 'books.categories.filter_by_category'
+    .dropdown
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        = t '.newest_first'
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        = render 'sort_by'
+    %p.lead.small.mb-10= t '.sort_by'
+    .dropdown
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        =t '.newest_first'
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        = render 'sort_by'
+  .mb-120
+    .row
+      -# Collection?
+      = render @books
+      -# = render partial: 'books', object: @books.order('created_at DESC')
+      = paginate @books
+      -# = page_entries_info @books
+    .text-center
+      = link_to 'next', path_to_next_page(@books)
+      = button_to t('.view_more'), path_to_next_page(@books), method: :get, class: 'btn btn-primary'
+      -# %button.btn.btn-primary= t '.view_more'
 
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Price
-      %th Image url
-      %th Publication year
-      %th Dimensions
-      %th Materials
-      %th
-      %th
-      %th
 
-  %tbody
-    - @books.each do |book|
-      %tr
-        %td= book.title
-        %td= book.description
-        %td= book.price
-        %td= book.image_url
-        %td= book.publication_year
-        %td= book.dimensions
-        %td= book.materials
-        %td= link_to 'Show', book
-        %td= link_to 'Edit', edit_book_path(book)
-        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
 
-= link_to 'New Book', new_book_path
+
+
+-# %h1 Listing books
+-#
+-# %table
+-#   %thead
+-#     %tr
+-#       %th Title
+-#       %th Description
+-#       %th Price
+-#       %th Image url
+-#       %th Publication year
+-#       %th Dimensions
+-#       %th Materials
+-#       %th
+-#       %th
+-#       %th
+-#
+-#   %tbody
+-#     - @books.each do |book|
+-#       %tr
+-#         %td= book.title
+-#         %td= book.description
+-#         %td= book.price
+-#         %td= book.image_url
+-#         %td= book.publication_year
+-#         %td= book.dimensions
+-#         %td= book.materials
+-#         %td= link_to 'Show', book
+-#         %td= link_to 'Edit', edit_book_path(book)
+-#         %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+-#
+-# %br
+-#
+-# = link_to 'New Book', new_book_path

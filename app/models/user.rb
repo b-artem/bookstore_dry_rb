@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
   ROLES = %i[admin user].freeze
 
+  has_many :reviews
+
   def self.from_omniauth(auth)
     where(omniauth_provider: auth.provider, omniauth_uid: auth.uid).first_or_create do |user|
       user.omniauth_provider = auth.provider
