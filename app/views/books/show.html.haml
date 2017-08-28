@@ -29,16 +29,26 @@
           = number_to_currency(@book.price)
       .col-xs-5.col-md-3
         .input-group.general-position
-          %a.input-link{href: "#"}
-            %i.fa.fa-minus.line-height-40
-          %input.form-control.quantity-input{type: "text"}
-          %a.input-link{href: "#"}
-            %i.fa.fa-plus.line-height-40
+          = form_tag line_items_path(book_id: @book.id), id: 'line-item-form' do
+            = link_to '', class: 'input-link',
+                      onclick: "decrementQuantity(); return false;" do
+              %i.fa.fa-minus.line-height-40
+            -# %a.input-link{href: "#"}
+            -#   %i.fa.fa-minus.line-height-40
+            %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}
+            -# = text_field_tag :quantity, class: 'form-control quantity-input', value: 1
+            -# = submit_tag t('.add_to_cart'), class: 'btn btn-default pull-right general-position'
+            = link_to '', class: 'input-link',
+                      onclick: "incrementQuantity(); return false;" do
+              %i.fa.fa-plus.line-height-40
+            -# %a.input-link{href: "#"}
+            -#   %i.fa.fa-plus.line-height-40
       .col-xs-7.col-md-5
-        = button_to t('.add_to_cart'), line_items_path(book_id: @book),
-                    class: 'btn btn-default pull-right general-position'
-        -# %button.btn.btn-default.pull-right.general-position
-        -#   = t '.add_to_cart'
+        -# = button_to t('.add_to_cart'),
+        -#             line_items_path(book_id: @book, quantity: quantity),
+        -#             class: 'btn btn-default pull-right general-position'
+        %button.btn.btn-default.pull-right.general-position{type: 'submit', form: 'line-item-form'}
+          = t '.add_to_cart'
     .general-info-wrap.divider-lg
       %p= t '.description'
       %p.lead.small.line-height-2
@@ -83,7 +93,6 @@
         .field
           = f.label t('.review_text')
           = f.text_area :text
-
         .actions
           = f.submit t('.post_review')
 
