@@ -1,4 +1,4 @@
-decrementQuantity = function() {
+$(document).on('turbolinks:load', decrementQuantity = function() {
   var quantity;
   quantity = $(event.target).parent().siblings('.quantity-input').val();
   if ( quantity == '1' ) {
@@ -7,4 +7,16 @@ decrementQuantity = function() {
     quantity--;
   }
   $(event.target).parent().siblings('.quantity-input').val(quantity);
-};
+});
+
+
+// decrementQuantity = function() {
+//   var quantity;
+//   quantity = $(event.target).parent().siblings('.quantity-input').val();
+//   if ( quantity == '1' ) {
+//     return false;
+//   } else {
+//     quantity--;
+//   }
+//   $(event.target).parent().siblings('.quantity-input').val(quantity);
+// };

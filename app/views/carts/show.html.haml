@@ -28,7 +28,10 @@
         %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
         %div
           %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
-          %button.btn.btn-primary.mb-15.res-block Update cart
+          -# = button_to 'Update cart', remote: true,
+          -#             onclick: 'updateCart()', class: 'button btn btn-primary mb-15 res-block'
+          %button.btn.btn-primary.mb-15.res-block{onclick: "updateCart();"}
+            = 'Update cart'
     .col-sm-8
       .res-mr-200.text-center.general-text-right
         %p.in-gold-500.font-18 Order Summary
