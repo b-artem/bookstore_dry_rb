@@ -1,59 +1,9 @@
 %h1.general-title-margin= t '.cart'
+
 .visible-xs
-  .general-cart-item.divider-lg-bottom
-    %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
-      %span{'aria-hidden': "true"} &times;
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600= t '.price'
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600= t '.quantity'
-        %td
-          .input-group
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-heaght-40
-            %input.form-control.quantity-input{type: "text"} 57
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-heaght-40
-      %tr
-        %td
-          %span.in-grey-600= t '.subtotal'
-        %td
-          %span.font-16.in-gold-500 €32.90
-  .general-cart-item.divider-lg-bottom.mb-30
-    %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
-      %span{'aria-hidden': "true"} &times;
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          .input-group
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-heaght-40
-            %input.form-control.quantity-input{type: "text"}
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-heaght-40
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
+  = render partial: 'line_items/line_item_visible_xs',
+          collection: @cart.line_items, as: :line_item
+
 .hidden-xs
   %table.table.table-hover
     %tr.no-hover
@@ -67,8 +17,8 @@
       %th.col-total
         %span.in-grey-600= t '.subtotal'
       %th.col-close
-
-    = render @cart.line_items
+    = render partial: 'line_items/line_item_hidden_xs',
+            collection: @cart.line_items, as: :line_item
 
 .general-order-wrap
   .row
