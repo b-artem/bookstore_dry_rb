@@ -1,7 +1,7 @@
 %h1.general-title-margin= t '.cart'
 
 .visible-xs
-  = render partial: 'line_items/line_item_visible_xs',
+  = render partial: 'line_items/form_visible_xs',
           collection: @cart.line_items, as: :line_item
 
 .hidden-xs
@@ -17,7 +17,7 @@
       %th.col-total
         %span.in-grey-600= t '.subtotal'
       %th.col-close
-    = render partial: 'line_items/line_item_hidden_xs',
+    = render partial: 'line_items/form_hidden_xs',
             collection: @cart.line_items, as: :line_item
 
 .general-order-wrap

@@ -1,12 +1,15 @@
 %p#notice= notice
 
-%p
-  %b Product:
-  = @line_item.product
-%p
-  %b Cart:
-  = @line_item.cart
+-# = render 'form_hidden_xs', as: :line_item
 
-= link_to 'Edit', edit_line_item_path(@line_item)
-\|
-= link_to 'Back', line_items_path
+
+-# %p
+-#   %b Product:
+-#   = @line_item.product
+-# %p
+-#   %b Cart:
+-#   = @line_item.cart
+-#
+-# = link_to 'Edit', edit_line_item_path(@line_item)
+-# \|
+-# = link_to 'Back', line_items_path

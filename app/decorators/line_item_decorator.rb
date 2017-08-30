@@ -1,6 +1,10 @@
 class LineItemDecorator < Draper::Decorator
   delegate_all
 
+  def subtotal
+    h.number_to_currency(book.price * quantity)
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
