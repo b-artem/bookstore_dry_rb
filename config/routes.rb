@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :line_items
+  resources :carts
   resources :books do
     # Do I  really need  #new action?
-    resources :reviews, except: [:index, :show, :destroy]
+    resources :reviews, except: [:new, :index]
   end
   get 'home/index'
   root 'home#index'

@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   # Do I really need #new action?
-  before_action :set_review, only: [:show, :edit, :update]
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
   decorates_assigned :book
 
   def show
@@ -43,6 +43,14 @@ class ReviewsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @review.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Review was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
