@@ -1,0 +1,4 @@
+var input = "#input-line-item-<%= params[:id] %>";
+$(input).val(<%= @line_item.quantity %>);
+$("#subtotal-<%= params[:id] %>").text("<%= @line_item.decorate.subtotal_decorated %>");
+$("#cart-subtotal").text("<%= @line_item.cart.decorate.subtotal_decorated %>");

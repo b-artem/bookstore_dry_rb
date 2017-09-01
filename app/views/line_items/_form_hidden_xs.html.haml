@@ -10,18 +10,19 @@
     %span.font-16.in-gold-500= number_to_currency(line_item.book.price)
   %td
     .input-group
-      = form_with model: line_item, id: "form-line-item-#{line_item.id}" do |f|
+      = form_for line_item, id: "form-line-item-#{line_item.id}", remote: true do |f|
         = link_to '', class: 'input-link',
                   onclick: "decrementQuantity(); return false;" do
           %i.fa.fa-minus.line-height-40
         = f.text_field :quantity, class: 'form-control quantity-input',
                         id: "input-line-item-#{line_item.id}",
-                        onchange: "editQuantity(#{line_item.id})"
+                        onchange: "updateQuantity(#{line_item.id})"
         -# %input.form-control.quantity-input{name: 'quantity', type: "text",
         -#                                   value: "#{line_item.quantity}"}
         = link_to '', class: 'input-link',
                   onclick: "incrementQuantity(); return false;" do
           %i.fa.fa-plus.line-height-40
+        = f.submit '', id: "update-line-item-#{line_item.id}", hidden: true
 
       -# %a.input-link{href: "#"}
       -#   %i.fa.fa-minus.line-heaght-40
@@ -30,7 +31,8 @@
       -#   %i.fa.fa-plus.line-heaght-40
 
   %td
-    %span.font-16.in-gold-500= line_item.decorate.subtotal
+    %span.font-16.in-gold-500{id: "subtotal-#{line_item.id}"}
+      = line_item.decorate.subtotal_decorated
   %td
     %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
       %span{'aria-hidden': "true"} &times;

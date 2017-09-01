@@ -1,6 +1,10 @@
 class CartDecorator < Draper::Decorator
   delegate_all
 
+  def subtotal_decorated
+    h.number_to_currency(subtotal)
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
