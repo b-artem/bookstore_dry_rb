@@ -2,7 +2,6 @@ updateQuantity = function(lineItemId) {
   console.log('updateQuantity start');
   $("#update-line-item-" + lineItemId).click();
   console.log('updateQuantity finish!');
-
 };
 
 // $(document).on("turbolinks:load", function() {
@@ -10,7 +9,6 @@ updateQuantity = function(lineItemId) {
 //     $("#new_article").append xhr.responseText
 //   ).on "ajax:error", (e, xhr, status, error) ->
 //     $("#new_article").append "<p>ERROR</p>"
-//
 // });
 
 // $.ajax({
