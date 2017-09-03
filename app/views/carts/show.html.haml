@@ -51,8 +51,13 @@
               %strong.font-18 Order Total:
             %td
               %strong.font-18 €117.69
-        %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
-%button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+        = button_to t('.checkout'), checkouts_path, method: :get,
+                          class: 'btn btn-default mb-20 visible-xs-inline-block'
+        -# %button.btn.btn-default.mb-20.visible-xs-inline-block= t '.checkout'
+
+= button_to t('.checkout'), checkouts_path, method: :post,
+            class: 'btn btn-default mb-20 hidden-xs center-block'
+-# %button.btn.btn-default.mb-20.hidden-xs.center-block= t '.checkout'
 
 
 = link_to 'Edit', edit_cart_path(@cart)

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     # Do I  really need  #new action?
     resources :reviews, except: [:new, :index]
   end
+  resources :checkouts
   get 'home/index'
   root 'home#index'
 

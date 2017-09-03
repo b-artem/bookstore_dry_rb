@@ -96,6 +96,7 @@ en:
       quantity: 'Quantity'
       subtotal: 'SubTotal'
       update_cart: 'Update cart'
+      checkout: 'Checkout'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

@@ -42,12 +42,12 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand Bookstore
-          = link_to current_cart, class: 'shop-link pull-right visible-xs' do
+          = link_to @cart, class: 'shop-link pull-right visible-xs' do
             %span.shop-icon
-              %span.shop-quantity= current_cart.line_items.count
-        = link_to current_cart, class: 'shop-link pull-right hidden-xs' do
+              %span.shop-quantity= @cart.line_items.count
+        = link_to @cart, class: 'shop-link pull-right hidden-xs' do
           %span.shop-icon
-            %span.shop-quantity= current_cart.line_items.count
+            %span.shop-quantity= @cart.line_items.count
         -# %a.shop-link.pull-right.hidden-xs{href: "#"}
         #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
           .visible-xs
