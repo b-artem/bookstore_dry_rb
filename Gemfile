@@ -7,6 +7,7 @@ end
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'cancancan', '~> 2.0'
+gem 'country_select', '~> 3.1'
 gem 'devise', '~> 4.3'
 gem 'draper', '~> 3.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
