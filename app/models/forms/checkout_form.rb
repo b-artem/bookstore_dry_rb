@@ -1,4 +1,4 @@
-# module Forms
+module Forms
 
   class CheckoutForm < Rectify::Form
     mimic :order
@@ -15,11 +15,11 @@
 
     attribute :card_number, Integer
     attribute :name_on_card, String
-    attributr :valid_until, String
+    attribute :valid_until, String
     attribute :cvv, String
 
 
-    validates :first_name, :last_name, :presence => true
+    validates :first_name, presence: true
   end
 
-# end
+end
