@@ -24,8 +24,8 @@
   .row
     .col-sm-4
       .input-group.general-input-group
-        %label.input-label Enter Your Coupon Code
-        %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
+        %label.input-label= t '.enter_coupon'
+        %input.form-control.mb-30{type: "text", placeholder: t('.enter_coupon')}
         %div
           %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
           -# = button_to 'Update cart', remote: true,
@@ -51,11 +51,11 @@
               %strong.font-18 Order Total:
             %td
               %strong.font-18 €117.69
-        = button_to t('.checkout'), checkouts_path, method: :get,
+        = button_to t('.checkout'), orders_path, method: :post,
                           class: 'btn btn-default mb-20 visible-xs-inline-block'
         -# %button.btn.btn-default.mb-20.visible-xs-inline-block= t '.checkout'
 
-= button_to t('.checkout'), checkouts_path, method: :post,
+= button_to t('.checkout'), orders_path, method: :post,
             class: 'btn btn-default mb-20 hidden-xs center-block'
 -# %button.btn.btn-default.mb-20.hidden-xs.center-block= t '.checkout'
 

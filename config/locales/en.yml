@@ -97,6 +97,7 @@ en:
       subtotal: 'SubTotal'
       update_cart: 'Update cart'
       checkout: 'Checkout'
+      enter_coupon: 'Enter Your Coupon Code'
   devise:
     or: 'or'
     enter_email: 'Enter Email'
