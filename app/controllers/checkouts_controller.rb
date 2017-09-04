@@ -3,6 +3,7 @@ class CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
+    @form = Forms::CheckoutForm.new
     render_wizard
   end
 
@@ -12,7 +13,7 @@ class CheckoutsController < ApplicationController
 
   def create
 
-    @form = Forms::CheckoutForm.new
+
 
     respond_to do |format|
       if @form.valid?
@@ -41,5 +42,9 @@ class CheckoutsController < ApplicationController
     #     status: :unprocessable_entity }
     #   end
     # end
+  end
+
+  def update
+
   end
 end
