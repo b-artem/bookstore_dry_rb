@@ -11,6 +11,7 @@ module Forms
     attribute :phone, String
 
     validates :first_name, presence: true
+
   end
 
 end

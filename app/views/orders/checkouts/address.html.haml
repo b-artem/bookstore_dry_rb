@@ -14,13 +14,24 @@
         %h3.general-subtitle Billing Address
         %p.general-info-text all fields are required
 
-      = form_for @form do |f|
-        = f.text_field :first_name
-        = f.text_field :last_name
+      -# = form_for @form do |f|
+      -#
+      -#   = f.text_field :first_name
+      -#   = f.text_field :last_name
+      -#   = f.text_field :address
+      -#   = f.text_field :city
+      -#   = f.submit
 
-      = simple_form_for @form, id: 'simple-form' do |f|
-        = f.input :first_name
+      = simple_form_for @form, 
+          defaults: { label_html: { class: 'control-label input-label' },
+                    } do |f|
+        = f.input :first_name, placeholder: "First Name",
+          wrapper_html: { class: 'has-error'}
+        = f.hint "No special characters please", class: 'help-block'
         = f.input :last_name
+        = f.input :address
+        = f.input :city
+        = f.button :submit
 
       -# = form_for @form do |f|
       -#   = f.input :first_name
