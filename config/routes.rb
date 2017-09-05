@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :checkouts, controller: 'orders/checkouts'
   end
   resources :addresses, only: [:create, :update]
+  resources :billing_addresses
 
   get 'home/index'
   root 'home#index'

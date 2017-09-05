@@ -14,17 +14,7 @@
         %h3.general-subtitle Billing Address
         %p.general-info-text all fields are required
 
-      -# = form_for @form do |f|
-      -#
-      -#   = f.text_field :first_name
-      -#   = f.text_field :last_name
-      -#   = f.text_field :address
-      -#   = f.text_field :city
-      -#   = f.submit
-
-      = simple_form_for @form, 
-          defaults: { label_html: { class: 'control-label input-label' },
-                    } do |f|
+      = simple_form_for(@formas, url: wizard_path, method: :post) do |f|
         = f.input :first_name, placeholder: "First Name",
           wrapper_html: { class: 'has-error'}
         = f.hint "No special characters please", class: 'help-block'
@@ -33,10 +23,13 @@
         = f.input :city
         = f.button :submit
 
-      -# = form_for @form do |f|
-      -#   = f.input :first_name
-      -#   = f.input :last_name
-      -#   = f.input :card_number
+      = form_for @formas, url: wizard_path, method: :post do |f|
+        = f.text_area :first_name
+        = f.submit
+
+      -# = link_to 'dkjhgk', wizard_path, method: :post
+      -#
+      -# %h1 fkljhklj
 
       .form-group.has-error
         %label.control-label.input-label{for: "firstName"} First Name
