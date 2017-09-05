@@ -98,9 +98,10 @@ en:
       update_cart: 'Update cart'
       checkout: 'Checkout'
       enter_coupon: 'Enter Your Coupon Code'
-  checkouts:
-    order_summary:
-      save_and_continue: 'Save and Continue'
+  orders:
+    checkouts:
+      order_summary:
+        save_and_continue: 'Save and Continue'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

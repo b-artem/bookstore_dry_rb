@@ -1,9 +1,9 @@
-class CheckoutsController < ApplicationController
+class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    @form = Forms::CheckoutForm.new
+    form
     render_wizard
   end
 
@@ -12,8 +12,7 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-
-
+    @form = Forms::AddressForm.from_params(params)
 
     respond_to do |format|
       if @form.valid?
@@ -44,7 +43,38 @@ class CheckoutsController < ApplicationController
     # end
   end
 
-  def update
-
+  def edit
+    @form = Forms::AddressForm.from_model()
   end
+
+  def update
+    # @form = Forms::AddressForm.from_params(params)
+    render_wizard
+  end
+
+  private
+
+    def form
+      @form = form_object.new(model)
+    end
+
+    def model
+      @model = case step
+      when :address then current_user.shipping_address
+        when :delivery then Forms::DeliveryForm
+        when :payment then Forms::PaymentForm
+        when :confirm then Forms::ConfirmForm
+        when :complete then Forms::CompleteForm
+      end
+    end
+
+    def form_object
+      case step
+      when :address then Forms::AddressForm
+      when :delivery then Forms::DeliveryForm
+      when :payment then Forms::PaymentForm
+      when :confirm then Forms::ConfirmForm
+      when :complete then Forms::CompleteForm
+      end
+    end
 end

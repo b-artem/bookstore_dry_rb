@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Orders::OrdersController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :ensure_cart_isnt_empty, only: [:create]
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     @order = current_user.orders.create
     add_line_items_to_order_from_cart(@cart)
     destroy_cart
-    redirect_to checkouts_path
+    redirect_to order_checkouts_path(@order)
 
     # @order = Order.new(order_params)
     # respond_to do |format|
