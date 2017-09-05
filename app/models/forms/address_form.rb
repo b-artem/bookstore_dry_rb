@@ -1,7 +1,6 @@
 module Forms
 
   class AddressForm < Rectify::Form
-    # mimic :address
 
     attribute :first_name, String
     attribute :last_name, String

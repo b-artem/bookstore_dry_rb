@@ -1,9 +1,12 @@
 class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
+  include Rectify::ControllerHelpers
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    form
+    # @form = Forms::AddressForm.new
+    @form = form
+    # set_attributes_from_model(step)
     render_wizard
   end
 
@@ -52,11 +55,13 @@ class Orders::CheckoutsController < ApplicationController
     render_wizard
   end
 
+  def form
+    @form = form_object.from_model(model)
+  end
+
   private
 
-    def form
-      @form = form_object.new(model)
-    end
+
 
     def model
       @model = case step
@@ -77,4 +82,9 @@ class Orders::CheckoutsController < ApplicationController
       when :complete then Forms::CompleteForm
       end
     end
+
+    # def set_attributes_from_model(attribute)
+    #   raise RuntimeError, attribute unless respond_to?(attribute)
+    #   current_user.send(attribute)
+    # end
 end
