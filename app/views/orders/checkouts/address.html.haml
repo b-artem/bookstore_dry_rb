@@ -14,16 +14,16 @@
         %h3.general-subtitle Billing Address
         %p.general-info-text all fields are required
 
-      = simple_form_for @form, url: wizard_path, method: :patch,
+      = simple_form_for @billing_address, url: wizard_path, method: :patch,
               defaults: { label_html: { class: 'control-label input-label' } } do |f|
-        = f.input :first_name, placeholder: "First Name"
+        = f.input :first_name
         = f.input :last_name
         = f.input :address
         = f.input :city
         = f.input :zip
         = f.input :country
         = f.input :phone
-        = f.button :submit
+        = f.button :submit, id: 'form-1'
 
 
 
@@ -54,6 +54,27 @@
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm
         %h3.general-subtitle Shipping Address
+      = simple_form_for @shipping_address, url: wizard_path, method: :patch,
+              defaults: { label_html: { class: 'control-label input-label' } } do |f|
+        = f.input :first_name
+        = f.input :last_name
+        = f.input :address
+        = f.input :city
+        = f.input :zip
+        = f.input :country
+        = f.input :phone
+        = f.button :submit, id: 'form-2'
+
+        %button{text:'submit all', onclick:"$('#form-1').click(); $('#form-2').click(); return false;"}  
+
+
+
+
+
+
+
+
+
       .form-group.has-error
         %label.control-label.input-label{for: "firstName"} First Name
         %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}

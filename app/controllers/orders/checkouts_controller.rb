@@ -7,7 +7,8 @@ class Orders::CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    @form = Forms::BillingAddressForm.new
+    @billing_address = Forms::BillingAddressForm.new
+    @shipping_address = Forms::ShippingAddressForm.new
     # set_attributes_from_model(step)
     # binding.pry
     render_wizard
@@ -53,15 +54,22 @@ class Orders::CheckoutsController < ApplicationController
   def update
     case step
     when :address
-      @form = Forms::BillingAddressForm
-              .from_params(params[:billing_address], order_id: current_order.id)
+      @billing_address = Forms::AddressForm
+              .from_params(params[:billing_address], order_id: current_order.id,
+                            type: 'BillingAddress')
+      @shipping_address = Forms::AddressForm
+              .from_params(params[:shipping_address], order_id: current_order.id,
+                            type: 'ShippingAddress')
     when :delivery then Forms::DeliveryForm
     when :payment then Forms::PaymentForm
     when :confirm then Forms::ConfirmForm
     when :complete then Forms::CompleteForm
     end
-
-    render_wizard @form
+    if @billing_address.save
+      render_wizard @shipping_address
+    else
+      render_wizard @billing_address
+    end
   end
 
   # def form

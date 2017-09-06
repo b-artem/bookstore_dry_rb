@@ -1,5 +1,6 @@
 class Forms::AddressForm < Rectify::Form
 
+  attribute :type, String
   attribute :first_name, String
   attribute :last_name, String
   attribute :address, String
@@ -14,9 +15,7 @@ class Forms::AddressForm < Rectify::Form
 
   def save
     if valid?
-      binding.pry
-      billing_address = BillingAddress.create(attributes)
-      # billing_address.order_id = current_order.id
+      Address.create(attributes)
       true
     else
       false
