@@ -1,4 +1,5 @@
 class Forms::AddressForm < Rectify::Form
+  include CurrentOrder
 
   attribute :first_name, String
   attribute :last_name, String
@@ -7,6 +8,7 @@ class Forms::AddressForm < Rectify::Form
   attribute :zip, String
   attribute :country, String
   attribute :phone, String
+  attribute :order_id, Integer
 
   validates :first_name, presence: true
   validates :last_name, presence: true

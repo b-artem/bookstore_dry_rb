@@ -1,5 +1,6 @@
 class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
+  include CurrentOrder
   require 'pry'
   # include Rectify::ControllerHelpers
   # before_action :set_form, only: [:show]
@@ -52,14 +53,15 @@ class Orders::CheckoutsController < ApplicationController
   def update
     case step
     when :address
-      @form = Forms::BillingAddressForm.from_params(params[:billing_address])
+      @form = Forms::BillingAddressForm
+              .from_params(params[:billing_address], order_id: current_order.id)
     when :delivery then Forms::DeliveryForm
     when :payment then Forms::PaymentForm
     when :confirm then Forms::ConfirmForm
     when :complete then Forms::CompleteForm
     end
 
-      render_wizard @form
+    render_wizard @form
   end
 
   # def form

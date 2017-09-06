@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170903191629) do
+ActiveRecord::Schema.define(version: 20170906121211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20170903191629) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_addresses_on_order_id"
     t.index ["type"], name: "index_addresses_on_type"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
@@ -93,14 +95,10 @@ ActiveRecord::Schema.define(version: 20170903191629) do
     t.datetime "completed_at"
     t.string "state"
     t.bigint "user_id"
-    t.bigint "billing_address_id"
-    t.bigint "shipping_address_id"
     t.bigint "shipping_method_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
     t.index ["number"], name: "index_orders_on_number"
-    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
     t.index ["shipping_method_id"], name: "index_orders_on_shipping_method_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -151,6 +149,7 @@ ActiveRecord::Schema.define(version: 20170903191629) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "orders"
   add_foreign_key "addresses", "users"
   add_foreign_key "authors_books", "authors"
   add_foreign_key "authors_books", "books"
