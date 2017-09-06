@@ -1,12 +1,12 @@
 class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
-  # include Rectify::ControllerHelpers
   require 'pry'
+  # include Rectify::ControllerHelpers
   # before_action :set_form, only: [:show]
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    @formas = Forms::BillingAddressForm.new
+    @form = Forms::BillingAddressForm.new
     # set_attributes_from_model(step)
     # binding.pry
     render_wizard
@@ -50,10 +50,16 @@ class Orders::CheckoutsController < ApplicationController
   # end
 
   def update
-    # @form = BillingAddressForm.from_params(params, params[:order_id])
-    binding.pry
-    render_wizard @form
+    case step
+    when :address
+      @form = Forms::BillingAddressForm.from_params(params[:billing_address])
+    when :delivery then Forms::DeliveryForm
+    when :payment then Forms::PaymentForm
+    when :confirm then Forms::ConfirmForm
+    when :complete then Forms::CompleteForm
+    end
 
+      render_wizard @form
   end
 
   # def form

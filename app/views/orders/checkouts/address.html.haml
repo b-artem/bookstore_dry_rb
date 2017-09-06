@@ -1,6 +1,6 @@
 = render 'steps', locals: { step: 1 }
 
-%form.res-mb-100
+.res-mb-100
   .hidden-xs.hidden-sm
     .row
       .col-md-5
@@ -14,22 +14,18 @@
         %h3.general-subtitle Billing Address
         %p.general-info-text all fields are required
 
-      = simple_form_for(@formas, url: wizard_path, method: :post) do |f|
-        = f.input :first_name, placeholder: "First Name",
-          wrapper_html: { class: 'has-error'}
-        = f.hint "No special characters please", class: 'help-block'
+      = simple_form_for @form, url: wizard_path, method: :patch,
+              defaults: { label_html: { class: 'control-label input-label' } } do |f|
+        = f.input :first_name, placeholder: "First Name"
         = f.input :last_name
         = f.input :address
         = f.input :city
         = f.button :submit
 
-      = form_for @formas, url: wizard_path, method: :post do |f|
-        = f.text_area :first_name
-        = f.submit
+      -# = form_for @form, url: wizard_path, method: :post do |f|
+      -#   = f.text_area :first_name
+      -#   = f.submit
 
-      -# = link_to 'dkjhgk', wizard_path, method: :post
-      -#
-      -# %h1 fkljhklj
 
       .form-group.has-error
         %label.control-label.input-label{for: "firstName"} First Name

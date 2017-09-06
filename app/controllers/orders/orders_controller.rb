@@ -1,5 +1,6 @@
 class Orders::OrdersController < ApplicationController
   include CurrentCart
+  include CurrentOrder
   before_action :set_cart, only: [:create]
   before_action :ensure_cart_isnt_empty, only: [:create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -30,6 +31,7 @@ class Orders::OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = current_user.orders.create
+    set_current_order(@order)
     add_line_items_to_order_from_cart(@cart)
     destroy_cart
     redirect_to order_checkouts_path(@order)
