@@ -15,10 +15,8 @@ class Forms::AddressForm < Rectify::Form
   def save
     if valid?
       binding.pry
-      billing_address = BillingAddress.create(self.attributes)
-      # billing_address.update
-      billing_address.order_id = current_order.id
-      flash[:alert] = 'Billing address was not saved' unless billing_address.save
+      billing_address = BillingAddress.create(attributes)
+      # billing_address.order_id = current_order.id
       true
     else
       false

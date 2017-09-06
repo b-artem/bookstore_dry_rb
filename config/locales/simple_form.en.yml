@@ -10,6 +10,28 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
+    labels:
+      defaults:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        address: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        country: 'Country'
+        phone: 'Phone'
+    placeholders:
+      defaults:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        address: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        phone: 'Example +355 66 123 4567'
+    prompts:
+      defaults:
+        country: 'Select a country'
+
+
     # Examples
     # labels:
     #   defaults:

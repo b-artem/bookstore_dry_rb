@@ -20,29 +20,30 @@
         = f.input :last_name
         = f.input :address
         = f.input :city
+        = f.input :zip
+        = f.input :country
+        = f.input :phone
         = f.button :submit
 
-      -# = form_for @form, url: wizard_path, method: :post do |f|
-      -#   = f.text_area :first_name
-      -#   = f.submit
 
 
-      .form-group.has-error
-        %label.control-label.input-label{for: "firstName"} First Name
-        %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
-        %span.help-block Please enter your first name
-      .form-group
-        %label.control-label.input-label{for: "lastName"} Last Name
-        %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
-      .form-group
-        %label.control-label.input-label{for: "address"} Address
-        %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
-      .form-group
-        %label.control-label.input-label{for: "city"} City
-        %input#city.form-control{name: "city", type: "text", placeholder: "City"}
-      .form-group
-        %label.control-label.input-label{for: "zip"} Zip
-        %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
+      -#
+      -# .form-group.has-error
+      -#   %label.control-label.input-label{for: "firstName"} First Name
+      -#   %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
+      -#   %span.help-block Please enter your first name
+      -# .form-group
+      -#   %label.control-label.input-label{for: "lastName"} Last Name
+      -#   %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
+      -# .form-group
+      -#   %label.control-label.input-label{for: "address"} Address
+      -#   %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
+      -# .form-group
+      -#   %label.control-label.input-label{for: "city"} City
+      -#   %input#city.form-control{name: "city", type: "text", placeholder: "City"}
+      -# .form-group
+      -#   %label.control-label.input-label{for: "zip"} Zip
+      -#   %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
       .form-group
         %label.control-label.input-label{for: "сountry"} Country
         %input#country.form-control{name: "country", type: "text", placeholder: "Select a country"}
