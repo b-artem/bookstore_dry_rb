@@ -1,5 +1,4 @@
 class Forms::AddressForm < Rectify::Form
-  include CurrentOrder
 
   attribute :first_name, String
   attribute :last_name, String
