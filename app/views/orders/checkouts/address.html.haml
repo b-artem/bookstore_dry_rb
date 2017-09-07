@@ -14,17 +14,33 @@
         %h3.general-subtitle Billing Address
         %p.general-info-text all fields are required
 
-      = simple_form_for @billing_address, url: wizard_path, method: :patch,
-              defaults: { label_html: { class: 'control-label input-label' } } do |f|
-        = f.input :first_name
-        = f.input :last_name
-        = f.input :address
-        = f.input :city
-        = f.input :zip
-        = f.input :country
-        = f.input :phone
-        = f.button :submit, id: 'form-1'
+      = simple_form_for @order, url: wizard_path, method: :patch,
+              defaults: { label_html: { class: 'control-label input-label' } } do |o|
 
+        = o.simple_fields_for @order.billing_address do |b|
+          = b.input :first_name
+          = b.input :last_name
+
+        = o.simple_fields_for @order.shipping_address do |s|
+          = s.input :first_name
+          = s.input :last_name
+
+        = o.input :strs
+        = o.button :submit
+
+      %h2 Yes
+      -#
+      -# = simple_form_for @billing_address, url: wizard_path, method: :patch,
+      -#         defaults: { label_html: { class: 'control-label input-label' } } do |f|
+      -#   = f.input :first_name
+      -#   = f.input :last_name
+      -#   = f.input :address
+      -#   = f.input :city
+      -#   = f.input :zip
+      -#   = f.input :country
+      -#   = f.input :phone
+      -#   = f.button :submit, id: 'form-1'
+      -#
 
 
       -#
@@ -54,18 +70,18 @@
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm
         %h3.general-subtitle Shipping Address
-      = simple_form_for @shipping_address, url: wizard_path, method: :patch,
-              defaults: { label_html: { class: 'control-label input-label' } } do |f|
-        = f.input :first_name
-        = f.input :last_name
-        = f.input :address
-        = f.input :city
-        = f.input :zip
-        = f.input :country
-        = f.input :phone
-        = f.button :submit, id: 'form-2'
-
-        %button{text:'submit all', onclick:"$('#form-1').click(); $('#form-2').click(); return false;"}  
+      -# = simple_form_for @shipping_address, url: wizard_path, method: :patch,
+      -#         defaults: { label_html: { class: 'control-label input-label' } } do |f|
+      -#   = f.input :first_name
+      -#   = f.input :last_name
+      -#   = f.input :address
+      -#   = f.input :city
+      -#   = f.input :zip
+      -#   = f.input :country
+      -#   = f.input :phone
+      -#   = f.button :submit, id: 'form-2'
+      -#
+      -#   %button{text:'submit all', onclick:"$('#form-1').click(); $('#form-2').click(); return false;"}
 
 
 

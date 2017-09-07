@@ -7,11 +7,29 @@ class Orders::CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    @billing_address = Forms::BillingAddressForm.new
-    @shipping_address = Forms::ShippingAddressForm.new
-    # set_attributes_from_model(step)
-    # binding.pry
+    @order = Forms::OrderForm.new
+    @order.billing_address = Forms::BillingAddressForm.new
+    @order.shipping_address = Forms::ShippingAddressForm.new
     render_wizard
+  end
+
+
+  def update
+    case step
+    when :address
+      # @billing_address = Forms::BillingAddressForm
+      #         .from_params(params[:order][:billing_address], order_id: current_order.id,
+      #                       type: 'BillingAddress')
+      # @shipping_address = Forms::ShippingAddressForm
+      #         .from_params(params[:order][:shipping_address], order_id: current_order.id,
+      #                       type: 'ShippingAddress')
+    when :delivery then Forms::DeliveryForm
+    when :payment then Forms::PaymentForm
+    when :confirm then Forms::ConfirmForm
+    when :complete then Forms::CompleteForm
+    end
+    @order = Forms::OrderForm.from_params(params[:order])
+    render_wizard @order
   end
 
   # def create
@@ -51,26 +69,6 @@ class Orders::CheckoutsController < ApplicationController
   #   # @form = Forms::AddressForm.from_model(model)
   # end
 
-  def update
-    case step
-    when :address
-      @billing_address = Forms::AddressForm
-              .from_params(params[:billing_address], order_id: current_order.id,
-                            type: 'BillingAddress')
-      @shipping_address = Forms::AddressForm
-              .from_params(params[:shipping_address], order_id: current_order.id,
-                            type: 'ShippingAddress')
-    when :delivery then Forms::DeliveryForm
-    when :payment then Forms::PaymentForm
-    when :confirm then Forms::ConfirmForm
-    when :complete then Forms::CompleteForm
-    end
-    if @billing_address.save
-      render_wizard @shipping_address
-    else
-      render_wizard @billing_address
-    end
-  end
 
   # def form
   #   @form = form_object.from_model(model)
