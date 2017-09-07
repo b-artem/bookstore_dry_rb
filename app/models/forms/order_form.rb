@@ -8,7 +8,6 @@ class Forms::OrderForm < Rectify::Form
 
   validates :billing_address, presence: true
   validates :shipping_address, presence: true
-  validates :strs, presence: true
 
   def save
     if valid?

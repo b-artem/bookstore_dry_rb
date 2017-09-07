@@ -1,65 +1,32 @@
 = render 'steps', locals: { step: 1 }
 
-.res-mb-100
+= simple_form_for @order, url: wizard_path, method: :patch, class: 'res-mb-100',
+        defaults: { label_html: { class: 'control-label input-label' } } do |order|
   .hidden-xs.hidden-sm
     .row
       .col-md-5
-        %h3.general-subtitle Billing Address
-        %p.general-info-text all fields are required
+        %h3.general-subtitle= t '.billing_address'
+        %p.general-info-text= t '.all_fields_are_required'
       .col-md-5.col-md-offset-1
-        %h3.general-subtitle Shipping Address
+        %h3.general-subtitle= t '.shipping_address'
+        -# %p.general-info-text= t '.all_fields_are_required'
   .row
     .col-md-5.mb-40
       .visible-xs.visible-sm
-        %h3.general-subtitle Billing Address
-        %p.general-info-text all fields are required
+        %h3.general-subtitle= t '.billing_address'
+        %p.general-info-text= t '.all_fields_are_required'
 
-      = simple_form_for @order, url: wizard_path, method: :patch,
-              defaults: { label_html: { class: 'control-label input-label' } } do |o|
+      = order.simple_fields_for @order.billing_address do |b|
+        = b.input :first_name
+        = b.input :last_name
+        = b.input :address
+        = b.input :city
+        = b.input :zip
+        = b.input :country
+        = b.input :phone
 
-        = o.simple_fields_for @order.billing_address do |b|
-          = b.input :first_name
-          = b.input :last_name
+      %h3 Example
 
-        = o.simple_fields_for @order.shipping_address do |s|
-          = s.input :first_name
-          = s.input :last_name
-
-        = o.input :strs
-        = o.button :submit
-
-      %h2 Yes
-      -#
-      -# = simple_form_for @billing_address, url: wizard_path, method: :patch,
-      -#         defaults: { label_html: { class: 'control-label input-label' } } do |f|
-      -#   = f.input :first_name
-      -#   = f.input :last_name
-      -#   = f.input :address
-      -#   = f.input :city
-      -#   = f.input :zip
-      -#   = f.input :country
-      -#   = f.input :phone
-      -#   = f.button :submit, id: 'form-1'
-      -#
-
-
-      -#
-      -# .form-group.has-error
-      -#   %label.control-label.input-label{for: "firstName"} First Name
-      -#   %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
-      -#   %span.help-block Please enter your first name
-      -# .form-group
-      -#   %label.control-label.input-label{for: "lastName"} Last Name
-      -#   %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
-      -# .form-group
-      -#   %label.control-label.input-label{for: "address"} Address
-      -#   %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
-      -# .form-group
-      -#   %label.control-label.input-label{for: "city"} City
-      -#   %input#city.form-control{name: "city", type: "text", placeholder: "City"}
-      -# .form-group
-      -#   %label.control-label.input-label{for: "zip"} Zip
-      -#   %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
       .form-group
         %label.control-label.input-label{for: "сountry"} Country
         %input#country.form-control{name: "country", type: "text", placeholder: "Select a country"}
@@ -69,44 +36,19 @@
 
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm
-        %h3.general-subtitle Shipping Address
-      -# = simple_form_for @shipping_address, url: wizard_path, method: :patch,
-      -#         defaults: { label_html: { class: 'control-label input-label' } } do |f|
-      -#   = f.input :first_name
-      -#   = f.input :last_name
-      -#   = f.input :address
-      -#   = f.input :city
-      -#   = f.input :zip
-      -#   = f.input :country
-      -#   = f.input :phone
-      -#   = f.button :submit, id: 'form-2'
-      -#
-      -#   %button{text:'submit all', onclick:"$('#form-1').click(); $('#form-2').click(); return false;"}
+        %h3.general-subtitle= t '.shipping_address'
 
+      = order.simple_fields_for @order.shipping_address do |s|
+        = s.input :first_name
+        = s.input :last_name
+        = s.input :address
+        = s.input :city
+        = s.input :zip
+        = s.input :country
+        = s.input :phone
 
+      %h3 Example
 
-
-
-
-
-
-
-      .form-group.has-error
-        %label.control-label.input-label{for: "firstName"} First Name
-        %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
-        %span.help-block Please enter your first name
-      .form-group
-        %label.control-label.input-label{for: "lastName"} Last Name
-        %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
-      .form-group
-        %label.control-label.input-label{for: "address"} Address
-        %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
-      .form-group
-        %label.control-label.input-label{for: "city"} City
-        %input#city.form-control{name: "city", type: "text", placeholder: "City"}
-      .form-group
-        %label.control-label.input-label{for: "zip"} Zip
-        %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
       .form-group
         %label.control-label.input-label{for: "сountry"} Country
         %select#country.form-control{name: "country", placeholder: "Select a country"}
@@ -116,6 +58,7 @@
       .form-group
         %label.control-label.input-label{for: "phone"} Phone
         %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
+
       .form-group.checkbox
         %label.checkbox-label
           %input.checkbox-input{type: "checkbox", hidden: "true"}
@@ -123,8 +66,12 @@
             %i.fa.fa-check
           %span.checkbox-text Use Billing Adress
 
-  = render 'order_summary'
+  .general-text-align.mb-60
+    = render('order_summary')
 
+    = order.button :submit, t('orders.checkouts.save_and_continue'),
+                  class: 'btn center-block mb-20' #disabled
+    -# %button.btn.disabled.center-block.mb-20 Save and Continue
 
 
 

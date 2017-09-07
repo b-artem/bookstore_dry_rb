@@ -100,8 +100,15 @@ en:
       enter_coupon: 'Enter Your Coupon Code'
   orders:
     checkouts:
+      address:
+        billing_address: 'Billing Address'
+        shipping_address: 'Shipping Address'
+        all_fields_are_required: 'all fields are required'
       order_summary:
-        save_and_continue: 'Save and Continue'
+        order_summary: 'Order Summary'
+        item_total: 'Item Total:'
+        order_total: 'Order Total:'
+      save_and_continue: 'Save and Continue'
   devise:
     or: 'or'
     enter_email: 'Enter Email'
