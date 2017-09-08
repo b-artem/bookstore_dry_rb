@@ -1,38 +1,35 @@
 $(document).on('turbolinks:load', function() {
   var checked = $('#use_billing_address').data('checked');
-  if ( checked == true ) {
-    $('#use_billing_address').prop('checked', true);
-    $('#shipping-address-form').prop('hidden', true);
-  } else {
-    $('#use_billing_address').prop('checked', false);
-    $('#shipping-address-form').prop('hidden', false);
-  }
-});
+  $('#use_billing_address').prop('checked', checked);
+  $('#shipping-address-form').prop('hidden', checked);
 
-$("#use_billing_address").change( function(){
-  alert('sfh0');
-  //  if ( $(event.target).prop('checked') ) {
-  //    alert("checked");
-  //  } else {
-  //    alert('no');
-  //  }
+  $("#use_billing_address").change(function() {
+    var checked = $(this).prop('checked')
+    $('#shipping-address-form').prop('hidden', checked);
+  });
+
 });
 
 
 
 
 //
-// ready(function() {
-//     //set initial state.
-//     $('#textbox1').val($(this).is(':checked'));
+// $(document).on('turbolinks:load', function() {
+//   var checked = $('#use_billing_address').data('checked');
+//   if ( checked == true ) {
+//     $('#use_billing_address').prop('checked', true);
+//     $('#shipping-address-form').prop('hidden', true);
+//   } else {
+//     $('#use_billing_address').prop('checked', false);
+//     $('#shipping-address-form').prop('hidden', false);
+//   }
 //
-//     $('#checkbox1').change(function() {
-//         $('#textbox1').val($(this).is(':checked'));
-//     });
+//   $("#use_billing_address").change(function() {
+//      if ( $(this).prop('checked') ) {
+//        $('#shipping-address-form').prop('hidden', true);
+//      } else {
+//        $('#shipping-address-form').prop('hidden', false);
+//      }
+//   });
 //
-//     $('#checkbox1').click(function() {
-//         if (!$(this).is(':checked')) {
-//             return confirm("Are you sure?");
-//         }
-//     });
 // });
