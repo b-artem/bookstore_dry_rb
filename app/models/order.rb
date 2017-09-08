@@ -5,4 +5,9 @@ class Order < ApplicationRecord
   # accepts_nested_attributes_for :billing_address, :shipping_address
   belongs_to :shipping_method, optional: true
   has_many :line_items, dependent: :destroy
+
+  def item_total
+    return 0 unless line_items.any?
+    line_items.sum(&:subtotal)
+  end
 end

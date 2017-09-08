@@ -32,7 +32,7 @@
 
   %td
     %span.font-16.in-gold-500{id: "subtotal-#{line_item.id}"}
-      = line_item.decorate.subtotal_decorated
+      = line_item.decorate.subtotal
   %td
     = button_to line_item_path(line_item), method: :delete, type: "button",
                 class: "close general-cart-close", 'aria-label': "Close" do

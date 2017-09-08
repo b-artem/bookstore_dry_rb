@@ -7,6 +7,7 @@ class Orders::CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
+    @current_order = current_order
     @order = Forms::OrderForm.new
     @order.billing_address = Forms::BillingAddressForm.new
     @order.shipping_address = Forms::ShippingAddressForm.new
@@ -15,6 +16,7 @@ class Orders::CheckoutsController < ApplicationController
 
 
   def update
+    @current_order = current_order
     case step
     when :address
       @order = Forms::OrderForm.from_params(params[:order])

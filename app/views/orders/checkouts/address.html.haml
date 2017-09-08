@@ -1,3 +1,6 @@
+= content_for :javascripts do
+  = javascript_include_tag 'orders/checkouts/use_billing_address', 'data-turbolinks-track': 'reload'
+
 = render 'steps', locals: { step: 1 }
 
 = simple_form_for @order, url: wizard_path, method: :patch, class: 'res-mb-100',
@@ -38,14 +41,15 @@
       .visible-xs.visible-sm
         %h3.general-subtitle= t '.shipping_address'
 
-      = order.simple_fields_for @order.shipping_address do |s|
-        = s.input :first_name
-        = s.input :last_name
-        = s.input :address
-        = s.input :city
-        = s.input :zip
-        = s.input :country
-        = s.input :phone
+      #shipping-address-form
+        = order.simple_fields_for @order.shipping_address do |s|
+          = s.input :first_name
+          = s.input :last_name
+          = s.input :address
+          = s.input :city
+          = s.input :zip
+          = s.input :country
+          = s.input :phone
 
       %h3 Example
 
@@ -66,8 +70,9 @@
         %label.checkbox-label
           %input.checkbox-input{name: 'order[use_billing_address_as_shipping]',
                 type: "hidden", hidden: "true", value: 'false'}
-          %input.checkbox-input{name: 'order[use_billing_address_as_shipping]',
-                type: "checkbox", hidden: "true", value: 'true'}
+          %input#use_billing_address.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+                type: "checkbox", hidden: "true", value: 'true',
+                data: { checked: @order.use_billing_address_as_shipping.to_s } }
           %span.checkbox-icon
             %i.fa.fa-check
           %span.checkbox-text= t '.use_billing_address'

@@ -6,6 +6,6 @@ class LineItem < ApplicationRecord
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 1  }
 
   def subtotal
-    book.price * quantity
+    price * quantity
   end
 end
