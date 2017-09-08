@@ -17,6 +17,9 @@ class Orders::CheckoutsController < ApplicationController
   def update
     case step
     when :address
+      @order = Forms::OrderForm.from_params(params[:order])
+              .with_context(use_billing_address_as_shipping:
+                            params[:order][:use_billing_address_as_shipping])
       # @billing_address = Forms::BillingAddressForm
       #         .from_params(params[:order][:billing_address], order_id: current_order.id,
       #                       type: 'BillingAddress')
@@ -28,7 +31,6 @@ class Orders::CheckoutsController < ApplicationController
     when :confirm then Forms::ConfirmForm
     when :complete then Forms::CompleteForm
     end
-    @order = Forms::OrderForm.from_params(params[:order])
     render_wizard @order
   end
 

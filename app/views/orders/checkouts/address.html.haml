@@ -59,12 +59,18 @@
         %label.control-label.input-label{for: "phone"} Phone
         %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
 
+      -# = order.input :use_billing_address_as_shipping, as: :boolean,
+      -#               checked_value: true, unchecked_value: false
+
       .form-group.checkbox
         %label.checkbox-label
-          %input.checkbox-input{type: "checkbox", hidden: "true"}
+          %input.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+                type: "hidden", hidden: "true", value: 'false'}
+          %input.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+                type: "checkbox", hidden: "true", value: 'true'}
           %span.checkbox-icon
             %i.fa.fa-check
-          %span.checkbox-text Use Billing Adress
+          %span.checkbox-text= t '.use_billing_address'
 
   .general-text-align.mb-60
     = render('order_summary')
