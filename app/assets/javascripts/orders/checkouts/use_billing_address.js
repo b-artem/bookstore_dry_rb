@@ -7,7 +7,6 @@ $(document).on('turbolinks:load', function() {
     var checked = $(this).prop('checked')
     $('#shipping-address-form').prop('hidden', checked);
   });
-
 });
 
 

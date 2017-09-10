@@ -19,9 +19,16 @@ class Orders::CheckoutsController < ApplicationController
     @current_order = current_order
     case step
     when :address
-      @order = Forms::OrderForm.from_params(params[:order])
-              .with_context(use_billing_address_as_shipping:
-                            params[:order][:use_billing_address_as_shipping])
+      if params[:order][:use_billing_address_as_shipping] == 'true'
+        use_billing = true
+      else
+        use_billing = false
+      end
+      @order = Forms::OrderForm.from_params(params[:order], id: current_order.id)
+              .with_context(use_billing_address_as_shipping: use_billing)
+      # current_order.update_attributes(use_billing_address_as_shipping: use_billing)
+
+
       # @billing_address = Forms::BillingAddressForm
       #         .from_params(params[:order][:billing_address], order_id: current_order.id,
       #                       type: 'BillingAddress')

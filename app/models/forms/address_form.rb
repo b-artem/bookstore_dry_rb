@@ -11,10 +11,9 @@ class Forms::AddressForm < Rectify::Form
   attribute :order_id, Integer
 
   validates :first_name, :last_name, presence: true, if: :need_shipping_address?
-  # validates :last_name, presence: true
 
   def need_shipping_address?
-    return if type == 'ShippingAddress' && context.use_billing_address_as_shipping == 'true'
+    return if type == 'ShippingAddress' && context.use_billing_address_as_shipping
     true
   end
 

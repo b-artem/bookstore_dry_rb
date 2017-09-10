@@ -10,6 +10,11 @@ class Forms::OrderForm < Rectify::Form
   def save
     if valid?
       binding.pry
+      Order.find(id).update_attributes(use_billing_address_as_shipping: use_billing_address_as_shipping)
+      Order.find(id).billing_address = Address.create(billing_address.attributes)
+      unless use_billing_address_as_shipping
+        Order.find(id).shipping_address = Address.create(shipping_address.attributes)
+      end
       true
     else
       false
