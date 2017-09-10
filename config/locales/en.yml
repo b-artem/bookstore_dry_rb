@@ -106,6 +106,10 @@ en:
         shipping_address: 'Shipping Address'
         all_fields_are_required: 'all fields are required'
         use_billing_address: 'Use Billing Address'
+      delivery:
+        method: 'Method'
+        days: 'Days'
+        price: 'Price'
       order_summary:
         order_summary: 'Order Summary'
         item_total: 'Item Total:'
