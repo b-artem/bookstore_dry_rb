@@ -18,7 +18,7 @@ class Orders::CheckoutsController < ApplicationController
     when :payment
       @payment = Forms::PaymentForm.new
     when :confirm
-      @confirm = Forms::ConfirmForm.new
+      @order = current_order
     when :complete
       @complete = Forms::CompleteForm.new
     end
@@ -54,7 +54,8 @@ class Orders::CheckoutsController < ApplicationController
       @payment = Forms::PaymentForm.from_params(params[:payment])
       render_wizard @payment
     when :confirm
-      @confirm = Forms::ConfirmForm.form_params(params[:confirm])
+      @order = current_order
+      render_wizard @order
     when :complete then Forms::CompleteForm
     end
   end

@@ -33,7 +33,7 @@ en:
   number:
     currency:
       format:
-        unit:      "$"
+        unit:      "€"
         precision: 2
         separator: "."
         delimiter: ","
@@ -124,12 +124,22 @@ en:
         name_on_card: 'Name on Card'
         mm_yy: '"MM / YY"'
         cvv: 'CVV'
+      confirm:
+        edit: 'edit'
+        shipments: 'Shipments'
+        payment_information: 'Payment Information'
       order_summary:
         order_summary: 'Order Summary'
         item_total: 'Item Total:'
         order_total: 'Order Total:'
         shipping: 'Shipping'
       save_and_continue: 'Save and Continue'
+      line_item:
+        book: 'Book'
+        price: 'Price'
+        quantity: 'Quantity'
+        total: 'Total'
+        sub_total: 'SubTotal'
   devise:
     or: 'or'
     enter_email: 'Enter Email'
