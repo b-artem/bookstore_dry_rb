@@ -10,4 +10,10 @@ class Order < ApplicationRecord
     return 0 unless line_items.any?
     line_items.sum(&:subtotal)
   end
+
+  def order_total
+    return item_total untill shipping_method
+    item_total + shipping_method.price
+  end
+
 end

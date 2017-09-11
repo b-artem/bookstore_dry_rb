@@ -15,9 +15,12 @@ class Orders::CheckoutsController < ApplicationController
       @order.shipping_address = Forms::ShippingAddressForm.new
     when :delivery # then Forms::DeliveryForm
       @order = current_order # @shipping_method = Forms::ShippingMethodForm.new
-    when :payment then Forms::PaymentForm
-    when :confirm then Forms::ConfirmForm
-    when :complete then Forms::CompleteForm
+    when :payment
+      @payment = Forms::PaymentForm.new
+    when :confirm
+      @confirm = Forms::ConfirmForm.new
+    when :complete
+      @complete = Forms::CompleteForm.new
     end
 
     render_wizard
@@ -35,10 +38,8 @@ class Orders::CheckoutsController < ApplicationController
       end
       @order = Forms::OrderForm.from_params(params[:order], id: current_order.id)
               .with_context(use_billing_address_as_shipping: use_billing)
-              binding.pry
+      render_wizard @order
       # current_order.update_attributes(use_billing_address_as_shipping: use_billing)
-
-
       # @billing_address = Forms::BillingAddressForm
       #         .from_params(params[:order][:billing_address], order_id: current_order.id,
       #                       type: 'BillingAddress')
@@ -48,11 +49,14 @@ class Orders::CheckoutsController < ApplicationController
     when :delivery then
       current_order.update_attributes(shipping_method_id: params[:order][:shipping_method_id])
       @order = current_order
-    when :payment then Forms::PaymentForm
-    when :confirm then Forms::ConfirmForm
+      render_wizard @order
+    when :payment
+      @payment = Forms::PaymentForm.from_params(params[:payment])
+      render_wizard @payment
+    when :confirm
+      @confirm = Forms::ConfirmForm.form_params(params[:confirm])
     when :complete then Forms::CompleteForm
     end
-    render_wizard @order
   end
 
   # def create

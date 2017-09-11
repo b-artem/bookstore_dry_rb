@@ -3,6 +3,8 @@
 
 = render 'steps', locals: { step: 2 }
 
+%h3.general-subtitle= t '.shipping_method'
+
 = simple_form_for @order, url: wizard_path, method: :put do |f|
   -# = f.association :shipping_method, as: :radio_buttons
 

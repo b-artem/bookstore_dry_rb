@@ -5,6 +5,10 @@ class OrderDecorator < Draper::Decorator
     h.number_to_currency(object.item_total)
   end
 
+  def order_total
+    h.number_to_currency(object.order_total)
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #

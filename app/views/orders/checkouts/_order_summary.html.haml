@@ -5,8 +5,14 @@
       %p.font-16= t '.item_total'
     %td
       %p.font-16= @current_order.decorate.item_total
+  -if [:payment, :confirm].include? step
+    %tr
+      %td
+        %p.font-16= t '.shipping'
+      %td
+        %p.font-16= @current_order.shipping_method.decorate.price
   %tr
     %td
       %p.font-16= t '.order_total'
     %td
-      %p.font-16 HAVE TO DO IT
+      %p.font-16= @current_order.decorate.order_total
