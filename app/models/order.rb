@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   has_many :line_items, dependent: :destroy
 
   def shipping_address
-    return self[:shipping_address] unless use_billing_address_as_shipping
+    return super unless self[:use_billing_address_as_shipping]
     billing_address
   end
 

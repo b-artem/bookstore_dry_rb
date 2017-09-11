@@ -7,7 +7,9 @@ module CurrentOrder
     end
 
     def current_order
-      Order.find(session[:order_id])
+      Order.uncached do
+        Order.find(session[:order_id])
+      end
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "Order #{session[:order_id]} was not found"
     end

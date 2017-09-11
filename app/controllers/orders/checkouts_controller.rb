@@ -10,9 +10,23 @@ class Orders::CheckoutsController < ApplicationController
     @current_order = current_order
     case step
     when :address
-      @order = Forms::OrderForm.new
-      @order.billing_address = Forms::BillingAddressForm.new
-      @order.shipping_address = Forms::ShippingAddressForm.new
+      @order = Forms::OrderForm.from_model(current_order)
+      # Should I commetn this?
+      @order.billing_address = Forms::BillingAddressForm.from_model(@current_order.billing_address)
+      @order.shipping_address = Forms::ShippingAddressForm.from_model(@current_order.shipping_address)
+      # if @current_order.billing_address
+      #   @order.billing_address = Forms::BillingAddressForm.from_model(@current_order.billing_address)
+      # else
+      #   @order.billing_address = Forms::BillingAddressForm.new
+      # end
+      # @order[:use_billing_address_as_shipping] = 'true' if @current_order.use_billing_address_as_shipping
+
+      # if @current_order.shipping_address
+      #   @order.billing_address = Forms::BillingAddressForm.from_params(@current_order.billing_address)
+      # else
+      #   @order.billing_address = Forms::BillingAddressForm.new
+      # end
+      # @order.shipping_address = Forms::ShippingAddressForm.new
     when :delivery # then Forms::DeliveryForm
       @order = current_order # @shipping_method = Forms::ShippingMethodForm.new
     when :payment
@@ -127,8 +141,6 @@ class Orders::CheckoutsController < ApplicationController
     #     when :complete then Forms::CompleteForm
     #   end
     # end
-
-
 
     # def set_attributes_from_model(attribute)
     #   raise RuntimeError, attribute unless respond_to?(attribute)
