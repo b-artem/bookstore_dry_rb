@@ -1,4 +1,5 @@
 class Review < ApplicationRecord
+  include AASM
 
   belongs_to :book
   belongs_to :user
@@ -10,8 +11,6 @@ class Review < ApplicationRecord
                       message: "only allows letters, numbers or !#$%&'*+-/=?^_`{|}~." }
   validates :title, length: { maximum: 79 }
   validates :text, length: { maximum: 499 }
-
-  include AASM
 
   aasm column: 'status' do
     state :unprocessed, initial: true

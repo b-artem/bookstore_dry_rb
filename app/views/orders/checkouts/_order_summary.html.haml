@@ -8,7 +8,7 @@
     %td
       %p.font-16= t '.item_total'
     %td
-      %p.font-16= @order.decorate.item_total
+      %p.font-16= @current_order.decorate.item_total
   -if [:delivery, :payment, :confirm, :complete].include? step
     %tr
       %td
@@ -17,6 +17,12 @@
         %p.font-16= @order.shipping_method.decorate.price
   %tr
     %td
-      %p.font-16= t '.order_total'
+      - if step == :address
+        %p.font-16= t '.order_total'
+      - else
+        %strong.font-18= t '.order_total'
     %td
-      %p.font-16= @order.decorate.order_total
+      - if step == :address
+        %p.font-16= @current_order.decorate.order_total
+      - else
+        %strong.font-18= @current_order.decorate.order_total

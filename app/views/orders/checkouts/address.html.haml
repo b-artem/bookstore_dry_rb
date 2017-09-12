@@ -78,7 +78,7 @@
           %span.checkbox-text= t '.use_billing_address'
 
   .general-text-align.mb-60
-    = render('order_summary')
+    = render 'order_summary'
 
     = order.button :submit, t('orders.checkouts.save_and_continue'),
                   class: 'btn center-block mb-20' #disabled

@@ -7,13 +7,13 @@ class Orders::CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    # @current_order = current_order
+    @current_order = current_order
     case step
     when :address
       @order = Forms::OrderForm.from_model(current_order)
       # Should I commetn this?
-      @order.billing_address = Forms::BillingAddressForm.from_model(@current_order.billing_address)
-      @order.shipping_address = Forms::ShippingAddressForm.from_model(@current_order.shipping_address)
+      @order.billing_address = Forms::BillingAddressForm.from_model(current_order.billing_address)
+      @order.shipping_address = Forms::ShippingAddressForm.from_model(current_order.shipping_address)
       # if @current_order.billing_address
       #   @order.billing_address = Forms::BillingAddressForm.from_model(@current_order.billing_address)
       # else
@@ -36,8 +36,8 @@ class Orders::CheckoutsController < ApplicationController
     when :confirm
       @order = current_order
     when :complete
+      current_order.pay if current_order.may_pay?
       @order = current_order
-      
     end
 
     render_wizard
@@ -73,7 +73,7 @@ class Orders::CheckoutsController < ApplicationController
     when :confirm
       @order = current_order
       render_wizard @order
-    when :complete then Forms::CompleteForm
+    when :complete
     end
   end
 
