@@ -7,7 +7,7 @@ class Orders::CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    @current_order = current_order
+    # @current_order = current_order
     case step
     when :address
       @order = Forms::OrderForm.from_model(current_order)
@@ -29,12 +29,15 @@ class Orders::CheckoutsController < ApplicationController
       # @order.shipping_address = Forms::ShippingAddressForm.new
     when :delivery # then Forms::DeliveryForm
       @order = current_order # @shipping_method = Forms::ShippingMethodForm.new
+      @order.shipping_method ||= ShippingMethod.order(:price).first
     when :payment
+      @order = current_order
       @payment = Forms::PaymentForm.new
     when :confirm
       @order = current_order
     when :complete
-      @complete = Forms::CompleteForm.new
+      @order = current_order
+      
     end
 
     render_wizard

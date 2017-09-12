@@ -1,18 +1,22 @@
 %p.in-gold-500.font-18= t '.order_summary'
-%table.general-summary-table
+- if [:confirm, :complete].include? step
+  - table_class = ' general-summary-table-right general-text-right'
+- else
+  - table_class = ''
+= content_tag(:table, class: "general-summary-table" + table_class) do
   %tr
     %td
       %p.font-16= t '.item_total'
     %td
-      %p.font-16= @current_order.decorate.item_total
-  -if [:payment, :confirm].include? step
+      %p.font-16= @order.decorate.item_total
+  -if [:delivery, :payment, :confirm, :complete].include? step
     %tr
       %td
         %p.font-16= t '.shipping'
       %td
-        %p.font-16= @current_order.shipping_method.decorate.price
+        %p.font-16= @order.shipping_method.decorate.price
   %tr
     %td
       %p.font-16= t '.order_total'
     %td
-      %p.font-16= @current_order.decorate.order_total
+      %p.font-16= @order.decorate.order_total

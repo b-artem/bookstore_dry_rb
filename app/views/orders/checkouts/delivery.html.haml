@@ -1,5 +1,4 @@
-= content_for :javascripts do
-  = javascript_include_tag 'orders/checkouts/select_shipping_method', 'data-turbolinks-track': 'reload'
+-# = content_for :javascripts do
 
 = render 'steps', locals: { step: 2 }
 
@@ -45,12 +44,15 @@
             %span.in-grey-600= t '.price'
       %tbody
         - shipping_methods.each do |shipping_method|
+          - checked = false
+          - checked = true if @order.shipping_method.id == shipping_method.id
           %tr
             %td
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
                   %input.radio-input{name: 'order[shipping_method_id]',
-                    value: "#{shipping_method.id}", type: "radio", hidden: "true"}
+                    value: shipping_method.id, type: "radio", hidden: "true",
+                    checked: checked}
                   %span.radio-icon
                   %span.radio-text= shipping_method.name
             %td
@@ -64,6 +66,7 @@
                 class: 'btn center-block mb-20'
   -# %button.btn.btn-default.mb-20 Save and Continue
 
+= javascript_include_tag 'orders/checkouts/select_shipping_method', 'data-turbolinks-track': 'reload'
 
 -#
 -# .visible-xs
