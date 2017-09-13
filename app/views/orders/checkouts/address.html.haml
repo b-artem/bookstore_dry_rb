@@ -1,7 +1,7 @@
 = content_for :javascripts do
   = javascript_include_tag 'orders/checkouts/use_billing_address', 'data-turbolinks-track': 'reload'
 
-= render 'steps', locals: { step: 1 }
+= render 'steps'
 
 = simple_form_for @order, url: wizard_path, method: :patch, class: 'res-mb-100',
         defaults: { label_html: { class: 'control-label input-label' } } do |order|

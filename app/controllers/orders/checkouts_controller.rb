@@ -33,6 +33,7 @@ class Orders::CheckoutsController < ApplicationController
     when :payment
       @order = current_order
       @payment = Forms::PaymentForm.new
+      get_payment_data
     when :confirm
       @order = current_order
     when :complete
@@ -69,14 +70,38 @@ class Orders::CheckoutsController < ApplicationController
       render_wizard @order
     when :payment
       @payment = Forms::PaymentForm.from_params(params[:payment])
+      set_payment_data
       render_wizard @payment
     when :confirm
+      clear_payment_data
       @order = current_order
       render_wizard @order
     when :complete
     end
   end
 
+  private
+
+    def set_payment_data
+      session[:card_number] = @payment.card_number
+      session[:name_on_card] = @payment.name_on_card
+      session[:valid_until] = @payment.valid_until
+      session[:cvv] = @payment.cvv
+    end
+
+    def clear_payment_data
+      session[:card_number] = nil
+      session[:name_on_card] = nil
+      session[:valid_until] = nil
+      session[:cvv] = nil
+    end
+
+    def get_payment_data
+      @payment.card_number = session[:card_number]
+      @payment.name_on_card = session[:name_on_card]
+      @payment.valid_until = session[:valid_until]
+      @payment.cvv = session[:cvv]
+    end
   # def create
   #   @form = Forms::AddressForm.from_params(params)
   #

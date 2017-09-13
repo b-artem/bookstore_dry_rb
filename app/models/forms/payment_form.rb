@@ -10,6 +10,11 @@ class Forms::PaymentForm < Rectify::Form
   validates :cvv, presence: true
 
   def save
-    valid? ? true : false
+    if valid?
+      # session[:card_number] = '1234'
+      true
+    else
+      false
+    end
   end
 end
