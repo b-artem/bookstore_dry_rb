@@ -3,11 +3,12 @@ require 'support/factory_girl'
 
 feature 'Login' do
   let(:user) { create(:user) }
-  before do
-    visit new_user_session_path
-  end
+  background { visit new_user_session_path }
 
   context 'when email and password are valid' do
+    background do
+      3.times { create :book }
+    end
     scenario 'logs user in' do
       within 'form#new_user' do
         fill_in 'email', with: user.email

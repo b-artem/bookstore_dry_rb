@@ -21,12 +21,15 @@ class Book < ApplicationRecord
   scope :mobile_development, -> do
     Book.joins(:categories).where('categories.name = ?', 'Mobile development')
   end
+
   scope :photo, -> do
     Book.joins(:categories).where('categories.name = ?', 'Photo')
   end
+
   scope :web_design, -> do
     Book.joins(:categories).where('categories.name = ?', 'Web design')
   end
+
   scope :web_development, -> do
     Book.joins(:categories).where('categories.name = ?', 'Web development')
   end
