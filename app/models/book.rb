@@ -6,6 +6,7 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :categories
   has_many :reviews, dependent: :destroy
   has_many :line_items
+
   before_destroy :ensure_not_referenced_by_any_line_item
 
   validates :title, :description, :price, :image_url, :publication_year,

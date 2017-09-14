@@ -8,8 +8,14 @@ RSpec.describe Book, type: :model do
     expect(book).to be_valid
   end
 
+  describe 'Associations' do
+    it { is_expected.to have_and_belong_to_many(:authors) }
+    it { is_expected.to have_and_belong_to_many(:categories) }
+    it { is_expected.to have_many(:reviews).dependent(:destroy) }
+    it { is_expected.to have_many(:line_items) }
+  end
+
   describe "ActiveModel validations" do
-    # Basic validations
 
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:description) }
@@ -52,4 +58,34 @@ RSpec.describe Book, type: :model do
     # it { expect(user).to validate_confirmation_of(:password) }  # Ensure two values match
   end
 
+  describe 'scopes' do
+    let!(:books_mobile_development) { create_list(:book_mobile_development, 3) }
+    let!(:books_photo) { create_list(:book_photo, 3) }
+    let!(:books_web_design) { create_list(:book_web_design, 3) }
+    let!(:books_web_development) { create_list(:book_web_development, 3) }
+
+    context 'when .mobile_development' do
+      it 'selects books with proper category' do
+        expect(Book.mobile_development).to eq books_mobile_development
+      end
+    end
+
+    context 'when .photo' do
+      it 'selects books with proper category' do
+        expect(Book.photo).to eq books_photo
+      end
+    end
+
+    context 'when .web_design' do
+      it 'selects books with proper category' do
+        expect(Book.web_design).to eq books_web_design
+      end
+    end
+
+    context 'when .web_development' do
+      it 'selects books with proper category' do
+        expect(Book.web_development).to eq books_web_development
+      end
+    end
+  end
 end
