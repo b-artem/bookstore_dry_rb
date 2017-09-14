@@ -21,5 +21,4 @@ class Cart < ApplicationRecord
   def total
     subtotal
   end
-
 end

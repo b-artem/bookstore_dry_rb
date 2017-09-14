@@ -3,6 +3,6 @@ class Author < ApplicationRecord
 
   validates :first_name, :last_name,
             presence: true,
-            format: { with: /\A[a-zA-Z]+\z/, message: 'only allows letters' },
+            format: { with: /\A[a-zA-Z]+\z/, message: 'Only allows letters' },
             length: { maximum: 49 }
 end

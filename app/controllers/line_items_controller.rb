@@ -35,7 +35,7 @@ class LineItemsController < ApplicationController
                       notice: 'Line item was successfully created.' }
         format.json { render :show, status: :created, location: @line_item }
       else
-        format.html { redirect_back fallback_location: root_path, alert: 'Line was not created' }
+        format.html { redirect_back fallback_location: root_path, alert: 'Line item was not created' }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
