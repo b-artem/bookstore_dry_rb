@@ -1,5 +1,10 @@
 require 'rails_helper'
+require 'support/factory_girl'
 
 RSpec.describe Author, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:author) { build :author }
+
+  it 'has valid factory' do
+    expect(author).to be_valid
+  end
 end

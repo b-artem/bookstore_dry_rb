@@ -11,7 +11,6 @@ class Forms::PaymentForm < Rectify::Form
 
   def save
     if valid?
-      # session[:card_number] = '1234'
       true
     else
       false

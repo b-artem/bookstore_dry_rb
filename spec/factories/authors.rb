@@ -1,7 +1,12 @@
 FactoryGirl.define do
   factory :author do
-    first_name "MyString"
-    last_name "MyString"
-    description "MyText"
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+  end
+
+  factory :author_with_description, parent: :author do
+    description do
+      "Here comes a description of wonderful life of #{first_name} #{last_name}"
+    end
   end
 end
