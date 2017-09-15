@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :set_locale_from_params
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  include CurrentCart
+  before_action :set_cart
+
   # rescue_from CanCan::AccessDenied do |exception|
   #   respond_to do |format|
   #     format.json { head :forbidden, content_type: 'text/html' }

@@ -6,8 +6,8 @@ class BookDecorator < Draper::Decorator
     authors.map(&:name).join(', ')
   end
 
-  def short_description
-    h.truncate(description, length: 500)
+  def short_description(length = 500)
+    h.truncate(description, length: length)
   end
 
   def full_description

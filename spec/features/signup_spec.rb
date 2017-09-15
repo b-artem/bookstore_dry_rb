@@ -6,6 +6,7 @@ feature 'Signup' do
   background { visit new_user_registration_path }
 
   scenario 'User registers successfully via register form' do
+    3.times { create :book }
     within 'form#new_user' do
       fill_in 'email', with: Faker::Internet.email
       fill_in 'password', with: password

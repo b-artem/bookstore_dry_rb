@@ -15,7 +15,7 @@
       %th.col-quantity
         %span.in-grey-600= t '.quantity'
       %th.col-total
-        %span.in-grey-600= t '.subtotal'
+        %span.in-grey-600= t '.sub_total'
       %th.col-close
     = render partial: 'line_items/form_hidden_xs',
             collection: @cart.line_items, as: :line_item
@@ -24,23 +24,23 @@
   .row
     .col-sm-4
       .input-group.general-input-group
-        %label.input-label Enter Your Coupon Code
-        %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
+        %label.input-label= t '.enter_coupon'
+        %input.form-control.mb-30{type: "text", placeholder: t('.enter_coupon')}
         %div
           %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
           -# = button_to 'Update cart', remote: true,
           -#             onclick: 'updateCart()', class: 'button btn btn-primary mb-15 res-block'
           %button.btn.btn-primary.mb-15.res-block{onclick: "updateCart();"}
-            = 'Update cart'
+            = t '.update_cart'
     .col-sm-8
       .res-mr-200.text-center.general-text-right
         %p.in-gold-500.font-18 Order Summary
         %table.general-summary-table.general-summary-table-right.general-text-right
           %tr
             %td
-              %p.font-16 Subtotal:
+              %p.font-16= t '.subtotal'
             %td
-              %p.font-16{id: "cart-subtotal"}= @cart.decorate.subtotal_decorated
+              %p.font-16{id: "cart-subtotal"}= @cart.decorate.subtotal
           %tr
             %td
               %p.font-16 Coupon:
@@ -50,9 +50,14 @@
             %td
               %strong.font-18 Order Total:
             %td
-              %strong.font-18 €117.69
-        %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
-%button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+              %strong.font-18{id: "cart-total"}= @cart.decorate.total
+        = button_to t('.checkout'), orders_path, method: :post,
+                          class: 'btn btn-default mb-20 visible-xs-inline-block'
+        -# %button.btn.btn-default.mb-20.visible-xs-inline-block= t '.checkout'
+
+= button_to t('.checkout'), orders_path, method: :post,
+            class: 'btn btn-default mb-20 hidden-xs center-block'
+-# %button.btn.btn-default.mb-20.hidden-xs.center-block= t '.checkout'
 
 
 = link_to 'Edit', edit_cart_path(@cart)

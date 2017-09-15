@@ -15,6 +15,10 @@ class Cart < ApplicationRecord
 
   def subtotal
     return 0 unless line_items.any?
-    line_items.decorate.sum(&:subtotal)
+    line_items.sum(&:subtotal)
+  end
+
+  def total
+    subtotal
   end
 end

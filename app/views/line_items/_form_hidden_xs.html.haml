@@ -7,7 +7,7 @@
   %td
     %p.title= line_item.book.title
   %td
-    %span.font-16.in-gold-500= number_to_currency(line_item.book.price)
+    %span.font-16.in-gold-500= line_item.decorate.price
   %td
     .input-group
       = form_for line_item, id: "form-line-item-#{line_item.id}", remote: true do |f|
@@ -32,10 +32,10 @@
 
   %td
     %span.font-16.in-gold-500{id: "subtotal-#{line_item.id}"}
-      = line_item.decorate.subtotal_decorated
+      = line_item.decorate.subtotal
   %td
-    = button_to line_item_path(line_item), method: :delete,
-                class: "close general-cart-close" do
+    = button_to line_item_path(line_item), method: :delete, type: "button",
+                class: "close general-cart-close", 'aria-label': "Close" do
       %span{'aria-hidden': "true"} &times;
     -# %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
     -#   %span{'aria-hidden': "true"} &times;

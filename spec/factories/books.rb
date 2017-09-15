@@ -10,4 +10,32 @@ FactoryGirl.define do
     # authors nil
     # categories nil
   end
+
+  factory :book_random_category, parent: :book do
+    categories :category
+  end
+
+  factory :book_mobile_development, parent: :book do
+    after :create do |book|
+      book.categories = [Category.find_or_create_by(name: 'Mobile development')]
+    end
+  end
+
+  factory :book_photo, parent: :book do
+    after :create do |book|
+      book.categories = [Category.find_or_create_by(name: 'Photo')]
+    end
+  end
+
+  factory :book_web_design, parent: :book do
+    after :create do |book|
+      book.categories = [Category.find_or_create_by(name: 'Web design')]
+    end
+  end
+
+  factory :book_web_development, parent: :book do
+    after :create do |book|
+      book.categories = [Category.find_or_create_by(name: 'Web development')]
+    end
+  end
 end

@@ -7,6 +7,7 @@ end
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'cancancan', '~> 2.0'
+gem 'country_select', '~> 3.1'
 gem 'devise', '~> 4.3'
 gem 'draper', '~> 3.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
@@ -22,8 +23,10 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails_admin', '~> 1.2'
 gem 'rails_admin_aasm', '~> 0.1.1'
+gem 'rectify', '~> 0.10.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form', '~> 3.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -42,6 +45,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'wicked', '~> 1.3', '>= 1.3.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

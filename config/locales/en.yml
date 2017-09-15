@@ -33,7 +33,7 @@ en:
   number:
     currency:
       format:
-        unit:      "$"
+        unit:      "€"
         precision: 2
         separator: "."
         delimiter: ","
@@ -94,7 +94,58 @@ en:
       product: 'Product'
       price: 'Price'
       quantity: 'Quantity'
-      subtotal: 'SubTotal'
+      sub_total: 'SubTotal'
+      subtotal: 'Subtotal'
+      update_cart: 'Update cart'
+      checkout: 'Checkout'
+      enter_coupon: 'Enter Your Coupon Code'
+  orders:
+    checkouts:
+      steps:
+        checkout: 'Checkout'
+        address: 'Address'
+        delivery: 'Delivery'
+        payment: 'Payment'
+        confirm: 'Confirm'
+        complete: 'Complete'
+      address:
+        billing_address: 'Billing Address'
+        shipping_address: 'Shipping Address'
+        all_fields_are_required: 'all fields are required'
+        use_billing_address: 'Use Billing Address'
+      delivery:
+        shipping_method: 'Shipping Method'
+        method: 'Method'
+        days: 'Days'
+        price: 'Price'
+      payment:
+        credit_card: 'Credit Card'
+        card_number: 'Card Number'
+        name_on_card: 'Name on Card'
+        mm_yy: '"MM / YY"'
+        cvv: 'CVV'
+      confirm:
+        edit: 'edit'
+        shipments: 'Shipments'
+        payment_information: 'Payment Information'
+        place_order: 'Place Order'
+      complete:
+        thank_you_for_your_order: 'Thank You for your Order!'
+        order_confirmation_has_been_sent: 'An order confirmation has been sent to'
+        order: 'Order'
+        back_to_store: 'Back to Store'
+      order_summary:
+        order_summary: 'Order Summary'
+        item_total: 'Item Total:'
+        order_total: 'Order Total:'
+        shipping: 'Shipping'
+      save_and_continue: 'Save and Continue'
+      line_item:
+        book: 'Book'
+        price: 'Price'
+        quantity: 'Quantity'
+        total: 'Total'
+        sub_total: 'SubTotal'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

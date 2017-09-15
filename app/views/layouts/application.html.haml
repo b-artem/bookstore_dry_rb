@@ -42,12 +42,13 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand Bookstore
-          %a.shop-link.pull-right.visible-xs{href: "#"}
+          = link_to @cart, class: 'shop-link pull-right visible-xs' do
             %span.shop-icon
-              %span.shop-quantity 3
-        %a.shop-link.pull-right.hidden-xs{href: "#"}
+              %span.shop-quantity= @cart.line_items.count
+        = link_to @cart, class: 'shop-link pull-right hidden-xs' do
           %span.shop-icon
-            %span.shop-quantity 3
+            %span.shop-quantity= @cart.line_items.count
+        -# %a.shop-link.pull-right.hidden-xs{href: "#"}
         #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
           .visible-xs
             %button.close{type: "button", 'aria-label': "Close"}
@@ -86,7 +87,7 @@
               %li= link_to t('.my_account'), '#'
 
     %main.container.general-main-wrap
-    
+
       - if flash.any?
         %p#notice= notice
         %p#alert= alert

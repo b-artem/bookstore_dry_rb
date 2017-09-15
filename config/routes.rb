@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     # Do I  really need  #new action?
     resources :reviews, except: [:new, :index]
   end
+  resources :orders, controller: 'orders/orders' do
+    resources :checkouts, controller: 'orders/checkouts'
+  end
+  resources :addresses, only: [:create, :update]
+  resources :billing_addresses
+
   get 'home/index'
   root 'home#index'
 

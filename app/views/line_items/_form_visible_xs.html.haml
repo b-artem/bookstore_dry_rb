@@ -9,7 +9,7 @@
       %td
         %span.in-grey-600= t '.price'
       %td
-        %span.font-16.in-gold-500= number_to_currency(line_item.book.price)
+        %span.font-16.in-gold-500= line_item.decorate.price
     %tr
       %td.vertical-middle
         %span.in-grey-600= t '.quantity'
@@ -37,7 +37,7 @@
           -#   %i.fa.fa-plus.line-heaght-40
     %tr
       %td
-        %span.in-grey-600= t '.subtotal'
+        %span.in-grey-600= t '.sub_total'
       %td
         %span.font-16.in-gold-500 €32.90 Need to do smth.
 
