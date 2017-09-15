@@ -16,7 +16,6 @@ RSpec.describe Book, type: :model do
   end
 
   describe "ActiveModel validations" do
-
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_presence_of(:price) }
@@ -25,7 +24,8 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:dimensions) }
     it { is_expected.to validate_presence_of(:materials) }
 
-    it { is_expected.to validate_numericality_of(:price).is_greater_than_or_equal_to(0.01) }
+    it { is_expected.to validate_numericality_of(:price).
+                        is_greater_than_or_equal_to(0.01) }
     it 'validates uniqueness of #title' do
       expect(book).to validate_uniqueness_of(:title)
     end
@@ -33,7 +33,8 @@ RSpec.describe Book, type: :model do
     it { is_expected.to allow_value('1.png').for(:image_url) }
     it { is_expected.to allow_value('1.jpg').for(:image_url) }
     it { is_expected.to_not allow_value('1.psd').for(:image_url) }
-    it { is_expected.to validate_inclusion_of(:publication_year).in_range(1969..Date.today.year) }
+    it { is_expected.to validate_inclusion_of(:publication_year).
+                        in_range(1969..Date.today.year) }
 
     # it { expect(bodybuilder).to validate_presence_of(:food).with_message(/you can't get big without your protein!/)
     # it { expect(tumblog).to validate_numericality_of(:follower_count).only_integer }

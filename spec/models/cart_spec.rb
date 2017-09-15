@@ -48,5 +48,22 @@ RSpec.describe Cart, type: :model do
         end
       end
     end
+
+    describe '#subtotal' do
+      it 'it sums line_items subtotals' do
+        line_item1 = build :line_item, price: 10, quantity: 1
+        line_item2 = build :line_item, price: 20, quantity: 3
+        cart.line_items = [line_item1, line_item2]
+        expect(cart.subtotal).to eq 70
+      end
+    end
+
+    # Have to change it
+    describe '#total' do
+      it 'calculates (:subtotal - discount)' # do
+      #   allow(cart).to receive(:subtotal).and_return(100)
+      #   expect(cart.total).to eq 100
+      # end
+    end
   end
 end
