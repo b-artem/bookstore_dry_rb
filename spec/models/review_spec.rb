@@ -36,5 +36,31 @@ RSpec.describe Review, type: :model do
         expect(Review.new_).to eq unprocessed
       end
     end
+
+    context 'when .processed' do
+      it "selects reviews with status 'approved' or 'rejected'" do
+        expect(Review.processed).to eq(approved + rejected)
+      end
+    end
+  end
+
+  describe 'aasm states' do
+    it "initially has 'unprocessed' status" do
+      expect(review.status).to eq 'unprocessed'
+    end
+
+    describe '#approve' do
+      it "changes state from 'unprocessed' to 'approved'" do
+        expect { review.approve }.to change { review.status }
+                .from('unprocessed').to('approved')
+      end
+    end
+
+    describe '#reject' do
+      it "changes state from 'unprocessed' to 'rejected'" do
+        expect { review.reject }.to change { review.status }
+                .from('unprocessed').to('rejected')
+      end
+    end
   end
 end

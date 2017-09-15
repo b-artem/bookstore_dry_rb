@@ -17,9 +17,4 @@ FactoryGirl.define do
     #   end
     # end
   end
-  #
-  # factory :post do
-  #   title { FFaker::Lorem.sentence }
-  #   user
-  # end
 end
