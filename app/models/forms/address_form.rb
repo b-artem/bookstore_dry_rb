@@ -10,7 +10,8 @@ class Forms::AddressForm < Rectify::Form
   attribute :phone, String
   attribute :order_id, Integer
 
-  validates :first_name, :last_name, presence: true, if: :need_shipping_address?
+  validates :first_name, :last_name, :address, :city, :zip, :country, :phone,
+            presence: true, if: :need_shipping_address?
 
   def need_shipping_address?
     return if type == 'ShippingAddress' && context.use_billing_address_as_shipping

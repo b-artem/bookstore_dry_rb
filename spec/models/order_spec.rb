@@ -24,7 +24,7 @@ RSpec.describe Order, type: :model do
     describe '#pay' do
       it "changes state from 'in_progress' to 'in_queue'" do
         expect { order.pay }.to change { order.state }
-                .from('in_progress').to('in_queue')
+          .from('in_progress').to('in_queue')
       end
     end
   end
@@ -72,7 +72,7 @@ RSpec.describe Order, type: :model do
         it 'returns items price + shipping price' do
           allow(order).to receive(:item_total).and_return(100)
           allow(order).to receive_message_chain(:shipping_method, :price)
-                          .and_return(20)
+            .and_return(20)
           expect(order.order_total).to eq 120
         end
       end

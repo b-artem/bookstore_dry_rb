@@ -1,32 +1,36 @@
 require 'rails_helper'
+require 'support/factory_girl'
 
 RSpec.describe User, type: :model do
-  # subject { FactoryGirl.build :user }
-  # let(:user) { FactoryGirl.create :user }
+  let(:user) { build :user }
 
-  # it 'is invalid without an email' do
-  #   expect(FactoryGirl.build :user, email: nil).not_to be_valid
-  # end
-  #
-  # it 'does not allow duplicate emails' do
-  #   expect(FactoryGirl.build :user, email: user.email).not_to be_valid
-  # end
-
-  context ':email' do
-    it { is_expected.to validate_presence_of(:email) }
-    # it { is_expected.to allow_value('http://foo.com').for(:email) }
+  it 'has a valid factory' do
+    expect(user).to be_valid
   end
 
-  context ':password' do
+  context 'associations' do
+    it { is_expected.to have_many(:orders) }
+    it { is_expected.to have_many(:reviews) }
+    it { is_expected.to have_one(:billing_address) }
+    it { is_expected.to have_one(:shipping_address) }
+  end
+
+
+  context 'ActiveModel validations' do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:password) }
+    it 'validates uniqueness of :email' do
+      expect(user).to validate_uniqueness_of(:email).case_insensitive
+    end
+    it { is_expected.not_to allow_value('http://foo.com').for(:email) }
+    it { is_expected.to validate_length_of(:password).is_at_least(8) }
+    it { is_expected.to validate_confirmation_of(:password) }
+    it 'validates many validations TBD'
+  end
+
+
     # Should be masked.
     # Minimum 8 letters, at least 1 uppercase, at least 1 lowercase, at least 1 number.
     # Mustn't contain spaces inside
     # Spaces at the beginning and at the end should be cut off.
-
-    it { is_expected.to validate_presence_of(:password) }
-    it { is_expected.to validate_length_of(:password).is_at_least(8) }
-
-
-
-  end
 end
