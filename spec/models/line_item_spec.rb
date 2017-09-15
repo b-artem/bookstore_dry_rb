@@ -27,6 +27,4 @@ RSpec.describe LineItem, type: :model do
       expect(line_item.subtotal).to eq 81
     end
   end
-
-
 end

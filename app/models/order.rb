@@ -45,8 +45,7 @@ class Order < ApplicationRecord
   private
 
     def generate_number
-      number = id.to_s.prepend('R' + '0'*(8 - id.to_s.length))
+      number = id.to_s.prepend('R' + '0' * (8 - id.to_s.length))
       update_attributes(number: number)
     end
-
 end

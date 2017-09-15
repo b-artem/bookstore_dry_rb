@@ -1,10 +1,8 @@
 FactoryGirl.define do
   factory :review do
-    title "MyString"
-    text "MyText"
-    score 1
-    status "MyString"
-    book nil
-    user nil
+    sequence :title { |n| "Review no. #{n}" }
+    text { Faker::Lorem.paragraph }
+    book { build :book }
+    user { build_stubbed :user }
   end
 end
