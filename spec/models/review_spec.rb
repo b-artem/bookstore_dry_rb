@@ -4,7 +4,7 @@ require 'support/factory_girl'
 RSpec.describe Review, type: :model do
   let(:review) { build :review }
 
-  it 'has valid factory' do
+  it 'has a valid factory' do
     expect(review).to be_valid
   end
 

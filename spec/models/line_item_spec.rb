@@ -4,7 +4,7 @@ require 'support/factory_girl'
 RSpec.describe LineItem, type: :model do
   let(:line_item) { build :line_item }
 
-  it 'has valid factory' do
+  it 'has a valid factory' do
     expect(line_item).to be_valid
   end
 

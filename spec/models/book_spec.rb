@@ -26,7 +26,7 @@ RSpec.describe Book, type: :model do
 
     it { is_expected.to validate_numericality_of(:price).
                         is_greater_than_or_equal_to(0.01) }
-    it 'validates uniqueness of #title' do
+    it 'validates uniqueness of :title' do
       expect(book).to validate_uniqueness_of(:title)
     end
     it { is_expected.to allow_value('1.gif').for(:image_url) }

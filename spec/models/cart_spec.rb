@@ -4,7 +4,7 @@ require 'support/factory_girl'
 RSpec.describe Cart, type: :model do
   let(:cart) { build :cart }
 
-  it 'has valid factory' do
+  it 'has a valid factory' do
     expect(cart).to be_valid
   end
 
@@ -50,7 +50,7 @@ RSpec.describe Cart, type: :model do
     end
 
     describe '#subtotal' do
-      it 'it sums line_items subtotals' do
+      it 'sums line_items subtotals' do
         line_item1 = build :line_item, price: 10, quantity: 1
         line_item2 = build :line_item, price: 20, quantity: 3
         cart.line_items = [line_item1, line_item2]
