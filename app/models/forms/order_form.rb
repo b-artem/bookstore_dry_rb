@@ -9,7 +9,6 @@ class Forms::OrderForm < Rectify::Form
 
   # def initialize(*args)
   #   super(*args)
-  #
   # end
 
   def save
@@ -28,5 +27,4 @@ class Forms::OrderForm < Rectify::Form
   def need_shipping_address?
     true unless use_billing_address_as_shipping
   end
-
 end
