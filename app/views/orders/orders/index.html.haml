@@ -6,10 +6,14 @@
       %th
       %th
       %th
+      %th
+      %th
 
   %tbody
     - @orders.each do |order|
       %tr
+        %td= "Order_id: #{order.id}"
+        %td= "user_id: #{order.user.id}"
         %td= link_to 'Show', order
         %td= link_to 'Edit', edit_order_path(order)
         %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }

@@ -8,9 +8,10 @@ class Orders::OrdersController < ApplicationController
 
   # GET /orders
   # GET /orders.json
-  # def index
-  #   @orders = Order.all
-  # end
+  def index
+    set_cart
+    @orders = Order.all.order(:id)
+  end
 
   # GET /orders/1
   # GET /orders/1.json
