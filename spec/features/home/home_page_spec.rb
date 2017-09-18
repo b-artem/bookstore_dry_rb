@@ -1,39 +1,65 @@
 require 'rails_helper'
 require 'support/factory_girl'
+require 'support/devise'
 
-feature 'HomePage' do
-  let(:user) { create(:user) }
-  background { visit home_index_path }
-
-  context 'when email and password are valid' do
-    background do
-      3.times { create :book }
-    end
-    scenario 'logs user in' do
-      within 'form#new_user' do
-        fill_in 'email', with: user.email
-        fill_in 'password', with: user.password
-        click_button 'Log in'
-      end
-      expect(page).to have_text 'Signed in successfully'
-      expect(page).not_to have_content 'Enter Email'
-      expect(page).not_to have_content 'Password'
-      expect(page).not_to have_button 'Log in'
-    end
+shared_examples 'home page' do
+  background do
+    5.times { create :book }
+    visit home_index_path
   end
 
-  context 'when password is invalid' do
-    scenario "doesn't log user in" do
-      within 'form#new_user' do
-        fill_in 'email', with: user.email
-        fill_in 'password', with: (user.password + '1')
-        click_button 'Log in'
-      end
-      expect(page).to have_text 'Invalid Email or password'
-      expect(page).not_to have_text 'Signed in successfully'
-      expect(page).to have_content 'Enter Email'
-      expect(page).to have_content 'Password'
-      expect(page).to have_button 'Log in'
-    end
+  scenario 'shows Latest books block' do
+    expect(page).to have_css('#slider.carousel.slide')
+  end
+
+  scenario 'shows Get started bock' do
+    expect(page).to have_text('Welcome to our amazing Bookstore!')
+    expect(page).to have_button('Get Started')
+  end
+
+  scenario 'shows Best sellers block' do
+    expect(page).to have_text('Best Sellers')
   end
 end
+
+feature 'Home page' do
+  context 'when user is a guest' do
+    it_behaves_like 'home page'
+  end
+
+  context 'when user is logged in' do
+    let(:user) { create(:user) }
+    background { sign_in user }
+    it_behaves_like 'home page'
+  end
+end
+
+# feature 'HomePage' do
+#   let(:user) { create(:user) }
+#   background do
+#     5.times { create :book }
+#     visit home_index_path
+#   end
+#
+#   context 'when user is a guest' do
+#     scenario 'shows Latest books block' do
+#       expect(page).to have_css('#slider.carousel.slide')
+#     end
+#
+#     scenario 'shows Get started bock' do
+#       expect(page).to have_text('Welcome to our amazing Bookstore!')
+#       expect(page).to have_button('Get Started')
+#     end
+#
+#     scenario 'shows Bestsellers block' do
+#       expect(page).to have_text('Best Sellers')
+#     end
+#   end
+#
+#   context 'when user is logged in' do
+#     scenario 'shows Latest books block' do
+#       sign_in user
+#       expect(page).to have_css('#slider.carousel.slide')
+#     end
+#   end
+# end

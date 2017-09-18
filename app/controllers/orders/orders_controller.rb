@@ -4,6 +4,8 @@ class Orders::OrdersController < ApplicationController
   before_action :set_cart, only: [:create]
   before_action :ensure_cart_isnt_empty, only: [:create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+
+  authorize_resource
   # before_action :create_order_and, only: :show
 
   # GET /orders

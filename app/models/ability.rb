@@ -9,6 +9,7 @@ class Ability
       can :manage, :all               # allow admins to do anything
     else
       can :read, :all                 # allow everyone to read everything
+      # cannot :read, Order, shipping_method: { id: 3 } 
     end
     #
     # The first argument to `can` is the action you are giving the user
