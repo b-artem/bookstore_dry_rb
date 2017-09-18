@@ -23,8 +23,7 @@ shared_examples 'latest books' do
     end
   end
 
-  scenario 'flips the slide', js: true, driver: :webkit do
-    # binding.pry
+  scenario 'flips the slide', js: true do
     latest = Book.order('created_at DESC').limit(2)
     within '.carousel-inner > .item.active' do
       expect(page).to have_content(latest.first.title)
