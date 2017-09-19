@@ -59,9 +59,9 @@ RSpec.describe LineItemsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "does not return a success response" do
+    it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).not_to be_success
+      expect(response).to be_success
     end
   end
 

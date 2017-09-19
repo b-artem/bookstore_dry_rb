@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
-require 'support/wait_for_ajax'
 
 shared_examples 'latest books' do
   background do
@@ -25,18 +24,18 @@ shared_examples 'latest books' do
     end
   end
 
-  # context 'when user flips the slide' do
-  #   scenario 'next slide is shown', js: true do
-  #     latest = Book.order('created_at DESC').limit(2)
-  #     within '.carousel-inner > .item.active' do
-  #       expect(page).to have_content(latest.first.title)
-  #     end
-  #     page.find('a.right.carousel-control').click
-  #     within '.carousel-inner > .item.active' do
-  #       expect(page).to have_content(latest.last.title)
-  #     end
-  #   end
-  # end
+  context 'when user flips the slide' do
+    scenario 'next slide is shown', js: true do
+      latest = Book.order('created_at DESC').limit(2)
+      within '.carousel-inner > .item.active' do
+        expect(page).to have_content(latest.first.title)
+      end
+      page.find('a.right.carousel-control').click
+      within '.carousel-inner > .item.active' do
+        expect(page).to have_content(latest.last.title)
+      end
+    end
+  end
 
   context 'when user clicks Buy now button' do
     scenario 'adds chosen book to the cart', js: true do
@@ -44,7 +43,6 @@ shared_examples 'latest books' do
         click_button('Buy Now')
       end
       wait_for_ajax
-      # binding.pry
       expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
     end
   end

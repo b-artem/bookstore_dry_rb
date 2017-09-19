@@ -48,4 +48,8 @@ class ApplicationController < ActionController::Base
   def default_url_options
     { locale: I18n.locale }
   end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, session)
+  end
 end
