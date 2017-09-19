@@ -15,23 +15,23 @@ class Forms::AddressForm < Rectify::Form
   validates :type, inclusion: { in: %w(BillingAddress ShippingAddress) }
   validates :first_name, :last_name,
             format: { with: /\A[a-zA-Z]+\z/, message: 'Only allows letters' },
-            length: { maximum: 49 }
+            length: { maximum: 49 }, if: :need_shipping_address?
   validates :address,
             format: { with: /\A[A-Za-z0-9, -]+\z/,
                       message: "Only allows a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’" },
-            length: { maximum: 49 }
+            length: { maximum: 49 }, if: :need_shipping_address?
   validates :city, :country,
             format: { with: /\A[A-Z a-z]+\z/,
                       message: "Only allows a-z, ' ', A-Z" },
-            length: { maximum: 49 }
+            length: { maximum: 49 }, if: :need_shipping_address?
   validates :zip,
             format: { with: /\A[0-9-]+\z/,
                       message: "Only allows 0-9 '-'" },
-            length: { maximum: 10 }
+            length: { maximum: 10 }, if: :need_shipping_address?
   validates :phone,
             format: { with: /\A\+{1}[0-9]+\z/,
                       message: "Only allows '+', 0-9" },
-            length: { maximum: 15 }
+            length: { maximum: 15 }, if: :need_shipping_address?
 
   def need_shipping_address?
     return if type == 'ShippingAddress' && context.use_billing_address_as_shipping

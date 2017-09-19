@@ -35,6 +35,19 @@ class Book < ApplicationRecord
     Book.joins(:categories).where('categories.name = ?', 'Web development')
   end
 
+  scope :best_seller, ->(category) do
+    return Book.none unless CATEGORIES.include?(category.to_s)
+    LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
+      .joins(:book).merge(Book.send(category))
+      .joins(:order).where(orders: { state: 'delivered' })
+      .group('line_items.book_id').order('total_quantity DESC').first
+
+
+    # LineItem.joins(:book).merge(Book.send(category))
+    #   .joins(:order).where(orders: { state: 'delivered' })
+    #   .select("book_id, sum(quantity) as total_quantity").group('book_id').order('total_quantity DESC').first
+  end
+
   private
 
     def ensure_not_referenced_by_any_line_item

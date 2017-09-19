@@ -2,6 +2,9 @@ class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder
   require 'pry'
+
+  authorize_resource(Order)
+  authorize_resource(Address)
   # include Rectify::ControllerHelpers
   # before_action :set_form, only: [:show]
   steps :address, :delivery, :payment, :confirm, :complete
@@ -53,9 +56,12 @@ class Orders::CheckoutsController < ApplicationController
         use_billing = true
       else
         use_billing = false
+
       end
       @order = Forms::OrderForm.from_params(params[:order], id: current_order.id)
               .with_context(use_billing_address_as_shipping: use_billing)
+      @order.billing_address.order_id = current_order.id
+      @order.shipping_address.order_id = current_order.id unless use_billing
       render_wizard @order
       # current_order.update_attributes(use_billing_address_as_shipping: use_billing)
       # @billing_address = Forms::BillingAddressForm
