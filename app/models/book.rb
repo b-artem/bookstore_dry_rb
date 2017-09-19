@@ -40,7 +40,7 @@ class Book < ApplicationRecord
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book).merge(Book.send(category))
       .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.book_id').order('total_quantity DESC').first
+      .group('line_items.book_id').order('total_quantity DESC').first.book
 
 
     # LineItem.joins(:book).merge(Book.send(category))
