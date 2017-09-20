@@ -1,4 +1,6 @@
-- best_sellers.each do |bestseller|
+- Book::CATEGORIES.each do |category|
+  - bestseller = Book.best_seller(category).decorate
+  -# - best_sellers.each do |bestseller|
   .col-sm-6.col-md-3
     .general-thumb-wrap
       .thumbnail.general-thumbnail
@@ -6,7 +8,7 @@
                     alt: "design-book"
         .thumb-hover
           .general-thumb-link-wrap
-            = link_to book_path(bestseller), id: "book-view-#{bestseller.id}", 
+            = link_to book_path(bestseller), id: "book-view-#{bestseller.id}",
                       class: 'thumb-hover-link' do
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
             = link_to line_items_path(book_id: bestseller.id, quantity: 1), method: :post,

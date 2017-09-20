@@ -9,8 +9,10 @@ class Ability
       can :manage, :all               # allow admins to do anything
     else
       can :read, :all                 # allow everyone to read everything
+      return unless session
       can :update, Cart, id: session[:cart_id]
       can :manage, LineItem, cart: { id: session[:cart_id] }
+      can :manage, Order, id: session[:order_id]
       # cannot :read, Order, shipping_method: { id: 3 }
     end
     #
