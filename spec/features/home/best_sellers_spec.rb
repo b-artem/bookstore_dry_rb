@@ -28,30 +28,26 @@ shared_examples 'best sellers' do
   # end
 
   context 'when user clicks the View icon' do
-    scenario 'details of item are shown', js: true do
-      # bestseller_mobile_development = Book
-      # latest = Book.order('created_at DESC').limit(2)
-      # id = Book
-      within('#bestsellers') { click_link("book-view-") }
-      within '.carousel-inner > .item.active' do
-        expect(page).to have_content(latest.first.title)
-      end
-      page.find('a.right.carousel-control').click
-      within '.carousel-inner > .item.active' do
-        expect(page).to have_content(latest.last.title)
+    scenario 'details of item are shown' do
+      bestseller_mob_dev = Book.mobile_development.take
+      allow(Book).to receive(:best_seller).with(:mobile_development)
+        .and_return(:bestseller_mob_dev)
+      within('#bestsellers') { click_link("#book-view-#{bestseller_mob_dev.id}") }
+      within "#book-#{bestseller_mob_dev.id}" do
+        expect(page).to have_text(bestseller_mob_dev.title)
       end
     end
   end
 
-  context 'when user clicks Buy now button' do
-    scenario 'adds chosen book to the cart', js: true do
-      within '.carousel-inner > .item.active' do
-        click_button('Buy Now')
-      end
-      wait_for_ajax
-      expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
-    end
-  end
+  # context 'when user clicks Buy now button' do
+  #   scenario 'adds chosen book to the cart', js: true do
+  #     within '.carousel-inner > .item.active' do
+  #       click_button('Buy Now')
+  #     end
+  #     wait_for_ajax
+  #     expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
+  #   end
+  # end
 end
 
 feature 'Home page' do

@@ -11,8 +11,6 @@ class Ability
       can :read, :all                 # allow everyone to read everything
       can :update, Cart, id: session[:cart_id]
       can :manage, LineItem, cart: { id: session[:cart_id] }
-      can :manage, Order, user: { id: user.id }
-      can :manage, Address, order: { user: user.id }
       # cannot :read, Order, shipping_method: { id: 3 }
     end
     #
