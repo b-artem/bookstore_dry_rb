@@ -4,74 +4,44 @@ require 'support/devise'
 
 shared_examples 'best sellers' do
   let(:bestseller_mob_dev) { create :book_mobile_development }
-  background do
-    3.times { create :book_mobile_development }
-    3.times { create :book_photo }
-    3.times { create :book_web_design }
-    3.times { create :book_web_development }
-    # bestseller_photo = Book.photo.take
-    # bestseller_web_design = Book.web_design.take
-    # bestseller_web_dev = Book.web_development.take
-    allow(Book).to receive("best_seller").and_return(bestseller_mob_dev)
+  let(:bestseller_photo) { create :book_photo }
+  let(:bestseller_web_design) { create :book_web_design }
+  let(:bestseller_web_dev) { create :book_web_development }
 
-      # allow(Book).to receive(:best_seller).with(:mobile_development)
-      #   .and_return(bestseller_mob_dev)
-      # allow(Book).to receive(:best_seller).with(:photo)
-      #   .and_return(bestseller_photo)
-      # allow(Book).to receive(:best_seller).with(:web_design)
-      #   .and_return(bestseller_web_design)
-      # allow(Book).to receive(:best_seller).with(:web_development)
-      #   .and_return(bestseller_web_dev)
+  background do
+    create(:order, state: 'delivered', line_items: [
+            create(:line_item, book: bestseller_mob_dev),
+            create(:line_item, book: bestseller_photo),
+            create(:line_item, book: bestseller_web_design),
+            create(:line_item, book: bestseller_web_dev) ])
+    3.times do
+      create :book_mobile_development
+      create :book_photo
+      create :book_web_design
+      create :book_web_development
+    end
     visit home_index_path
   end
 
-  # scenario 'displays latest 3 books, added onto website' do
-  #   latest = Book.order('created_at DESC').limit(3)
-  #   within '.carousel-inner' do
-  #     expect(page).to have_content(latest.first.title)
-  #     expect(page).to have_content(latest.second.title)
-  #     expect(page).to have_content(latest.third.description[0..20])
-  #   end
-  # end
-  #
-  # scenario 'does not display latest 4th book, added onto website' do
-  #   within '.carousel' do
-  #     expect(page).not_to have_content(Book.order('created_at DESC')
-  #                                           .fourth.title)
-  #   end
-  # end
+  scenario 'shows best sellers from each category' do
+    within('#bestsellers') do
+      expect(page).to have_text(bestseller_mob_dev.title)
+      expect(page).to have_text(bestseller_photo.price)
+      expect(page).to have_text(bestseller_web_design.title)
+      expect(page).to have_text(bestseller_web_dev.price)
+    end
+  end
 
   context 'when user clicks the View icon' do
     scenario 'details of item are shown' do
-      # bestseller_mob_dev = Book.mobile_development.take
-      # bestseller_photo = Book.photo.take
-      # bestseller_web_design = Book.web_design.take
-      # bestseller_web_dev = Book.web_development.take
-      # allow(Book).to receive('best_seller(:mobile_developmet)' => bestseller_mob_dev)
-      #   .and_return(bestseller_mob_dev)
-      # allow(Book).to receive(:best_seller).with(:photo)
-      #   .and_return(bestseller_photo)
-      # allow(Book).to receive(:best_seller).with(:web_design)
-      #   .and_return(bestseller_web_design)
-      # allow(Book).to receive(:best_seller).with('web_development')
-      #   .and_return(bestseller_web_dev)
-      within('#bestsellers') { click_link("book-view-#{bestseller_mob_dev.id}",
-                                      match: :first) }
+      within('#bestsellers') do
+        click_link("book-view-#{bestseller_mob_dev.id}")
+      end
       within "#book-#{bestseller_mob_dev.id}" do
         expect(page).to have_text(bestseller_mob_dev.title)
       end
     end
   end
-
-  # context 'when user clicks Buy now button' do
-  #   scenario 'adds chosen book to the cart', js: true do
-  #     within '.carousel-inner > .item.active' do
-  #       click_button('Buy Now')
-  #     end
-  #     wait_for_ajax
-  #     expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
-  #   end
-  # end
 end
 
 feature 'Home page' do
