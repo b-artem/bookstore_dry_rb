@@ -45,7 +45,7 @@
           = link_to @cart, class: 'shop-link pull-right visible-xs' do
             %span.shop-icon
               %span.shop-quantity= @cart.line_items.count
-        = link_to @cart, class: 'shop-link pull-right hidden-xs' do
+        = link_to @cart, class: 'shop-link pull-right hidden-xs', id: 'cart' do
           %span.shop-icon
             %span.shop-quantity= @cart.line_items.count
         -# %a.shop-link.pull-right.hidden-xs{href: "#"}
