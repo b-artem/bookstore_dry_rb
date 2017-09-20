@@ -1,5 +1,5 @@
 - Book::CATEGORIES.each do |category|
-  - bestseller = Book.best_seller(category).decorate
+  - bestseller = Book.best_seller(category)
   -# - best_sellers.each do |bestseller|
   .col-sm-6.col-md-3
     .general-thumb-wrap
@@ -16,10 +16,10 @@
               %i.fa.fa-shopping-cart.thumb-icon
     .mb-35
       .clearfix
-        %p.pull-right.font-16.in-gold-500= number_to_currency bestseller.price
+        %p.pull-right.font-16.in-gold-500= bestseller.decorate.price
         %p.title.mr-55= bestseller.title
       %span.divider-sm
-      %p.lead.small= bestseller.authors_names
+      %p.lead.small= bestseller.decorate.authors_names
 
 
 

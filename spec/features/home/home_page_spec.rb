@@ -5,6 +5,7 @@ require 'support/devise'
 shared_examples 'home page' do
   background do
     5.times { create :book }
+    allow(Book).to receive(:best_seller).and_return(Book.first)
     visit home_index_path
   end
 
