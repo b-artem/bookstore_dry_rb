@@ -34,33 +34,3 @@ feature 'Home page' do
     it_behaves_like 'home page'
   end
 end
-
-# feature 'HomePage' do
-#   let(:user) { create(:user) }
-#   background do
-#     5.times { create :book }
-#     visit home_index_path
-#   end
-#
-#   context 'when user is a guest' do
-#     scenario 'shows Latest books block' do
-#       expect(page).to have_css('#slider.carousel.slide')
-#     end
-#
-#     scenario 'shows Get started bock' do
-#       expect(page).to have_text('Welcome to our amazing Bookstore!')
-#       expect(page).to have_button('Get Started')
-#     end
-#
-#     scenario 'shows Bestsellers block' do
-#       expect(page).to have_text('Best Sellers')
-#     end
-#   end
-#
-#   context 'when user is logged in' do
-#     scenario 'shows Latest books block' do
-#       sign_in user
-#       expect(page).to have_css('#slider.carousel.slide')
-#     end
-#   end
-# end

@@ -10,7 +10,7 @@ RailsAdmin.config do |config|
 
   ## == Cancan ==
   config.authorize_with :cancan do
-    redirect_to main_app.root_path unless current_user.role == 'admin'
+    # redirect_to main_app.root_path unless current_user.role == 'admin'
   end
 
   ## == Pundit ==

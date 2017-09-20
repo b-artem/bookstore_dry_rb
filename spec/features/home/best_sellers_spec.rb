@@ -43,15 +43,15 @@ shared_examples 'best sellers' do
     end
   end
 
-  # context 'when user clicks Cart icon' do
-  #   scenario 'adds chosen book to the cart', js: true do
-  #     within '#bestsellers' do
-  #       click_button('Buy Now')
-  #     end
-  #     wait_for_ajax
-  #     expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
-  #   end
-  # end
+  context 'when user clicks Cart icon' do
+    scenario 'adds chosen book to the cart', js: true do
+      within '#bestsellers' do
+        click_link("add-book-#{bestseller_photo.id}-to-cart")
+      end
+      wait_for_ajax
+      expect(Cart.last.line_items.first.book).to eq bestseller_photo
+    end
+  end
 end
 
 feature 'Home page' do
