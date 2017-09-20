@@ -34,7 +34,7 @@ shared_examples 'best sellers' do
 
   context 'when user clicks the View icon' do
     scenario 'details of item are shown' do
-      within('#bestsellers') do
+      within '#bestsellers' do
         click_link("book-view-#{bestseller_mob_dev.id}")
       end
       within "#book-#{bestseller_mob_dev.id}" do
@@ -42,6 +42,16 @@ shared_examples 'best sellers' do
       end
     end
   end
+
+  # context 'when user clicks Cart icon' do
+  #   scenario 'adds chosen book to the cart', js: true do
+  #     within '#bestsellers' do
+  #       click_button('Buy Now')
+  #     end
+  #     wait_for_ajax
+  #     expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
+  #   end
+  # end
 end
 
 feature 'Home page' do

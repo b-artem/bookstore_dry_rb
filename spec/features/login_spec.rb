@@ -2,8 +2,12 @@ require 'rails_helper'
 require 'support/factory_girl'
 
 feature 'Login' do
-  let(:user) { create(:user) }
-  background { visit new_user_session_path }
+  let(:user) { create :user }
+  let(:book) { create :book }
+  background do
+    allow(Book).to receive(:best_seller).and_return(book)
+    visit new_user_session_path
+  end
 
   context 'when email and password are valid' do
     background do
