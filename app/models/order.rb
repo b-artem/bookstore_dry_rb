@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   has_one :billing_address, dependent: :destroy
   has_one :shipping_address, dependent: :destroy
   # accepts_nested_attributes_for :billing_address, :shipping_address
+  has_one :discount
   has_many :line_items, dependent: :destroy
 
   after_create :generate_number
