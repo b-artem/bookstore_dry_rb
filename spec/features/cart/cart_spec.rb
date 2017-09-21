@@ -1,14 +1,13 @@
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
-include CurrentCart
 
 shared_examples 'cart' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
   end
-  
+
   context 'when user clicks Cart icon in top right corner' do
     background { visit home_index_path }
     scenario 'Cart page opens' do
@@ -29,7 +28,7 @@ shared_examples 'cart' do
     context 'user clicks Photo' do
       scenario 'Book view page opens' do
         click_link "photo-view-#{book.id}"
-        expect(current_path).to eq books_path(book).gsub('.', '/')
+        expect(current_path).to eq book_path(book)
         expect(page).to have_text(book.decorate.authors_names)
         expect(page).to have_text(book.publication_year)
       end
@@ -38,7 +37,7 @@ shared_examples 'cart' do
     context 'user clicks Title' do
       scenario 'Book view page opens' do
         click_link "title-view-#{book.id}-xs"
-        expect(current_path).to eq books_path(book).gsub('.', '/')
+        expect(current_path).to eq book_path(book)
         expect(page).to have_text(book.decorate.authors_names)
         expect(page).to have_text(book.publication_year)
       end

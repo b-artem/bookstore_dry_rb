@@ -1,4 +1,4 @@
-.general-cart-item.divider-lg-bottom
+.general-cart-item.divider-lg-bottom{id: "line-item-#{line_item.id}-xs"}
   %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
     %span{'aria-hidden': "true"} &times;
   .general-img-wrap-table
@@ -21,7 +21,7 @@
 
 
           = form_tag line_items_path(book_id: line_item.book.id), id: 'line-item-form' do
-            = link_to '', class: 'input-link',
+            = link_to '', id: "minus-#{line_item.id}", class: 'input-link',
                       onclick: "decrementQuantity(); return false;" do
               %i.fa.fa-minus.line-height-40
             %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}

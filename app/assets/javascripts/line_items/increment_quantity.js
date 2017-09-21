@@ -6,6 +6,13 @@ $(document).on('turbolinks:load', incrementQuantity = function() {
   input.trigger("change");
 });
 
+// $(document).ready(incrementQuantity = function() {
+//   var input = $(event.target).parent().siblings('.quantity-input');
+//   var quantity = input.val();
+//   quantity++;
+//   input.val(quantity);
+//   input.trigger("change");
+// });
 
 // incrementQuantity = function() {
 //   var quantity;
