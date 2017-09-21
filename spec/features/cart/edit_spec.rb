@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
-# require 'support/wait_for_ajax'
 
 shared_examples 'edit' do
   let(:book) { create :book }
@@ -10,62 +9,77 @@ shared_examples 'edit' do
     visit home_index_path
   end
 
-  # context 'when user clicks Cart icon in top right corner' do
-  #   background { visit home_index_path }
-  #   scenario 'Cart page opens' do
-  #     click_link 'cart'
-  #     expect(page).to have_text('Cart')
-  #     expect(page).to have_text('Enter Your Coupon Code')
-  #     expect(page).to have_button('Checkout')
+  # context 'when user wants to edit Cart' do
+  #   let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
+  #   background do
+  #     visit cart_path(Cart.last)
   #   end
-  # end
 
-  context 'when user wants to edit Cart' do
+  context 'when product quantity = 1', js: true do
     let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
-    background do
-      visit cart_path(Cart.last)
-    end
+    background { visit cart_path(Cart.last) }
 
-    context 'when product quantity = 1', js: true do
-      context "user clicks '+' button" do
-        scenario 'increments quantity' do
-          within "#line-item-#{line_item.id}" do
-            expect(LineItem.last.quantity).to eq 1
-            expect(page.find_by_id("input-line-item-#{line_item.id}").value)
-              .to eq '1'
-            click_link("plus-#{line_item.id}")
-            # wait_for_ajax does NOT help
-            sleep 0.1
-            expect(LineItem.last.quantity).to eq 2
-            expect(page.find_by_id("input-line-item-#{line_item.id}").value)
-              .to eq '2'
-          end
+    context "user clicks '+' button" do
+      # wait_for_ajax does NOT help there
+      subject { click_link("plus-#{line_item.id}"); sleep 0.1 }
+
+      scenario 'increments quantity value in cart' do
+        within "#line-item-#{line_item.id}" do
+          expect { subject }.to change {
+            page.find_by_id("input-line-item-#{line_item.id}").value.to_i }.by(1)
+        end
+      end
+
+      scenario 'increments line_item:quantity' do
+        within "#line-item-#{line_item.id}" do
+          expect { subject }.to change { LineItem.last.quantity }.by(1)
         end
       end
     end
 
-    context 'when product quantity = 2' do
+    context "user clicks '-' button" do
+      # wait_for_ajax does NOT help there
+      subject { click_link("minus-#{line_item.id}"); sleep 0.1 }
 
+      scenario 'does NOT decrement quantity value in cart' do
+        within "#line-item-#{line_item.id}" do
+          expect { subject }.not_to change {
+            page.find_by_id("input-line-item-#{line_item.id}").value.to_i }
+        end
+      end
+
+      scenario 'does NOT decrement line_item:quantity' do
+        within "#line-item-#{line_item.id}" do
+          expect { subject }.not_to change { LineItem.last.quantity }
+        end
+      end
     end
-    #
-    # context 'user clicks Title' do
-    #   scenario 'Book view page opens' do
-    #     click_link "title-view-#{book.id}-xs"
-    #     expect(current_path).to eq books_path(book).gsub('.', '/')
-    #     expect(page).to have_text(book.decorate.authors_names)
-    #     expect(page).to have_text(book.publication_year)
-    #   end
-    # end
   end
-  #
-  # scenario 'shows Get started bock' do
-  #   expect(page).to have_text('Welcome to our amazing Bookstore!')
-  #   expect(page).to have_button('Get Started')
-  # end
-  #
-  # scenario 'shows Best sellers block' do
-  #   expect(page).to have_text('Best Sellers')
-  # end
+
+  context 'when product quantity = 2', js: true do
+    let!(:line_item) do
+      create(:line_item, cart: Cart.last, book: book, quantity: 2)
+    end
+    background { visit cart_path(Cart.last) }
+
+    context "user clicks '-' button" do
+      # wait_for_ajax does NOT help there
+      subject { click_link("minus-#{line_item.id}"); sleep 0.1 }
+
+      scenario 'decrements quantity value in cart' do
+        within "#line-item-#{line_item.id}" do
+          expect { subject }.to change {
+            page.find_by_id("input-line-item-#{line_item.id}").value.to_i }.by(-1)
+        end
+      end
+
+      scenario 'decrements line_item:quantity' do
+        within "#line-item-#{line_item.id}" do
+          expect { subject }.to change { LineItem.last.quantity }.by(-1)
+        end
+      end
+    end
+  end
 end
 
 feature 'Cart' do

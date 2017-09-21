@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
 
-shared_examples 'cart' do
+shared_examples 'item view' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
@@ -43,25 +43,18 @@ shared_examples 'cart' do
       end
     end
   end
-  #
-  # scenario 'shows Get started bock' do
-  #   expect(page).to have_text('Welcome to our amazing Bookstore!')
-  #   expect(page).to have_button('Get Started')
-  # end
-  #
-  # scenario 'shows Best sellers block' do
-  #   expect(page).to have_text('Best Sellers')
-  # end
 end
 
 feature 'Cart' do
-  context 'when user is a guest' do
-    it_behaves_like 'cart'
-  end
+  feature 'Item view' do
+    context 'when user is a guest' do
+      it_behaves_like 'item view'
+    end
 
-  context 'when user is logged in' do
-    let(:user) { create(:user) }
-    background { sign_in user }
-    it_behaves_like 'cart'
+    context 'when user is logged in' do
+      let(:user) { create(:user) }
+      background { sign_in user }
+      it_behaves_like 'item view'
+    end
   end
 end
