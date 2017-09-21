@@ -2,18 +2,12 @@ require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
 
-shared_examples 'edit' do
+shared_examples 'change quantity' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     visit home_index_path
   end
-
-  # context 'when user wants to edit Cart' do
-  #   let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
-  #   background do
-  #     visit cart_path(Cart.last)
-  #   end
 
   context 'when product quantity = 1', js: true do
     let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
@@ -30,7 +24,7 @@ shared_examples 'edit' do
         end
       end
 
-      scenario 'increments line_item:quantity' do
+      scenario 'increments product quantity' do
         within "#line-item-#{line_item.id}" do
           expect { subject }.to change { LineItem.last.quantity }.by(1)
         end
@@ -48,7 +42,7 @@ shared_examples 'edit' do
         end
       end
 
-      scenario 'does NOT decrement line_item:quantity' do
+      scenario 'does NOT decrement product quantity' do
         within "#line-item-#{line_item.id}" do
           expect { subject }.not_to change { LineItem.last.quantity }
         end
@@ -73,10 +67,8 @@ shared_examples 'edit' do
         end
       end
 
-      scenario 'decrements line_item:quantity' do
-        within "#line-item-#{line_item.id}" do
-          expect { subject }.to change { LineItem.last.quantity }.by(-1)
-        end
+      scenario 'decrements product quantity' do
+        expect { subject }.to change { LineItem.last.quantity }.by(-1)
       end
     end
   end
@@ -85,13 +77,13 @@ end
 feature 'Cart' do
   feature 'Edit' do
     context 'when user is a guest' do
-      it_behaves_like 'edit'
+      it_behaves_like 'change quantity'
     end
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }
-      it_behaves_like 'edit'
+      it_behaves_like 'change quantity'
     end
   end
 end
