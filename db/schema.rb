@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921192916) do
+ActiveRecord::Schema.define(version: 20170922071839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20170921192916) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_carts_on_coupon_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -78,9 +80,9 @@ ActiveRecord::Schema.define(version: 20170921192916) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "discounts", force: :cascade do |t|
+  create_table "coupons", force: :cascade do |t|
     t.string "code"
-    t.decimal "amount", precision: 4, scale: 3
+    t.decimal "discount", precision: 4, scale: 1
     t.date "valid_until"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -108,8 +110,8 @@ ActiveRecord::Schema.define(version: 20170921192916) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "use_billing_address_as_shipping", default: false
-    t.bigint "discount_id"
-    t.index ["discount_id"], name: "index_orders_on_discount_id"
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["number"], name: "index_orders_on_number"
     t.index ["shipping_method_id"], name: "index_orders_on_shipping_method_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -167,10 +169,11 @@ ActiveRecord::Schema.define(version: 20170921192916) do
   add_foreign_key "authors_books", "books"
   add_foreign_key "books_categories", "books"
   add_foreign_key "books_categories", "categories"
+  add_foreign_key "carts", "coupons"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
-  add_foreign_key "orders", "discounts"
+  add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "shipping_methods"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"

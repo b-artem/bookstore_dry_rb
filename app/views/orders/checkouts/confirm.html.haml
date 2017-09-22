@@ -4,7 +4,7 @@
   .col-sm-3
     %h3.general-subtitle
       = t 'orders.checkouts.address.shipping_address'
-      = link_to wizard_path(:address) do
+      = link_to wizard_path(:address, next_step: 'confirm') do
         %span.general-edit= t('.edit')
     -# - binding.pry
     = render partial: 'address', object: @order.shipping_address
@@ -12,7 +12,7 @@
   .col-sm-3
     %h3.general-subtitle
       = t 'orders.checkouts.address.billing_address'
-      = link_to wizard_path(:address) do
+      = link_to wizard_path(:address, next_step: 'confirm') do
         %span.general-edit= t('.edit')
     -# - binding.pry
     = render partial: 'address', object: @order.billing_address
@@ -31,7 +31,7 @@
   .col-sm-3
     %h3.general-subtitle
       = t '.shipments'
-      = link_to wizard_path(:delivery) do
+      = link_to wizard_path(:delivery, next_step: 'confirm') do
         %span.general-edit= t('.edit')
     %p.general-address
       = @order.shipping_method.name
@@ -47,9 +47,9 @@
       = link_to wizard_path(:payment) do
         %span.general-edit= t('.edit')
     %p.general-address
-      ** ** ** 8756 HTDIT
+      = '** ** ** ' + @payment.card_number[-4,4]
       %br
-      12/2018 HTDIT
+      = @payment.valid_until.dup.insert(3,'20')
 
 = render partial: 'line_items', object: @order.line_items
 
