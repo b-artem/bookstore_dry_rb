@@ -47,7 +47,7 @@
       = link_to wizard_path(:payment) do
         %span.general-edit= t('.edit')
     %p.general-address
-      = '** ** ** ' + @payment.card_number[-4,4]
+      = '**** **** **** ' + @payment.card_number[-4,4]
       %br
       = @payment.valid_until.dup.insert(3,'20')
 

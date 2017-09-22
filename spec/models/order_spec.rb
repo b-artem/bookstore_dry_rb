@@ -50,30 +50,30 @@ RSpec.describe Order, type: :model do
       end
     end
 
-    describe '#item_total' do
+    describe '#subtotal' do
       it 'sums line_items subtotals' do
         line_item1 = build :line_item, price: 10, quantity: 1
         line_item2 = build :line_item, price: 20, quantity: 3
         order.line_items = [line_item1, line_item2]
-        expect(order.item_total).to eq 70
+        expect(order.subtotal).to eq 70
       end
     end
 
-    describe '#order_total' do
+    describe '#total' do
       context 'when :shipping_method is not set' do
         it 'returns items price' do
           order.shipping_method = nil
-          allow(order).to receive(:item_total).and_return(100)
-          expect(order.order_total).to eq 100
+          allow(order).to receive(:subtotal).and_return(100)
+          expect(order.total).to eq 100
         end
       end
 
       context 'when :shipping_method is set' do
         it 'returns items price + shipping price' do
-          allow(order).to receive(:item_total).and_return(100)
+          allow(order).to receive(:subtotal).and_return(100)
           allow(order).to receive_message_chain(:shipping_method, :price)
             .and_return(20)
-          expect(order.order_total).to eq 120
+          expect(order.total).to eq 120
         end
       end
     end
