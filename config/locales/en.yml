@@ -136,9 +136,11 @@ en:
         back_to_store: 'Back to Store'
       order_summary:
         order_summary: 'Order Summary'
-        item_total: 'Item Total:'
-        order_total: 'Order Total:'
+        subtotal: 'Subtotal'
+        coupon: 'Coupon'
         shipping: 'Shipping'
+        order_total: 'Order Total:'
+
       save_and_continue: 'Save and Continue'
       line_item:
         book: 'Book'

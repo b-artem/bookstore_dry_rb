@@ -51,6 +51,9 @@
           = s.input :country
           = s.input :phone
 
+      - if params[:next_step] == 'confirm'
+        %input.form-control{name: "next_step", value: 'confirm', type: 'hidden' }
+
       %h3 Example
 
       .form-group

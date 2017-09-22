@@ -33,7 +33,7 @@ class Orders::OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = current_user.orders.create
+    @order = current_user.orders.create(coupon: @cart.coupon)
     set_current_order(@order)
     add_line_items_to_order_from_cart(@cart)
     destroy_cart

@@ -9,6 +9,8 @@ class Orders::CheckoutsController < ApplicationController
   # before_action :set_form, only: [:show]
   steps :address, :delivery, :payment, :confirm, :complete
 
+  # after_action :return_to_confirm?, only: [:update]
+
   def show
     @current_order = current_order
     case step
@@ -39,6 +41,8 @@ class Orders::CheckoutsController < ApplicationController
       get_payment_data
     when :confirm
       @order = current_order
+      @payment = Forms::PaymentForm.new
+      get_payment_data
     when :complete
       current_order.pay if current_order.may_pay?
       @order = current_order
@@ -62,7 +66,7 @@ class Orders::CheckoutsController < ApplicationController
               .with_context(use_billing_address_as_shipping: use_billing)
       @order.billing_address.order_id = current_order.id
       @order.shipping_address.order_id = current_order.id unless use_billing
-      render_wizard @order
+      render_next_step @order
       # current_order.update_attributes(use_billing_address_as_shipping: use_billing)
       # @billing_address = Forms::BillingAddressForm
       #         .from_params(params[:order][:billing_address], order_id: current_order.id,
@@ -73,20 +77,38 @@ class Orders::CheckoutsController < ApplicationController
     when :delivery then
       current_order.update_attributes(shipping_method_id: params[:order][:shipping_method_id])
       @order = current_order
-      render_wizard @order
+      render_next_step @order
     when :payment
       @payment = Forms::PaymentForm.from_params(params[:payment])
       set_payment_data
-      render_wizard @payment
+      render_next_step @payment
     when :confirm
-      clear_payment_data
+      # get_payment_data
       @order = current_order
       render_wizard @order
     when :complete
+      clear_payment_data
     end
   end
 
   private
+
+    def render_next_step(form)
+      if form.valid?
+        form.save
+        return redirect_to next_wizard_path unless params[:next_step] == 'confirm'
+        redirect_to wizard_path(:confirm)
+      else
+        render_wizard form
+      end
+    end
+
+    # def return_to_confirm?
+    #   return if step == :confirm
+    #   return unless params[:return_to_confirm] = 'true'
+    #   params.delete :return_to_confirm
+    #   jump_to :confirm
+    # end
 
     def set_payment_data
       session[:card_number] = @payment.card_number

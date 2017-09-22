@@ -1,5 +1,6 @@
 class Cart < ApplicationRecord
   include Validations
+  belongs_to :coupon, optional: true
   has_many :line_items, dependent: :destroy
 
   def add_product(product, quantity)
@@ -19,6 +20,7 @@ class Cart < ApplicationRecord
   end
 
   def total
-    subtotal
+    return subtotal unless coupon
+    subtotal * (1 - coupon.discount/100)
   end
 end

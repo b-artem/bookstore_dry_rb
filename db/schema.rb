@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20170908201646) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_carts_on_coupon_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -157,6 +159,7 @@ ActiveRecord::Schema.define(version: 20170908201646) do
   add_foreign_key "authors_books", "books"
   add_foreign_key "books_categories", "books"
   add_foreign_key "books_categories", "categories"
+  add_foreign_key "carts", "coupons"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
