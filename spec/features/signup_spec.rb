@@ -3,7 +3,12 @@ require 'support/factory_girl'
 
 feature 'Signup' do
   let(:password) { Faker::Internet.password(8) }
-  background { visit new_user_registration_path }
+  let(:book) { create :book }
+  background do
+    # stub_template "home/_best_sellers.html.erb" => "Here comes Best Sellers"
+    allow(Book).to receive(:best_seller).and_return(book)
+    visit new_user_registration_path
+  end
 
   scenario 'User registers successfully via register form' do
     3.times { create :book }

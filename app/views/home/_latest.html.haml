@@ -11,7 +11,10 @@
       %p.lead.small= latest.authors_names
       .general-align
         -# %button.disabled.btn= t 'buy_now'
-        %button.btn.btn-primary= t '.buy_now'
+        = button_to t('.buy_now'),
+                    line_items_path(book_id: latest.id, quantity: 1),
+                    class: 'btn btn-primary'
+
 
 
 -# .item.active

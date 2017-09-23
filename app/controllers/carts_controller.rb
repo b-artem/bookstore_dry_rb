@@ -3,6 +3,8 @@ class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
+  authorize_resource
+
   # GET /carts
   # GET /carts.json
   def index
@@ -42,13 +44,15 @@ class CartsController < ApplicationController
   # PATCH/PUT /carts/1
   # PATCH/PUT /carts/1.json
   def update
+    coupon = Coupon.find_by_code(params[:cart][:coupon][:code])
     respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
+      if coupon
+        @cart.update(coupon: coupon)
+        format.html { redirect_to @cart, notice: 'Coupon was successfully applied' }
         format.json { render :show, status: :ok, location: @cart }
       else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
+        format.html { redirect_to @cart, alert: "There is no such coupon or it's not valid anymore" }
+        format.json { render :show, status: :unprocessable_entity, location: @cart }
       end
     end
   end
@@ -71,7 +75,8 @@ class CartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
-      params.fetch(:cart, {})
+      # params.fetch(:cart, {})
+      params.require(:cart).permit(:coupon)
     end
 
     def invalid_cart

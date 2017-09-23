@@ -4,13 +4,16 @@ class Orders::OrdersController < ApplicationController
   before_action :set_cart, only: [:create]
   before_action :ensure_cart_isnt_empty, only: [:create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+
+  authorize_resource
   # before_action :create_order_and, only: :show
 
   # GET /orders
   # GET /orders.json
-  # def index
-  #   @orders = Order.all
-  # end
+  def index
+    set_cart
+    @orders = Order.all.order(:id)
+  end
 
   # GET /orders/1
   # GET /orders/1.json
@@ -30,7 +33,7 @@ class Orders::OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = current_user.orders.create
+    @order = current_user.orders.create(coupon: @cart.coupon)
     set_current_order(@order)
     add_line_items_to_order_from_cart(@cart)
     destroy_cart

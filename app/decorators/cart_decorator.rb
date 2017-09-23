@@ -9,6 +9,10 @@ class CartDecorator < Draper::Decorator
     h.number_to_currency(object.total)
   end
 
+  def discount
+    h.number_to_currency(object.total - object.subtotal)
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #

@@ -64,9 +64,11 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.14', '>= 2.14.4'
+  gem 'capybara', '~> 2.13'
+  gem 'capybara-webkit', '~> 1.14'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'faker', '~> 1.8', '>= 1.8.4'
+  gem 'selenium-webdriver', '~> 3.5', '>= 3.5.2'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 

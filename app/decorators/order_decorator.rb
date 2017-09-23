@@ -1,16 +1,20 @@
 class OrderDecorator < Draper::Decorator
   delegate_all
 
-  def item_total
-    h.number_to_currency(object.item_total)
+  def subtotal
+    h.number_to_currency(object.subtotal)
   end
 
-  def order_total
-    h.number_to_currency(object.order_total)
+  def total
+    h.number_to_currency(object.total)
   end
 
   def completed_at
     object.completed_at.strftime("%B %e, %Y")
+  end
+
+  def discount
+    h.number_to_currency(object.discount)
   end
 
   # Define presentation-specific methods here. Helpers are accessed through

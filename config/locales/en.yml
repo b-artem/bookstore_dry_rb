@@ -136,9 +136,11 @@ en:
         back_to_store: 'Back to Store'
       order_summary:
         order_summary: 'Order Summary'
-        item_total: 'Item Total:'
-        order_total: 'Order Total:'
+        subtotal: 'Subtotal'
+        coupon: 'Coupon'
         shipping: 'Shipping'
+        order_total: 'Order Total:'
+
       save_and_continue: 'Save and Continue'
       line_item:
         book: 'Book'
@@ -146,6 +148,16 @@ en:
         quantity: 'Quantity'
         total: 'Total'
         sub_total: 'SubTotal'
+  settings:
+    edit:
+      settings: 'Settings'
+      address: 'Address'
+      privacy: 'Privacy'
+      billing_address: 'Billing Address'
+      shipping_address: 'Shipping Address'
+      save: 'Save'
+      email: 'Email'
+      enter_email: 'Enter Email'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

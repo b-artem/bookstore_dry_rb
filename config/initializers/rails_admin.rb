@@ -9,7 +9,9 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   ## == Cancan ==
-  config.authorize_with :cancan
+  config.authorize_with :cancan do
+    # redirect_to main_app.root_path unless current_user.role == 'admin'
+  end
 
   ## == Pundit ==
   # config.authorize_with :pundit
@@ -58,4 +60,6 @@ RailsAdmin.config do |config|
       # disable: [:dead] # disable some events so they are not shown.
     })
   end
+
+  # config.parent_controller = 'ApplicationController'
 end

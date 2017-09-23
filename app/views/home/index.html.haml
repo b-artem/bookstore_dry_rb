@@ -21,10 +21,10 @@
   .mb-res-50
     %p= t '.about_us'
   = button_to t('.get_started'), books_path, method: :get, class: 'btn btn-default'
-.mb-35
+#bestsellers.mb-35
   %h3= t '.best_sellers'
   .row
-    = render partial: 'best_sellers', object: best_sellers
+    = render partial: 'best_sellers'
 
 
 - if current_user

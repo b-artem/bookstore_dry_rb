@@ -1,14 +1,19 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user, session = nil)
     user ||= User.new # guest user (not logged in)
     if user && user.role == "admin"
       can :access, :rails_admin       # only allow admin users to access Rails Admin
       can :dashboard                  # allow access to dashboard
-      can :manage, :all             # allow admins to do anything
+      can :manage, :all               # allow admins to do anything
     else
-      can :read, :all               # allow everyone to read everything
+      can :read, :all                 # allow everyone to read everything
+      return unless session
+      can :update, Cart, id: session[:cart_id]
+      can :manage, LineItem, cart: { id: session[:cart_id] }
+      can :manage, Order, id: session[:order_id]
+      # cannot :read, Order, shipping_method: { id: 3 }
     end
     #
     # The first argument to `can` is the action you are giving the user

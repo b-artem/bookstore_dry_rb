@@ -14,6 +14,10 @@ class BookDecorator < Draper::Decorator
     h.truncate(description, length: 10000).gsub(/\s+/, " ")
   end
 
+  def price
+    h.number_to_currency(object.price)
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #

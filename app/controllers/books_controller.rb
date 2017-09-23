@@ -3,6 +3,8 @@ class BooksController < ApplicationController
   before_action :set_category, only: :index
   decorates_assigned :book
 
+  authorize_resource
+
   # GET /books
   # GET /books.json
   def index
