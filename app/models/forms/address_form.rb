@@ -11,7 +11,7 @@ class Forms::AddressForm < Rectify::Form
   attribute :order_id, Integer
 
   validates :type, :first_name, :last_name, :address, :city, :zip, :country,
-            :phone, :order_id, presence: true, if: :need_shipping_address?
+            :phone, presence: true, if: :need_shipping_address?
   validates :type, inclusion: { in: %w(BillingAddress ShippingAddress) }
   validates :first_name, :last_name,
             format: { with: /\A[a-zA-Z]+\z/, message: 'Only allows letters' },

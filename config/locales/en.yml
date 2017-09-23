@@ -148,6 +148,16 @@ en:
         quantity: 'Quantity'
         total: 'Total'
         sub_total: 'SubTotal'
+  settings:
+    edit:
+      settings: 'Settings'
+      address: 'Address'
+      privacy: 'Privacy'
+      billing_address: 'Billing Address'
+      shipping_address: 'Shipping Address'
+      save: 'Save'
+      email: 'Email'
+      enter_email: 'Enter Email'
   devise:
     or: 'or'
     enter_email: 'Enter Email'
