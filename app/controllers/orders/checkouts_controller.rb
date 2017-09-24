@@ -1,7 +1,6 @@
 class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder
-  require 'pry'
 
   authorize_resource(Order)
   authorize_resource(Address)

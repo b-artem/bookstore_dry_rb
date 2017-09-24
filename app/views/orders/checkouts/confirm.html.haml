@@ -6,7 +6,6 @@
       = t 'orders.checkouts.address.shipping_address'
       = link_to wizard_path(:address, next_step: 'confirm') do
         %span.general-edit= t('.edit')
-    -# - binding.pry
     = render partial: 'address', object: @order.shipping_address
 
   .col-sm-3
@@ -14,7 +13,6 @@
       = t 'orders.checkouts.address.billing_address'
       = link_to wizard_path(:address, next_step: 'confirm') do
         %span.general-edit= t('.edit')
-    -# - binding.pry
     = render partial: 'address', object: @order.billing_address
 
     -# %p.general-address
