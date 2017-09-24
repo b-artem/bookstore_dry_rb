@@ -1,7 +1,7 @@
 class Orders::OrdersController < ApplicationController
   include CurrentCart
   include CurrentOrder
-  before_action :authenticate_user!, only: [:index, :show]
+  before_action :authenticate_user!
   # before_action :set_cart, only: [:create, :index]
   before_action :ensure_cart_isnt_empty, only: [:create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
