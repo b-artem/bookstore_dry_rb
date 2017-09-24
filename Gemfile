@@ -69,6 +69,7 @@ group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'faker', '~> 1.8', '>= 1.8.4'
   gem 'selenium-webdriver', '~> 3.5', '>= 3.5.2'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   # gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
