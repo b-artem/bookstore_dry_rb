@@ -1,6 +1,32 @@
-%p#notice= notice
+%h1.general-title-margin= 'Order ' + @order.number
+.row.mb-20
+  .col-sm-4
+    %h3.general-subtitle
+      = t 'orders.checkouts.address.shipping_address'
+    = render partial: 'orders/checkouts/address', object: @order.shipping_address
+  .col-sm-4
+    %h3.general-subtitle
+      = t 'orders.checkouts.address.billing_address'
+    = render partial: 'orders/checkouts/address', object: @order.billing_address
+  .col-sm-4
+    %h3.general-subtitle
+      = t '.shipments'
+    %p.general-address
+      = @order.shipping_method.name
+      %br
+      = @order.shipping_method.decorate.terms
+      %br
+      = @order.shipping_method.decorate.price
+      %br
+  -# .col-sm-3
+  -#   %h3.general-subtitle
+  -#     = t '.payment_information'
+  -#   %p.general-address
+  -#     = '**** **** **** ' + @payment.card_number[-4,4]
+  -#     %br
+  -#     = @payment.valid_until.dup.insert(3,'20')
 
+= render partial: 'orders/checkouts/line_items', object: @order.line_items
 
-= link_to 'Edit', edit_order_path(@order)
-\|
-= link_to 'Back', orders_path
+.text-center.general-text-right
+  = render 'summary'

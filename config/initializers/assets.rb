@@ -16,4 +16,5 @@ Rails.application.config.assets.precompile += %w( reviews/raty
   orders/checkouts/use_billing_address.js
   orders/checkouts/select_shipping_method.js
   settings/tabs.js
-  settings/remove_account.js)
+  settings/remove_account.js
+  orders/orders/filter.js)

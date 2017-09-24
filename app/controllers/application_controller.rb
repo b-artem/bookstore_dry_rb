@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
+  include CurrentCart
   protect_from_forgery with: :exception
   before_action :set_locale_from_params
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :set_cart
   # authorize_resource
   # check_authorization unless: :devise_controller?
 
-  include CurrentCart
-  before_action :set_cart
 
   rescue_from CanCan::AccessDenied do |exception|
     # respond_to do |format|

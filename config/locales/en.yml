@@ -100,6 +100,20 @@ en:
       checkout: 'Checkout'
       enter_coupon: 'Enter Your Coupon Code'
   orders:
+    orders:
+      index:
+        my_orders: 'My Orders'
+        filter_by: 'Filter by'
+      filter:
+        waiting_for_processing: 'Waiting for processing'
+        in_delivery: 'In delivery'
+        delivered: 'Delivered'
+        canceled: 'Canceled'
+      order:
+        number: 'Number'
+        completed_at: 'Completed at'
+        status: ' Status'
+        total: 'Total'
     checkouts:
       steps:
         checkout: 'Checkout'

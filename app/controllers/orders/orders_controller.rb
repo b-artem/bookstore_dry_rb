@@ -1,9 +1,11 @@
 class Orders::OrdersController < ApplicationController
   include CurrentCart
   include CurrentOrder
-  before_action :set_cart, only: [:create]
+  before_action :authenticate_user!, only: [:index, :show]
+  # before_action :set_cart, only: [:create, :index]
   before_action :ensure_cart_isnt_empty, only: [:create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :sanitize_filter_param, only: [:index]
 
   authorize_resource
   # before_action :create_order_and, only: :show
@@ -11,8 +13,7 @@ class Orders::OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    set_cart
-    @orders = Order.all.order(:id)
+    @orders = current_user.orders.send(params[:state]).order('completed_at DESC')
   end
 
   # GET /orders/1
@@ -84,6 +85,13 @@ class Orders::OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit()
+    end
+
+    def sanitize_filter_param
+      params[:state] ||= 'in_queue'
+      unless Order.aasm.states.map(&:name).include?(params[:state].to_sym)
+        params[:state] = 'in_queue'
+      end
     end
 
     def add_line_items_to_order_from_cart(cart)
