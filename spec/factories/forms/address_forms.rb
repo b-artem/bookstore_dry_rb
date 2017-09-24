@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :address_form, class: Forms::AddressForm do
     type { %w(BillingAddress ShippingAddress).sample }
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    first_name { Faker::Name.first_name.gsub("'", '') }
+    last_name { Faker::Name.last_name.gsub("'", '') }
     address { Faker::Address.street_address }
     city { Faker::Address.city }
     zip { Faker::Address.zip }

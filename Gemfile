@@ -26,6 +26,7 @@ gem 'rails_admin_aasm', '~> 0.1.1'
 gem 'rectify', '~> 0.10.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 gem 'simple_form', '~> 3.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -69,7 +70,8 @@ group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'faker', '~> 1.8', '>= 1.8.4'
   gem 'selenium-webdriver', '~> 3.5', '>= 3.5.2'
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
+  # gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
