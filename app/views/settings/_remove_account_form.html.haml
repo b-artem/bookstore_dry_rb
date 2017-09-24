@@ -1,0 +1,39 @@
+= content_for :javascripts do
+  = javascript_include_tag 'settings/remove_account', 'data-turbolinks-track': 'reload'
+
+%p.in-gold-500.font-18.mb-25= t '.remove_account'
+.general-settings-btn
+  = link_to t('.please_remove_my_account'),
+              { controller: 'devise/registrations', action: :destroy }, method: :delete,
+              data: { confirm: t('.are_you_sure') }, disabled: true,
+              id: 'remove-account-btn', class: 'btn disabled mb-20'
+.checkbox.general-settings-checkbox
+  %label.checkbox-label
+    %input#remove-account-cb.checkbox-input{type: "checkbox", hidden: "true"}
+    %span.checkbox-icon
+      %i.fa.fa-check
+    %span.checkbox-text= t '.i_understand_data_will_be_lost'
+
+
+
+
+
+
+
+-# %input.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+-#       type: "hidden", hidden: "true", value: 'false'}
+-# %input#use_billing_address.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+-#       type: "checkbox", hidden: "true", value: 'true',
+-#       data: { checked: @order.use_billing_address_as_shipping.to_s } }
+
+
+-# %p.in-gold-500.font-18.mb-25 Remove Account
+-# %form
+-#   .general-settings-btn
+-#     %button.btn.disabled.mb-20 Please Remove My Account
+-#   .form-group.checkbox.general-settings-checkbox
+-#     %label.checkbox-label
+-#       %input.checkbox-input{type: "checkbox", hidden: "true"}
+-#       %span.checkbox-icon
+-#         %i.fa.fa-check
+-#       %span.checkbox-text I understand that all data will be lost

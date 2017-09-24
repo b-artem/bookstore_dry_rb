@@ -1,9 +1,30 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :update_email, :change_password]
   before_action :set_addresses, only: :edit
 
   def edit
+  end
+
+  def update_email
+    if @user.update(user_params)
+      redirect_to settings_edit_path(tab: 'privacy'),
+                  notice: 'Your email was successfully changed'
+    else
+      redirect_to settings_edit_path(tab: 'privacy'),
+                  alert: "Your email wasn't changed"
+    end
+  end
+
+  def change_password
+    if @user.update_with_password(user_params)
+      bypass_sign_in(@user)
+      redirect_to settings_edit_path(tab: 'privacy'),
+                  notice: "Your password was successfully changed"
+    else
+      redirect_to settings_edit_path(tab: 'privacy'),
+                  alert: "Your password wasn't changed"
+    end
   end
 
   def update
@@ -29,11 +50,21 @@ class SettingsController < ApplicationController
       @user = current_user
     end
 
+    def user_params
+      params.require(:user).permit(:email, :current_password,
+                                    :password, :password_confirmation)
+    end
+
     def settings_params
       params.permit(billing_address: [:first_name, :last_name, :address, :city,
                                       :zip, :country, :phone],
                     shipping_address: [:first_name, :last_name, :address, :city,
                                       :zip, :country, :phone])
+      # params.permit(billing_address: [:first_name, :last_name, :address, :city,
+      #                                 :zip, :country, :phone],
+      #               shipping_address: [:first_name, :last_name, :address, :city,
+      #                                 :zip, :country, :phone],
+      #               user: [:email])
     end
 
     def set_addresses

@@ -158,6 +158,16 @@ en:
       save: 'Save'
       email: 'Email'
       enter_email: 'Enter Email'
+    password_form:
+      password: 'Password'
+      old_password: 'Old Password'
+      new_password: 'New Password'
+      confirm_password: 'Confirm Password'
+    remove_account_form:
+      remove_account: 'Remove Account'
+      please_remove_my_account: 'Please Remove My Account'
+      i_understand_data_will_be_lost: 'I understand that all data will be lost'
+      are_you_sure: 'Are you sure?'
   devise:
     or: 'or'
     enter_email: 'Enter Email'

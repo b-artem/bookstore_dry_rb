@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'settings/edit'
   put 'settings/update'
+  patch 'settings/update_email'
+  patch 'settings/change_password'
+  # delete 'devise/registrations', to: 'devise/registrations#destroy'
 
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
