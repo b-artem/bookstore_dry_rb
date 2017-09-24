@@ -67,6 +67,10 @@ GEM
     capybara-webkit (1.14.0)
       capybara (>= 2.3.0, < 2.14.0)
       json
+    carrierwave (1.1.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
@@ -374,6 +378,7 @@ DEPENDENCIES
   cancancan (~> 2.0)
   capybara (~> 2.13)
   capybara-webkit (~> 1.14)
+  carrierwave (~> 1.1)
   coffee-rails (~> 4.2)
   country_select (~> 3.1)
   database_cleaner (~> 1.6, >= 1.6.1)
