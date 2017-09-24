@@ -26,6 +26,7 @@ gem 'rails_admin_aasm', '~> 0.1.1'
 gem 'rectify', '~> 0.10.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 gem 'simple_form', '~> 3.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
