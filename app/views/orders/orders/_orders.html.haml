@@ -9,7 +9,6 @@
           %td.col-half
             = link_to order_path(order), class: 'mb-20' do
               %p.general-order-number= order.number
-            -# %span.general-order-number= order.number
         %tr
           %td
             %span.in-grey-600= t '.completed_at'
@@ -47,7 +46,6 @@
           %td
             = link_to order_path(order), class: 'mb-20' do
               %p.general-order-number= order.number
-            -# %span.general-order-number= order.number
           %td
             %span.in-grey-900.font-16.fw-300= order.decorate.completed_at_full_date
           %td

@@ -60,11 +60,6 @@ class SettingsController < ApplicationController
                                       :zip, :country, :phone],
                     shipping_address: [:first_name, :last_name, :address, :city,
                                       :zip, :country, :phone])
-      # params.permit(billing_address: [:first_name, :last_name, :address, :city,
-      #                                 :zip, :country, :phone],
-      #               shipping_address: [:first_name, :last_name, :address, :city,
-      #                                 :zip, :country, :phone],
-      #               user: [:email])
     end
 
     def set_addresses

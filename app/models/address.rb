@@ -4,8 +4,4 @@ class Address < ApplicationRecord
 
   validates :type, inclusion: { in: %w(BillingAddress ShippingAddress),
     message: "%{value} is not a valid type" }
-    
-  # def self.types
-  #   %w(BillingAddress ShippingAddress)
-  # end
 end

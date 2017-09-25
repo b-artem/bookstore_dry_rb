@@ -14,7 +14,6 @@ module CurrentCart
     end
 
     def destroy_cart
-      # return unless @cart
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
       session[:discount_id] = nil
