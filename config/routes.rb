@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :line_items
-  resources :carts, only: [:show]
+  resources :carts, only: [:show, :update]
   resources :books, only: [:index, :show] do
     resources :reviews, except: [:new, :index]
   end

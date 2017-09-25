@@ -91,11 +91,14 @@ en:
   carts:
     show:
       cart: 'Cart'
+      order_summary: 'Order Summary'
+      coupon: 'Coupon:'
       product: 'Product'
       price: 'Price'
       quantity: 'Quantity'
       sub_total: 'SubTotal'
-      subtotal: 'Subtotal'
+      subtotal: 'Subtotal:'
+      order_total: 'Order Total:'
       update_cart: 'Update cart'
       checkout: 'Checkout'
       enter_coupon: 'Enter Your Coupon Code'

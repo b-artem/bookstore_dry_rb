@@ -39,7 +39,7 @@
 
     .col-sm-8
       .res-mr-200.text-center.general-text-right
-        %p.in-gold-500.font-18 Order Summary
+        %p.in-gold-500.font-18= t'.order_summary'
         %table.general-summary-table.general-summary-table-right.general-text-right
           %tr
             %td
@@ -48,12 +48,12 @@
               %p.font-16{id: "cart-subtotal"}= @cart.decorate.subtotal
           %tr
             %td
-              %p.font-16 Coupon:
+              %p.font-16= t '.coupon'
             %td
               %p.font-16{id: 'coupon'}= @cart.decorate.discount
           %tr
             %td
-              %strong.font-18 Order Total:
+              %strong.font-18= t '.order_total' 
             %td
               %strong.font-18{id: "cart-total"}= @cart.decorate.total
         = button_to t('.checkout'), orders_path, method: :post,
