@@ -12,6 +12,9 @@ class Orders::OrdersController < ApplicationController
     @orders = current_user.orders.send(params[:state]).order('completed_at DESC')
   end
 
+  def show
+  end
+
   def create
     @order = current_user.orders.create(coupon: @cart.coupon)
     set_current_order(@order)
