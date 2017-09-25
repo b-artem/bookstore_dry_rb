@@ -64,26 +64,26 @@
   - if @book.reviews.approved.any?
     = render @book.reviews.approved.order('created_at DESC')
 
-    - if user_signed_in?
-      = t '.write_a_review'
-      = form_for [@book, @book.reviews.build] do |f|
-        - if flash[:errors]
-          #error_explanation
-            %h2= "#{pluralize(flash[:errors].count, "error")} prohibited this review from being saved:"
-            %ul
-              - flash[:errors].each do |error|
-                %li= error.join ' '
-        .field
-          = f.label :score
-          #star-rating
-          -# = f.number_field :score, id: "star-rating"
-        .field
-          = f.label t('.review_title')
-          = f.text_field :title
-        .field
-          = f.label t('.review_text')
-          = f.text_area :text
-        .actions
-          = f.submit t('.post_review')
-    - else
-      Please sign in to write a review
+  - if user_signed_in?
+    = t '.write_a_review'
+    = form_for [@book, @book.reviews.build] do |f|
+      - if flash[:errors]
+        #error_explanation
+          %h2= "#{pluralize(flash[:errors].count, "error")} prohibited this review from being saved:"
+          %ul
+            - flash[:errors].each do |error|
+              %li= error.join ' '
+      .field
+        = f.label :score
+        #star-rating
+        -# = f.number_field :score, id: "star-rating"
+      .field
+        = f.label t('.review_title')
+        = f.text_field :title
+      .field
+        = f.label t('.review_text')
+        = f.text_area :text
+      .actions
+        = f.submit t('.post_review')
+  - else
+    Please sign in to write a review
