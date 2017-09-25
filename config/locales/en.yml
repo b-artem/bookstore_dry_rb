@@ -40,12 +40,15 @@ en:
         format:    "%u%n"
   layouts:
     application:
+      bookstore: 'Bookstore'
       home: 'Home'
       shop: 'Shop'
       logout: 'Log out'
       my_account: 'My account'
       orders: 'Orders'
       settings: 'Settings'
+      support: 'support@bookstore.com'
+      phone_number: '(555)-555-5555'
   home:
     index:
       welcome: 'Welcome to our amazing Bookstore!'

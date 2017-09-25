@@ -4,7 +4,6 @@
       = link_to book_path(line_item.book), id: "photo-view-#{line_item.book.id}" do
         = image_tag line_item.book.image_url, alt: "design-book",
                     class: 'cart-img-shadow pull-left'
-      -# %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
   %td
     = link_to book_path(line_item.book), class: 'mb-20', id: "title-view-#{line_item.book.id}" do
       %p.title.in-gold-500= line_item.book.title
@@ -19,18 +18,10 @@
         = f.text_field :quantity, class: 'form-control quantity-input',
                         id: "input-line-item-#{line_item.id}",
                         onchange: "updateQuantity(#{line_item.id})"
-        -# %input.form-control.quantity-input{name: 'quantity', type: "text",
-        -#                                   value: "#{line_item.quantity}"}
         = link_to '', id: "plus-#{line_item.id}", class: 'input-link',
                   onclick: "incrementQuantity(); return false;" do
           %i.fa.fa-plus.line-height-40 &nbsp
         = f.submit '', id: "update-line-item-#{line_item.id}", hidden: true
-
-      -# %a.input-link{href: "#"}
-      -#   %i.fa.fa-minus.line-heaght-40
-      -# %input.form-control.quantity-input{type: "text", value: "#{line_item.quantity}"}
-      -# %a.input-link{href: "#"}
-      -#   %i.fa.fa-plus.line-heaght-40
 
   %td
     %span.font-16.in-gold-500{id: "subtotal-#{line_item.id}"}
@@ -40,47 +31,3 @@
                 id: "delete-#{line_item.id}",
                 class: "close general-cart-close", 'aria-label': "Close" do
       %span{'aria-hidden': "true"} &times;
-    -# %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
-    -#   %span{'aria-hidden': "true"} &times;
-
-
--# %tr
--#   %td
--#     .general-img-wrap-table
--#       %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
--#   %td
--#     %p.title Android Programming for Beginners
--#   %td
--#     %span.font-16.in-gold-500 €28.50
--#   %td
--#     .input-group
--#       %a.input-link{href: "#"}
--#         %i.fa.fa-minus.line-heaght-40
--#       %input.form-control.quantity-input{type: "text"}
--#       %a.input-link{href: "#"}
--#         %i.fa.fa-plus.line-heaght-40
--#   %td
--#     %span.font-16.in-gold-500 €32.90
--#   %td
--#     %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
--#       %span{'aria-hidden': "true"} &times;
--# %tr
--#   %td
--#     .general-img-wrap-table
--#       %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
--#   %td
--#     %p.title Android Programming for Beginners
--#   %td
--#     %span.font-16.in-gold-500 €28.50
--#   %td
--#     .input-group
--#       %a.input-link{href: "#"}
--#         %i.fa.fa-minus.line-heaght-40
--#       %input.form-control.quantity-input{type: "text"}
--#       %a.input-link{href: "#"}
--#         %i.fa.fa-plus.line-heaght-40
--#   %td
--#     %span.font-16.in-gold-500 €32.90
--#   %td
--#     %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
--#       %span{'aria-hidden': "true"} &times;
