@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :line_items
   resources :carts
-  resources :books do
+  resources :books, only: [:index, :show] do
     resources :reviews, except: [:new, :index]
   end
   resources :orders, controller: 'orders/orders' do
