@@ -1,9 +1,9 @@
 class Book < ApplicationRecord
-
   CATEGORIES = %w[mobile_development photo web_design web_development].freeze
 
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :categories
+  has_many :images, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :line_items
 
@@ -42,11 +42,6 @@ class Book < ApplicationRecord
       .joins(:book).merge(Book.send(category))
       .joins(:order).where(orders: { state: 'delivered' })
       .group('line_items.book_id').order('total_quantity DESC').first.book
-
-
-    # LineItem.joins(:book).merge(Book.send(category))
-    #   .joins(:order).where(orders: { state: 'delivered' })
-    #   .select("book_id, sum(quantity) as total_quantity").group('book_id').order('total_quantity DESC').first
   end
 
   private
