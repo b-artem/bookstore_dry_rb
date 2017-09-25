@@ -1,23 +1,9 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create, :destroy]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_line_item, only: [:update, :destroy]
 
   authorize_resource
-
-  def index
-    @line_items = LineItem.all
-  end
-
-  def show
-  end
-
-  def new
-    @line_item = LineItem.new
-  end
-
-  def edit
-  end
 
   def create
     book = Book.find(params[:book_id])
@@ -55,7 +41,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to @cart, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to @cart, notice: 'Product was successfully removed' }
       format.json { head :no_content }
     end
   end
