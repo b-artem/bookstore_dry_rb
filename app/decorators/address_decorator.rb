@@ -12,5 +12,4 @@ class AddressDecorator < Draper::Decorator
   def phone
     object.phone
   end
-
 end

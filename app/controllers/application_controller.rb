@@ -4,26 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :set_locale_from_params
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_cart
-  # authorize_resource
-  # check_authorization unless: :devise_controller?
-
 
   rescue_from CanCan::AccessDenied do |exception|
-    # respond_to do |format|
-      redirect_to main_app.root_path, alert: exception.message
-      # format.json { head :forbidden, content_type: 'text/html' }
-      # format.html { redirect_to root_url, notice: exception.message }
-      # format.js   { head :forbidden, content_type: 'text/html' }
-    # end
+    redirect_to main_app.root_path, alert: exception.message
   end
-
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   respond_to do |format|
-  #     format.json { head :forbidden, content_type: 'text/html' }
-  #     format.html { redirect_to main_app.root_url, notice: exception.message }
-  #     format.js   { head :forbidden, content_type: 'text/html' }
-  #   end
-  # end
 
   protected
 

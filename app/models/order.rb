@@ -6,7 +6,6 @@ class Order < ApplicationRecord
   belongs_to :coupon, optional: true
   has_one :billing_address, dependent: :destroy
   has_one :shipping_address, dependent: :destroy
-  # accepts_nested_attributes_for :billing_address, :shipping_address
   has_many :line_items, dependent: :destroy
 
   after_create :generate_number
@@ -22,10 +21,6 @@ class Order < ApplicationRecord
         update_attributes(completed_at: Time.now)
       end
     end
-
-    # event :to_delivery do
-    #   transitions from: :in_queue, to: :in_delivery
-    # end
   end
 
   def shipping_address

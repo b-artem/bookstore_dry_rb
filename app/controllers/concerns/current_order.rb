@@ -17,5 +17,4 @@ module CurrentOrder
     def empty_current_order
       session[:order_id] = nil
     end
-
 end

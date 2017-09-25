@@ -10,15 +10,3 @@ $(document).on('turbolinks:load', decrementQuantity = function() {
   input.val(quantity);
   input.trigger("change");
 });
-
-
-// decrementQuantity = function() {
-//   var quantity;
-//   quantity = $(event.target).parent().siblings('.quantity-input').val();
-//   if ( quantity == '1' ) {
-//     return false;
-//   } else {
-//     quantity--;
-//   }
-//   $(event.target).parent().siblings('.quantity-input').val(quantity);
-// };

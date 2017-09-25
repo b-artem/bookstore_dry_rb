@@ -5,7 +5,6 @@ feature 'Signup' do
   let(:password) { Faker::Internet.password(8) }
   let(:book) { create :book }
   background do
-    # stub_template "home/_best_sellers.html.erb" => "Here comes Best Sellers"
     allow(Book).to receive(:best_seller).and_return(book)
     visit new_user_registration_path
   end
