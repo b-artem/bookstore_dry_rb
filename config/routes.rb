@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :line_items, only: [:create, :update, :destroy]
-  resources :carts, only: [:show, :update]
   resources :books, only: [:index, :show] do
     resources :reviews, except: [:new, :index]
   end
+  resources :carts, only: [:show, :update]
+  resources :line_items, only: [:create, :update, :destroy]
   resources :orders, controller: 'orders/orders' do
     resources :checkouts, controller: 'orders/checkouts'
   end

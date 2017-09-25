@@ -16,7 +16,7 @@ shared_examples 'delete' do
     scenario 'removes product from Cart view' do
       click_button("delete-#{line_item.id}")
       expect(page).not_to have_content(line_item.book.title)
-      expect(page).to have_content('Line item was successfully destroyed')
+      expect(page).to have_content('Product was successfully removed')
     end
 
     scenario 'decrements number of products in Cart' do
