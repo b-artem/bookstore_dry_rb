@@ -13,7 +13,6 @@
       .images.clearfix
         = link_to @book.image_url, class: 'img-link' do
           = image_tag @book.image_url
-        -#   %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
         = link_to @book.image_url, class: 'img-link' do
           = image_tag @book.image_url
         = link_to @book.image_url, class: 'img-link' do
@@ -33,20 +32,11 @@
             = link_to '', class: 'input-link',
                       onclick: "decrementQuantity(); return false;" do
               %i.fa.fa-minus.line-height-40
-            -# %a.input-link{href: "#"}
-            -#   %i.fa.fa-minus.line-height-40
             %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}
-            -# = text_field_tag :quantity, class: 'form-control quantity-input', value: 1
-            -# = submit_tag t('.add_to_cart'), class: 'btn btn-default pull-right general-position'
             = link_to '', class: 'input-link',
                       onclick: "incrementQuantity(); return false;" do
               %i.fa.fa-plus.line-height-40
-            -# %a.input-link{href: "#"}
-            -#   %i.fa.fa-plus.line-height-40
       .col-xs-7.col-md-5
-        -# = button_to t('.add_to_cart'),
-        -#             line_items_path(book_id: @book, quantity: quantity),
-        -#             class: 'btn btn-default pull-right general-position'
         %button.btn.btn-default.pull-right.general-position{type: 'submit', form: 'line-item-form'}
           = t '.add_to_cart'
     .general-info-wrap.divider-lg
@@ -95,31 +85,3 @@
           = f.text_area :text
         .actions
           = f.submit t('.post_review')
-
--# %p#notice= notice
--#
--# %p
--#   %b Title:
--#   = @book.title
--# %p
--#   %b Description:
--#   = @book.description
--# %p
--#   %b Price:
--#   = @book.price
--# %p
--#   %b Image url:
--#   = @book.image_url
--# %p
--#   %b Publication year:
--#   = @book.publication_year
--# %p
--#   %b Dimensions:
--#   = @book.dimensions
--# %p
--#   %b Materials:
--#   = @book.materials
--#
--# = link_to 'Edit', edit_book_path(@book)
--# \|
--# = link_to 'Back', books_path

@@ -26,51 +26,11 @@
       = render 'sort_by'
 .mb-120
   .row
-    -# Collection?
+
     = render @books
-    -# = render partial: 'books', object: @books.order('created_at DESC')
     = paginate @books
-    -# = page_entries_info @books
+
   .text-center
     = link_to 'next', path_to_next_page(@books)
-    = button_to t('.view_more'), path_to_next_page(@books), method: :get, class: 'btn btn-primary'
-    -# %button.btn.btn-primary= t '.view_more'
-
-
-
-
-
-
--# %h1 Listing books
--#
--# %table
--#   %thead
--#     %tr
--#       %th Title
--#       %th Description
--#       %th Price
--#       %th Image url
--#       %th Publication year
--#       %th Dimensions
--#       %th Materials
--#       %th
--#       %th
--#       %th
--#
--#   %tbody
--#     - @books.each do |book|
--#       %tr
--#         %td= book.title
--#         %td= book.description
--#         %td= book.price
--#         %td= book.image_url
--#         %td= book.publication_year
--#         %td= book.dimensions
--#         %td= book.materials
--#         %td= link_to 'Show', book
--#         %td= link_to 'Edit', edit_book_path(book)
--#         %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
--#
--# %br
--#
--# = link_to 'New Book', new_book_path
+    = button_to t('.view_more'), path_to_next_page(@books), method: :get,
+                class: 'btn btn-primary'

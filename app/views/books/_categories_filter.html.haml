@@ -3,10 +3,6 @@
             class: 'filter-link' do
     = t('books.categories.all')
     %span.badge.general-badge= Book.count
--# %li.mr-35
--#   %a.filter-link{href: "#"}
--#     All
--#     %span.badge.general-badge 135
 %li.mr-35
   = link_to request.query_parameters.merge({category: 'mobile_development'}),
             class: 'filter-link' do
