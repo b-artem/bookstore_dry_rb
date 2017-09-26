@@ -12,7 +12,7 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         format.html { redirect_back fallback_location: root_path,
-                      notice: 'Line item was successfully created.' }
+                      notice: 'Line item was successfully added to a cart' }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { redirect_back fallback_location: root_path, alert: 'Line item was not created' }

@@ -2,6 +2,11 @@ class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder
 
+  rescue_from NoMethodError do |exception|
+    flash[:alert] = 'Please follow checkout step by step'
+    redirect_to wizard_path(:address)
+  end
+
   authorize_resource(Order)
   authorize_resource(Address)
 
