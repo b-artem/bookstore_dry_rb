@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :orders, controller: 'orders/orders', except: [:new, :edit] do
     resources :checkouts, controller: 'orders/checkouts'
   end
-  resources :addresses, only: [:create, :update]
-  resources :billing_addresses
+  # resources :addresses, only: [:create, :update]
+  # resources :billing_addresses
 
   root 'home#index'
   get 'home/index'

@@ -6,11 +6,10 @@ $(document).ready(function($) {
       return $(this).attr('data-score');
     }
   });
-  console.log('two');
 
   $('#star-rating').raty({
     path: '/assets',
     scoreName: 'review[score]'
   });
-  console.log('end!');
+  console.log('raty');
 });

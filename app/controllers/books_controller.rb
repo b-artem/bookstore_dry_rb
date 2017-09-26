@@ -6,9 +6,12 @@ class BooksController < ApplicationController
   authorize_resource
 
   def index
-    @books = Book.send(@category)
-                 .order(sort_column + ' ' + sort_direction)
-                 .page(params[:page]).per(12)
+    if sort_condition == 'popularity'
+      books = Book.where(id: Book.popular_first_ids)
+    else
+      books = Book.public_send(@category).order(sort_condition + ' ' + sort_direction)
+    end
+    @books = books.page(params[:page]).per(12)
   end
 
   def show
@@ -29,7 +32,8 @@ class BooksController < ApplicationController
       @category = params[:category]
     end
 
-    def sort_column
+    def sort_condition
+      return 'popularity' if params[:sort_by] == 'popularity'
       Book.column_names.include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
     end
 
