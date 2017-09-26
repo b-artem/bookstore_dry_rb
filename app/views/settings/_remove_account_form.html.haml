@@ -3,10 +3,10 @@
 
 %p.in-gold-500.font-18.mb-25= t '.remove_account'
 .general-settings-btn
-  = link_to t('.please_remove_my_account'),
-              { controller: 'devise/registrations', action: :destroy }, method: :delete,
+  = button_to t('.please_remove_my_account'),
+              user_registration_path, method: :delete,
               data: { confirm: t('.are_you_sure') }, disabled: true,
-              id: 'remove-account-btn', class: 'btn disabled mb-20'
+              id: 'remove-account-btn', class: 'btn btn-default disabled mb-20'
 .checkbox.general-settings-checkbox
   %label.checkbox-label
     %input#remove-account-cb.checkbox-input{type: "checkbox", hidden: "true"}
