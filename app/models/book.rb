@@ -44,20 +44,12 @@ class Book < ApplicationRecord
       .group('line_items.book_id').order('total_quantity DESC').first.book
   end
 
-  scope :pop, -> do
-    return Book.none unless LineItem.any?
-    Book.select('book_id, sum(book_id) as total_quantity')
-      .joins(:line_items)
-      # .joins(:order).where(orders: { state: 'delivered' })
-      # .group('line_items.book_id').order('total_quantity DESC').map(&:book)
-  end
-
-  scope :popular_first, -> do
+  scope :popular_first_ids, -> do
     return Book.none unless LineItem.any?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book)
       .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.book_id').order('total_quantity DESC').pluck(:book_id)
+      .group('line_items.book_id').order('total_quantity DESC').map(&:book_id)
   end
 
   private

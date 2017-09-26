@@ -6,7 +6,7 @@ FactoryGirl.define do
     address { Faker::Address.street_address }
     city { Faker::Address.city }
     zip { Faker::Address.zip }
-    country { Faker::Address.country }
+    country { Faker::Address.country.gsub('-', '') }
     phone '+380123456789'
     order_id { create(:order).id }
   end

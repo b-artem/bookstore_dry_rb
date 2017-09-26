@@ -6,10 +6,12 @@ class BooksController < ApplicationController
   authorize_resource
 
   def index
-    return @books = Book.where(id: Book.popular_first) if sort_condition == 'popularity'
-    @books = Book.send(@category)
-                 .order(sort_condition + ' ' + sort_direction)
-                 .page(params[:page]).per(12)
+    if sort_condition == 'popularity'
+      books = Book.where(id: Book.popular_first_ids)
+    else
+      books = Book.send(@category).order(sort_condition + ' ' + sort_direction)
+    end
+    @books = books.page(params[:page]).per(12)
   end
 
   def show
