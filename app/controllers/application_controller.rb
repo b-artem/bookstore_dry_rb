@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   include CurrentCart
   protect_from_forgery with: :exception
   before_action :set_locale_from_params
+  before_action :store_user_location, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
+
   before_action :set_cart
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -17,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || root_path
+    stored_location_for(resource) || root_path
   end
 
   def set_locale_from_params
@@ -37,4 +39,18 @@ class ApplicationController < ActionController::Base
   def current_ability
     @current_ability ||= Ability.new(current_user, session)
   end
+
+  private
+    # Its important that the location is NOT stored if:
+    # - The request method is not GET (non idempotent)
+    # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an
+    #    infinite redirect loop.
+    # - The request is an Ajax request as this can lead to very unexpected behaviour.
+    def storable_location?
+      request.get? && !devise_controller? && !request.xhr?
+    end
+
+    def store_user_location
+      store_location_for(:user, request.fullpath)
+    end
 end
