@@ -1,3 +1,8 @@
+- content_for :javascripts do
+  = javascript_include_tag 'line_items/increment_quantity', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'line_items/decrement_quantity', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'line_items/update_quantity', 'data-turbolinks-track': 'reload'
+
 %h1.general-title-margin= t '.cart'
 
 .visible-xs
@@ -53,7 +58,7 @@
               %p.font-16{id: 'coupon'}= @cart.decorate.discount
           %tr
             %td
-              %strong.font-18= t '.order_total' 
+              %strong.font-18= t '.order_total'
             %td
               %strong.font-18{id: "cart-total"}= @cart.decorate.total
         = button_to t('.checkout'), orders_path, method: :post,

@@ -4,4 +4,5 @@ $(document).on('turbolinks:load', incrementQuantity = function() {
   quantity++;
   input.val(quantity);
   input.trigger("change");
+  console.log('increment_quantity');
 });

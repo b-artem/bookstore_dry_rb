@@ -91,6 +91,7 @@ en:
       review_title: 'Title'
       review_text: 'Review'
       post_review: 'Post'
+      sign_in_to_write_a_review: 'Please sign in to write a review'
   carts:
     show:
       cart: 'Cart'

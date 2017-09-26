@@ -1,5 +1,8 @@
 - content_for :javascripts do
   = javascript_include_tag 'reviews/raty', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'books/read_more', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'line_items/increment_quantity', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'line_items/decrement_quantity', 'data-turbolinks-track': 'reload'
 
 = link_to request.referer.present? ? request.referer : books_path,
           class: 'general-back-link' do
@@ -76,7 +79,6 @@
       .field
         = f.label :score
         #star-rating
-        -# = f.number_field :score, id: "star-rating"
       .field
         = f.label t('.review_title')
         = f.text_field :title
@@ -86,4 +88,4 @@
       .actions
         = f.submit t('.post_review')
   - else
-    Please sign in to write a review
+    = t '.sign_in_to_write_a_review'
