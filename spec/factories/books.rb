@@ -7,6 +7,9 @@ FactoryGirl.define do
     publication_year { Date.today.year - rand(1..5) }
     dimensions "H: 9.0 x W: 7.0 x D: 0.9"
     materials "Paperback"
+    after :create do |book|
+      book.images = [Image.find_or_create_by(image_url: "https://images-na.ssl-images-amazon.com/images/I/51lOFSm9X6L._SX385_BO1,204,203,200_.jpg")]
+    end
     # authors nil
     # categories nil
   end
