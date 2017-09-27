@@ -12,7 +12,7 @@
   .col-sm-6
     .product-gallery
       .mb-20
-        = image_tag @book.image_url, class: 'img-responsive'
+        = image_tag @book.decorate.images[0], class: 'img-responsive'
       .images.clearfix
         = link_to @book.image_url, class: 'img-link' do
           = image_tag @book.image_url

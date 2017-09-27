@@ -30,7 +30,7 @@
 .mb-120
   #books.row
     = render @books
-    = paginate @books
+    -# = paginate @books
 
   .text-center
     = link_to t('.view_more'), path_to_next_page(@books), method: :get,
