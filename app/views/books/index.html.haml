@@ -29,6 +29,7 @@
 
     = render @books
     = paginate @books
+    = link_to_next_page @books, 'Next!!!' 
 
   .text-center
     = link_to 'next', path_to_next_page(@books)
