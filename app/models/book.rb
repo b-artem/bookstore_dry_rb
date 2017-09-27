@@ -19,6 +19,8 @@ class Book < ApplicationRecord
   }
   validates :publication_year, inclusion: { in: 1969..Date.today.year }
 
+  paginates_per 12
+
   scope :mobile_development, -> do
     Book.joins(:categories).where('categories.name = ?', 'Mobile development')
   end

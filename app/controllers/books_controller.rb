@@ -11,7 +11,7 @@ class BooksController < ApplicationController
     else
       books = Book.public_send(@category).order(sort_condition + ' ' + sort_direction)
     end
-    @books = books.page(params[:page]).per(12)
+    @books = books.page(params[:page])
   end
 
   def show

@@ -25,13 +25,11 @@
     %ul.dropdown-menu
       = render 'sort_by'
 .mb-120
-  .row
-
+  #books.row
     = render @books
     = paginate @books
-    = link_to_next_page @books, 'Next!!!' 
 
   .text-center
-    = link_to 'next', path_to_next_page(@books)
-    = button_to t('.view_more'), path_to_next_page(@books), method: :get,
-                class: 'btn btn-primary'
+    = link_to t('.view_more'), path_to_next_page(@books), method: :get,
+              remote: true,
+              id: 'view-more', class: 'btn btn-primary'
