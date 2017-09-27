@@ -22,4 +22,5 @@ Rails.application.config.assets.precompile +=
     orders/orders/filter.js
     reviews/raty
     settings/remove_account.js
+    books/filter.js
   ]
