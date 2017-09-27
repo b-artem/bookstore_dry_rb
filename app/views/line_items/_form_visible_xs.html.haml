@@ -3,7 +3,7 @@
     %span{'aria-hidden': "true"} &times;
   .general-img-wrap-table
     = link_to book_path(line_item.book), id: "photo-view-#{line_item.book.id}-xs" do
-      = image_tag line_item.book.image_url, class: 'cart-img-shadow',
+      = image_tag line_item.book.images[0].image_url, class: 'cart-img-shadow',
                   alt: "design-book"
   = link_to book_path(line_item.book), id: "title-view-#{line_item.book.id}-xs" do
     %p.title.in-gold-500= line_item.book.title

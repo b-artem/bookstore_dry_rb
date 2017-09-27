@@ -80,6 +80,7 @@ en:
       view_more: 'View More'
     show:
       back_to_results: 'Back to results'
+      no_images: 'There are no images for that book yet'
       add_to_cart: 'Add to Cart'
       description: 'Description'
       publication_year: 'Year of publication'

@@ -17,13 +17,4 @@ class BookDecorator < Draper::Decorator
   def price
     h.number_to_currency(object.price)
   end
-
-  def images
-    all_images = []
-    uploader = ImageUploader.new
-    object.images.each do |img|
-      all_images << uploader.retreive_from_store!(img)
-    end
-    all_images
-  end
 end
