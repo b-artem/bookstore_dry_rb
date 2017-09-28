@@ -6,12 +6,14 @@ shared_examples 'change quantity' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
+      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
     visit home_index_path
   end
 
   context 'when product quantity = 1', js: true do
-    let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
-    background { visit cart_path(Cart.last) }
+    let(:line_item) { create(:line_item, cart: Cart.last, book: book) }
+    background { visit cart_path(line_item.cart) }
 
     context "user clicks '+' button" do
       # wait_for_ajax does NOT help there

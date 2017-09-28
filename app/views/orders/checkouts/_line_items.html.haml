@@ -2,8 +2,8 @@
   .general-cart-item.divider-lg
     - line_items.each do |line_item|
       .general-img-wrap-table
-        = image_tag line_item.book.image_url, alt: "design-book"
-        -# %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+        = image_tag line_item.book.images[0].image_url.thumb.file.url,
+                    alt: "design-book"
       %p.title= line_item.book.title
       %P.in-grey-600.fw-300= line_item.book.decorate.short_description(200)
       %table.table
@@ -23,32 +23,6 @@
           %td
             %span.font-16.in-gold-500= line_item.decorate.subtotal
 
-  -# .general-cart-item.divider-lg.mb-55
-  -#   .general-img-wrap-table
-  -#     %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-  -#   %p.title Android Programming for Beginners
-  -#   %table.table
-  -#     %tr
-  -#       %td
-  -#         %span.in-grey-600 Price
-  -#       %td
-  -#         %span.font-16.in-gold-500 €28.50
-  -#     %tr
-  -#       %td.vertical-middle
-  -#         %span.in-grey-600 Quantity
-  -#       %td
-  -#         .input-group
-  -#           %a.input-link{href: "#"}
-  -#             %i.fa.fa-minus.line-heaght-40
-  -#           %input.form-control.quantity-input{type: "text"}
-  -#           %a.input-link{href: "#"}
-  -#             %i.fa.fa-plus.line-heaght-40
-  -#     %tr
-  -#       %td
-  -#         %span.in-grey-600 SubTotal
-  -#       %td
-  -#         %span.font-16.in-gold-500 €32.90
-
 .hidden-xs.divider-lg.pt-20
   %table.table.table-hover
     %thead
@@ -66,9 +40,9 @@
       - line_items.each do |line_item|
         %tr
           %td
-            .general-img-wrap-table= image_tag line_item.book.image_url,
+            .general-img-wrap-table
+              = image_tag line_item.book.images[0].image_url.thumb.file.url,
                           class: 'cart-img-shadow pull-left', alt: "design-book"
-              -# %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
           %td
             %p.title= line_item.book.title
             %p.in-grey-600.fw-300= line_item.book.decorate.short_description(200)

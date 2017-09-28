@@ -1,13 +1,13 @@
 .row
   .col-sm-5
     .general-img-wrap
-      = image_tag latest.image_url, class: 'img-shadow general-thumbnail-img',
-                alt: "design-book"
+      = image_tag latest.images[0].image_url.file.url,
+                  class: 'img-shadow general-thumbnail-img', alt: "design-book"
   .col-sm-7
     .mb-60
       %h1= latest.title
-      %p.lead= latest.short_description
-      %p.lead.small= latest.authors_names
+      %p.lead= latest.decorate.short_description
+      %p.lead.small= latest.decorate.authors_names
       .general-align
         = button_to t('.buy_now'),
                     line_items_path(book_id: latest.id, quantity: 1),

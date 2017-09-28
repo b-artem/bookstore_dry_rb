@@ -80,6 +80,7 @@ en:
       view_more: 'View More'
     show:
       back_to_results: 'Back to results'
+      no_images: 'There are no images for that book yet'
       add_to_cart: 'Add to Cart'
       description: 'Description'
       publication_year: 'Year of publication'
@@ -143,7 +144,7 @@ en:
         credit_card: 'Credit Card'
         card_number: 'Card Number'
         name_on_card: 'Name on Card'
-        mm_yy: '"MM / YY"'
+        mm_yy: 'MM/YY'
         cvv: 'CVV'
       confirm:
         edit: 'edit'

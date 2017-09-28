@@ -2,11 +2,6 @@ class Orders::CheckoutsController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder
 
-  rescue_from NoMethodError do |exception|
-    flash[:alert] = 'Please follow checkout step by step'
-    redirect_to wizard_path(:address)
-  end
-
   authorize_resource(Order)
   authorize_resource(Address)
 
@@ -59,6 +54,7 @@ class Orders::CheckoutsController < ApplicationController
       @order = current_order
       render_next_step @order
     when :payment
+      @order = current_order
       @payment = Forms::PaymentForm.from_params(params[:payment])
       set_payment_data
       render_next_step @payment
