@@ -6,6 +6,8 @@ shared_examples 'item view' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
+    allow_any_instance_of(Book).to receive_message_chain(:images, :[], :image_url)
+      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
   end
 
   context 'when user clicks Cart icon in top right corner' do
