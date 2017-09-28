@@ -20,10 +20,8 @@ shared_examples 'best sellers' do
       create :book_web_design
       create :book_web_development
     end
-    allow_any_instance_of(Book).to receive_message_chain(:images, :[], :image_url)
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
       .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
-    allow_any_instance_of(Book).to receive_message_chain(:images, :[], :image_url,
-      :file).and_return("https://link_to_file")
     visit home_index_path
   end
 

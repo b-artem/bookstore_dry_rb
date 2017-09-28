@@ -2,7 +2,8 @@
   .general-cart-item.divider-lg
     - line_items.each do |line_item|
       .general-img-wrap-table
-        = image_tag line_item.book.images[0].image_url.little, alt: "design-book"
+        = image_tag line_item.book.images[0].image_url.little.file.url,
+                    alt: "design-book"
       %p.title= line_item.book.title
       %P.in-grey-600.fw-300= line_item.book.decorate.short_description(200)
       %table.table
@@ -39,7 +40,7 @@
       - line_items.each do |line_item|
         %tr
           %td
-            .general-img-wrap-table= image_tag line_item.book.image_url,
+            .general-img-wrap-table= image_tag line_item.book.image_url.little.file.url,
                           class: 'cart-img-shadow pull-left', alt: "design-book"
           %td
             %p.title= line_item.book.title

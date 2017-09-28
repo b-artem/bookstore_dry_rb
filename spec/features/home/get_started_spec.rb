@@ -8,7 +8,7 @@ shared_examples 'get started' do
     3.times { create :book_photo }
     3.times { create :book_web_design }
     3.times { create :book_web_development }
-    allow_any_instance_of(Book).to receive_message_chain(:images, :[], :image_url)
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
       .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
     visit home_index_path
   end
