@@ -6,8 +6,8 @@
   .col-sm-7
     .mb-60
       %h1= latest.title
-      %p.lead= latest.short_description
-      %p.lead.small= latest.authors_names
+      %p.lead= latest.decorate.short_description
+      %p.lead.small= latest.decorate.authors_names
       .general-align
         = button_to t('.buy_now'),
                     line_items_path(book_id: latest.id, quantity: 1),
