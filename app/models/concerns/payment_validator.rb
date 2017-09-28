@@ -1,6 +1,6 @@
 class Concerns::PaymentValidator < ActiveModel::Validator
   def validate(form)
-    return if valid_terms.include? form.valid_until
+    return false if valid_terms.include? form.valid_until
     form.errors.add(:valid_until, 'Invalid term')
   end
 

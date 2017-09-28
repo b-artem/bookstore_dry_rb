@@ -13,7 +13,6 @@
     .col-sm-3
       = f.input :cvv, as: :integer, placeholder: t('.cvv'),
                 wrapper_html: { class: 'form-group relative' }
-      %i.fa.fa-question-circle.general-form-help
 
   .general-text-align
     = render 'order_summary', locals: { step: step }
