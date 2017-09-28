@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :image do
-    book nil
-    image_url "MyString"
+    image_url "https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg"
   end
 end

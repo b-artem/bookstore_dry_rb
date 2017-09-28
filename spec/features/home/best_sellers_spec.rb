@@ -9,6 +9,8 @@ shared_examples 'best sellers' do
   let(:bestseller_web_dev) { create :book_web_development }
 
   background do
+    allow_any_instance_of(Book).to receive_message_chain(:images, :[], :image_url)
+      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
     create(:order, state: 'delivered', line_items: [
             create(:line_item, book: bestseller_mob_dev),
             create(:line_item, book: bestseller_photo),

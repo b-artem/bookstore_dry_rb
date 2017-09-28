@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:show, :update]
+  # before_action :set_cart, only: [:show, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   authorize_resource
