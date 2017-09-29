@@ -23,4 +23,9 @@ class Cart < ApplicationRecord
     return subtotal unless coupon
     subtotal * (1 - coupon.discount/100)
   end
+
+  def products_quantity
+    return 0 unless line_items.any?
+    line_items.sum(&:quantity)
+  end
 end

@@ -41,10 +41,10 @@
           %a.navbar-brand= t '.bookstore'
           = link_to @cart, class: 'shop-link pull-right visible-xs' do
             %span.shop-icon
-              %span.shop-quantity= @cart.line_items.count
+              %span#cart-xs.shop-quantity= @cart.products_quantity
         = link_to @cart, class: 'shop-link pull-right hidden-xs', id: 'cart' do
           %span.shop-icon
-            %span.shop-quantity= @cart.line_items.count
+            %span#cart.shop-quantity= @cart.products_quantity
         #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
           .visible-xs
             %button.close{type: "button", 'aria-label': "Close"}
