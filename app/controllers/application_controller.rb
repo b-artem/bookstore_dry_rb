@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale_from_params
   before_action :store_user_location, if: :storable_location?
+  before_action :store_back_path, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   before_action :set_cart
@@ -52,5 +53,9 @@ class ApplicationController < ActionController::Base
 
     def store_user_location
       store_location_for(:user, request.fullpath)
+    end
+
+    def store_back_path
+      session[:back_path] = request.referer
     end
 end

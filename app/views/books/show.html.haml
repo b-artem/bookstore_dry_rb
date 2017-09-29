@@ -4,7 +4,8 @@
   = javascript_include_tag 'line_items/increment_quantity', 'data-turbolinks-track': 'reload'
   = javascript_include_tag 'line_items/decrement_quantity', 'data-turbolinks-track': 'reload'
 
-= link_to request.referer.present? ? request.referer : books_path,
+
+= link_to books_path,
           class: 'general-back-link' do
   %i.fa.fa-long-arrow-left.mr-15
   = t '.back_to_results'
@@ -24,11 +25,11 @@
       .col-xs-5.col-md-3
         .input-group.general-position
           = form_tag line_items_path(book_id: @book.id), id: 'line-item-form' do
-            = link_to '', class: 'input-link',
+            = link_to ' ', class: 'input-link',
                       onclick: "decrementQuantity(); return false;" do
               %i.fa.fa-minus.line-height-40
             %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}
-            = link_to '', class: 'input-link',
+            = link_to ' ', class: 'input-link',
                       onclick: "incrementQuantity(); return false;" do
               %i.fa.fa-plus.line-height-40
       .col-xs-7.col-md-5
@@ -39,7 +40,7 @@
       %p.lead.small.line-height-2
         = book.short_description
         - if @book.description.length > 500
-          = link_to t('.read_more'), '', id: "read-more-#{@book.id}",
+          = link_to t('.read_more'), '#', id: "read-more-#{@book.id}",
                     class: 'in-gold-500 ml-10',
                     onclick: "readMore('#{book.full_description}'); return false;"
     .general-info-wrap.divider-lg

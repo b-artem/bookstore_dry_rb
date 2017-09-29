@@ -80,7 +80,6 @@ en:
       view_more: 'View More'
     show:
       back_to_results: 'Back to results'
-      no_images: 'There are no images for that book yet'
       add_to_cart: 'Add to Cart'
       description: 'Description'
       publication_year: 'Year of publication'
@@ -93,6 +92,8 @@ en:
       review_text: 'Review'
       post_review: 'Post'
       sign_in_to_write_a_review: 'Please sign in to write a review'
+    images:
+      no_images: 'There are no images for that book yet'
   carts:
     show:
       cart: 'Cart'
