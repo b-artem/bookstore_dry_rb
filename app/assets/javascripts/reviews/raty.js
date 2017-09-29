@@ -1,12 +1,4 @@
-$(document).ready(function($) {
-  $('.star-rating').raty({
-    path: '/assets/',
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    }
-  });
-
+$(document).on('turbolinks:load', function() {
   $('#star-rating').raty({
     path: '/assets',
     scoreName: 'review[score]'

@@ -19,16 +19,16 @@
       %td
         .input-group
           = form_for line_item, id: "form-line-item-#{line_item.id}-xs", remote: true do |f|
-            = link_to '', id: "minus-#{line_item.id}-xs", class: 'input-link',
+            = link_to '#', id: "minus-#{line_item.id}-xs", class: 'input-link',
                       onclick: "decrementQuantity(); return false;" do
               %i.fa.fa-minus.line-height-40 &nbsp
             = f.text_field :quantity, class: 'form-control quantity-input',
                             id: "input-line-item-#{line_item.id}-xs",
                             onchange: "updateQuantity(#{line_item.id})"
-            = link_to '', id: "plus-#{line_item.id}-xs", class: 'input-link',
+            = link_to '#', id: "plus-#{line_item.id}-xs", class: 'input-link',
                       onclick: "incrementQuantity(); return false;" do
               %i.fa.fa-plus.line-height-40 &nbsp
-            = f.submit '', id: "update-line-item-#{line_item.id}-xs", hidden: true
+            = f.submit '#', id: "update-line-item-#{line_item.id}-xs", hidden: true
     %tr
       %td
         %span.in-grey-600= t '.sub_total'

@@ -14,3 +14,4 @@
 //= require jquery
 //= require jquery.raty
 //= require turbolinks
+//= require_tree .
