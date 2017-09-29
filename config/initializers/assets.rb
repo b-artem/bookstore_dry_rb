@@ -23,9 +23,4 @@ Rails.application.config.assets.precompile +=
     reviews/raty
     settings/remove_account.js
     books/filter.js
-    cancel-off.png
-    cancel-on.png
-    star-half.png
-    star-off.png
-    star-on.png
   ]
