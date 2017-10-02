@@ -30,6 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  application:
+    translation_not_available: "%{locale} translation not available"
   number:
     currency:
       format:
@@ -108,6 +110,21 @@ en:
       update_cart: 'Update cart'
       checkout: 'Checkout'
       enter_coupon: 'Enter Your Coupon Code'
+    update:
+      success: 'Coupon was successfully applied'
+      fail: "There is no such coupon or it's not valid anymore"
+    invalid_cart:
+      access_ivalid_cart: "Attempt to access invalid cart %{cart_id}"
+      invalid_cart: 'Invalid cart'
+  line_items:
+    create:
+      success: 'Line item was successfully added to a cart'
+      fail: 'Line item was not created'
+      enter_positive_integer: 'Line item was not added. Please enter positive integer quantity'
+    update:
+      success: 'Line item was successfully updated'
+    destroy:
+      success: 'Product was successfully removed'
   orders:
     orders:
       index:
@@ -123,6 +140,10 @@ en:
         completed_at: 'Completed at'
         status: ' Status'
         total: 'Total'
+      update:
+        success: 'Order was successfully updated'
+      destroy:
+        success: 'Order was successfully destroyed'
     checkouts:
       steps:
         checkout: 'Checkout'
@@ -171,6 +192,9 @@ en:
         quantity: 'Quantity'
         total: 'Total'
         sub_total: 'SubTotal'
+  reviews:
+    create:
+      success: 'Thanks for Review. It will be published as soon as Admin will approve it'
   settings:
     edit:
       settings: 'Settings'
@@ -191,6 +215,15 @@ en:
       please_remove_my_account: 'Please Remove My Account'
       i_understand_data_will_be_lost: 'I understand that all data will be lost'
       are_you_sure: 'Are you sure?'
+    change_password:
+      success: "Your password was successfully changed"
+      fail: "Your password wasn't changed"
+    update:
+      success: 'Address was successfully updated'
+      fail: "Address wasn't updated"
+    update_email:
+      success: 'Your email was successfully changed'
+      fail: "Your email wasn't changed"
   devise:
     or: 'or'
     enter_email: 'Enter Email'
@@ -210,3 +243,9 @@ en:
         sign_up: 'Sign Up'
         confirm_password: 'Confirm Password'
         have_an_account: Have an Account?
+  users:
+    omniauth_callbacks:
+      no_email_provided: "No email provided by facebook. Custom email created. Please change it in settings"
+      failed_to_sign_in: 'Failed to sign in'
+  cart_is_empty: 'Your cart is empty'
+  order_was_not_found: "Order %{order_id} was not found"

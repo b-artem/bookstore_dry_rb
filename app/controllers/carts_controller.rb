@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
   include CurrentCart
-  # before_action :set_cart, only: [:show, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   authorize_resource
@@ -13,10 +12,10 @@ class CartsController < ApplicationController
     respond_to do |format|
       if coupon
         @cart.update(coupon: coupon)
-        format.html { redirect_to @cart, notice: 'Coupon was successfully applied' }
+        format.html { redirect_to @cart, notice: t('.success') }
         format.json { render :show, status: :ok, location: @cart }
       else
-        format.html { redirect_to @cart, alert: "There is no such coupon or it's not valid anymore" }
+        format.html { redirect_to @cart, alert: t('.fail') }
         format.json { render :show, status: :unprocessable_entity, location: @cart }
       end
     end
@@ -29,7 +28,7 @@ class CartsController < ApplicationController
     end
 
     def invalid_cart
-      logger.error "Attempt to access invalid cart #{params[:id]}"
-      redirect_back fallback_location: root_path, notice: 'Invalid cart'
+      logger.error t('.access_ivalid_cart', cart_id: params[:id])
+      redirect_back fallback_location: root_path, notice: t('.invalid_cart')
     end
 end
