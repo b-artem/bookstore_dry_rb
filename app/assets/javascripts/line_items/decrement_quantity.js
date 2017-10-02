@@ -9,5 +9,4 @@ $(document).on('turbolinks:load', decrementQuantity = function() {
   }
   input.val(quantity);
   input.trigger("change");
-  console.log('decrement_quantity');
 });

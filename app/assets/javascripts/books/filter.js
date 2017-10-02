@@ -1,6 +1,5 @@
 $(document).on('turbolinks:load', function() {
   $("#sort-by li a").click(function() {
-    console.log('filter');
     var text = ($(this).text());
     setTimeout(function() { $("span#text").text(text); }, 500);
   });
