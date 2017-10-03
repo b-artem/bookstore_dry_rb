@@ -11,7 +11,7 @@ module CurrentOrder
         Order.find(session[:order_id])
       end
     rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "Order #{session[:order_id]} was not found"
+      flash[:alert] = t('order_was_not_found', order_id: session[:order_id])
     end
 
     def empty_current_order

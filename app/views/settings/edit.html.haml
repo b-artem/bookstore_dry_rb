@@ -18,8 +18,8 @@
     %a.tab-link{href: "#privacy", 'aria-controls': "privacy", role: "tab",
                 'data-toggle': "tab"}= t '.privacy'
 .tab-content
-  = content_tag(:div, id: 'address', class: "tab-pane general-main-wrap" + address_tab_class) do
-    -# #address.tab-pane.general-main-wrap{role: "tabpanel"}
+  = content_tag(:div, id: 'address', role: 'tabpanel',
+                class: "tab-pane general-main-wrap" + address_tab_class) do
     .hidden-xs.hidden-sm
       .row
         .col-md-5

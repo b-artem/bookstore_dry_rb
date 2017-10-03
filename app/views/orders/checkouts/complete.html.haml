@@ -7,7 +7,7 @@
   .col-sm-6
     .visible-xs
       %p.general-order-number.mb-0= "#{t('.order')} ##{@order.number}"
-      %p.general-address.mb-30 October 29, 2016 HTDIT
+      %p.general-address.mb-30= @order.decorate.completed_at_full_date
     %p.general-address
       = @order.shipping_address.decorate.full_name
       %br

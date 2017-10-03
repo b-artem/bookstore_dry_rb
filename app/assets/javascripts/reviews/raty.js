@@ -3,5 +3,4 @@ $(document).on('turbolinks:load', function() {
     path: '/assets',
     scoreName: 'review[score]'
   });
-  console.log('raty');
 });

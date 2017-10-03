@@ -1,5 +1,5 @@
 module CurrentCart
-
+  
   private
 
     def set_cart
@@ -10,7 +10,7 @@ module CurrentCart
     end
 
     def ensure_cart_isnt_empty
-      redirect_to(books_url, notice: 'Your cart is empty') unless @cart.line_items.any?
+      redirect_to(books_url, notice: t('cart_is_empty')) unless @cart.line_items.any?
     end
 
     def destroy_cart

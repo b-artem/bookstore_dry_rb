@@ -23,7 +23,6 @@ RSpec.describe LineItemsController, type: :controller do
 
   describe "POST #create" do
     let(:line_item) { create :line_item }
-    # subject { -> { line_item.create } }
 
     it "creates a new LineItem" do
       expect {

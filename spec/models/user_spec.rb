@@ -27,10 +27,4 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_confirmation_of(:password) }
     it 'validates many validations TBD'
   end
-
-
-    # Should be masked.
-    # Minimum 8 letters, at least 1 uppercase, at least 1 lowercase, at least 1 number.
-    # Mustn't contain spaces inside
-    # Spaces at the beginning and at the end should be cut off.
 end

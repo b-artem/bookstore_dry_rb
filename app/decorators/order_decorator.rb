@@ -14,7 +14,7 @@ class OrderDecorator < Draper::Decorator
   end
 
   def completed_at_full_date
-    return 'not completed' unless object.completed_at
+    return I18n.t('orders.orders.index.not_completed') unless object.completed_at
     object.completed_at.strftime("%Y-%m-%d")
   end
 
@@ -23,7 +23,7 @@ class OrderDecorator < Draper::Decorator
   end
 
   def state
-    return 'Waiting for processing' if object.state == 'in_queue'
+    return I18n.t('orders.orders.filter.waiting_for_processing') if object.state == 'in_queue'
     object.state.titleize
   end
 end

@@ -26,7 +26,7 @@ class Orders::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: t('.success') }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -38,7 +38,7 @@ class Orders::OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: t('.success') }
       format.json { head :no_content }
     end
   end

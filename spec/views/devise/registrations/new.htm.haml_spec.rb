@@ -2,7 +2,6 @@ require 'support/factory_girl'
 require 'support/i18n'
 
 describe 'devise/registrations/new.html.haml', type: :view do
-  # necessary for stubbing resource and resource_name
   before :all do
     RSpec.configure do |config|
       config.mock_with :rspec do |mocks|

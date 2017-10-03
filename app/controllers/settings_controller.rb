@@ -9,10 +9,10 @@ class SettingsController < ApplicationController
   def update_email
     if @user.update(user_params)
       redirect_to settings_edit_path(tab: 'privacy'),
-                  notice: 'Your email was successfully changed'
+                  notice: t('.success')
     else
       redirect_to settings_edit_path(tab: 'privacy'),
-                  alert: "Your email wasn't changed"
+                  alert: t('.fail')
     end
   end
 
@@ -20,10 +20,10 @@ class SettingsController < ApplicationController
     if @user.update_with_password(user_params)
       bypass_sign_in(@user)
       redirect_to settings_edit_path(tab: 'privacy'),
-                  notice: "Your password was successfully changed"
+                  notice: t('.success')
     else
       redirect_to settings_edit_path(tab: 'privacy'),
-                  alert: "Your password wasn't changed"
+                  alert: t('fail')
     end
   end
 
@@ -37,10 +37,10 @@ class SettingsController < ApplicationController
     if address.valid?
       addr = Address.find_or_create_by(user_id: @user.id, type: address.type)
       addr.update_attributes(address.attributes)
-      redirect_to settings_edit_path, notice: 'Address was successfully updated'
+      redirect_to settings_edit_path, notice: t('.success')
     else
       redirect_to settings_edit_path(settings_params),
-                  alert: "Address wasn't updated"
+                  alert: t('.fail')
     end
   end
 

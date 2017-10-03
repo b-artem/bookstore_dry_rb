@@ -8,8 +8,4 @@ class AddressDecorator < Draper::Decorator
   def city_zip
     city + ' ' + zip
   end
-
-  def phone
-    object.phone
-  end
 end

@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
     if I18n.available_locales.map(&:to_s).include?(params[:locale])
       I18n.locale = params[:locale]
     else
-      flash.now[:notice] = "#{params[:locale]} translation not available"
+      flash.now[:notice] = t('application.translation_not_available',
+                            locale: params[:locale])
       logger.error flash.now[:notice]
     end
   end
@@ -41,11 +42,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    # Its important that the location is NOT stored if:
-    # - The request method is not GET (non idempotent)
-    # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an
-    #    infinite redirect loop.
-    # - The request is an Ajax request as this can lead to very unexpected behaviour.
     def storable_location?
       request.get? && !devise_controller? && !request.xhr?
     end

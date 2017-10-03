@@ -1,6 +1,3 @@
-= content_for :javascripts do
-  = javascript_include_tag 'orders/checkouts/use_billing_address', 'data-turbolinks-track': 'reload'
-
 = render 'steps'
 
 = simple_form_for @order, url: wizard_path, method: :patch, class: 'res-mb-100',
@@ -57,4 +54,4 @@
     = render 'order_summary'
 
     = order.button :submit, t('orders.checkouts.save_and_continue'),
-                  class: 'btn center-block mb-20' #disabled
+                  class: 'btn center-block mb-20'

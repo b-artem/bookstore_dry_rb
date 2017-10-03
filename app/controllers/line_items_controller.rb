@@ -12,22 +12,22 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         format.html { redirect_back fallback_location: root_path,
-                      notice: 'Line item was successfully added to a cart' }
+                      notice: t('.success') }
         format.json { render :show, status: :created, location: @line_item }
       else
-        format.html { redirect_back fallback_location: root_path, alert: 'Line item was not created' }
+        format.html { redirect_back fallback_location: root_path, alert: t('.fail') }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
   rescue
     redirect_back fallback_location: root_path,
-                  alert: 'Line item was not added. Please enter positive integer quantity'
+                  alert: t('.enter_positive_integer')
   end
 
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
-        format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
+        format.html { redirect_to @line_item, notice: t('.success') }
         format.json { render :show, status: :ok, location: @line_item }
         format.js
       else
@@ -41,7 +41,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to @cart, notice: 'Product was successfully removed' }
+      format.html { redirect_to @cart, notice: t('.success') }
       format.json { head :no_content }
     end
   end

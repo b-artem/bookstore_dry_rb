@@ -1,9 +1,3 @@
-- content_for :javascripts do
-  = javascript_include_tag 'reviews/raty', 'data-turbolinks-track': 'reload'
-  = javascript_include_tag 'books/read_more', 'data-turbolinks-track': 'reload'
-  = javascript_include_tag 'line_items/increment_quantity', 'data-turbolinks-track': 'reload'
-  = javascript_include_tag 'line_items/decrement_quantity', 'data-turbolinks-track': 'reload'
-
 = link_to back_path,
           class: 'general-back-link' do
   %i.fa.fa-long-arrow-left.mr-15
@@ -55,7 +49,7 @@
         %p.pull-left= t '.materials'
         %p.lead.small.pull-right= @book.materials
 .mb-80
-  %h3.in-gold-500.mb-25= "#{t '.reviews'} (#{@book.reviews.count})"
+  %h3.in-gold-500.mb-25= "#{t '.reviews'} (#{@book.reviews.approved.count})"
   - if @book.reviews.approved.any?
     = render @book.reviews.approved.order('created_at DESC')
 
@@ -64,7 +58,6 @@
     = form_for [@book, @book.reviews.build] do |f|
       - if flash[:errors]
         #error_explanation
-          %h2= "#{pluralize(flash[:errors].count, "error")} prohibited this review from being saved:"
           %ul
             - flash[:errors].each do |error|
               %li= error.join ' '

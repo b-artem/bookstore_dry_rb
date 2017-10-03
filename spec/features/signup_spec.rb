@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/factory_girl'
+require 'support/i18n'
 
 feature 'Signup' do
   let(:password) { Faker::Internet.password(8) }
@@ -18,12 +19,12 @@ feature 'Signup' do
         fill_in 'email', with: Faker::Internet.email
         fill_in 'password', with: password
         fill_in 'confirm-password', with: password
-        click_button 'Sign Up'
+        click_button t('devise.registrations.new.sign_up')
       end
-      expect(page).to have_text 'You have signed up successfully'
-      expect(page).not_to have_content 'Enter Email'
-      expect(page).not_to have_content 'Password'
-      expect(page).not_to have_button 'Sign Up'
+      expect(page).to have_text t('devise.registrations.signed_up')
+      expect(page).not_to have_content t('devise.enter_email')
+      expect(page).not_to have_content t('devise.password')
+      expect(page).not_to have_button t('devise.registrations.new.sign_up')
     end
   end
 
@@ -33,12 +34,12 @@ feature 'Signup' do
         fill_in 'email', with: Faker::Internet.email
         fill_in 'password', with: password
         fill_in 'confirm-password', with: (password + '1')
-        click_button 'Sign Up'
+        click_button t('devise.registrations.new.sign_up')
       end
-      expect(page).not_to have_text 'You have signed up successfully'
-      expect(page).to have_content 'Enter Email'
-      expect(page).to have_content 'Password'
-      expect(page).to have_button 'Sign Up'
+      expect(page).not_to have_text t('devise.registrations.signed_up')
+      expect(page).to have_content t('devise.enter_email')
+      expect(page).to have_content t('devise.password')
+      expect(page).to have_button t('devise.registrations.new.sign_up')
     end
   end
 end

@@ -7,13 +7,10 @@ class Forms::OrderForm < Rectify::Form
   validates :billing_address, presence: true
   validates :shipping_address, presence: true, if: :need_shipping_address?
 
-  # def initialize(*args)
-  #   super(*args)
-  # end
-
   def save
     if valid?
-      Order.find(id).update_attributes(use_billing_address_as_shipping: use_billing_address_as_shipping)
+      Order.find(id).update_attributes(use_billing_address_as_shipping:
+                                        use_billing_address_as_shipping)
       Order.find(id).billing_address = Address.create(billing_address.attributes)
       unless use_billing_address_as_shipping
         Order.find(id).shipping_address = Address.create(shipping_address.attributes)

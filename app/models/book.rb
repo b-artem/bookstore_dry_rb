@@ -9,14 +9,10 @@ class Book < ApplicationRecord
 
   before_destroy :ensure_not_referenced_by_any_line_item
 
-  validates :title, :description, :price, :image_url, :publication_year,
+  validates :title, :description, :price, :publication_year,
             :dimensions, :materials, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :title, uniqueness: { case_sensitive: false }
-  validates :image_url, allow_blank: true, format: {
-    with: %r{\.(gif|jpg|png)\Z}i,
-    message: 'must be a URL for GIF, JPG or PNG image.'
-  }
   validates :publication_year, inclusion: { in: 1969..Date.today.year }
 
   paginates_per 12
@@ -58,7 +54,7 @@ class Book < ApplicationRecord
 
     def ensure_not_referenced_by_any_line_item
       unless line_items.empty?
-        errors.add(:base, 'Line Items present')
+        errors.add(:base, I18n.t('models.book.referenced_by_line_items'))
         throw :abort
       end
     end
