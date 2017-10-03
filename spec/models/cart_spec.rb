@@ -58,12 +58,13 @@ RSpec.describe Cart, type: :model do
       end
     end
 
-    # Have to change it
     describe '#total' do
-      it 'calculates (:subtotal - discount)' # do
-      #   allow(cart).to receive(:subtotal).and_return(100)
-      #   expect(cart.total).to eq 100
-      # end
+      let(:coupon) { build :coupon, discount: '30' }
+      before { cart.coupon = coupon }
+      it 'calculates (subtotal - discount)' do
+        allow(cart).to receive(:subtotal).and_return(100)
+        expect(cart.total).to eq 70
+      end
     end
   end
 end

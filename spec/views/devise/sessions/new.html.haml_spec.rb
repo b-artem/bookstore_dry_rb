@@ -2,7 +2,6 @@ require 'support/factory_girl'
 require 'support/i18n'
 
 describe 'devise/sessions/new.html.haml', type: :view do
-  # necessary for stubbing resource and resource_name
   before :all do
     RSpec.configure do |config|
       config.mock_with :rspec do |mocks|
@@ -61,6 +60,6 @@ describe 'devise/sessions/new.html.haml', type: :view do
   end
 
   it 'has Sign up link' do
-    expect(rendered).to have_link 'Sign up'
+    expect(rendered).to have_link t('devise.shared.links.sign_up')
   end
 end
