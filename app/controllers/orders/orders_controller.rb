@@ -1,5 +1,4 @@
 class Orders::OrdersController < ApplicationController
-  include CurrentCart
   include CurrentOrder
   before_action :authenticate_user!
   before_action :ensure_cart_isnt_empty, only: [:create]

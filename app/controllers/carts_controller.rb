@@ -1,5 +1,4 @@
 class CartsController < ApplicationController
-  include CurrentCart
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   authorize_resource
