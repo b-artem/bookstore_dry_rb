@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/factory_girl'
+require 'support/i18n'
 
 feature 'Login' do
   let(:user) { create :user }
@@ -19,12 +20,12 @@ feature 'Login' do
       within 'form#new_user' do
         fill_in 'email', with: user.email
         fill_in 'password', with: user.password
-        click_button 'Log in'
+        click_button t('devise.sessions.new.sign_in')
       end
-      expect(page).to have_text 'Signed in successfully'
-      expect(page).not_to have_content 'Enter Email'
-      expect(page).not_to have_content 'Password'
-      expect(page).not_to have_button 'Log in'
+      expect(page).to have_text t('devise.sessions.signed_in')
+      expect(page).not_to have_content t('devise.enter_email')
+      expect(page).not_to have_content t('devise.password')
+      expect(page).not_to have_button t('devise.sessions.new.sign_in')
     end
   end
 
@@ -33,13 +34,13 @@ feature 'Login' do
       within 'form#new_user' do
         fill_in 'email', with: user.email
         fill_in 'password', with: (user.password + '1')
-        click_button 'Log in'
+        click_button t('devise.sessions.new.sign_in')
       end
-      expect(page).to have_text 'Invalid Email or password'
-      expect(page).not_to have_text 'Signed in successfully'
-      expect(page).to have_content 'Enter Email'
-      expect(page).to have_content 'Password'
-      expect(page).to have_button 'Log in'
+      expect(page).to have_text t('devise.failure.invalid').first
+      expect(page).not_to have_text t('devise.sessions.signed_in')
+      expect(page).to have_content t('devise.enter_email')
+      expect(page).to have_content t('devise.password')
+      expect(page).to have_button t('devise.sessions.new.sign_in')
     end
   end
 end

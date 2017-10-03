@@ -4,10 +4,12 @@ require 'support/devise'
 
 shared_examples 'get started' do
   background do
-    3.times { create :book_mobile_development }
-    3.times { create :book_photo }
-    3.times { create :book_web_design }
-    3.times { create :book_web_development }
+    3.times do
+      create :book_mobile_development
+      create :book_photo
+      create :book_web_design
+      create :book_web_development
+    end
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
       .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
     visit home_index_path
@@ -16,7 +18,7 @@ shared_examples 'get started' do
   context 'when user clicks Get started button' do
     scenario 'shows Catalog page, all filter by default', js: true do
       within '.jumbotron' do
-        click_button('Get Started')
+        click_button(I18n.t('home.index.get_started'))
       end
       expect(page).to have_text(Book.mobile_development.first.title)
       expect(page).to have_text(Book.photo.first.title)

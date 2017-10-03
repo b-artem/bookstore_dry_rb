@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
+require 'support/i18n'
 
 shared_examples 'item view' do
   let(:book) { create :book }
@@ -14,9 +15,9 @@ shared_examples 'item view' do
     background { visit home_index_path }
     scenario 'Cart page opens' do
       click_link 'cart'
-      expect(page).to have_text('Cart')
-      expect(page).to have_text('Enter Your Coupon Code')
-      expect(page).to have_button('Checkout')
+      expect(page).to have_text(t('carts.show.cart'))
+      expect(page).to have_text(t('carts.show.enter_coupon'))
+      expect(page).to have_button(t('carts.show.checkout'))
     end
   end
 

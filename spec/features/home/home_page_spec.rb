@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
+require 'support/i18n'
 
 shared_examples 'home page' do
   background do
@@ -16,12 +17,12 @@ shared_examples 'home page' do
   end
 
   scenario 'shows Get started bock' do
-    expect(page).to have_text('Welcome to our amazing Bookstore!')
-    expect(page).to have_button('Get Started')
+    expect(page).to have_text(t('home.index.welcome'))
+    expect(page).to have_button(t('home.index.get_started'))
   end
 
   scenario 'shows Best sellers block' do
-    expect(page).to have_text('Best Sellers')
+    expect(page).to have_text(t('home.index.best_sellers'))
   end
 end
 
