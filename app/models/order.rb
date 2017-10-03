@@ -16,7 +16,6 @@ class Order < ApplicationRecord
 
     event :pay do
       transitions from: :in_progress, to: :in_queue
-
       after do
         update_attributes(completed_at: Time.now)
       end

@@ -15,8 +15,7 @@ class Book < ApplicationRecord
   validates :title, uniqueness: { case_sensitive: false }
   validates :image_url, allow_blank: true, format: {
     with: %r{\.(gif|jpg|png)\Z}i,
-    message: 'must be a URL for GIF, JPG or PNG image.'
-  }
+    message: I18n.t('models.book.image_format') }
   validates :publication_year, inclusion: { in: 1969..Date.today.year }
 
   paginates_per 12
@@ -58,7 +57,7 @@ class Book < ApplicationRecord
 
     def ensure_not_referenced_by_any_line_item
       unless line_items.empty?
-        errors.add(:base, 'Line Items present')
+        errors.add(:base, I18n.t('models.book.referenced_by_line_items'))
         throw :abort
       end
     end

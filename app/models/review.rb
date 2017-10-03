@@ -7,7 +7,7 @@ class Review < ApplicationRecord
   validates :title, :text,
             presence: true,
             format: { with: /\A[a-zA-Z0-9 !#\$%&'\*\+-=\/\?\^\_`\{\}\|~\.]+\z/,
-                      message: "Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. " }
+                      message: I18n.t('models.review.title_symbols') }
   validates :title, length: { maximum: 79 }
   validates :text, length: { maximum: 499 }
 

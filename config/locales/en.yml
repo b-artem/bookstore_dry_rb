@@ -1,21 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
 # The following keys must be escaped otherwise they will not be retrieved by
 # the default I18n backend:
 #
@@ -25,9 +7,6 @@
 #
 # en:
 #   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
 
 en:
   application:
@@ -192,6 +171,31 @@ en:
         quantity: 'Quantity'
         total: 'Total'
         sub_total: 'SubTotal'
+  models:
+    address:
+      invalid_type: "%{value} is not a valid type"
+    author:
+      names_symbols: 'Only allows letters'
+    book:
+      image_format: 'must be a URL for GIF, JPG or PNG image'
+      referenced_by_line_items: 'You can not delete this book because it is referenced by line items'
+    coupon:
+      coupon_symbols: 'Only allows letters and numbers'
+    review:
+      title_symbols: "Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. "
+    payment:
+      invalid_term: 'Invalid term'
+    forms:
+      address_form:
+        only_letters: 'Only allows letters'
+        address_symbols: "Only allows a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’"
+        city_symbols: "Only allows a-z, ' ', A-Z"
+        zip_symbols: "Only allows 0-9 '-'"
+        phone_symbols: "Only allows '+', 0-9"
+      payment_form:
+        card_number_symbols: 'Only allows 0-9'
+        name_on_card: 'Only allows letters and spaces'
+        cvv_symbols: 'Only allows 0-9'
   reviews:
     create:
       success: 'Thanks for Review. It will be published as soon as Admin will approve it'
