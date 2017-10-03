@@ -19,7 +19,6 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_presence_of(:price) }
-    it { is_expected.to validate_presence_of(:image_url) }
     it { is_expected.to validate_presence_of(:publication_year) }
     it { is_expected.to validate_presence_of(:dimensions) }
     it { is_expected.to validate_presence_of(:materials) }
@@ -29,10 +28,6 @@ RSpec.describe Book, type: :model do
     it 'validates uniqueness of :title' do
       expect(book).to validate_uniqueness_of(:title).case_insensitive
     end
-    it { is_expected.to allow_value('1.gif').for(:image_url) }
-    it { is_expected.to allow_value('1.png').for(:image_url) }
-    it { is_expected.to allow_value('1.jpg').for(:image_url) }
-    it { is_expected.to_not allow_value('1.psd').for(:image_url) }
     it { is_expected.to validate_inclusion_of(:publication_year).
                         in_range(1969..Date.today.year) }
   end

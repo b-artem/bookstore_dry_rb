@@ -177,7 +177,6 @@ en:
     author:
       names_symbols: 'Only allows letters'
     book:
-      image_format: 'must be a URL for GIF, JPG or PNG image'
       referenced_by_line_items: 'You can not delete this book because it is referenced by line items'
     coupon:
       coupon_symbols: 'Only allows letters and numbers'
@@ -194,7 +193,7 @@ en:
         phone_symbols: "Only allows '+', 0-9"
       payment_form:
         card_number_symbols: 'Only allows 0-9'
-        name_on_card: 'Only allows letters and spaces'
+        name_on_card_symbols: 'Only allows letters and spaces'
         cvv_symbols: 'Only allows 0-9'
   reviews:
     review:
