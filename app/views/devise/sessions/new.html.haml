@@ -23,7 +23,7 @@
         = f.check_box :remember_me, class: "checkbox-input", hidden: "true"
         %span.checkbox-icon
           %i.fa.fa-check
-        %span.checkbox-text #{ t '.remember_me' }
+        %span.checkbox-text= t '.remember_me'
 
   .text-center
     = f.submit t('.sign_in'), class: "btn btn-default mb-20"

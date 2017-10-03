@@ -1,6 +1,5 @@
 .text-center
   %h3.general-login-title= t '.sign_up'
-  -# %a.general-login-icon{href: "#"}
   = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
     %i.fa.fa-facebook-official
   %p.general-login-text= t 'devise.or'
@@ -15,9 +14,6 @@
 
   .form-group.mb-30
     = f.label :password, t('devise.password'), class: "control-label input-label"
-    -# - if @minimum_password_length
-    -#   %em #{@minimum_password_length} characters minimum
-    -#   %br
     = f.password_field :password, id: "password", class: "form-control",
                         placeholder: t('devise.password')
 

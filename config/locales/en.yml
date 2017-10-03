@@ -197,6 +197,8 @@ en:
         name_on_card: 'Only allows letters and spaces'
         cvv_symbols: 'Only allows 0-9'
   reviews:
+    review:
+      verified_reviewer: 'Verified Reviewer'
     create:
       success: 'Thanks for Review. It will be published as soon as Admin will approve it'
   settings:

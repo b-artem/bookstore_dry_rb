@@ -1,9 +1,3 @@
-- content_for :javascripts do
-  = javascript_include_tag 'reviews/raty', 'data-turbolinks-track': 'reload'
-  = javascript_include_tag 'books/read_more', 'data-turbolinks-track': 'reload'
-  = javascript_include_tag 'line_items/increment_quantity', 'data-turbolinks-track': 'reload'
-  = javascript_include_tag 'line_items/decrement_quantity', 'data-turbolinks-track': 'reload'
-
 = link_to back_path,
           class: 'general-back-link' do
   %i.fa.fa-long-arrow-left.mr-15
@@ -64,7 +58,6 @@
     = form_for [@book, @book.reviews.build] do |f|
       - if flash[:errors]
         #error_explanation
-          %h2= "#{pluralize(flash[:errors].count, "error")} prohibited this review from being saved:"
           %ul
             - flash[:errors].each do |error|
               %li= error.join ' '

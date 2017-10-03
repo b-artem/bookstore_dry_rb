@@ -6,8 +6,8 @@
       %div
         .general-message-date.hidden-xs= review.decorate.date
         .max-240
-          .general-message-verified Verified Reviewer
-          .general-message-name= "#{review.user.email}"
+          .general-message-verified= t('.verified_reviewer')
+          .general-message-name= "#{review.user.email.split('@').first}"
       .mb-15
       - if review.score
         - review.score.times do
