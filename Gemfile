@@ -33,9 +33,6 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'wicked', '~> 1.3', '>= 1.3.2'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
   gem 'pry-byebug'
@@ -58,7 +55,6 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ruby '2.4.1'

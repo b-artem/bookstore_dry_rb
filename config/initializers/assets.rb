@@ -12,15 +12,3 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile +=
-  %w[
-    books/read_more.js
-    line_items/decrement_quantity.js
-    line_items/increment_quantity.js
-    line_items/update_quantity
-    orders/checkouts/use_billing_address.js
-    orders/orders/filter.js
-    reviews/raty
-    settings/remove_account.js
-    books/filter.js
-  ]

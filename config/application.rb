@@ -11,7 +11,6 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
 require 'fog/aws'
-# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -31,7 +30,6 @@ module Bookstore
 
     config.generators do |g|
       g.test_framework :rspec
-      # g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
     config.i18n.default_locale = :en
   end
