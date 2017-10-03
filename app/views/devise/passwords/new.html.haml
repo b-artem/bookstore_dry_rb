@@ -1,5 +1,5 @@
 .text-center
-  %h1.mb-30 Forgot your password?
+  %h1.mb-30= t('.forgot_password')
   %p.general-password-text We'll email you instructions on how to reset it
 
 = form_for(resource, as: resource_name, url: password_path(resource_name),
@@ -7,11 +7,9 @@
   = devise_error_messages!
   .form-group.mb-25
     = f.email_field :email, id: "email", class: "form-control",
-                    placeholder: "Enter your email", autofocus: true
+                    placeholder: t('.enter_email'), autofocus: true
 
-  = f.submit "Email instructions", class: "btn btn-default center-block mb-20"
+  = f.submit t('.email_instructions'), class: "btn btn-default center-block mb-20"
   .text-center
-    -# Have to do smth with it
-    %a.in-gold-500.mb-20{href: "#"} Cancel
-    -# Have to do smth with it
+    %a.in-gold-500.mb-20{href: "#"}= t '.cancel'
     = render "devise/shared/links"

@@ -229,25 +229,6 @@ en:
     update_email:
       success: 'Your email was successfully changed'
       fail: "Your email wasn't changed"
-  devise:
-    or: 'or'
-    enter_email: 'Enter Email'
-    password: 'Password'
-    shared:
-      links:
-        sign_up: 'Sign up'
-      forgot_password:
-        forgot_your_password: "Forgot password?"
-    sessions:
-      new:
-        remember_me: 'Remember me'
-        sign_in: 'Log in'
-        dont_have_an_account: Don’t have an Account?
-    registrations:
-      new:
-        sign_up: 'Sign Up'
-        confirm_password: 'Confirm Password'
-        have_an_account: Have an Account?
   users:
     omniauth_callbacks:
       no_email_provided: "No email provided by facebook. Custom email created. Please change it in settings"
