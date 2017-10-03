@@ -130,6 +130,7 @@ en:
       index:
         my_orders: 'My Orders'
         filter_by: 'Filter by'
+        not_completed: 'not completed'
       filter:
         waiting_for_processing: 'Waiting for processing'
         in_delivery: 'In delivery'
@@ -184,7 +185,6 @@ en:
         coupon: 'Coupon'
         shipping: 'Shipping'
         order_total: 'Order Total:'
-
       save_and_continue: 'Save and Continue'
       line_item:
         book: 'Book'

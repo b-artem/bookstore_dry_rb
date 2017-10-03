@@ -1,12 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :destroy]
   decorates_assigned :book
-
-  def show
-  end
-
-  def new
-  end
 
   def create
     @book = Book.find(params[:book_id])
@@ -27,10 +20,6 @@ class ReviewsController < ApplicationController
   end
 
   private
-
-  def set_review
-    @review = Review.find(params[:id])
-  end
 
   def review_params
     params.require(:review).permit(:title, :text, :score, :status)
