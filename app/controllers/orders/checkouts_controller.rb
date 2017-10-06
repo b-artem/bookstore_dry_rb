@@ -12,7 +12,7 @@ class Orders::CheckoutsController < ApplicationController
     case step
     when :address
       @order = Forms::OrderForm.from_model(current_order)
-      billing_model = current_order.billing_address  || current_user.billing_address
+      billing_model = current_order.billing_address || current_user.billing_address
       shipping_model = current_order.shipping_address || current_user.shipping_address
       @order.billing_address = Forms::BillingAddressForm.from_model(billing_model)
       @order.shipping_address = Forms::ShippingAddressForm.from_model(shipping_model)

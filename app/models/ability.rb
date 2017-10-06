@@ -3,16 +3,19 @@ class Ability
 
   def initialize(user, session = nil)
     user ||= User.new
-    if user && user.role == 'admin'
+    if user.role == 'admin'
       can :access, :rails_admin
       can :dashboard
       can :manage, :all
     else
-      can :read, :all
       return unless session
-      can :update, Cart, id: session[:cart_id]
+      can :read, Book
+      can :read, Review, status: 'approved'
+      can :create, Review
+      can :manage, Cart, id: session[:cart_id]
       can :manage, LineItem, cart: { id: session[:cart_id] }
       can :manage, Order, id: session[:order_id]
+      can :manage, Address, order_id: session[:order_id]
     end
   end
 end
