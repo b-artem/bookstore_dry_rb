@@ -10,11 +10,12 @@ class Ability
     else
       return unless session
       can :read, Book
-      can :read, Review, status: 'approved'
       can :create, Review
+      can :read, Review, status: 'approved'
       can :manage, Cart, id: session[:cart_id]
       can :manage, LineItem, cart: { id: session[:cart_id] }
       can :manage, Order, id: session[:order_id]
+      can :read, Order, user_id: user.id
       can :manage, Address, order_id: session[:order_id]
     end
   end

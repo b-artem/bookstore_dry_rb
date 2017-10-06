@@ -2,13 +2,12 @@ class Orders::OrdersController < ApplicationController
   include CurrentOrder
   before_action :authenticate_user!
   before_action :ensure_cart_isnt_empty, only: [:create]
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :sanitize_filter_param, only: [:index]
-
-  authorize_resource
+  load_and_authorize_resource through: :current_user, except: :create
+  authorize_resource only: :create
 
   def index
-    @orders = current_user.orders.send(params[:state]).order('completed_at DESC')
+    @orders = @orders.public_send(params[:state]).order('completed_at DESC')
   end
 
   def show
@@ -43,10 +42,6 @@ class Orders::OrdersController < ApplicationController
   end
 
   private
-
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
     def order_params
       params.require(:order).permit()
