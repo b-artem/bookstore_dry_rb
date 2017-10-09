@@ -86,10 +86,10 @@ class Orders::CheckoutsController < ApplicationController
     end
 
     def clear_payment_data
-      session[:card_number] = nil
-      session[:name_on_card] = nil
-      session[:valid_until] = nil
-      session[:cvv] = nil
+      session.delete :card_number
+      session.delete :name_on_card
+      session.delete :valid_until
+      session.delete :cvv
     end
 
     def get_payment_data

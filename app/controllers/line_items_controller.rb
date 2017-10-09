@@ -6,7 +6,6 @@ class LineItemsController < ApplicationController
   def create
     book = Book.find(params[:book_id])
     @line_item = @cart.add_product(book, params[:quantity])
-    @line_item.price = book.price
     respond_to do |format|
       if @line_item.save
         format.html { redirect_back fallback_location: root_path,
@@ -47,6 +46,6 @@ class LineItemsController < ApplicationController
   private
 
     def line_item_params
-      params.require(:line_item).permit(:product_id, :quantity)
+      params.require(:line_item).permit(:quantity)
     end
 end

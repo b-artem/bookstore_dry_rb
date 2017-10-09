@@ -9,6 +9,11 @@ en:
         separator: "."
         delimiter: ","
         format:    "%u%n"
+  time:
+    formats:
+      date_long: "%B %e, %Y"
+      date_short: "%Y-%m-%d"
+      date_slashes: "%d/%m/%y"
   layouts:
     application:
       bookstore: 'Bookstore'
@@ -101,7 +106,7 @@ en:
         filter_by: 'Filter by'
         not_completed: 'not completed'
       filter:
-        waiting_for_processing: 'Waiting for processing'
+        in_queue: 'Waiting for processing'
         in_delivery: 'In delivery'
         delivered: 'Delivered'
         canceled: 'Canceled'
@@ -131,6 +136,7 @@ en:
         shipping_method: 'Shipping Method'
         method: 'Method'
         days: 'Days'
+        term: "%{days_min} to %{days_max} days"
         price: 'Price'
       payment:
         credit_card: 'Credit Card'

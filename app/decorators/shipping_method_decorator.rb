@@ -2,7 +2,7 @@ class ShippingMethodDecorator < Draper::Decorator
   delegate_all
 
   def terms
-    "#{days_min} to #{days_max} days"
+    I18n.t('orders.checkouts.delivery.term', days_min: days_min, days_max: days_max)
   end
 
   def price

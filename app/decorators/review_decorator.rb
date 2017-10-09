@@ -2,6 +2,6 @@ class ReviewDecorator < Draper::Decorator
   delegate_all
 
   def date
-    created_at.strftime("%d/%m/%y")
+    I18n.l(created_at, format: :date_slashes)
   end
 end

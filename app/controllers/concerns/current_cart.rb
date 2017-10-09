@@ -1,5 +1,5 @@
 module CurrentCart
-  
+
   private
 
     def set_cart
@@ -10,12 +10,12 @@ module CurrentCart
     end
 
     def ensure_cart_isnt_empty
-      redirect_to(books_url, notice: t('cart_is_empty')) unless @cart.line_items.any?
+      redirect_to(books_url, notice: t('cart_is_empty')) unless @cart.line_items.exists?
     end
 
     def destroy_cart
       Cart.destroy(session[:cart_id])
-      session[:cart_id] = nil
-      session[:discount_id] = nil
+      session.delete :cart_id
+      session.delete :discount_id
     end
 end

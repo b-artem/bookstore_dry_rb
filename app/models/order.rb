@@ -28,7 +28,7 @@ class Order < ApplicationRecord
   end
 
   def subtotal
-    return 0 unless line_items.any?
+    return 0 unless line_items.exists?
     line_items.sum(&:subtotal)
   end
 

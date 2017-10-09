@@ -7,7 +7,7 @@ class CartsController < ApplicationController
   end
 
   def update
-    coupon = Coupon.find_by_code(params[:cart][:coupon][:code])
+    coupon = Coupon.find_by(code: params[:cart][:coupon][:code])
     respond_to do |format|
       if coupon
         @cart.update(coupon: coupon)
@@ -21,10 +21,6 @@ class CartsController < ApplicationController
   end
 
   private
-
-    def cart_params
-      params.require(:cart).permit(:coupon)
-    end
 
     def invalid_cart
       logger.error t('.access_ivalid_cart', cart_id: params[:id])

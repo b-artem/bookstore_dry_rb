@@ -35,7 +35,7 @@ class Book < ApplicationRecord
 
   scope :best_seller, ->(category) do
     return Book.none unless CATEGORIES.include?(category.to_s)
-    return Book.public_send(category).first unless LineItem.any?
+    return Book.public_send(category).first unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book).merge(Book.send(category))
       .joins(:order).where(orders: { state: 'delivered' })
@@ -43,7 +43,7 @@ class Book < ApplicationRecord
   end
 
   scope :popular_first_ids, -> do
-    return Book.none unless LineItem.any?
+    return Book.none unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book)
       .joins(:order).where(orders: { state: 'delivered' })
