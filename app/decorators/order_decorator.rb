@@ -19,7 +19,7 @@ class OrderDecorator < Draper::Decorator
   end
 
   def discount
-    h.number_to_currency(object.discount)
+    h.number_to_currency(-1 * object.discount)
   end
 
   def state

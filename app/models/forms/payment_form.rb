@@ -20,7 +20,6 @@ class Forms::PaymentForm < Rectify::Form
             length: { minimum: 3 }
 
   def save
-    return true if valid?
-    false
+    valid?
   end
 end

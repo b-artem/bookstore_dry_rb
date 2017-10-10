@@ -17,7 +17,7 @@ class User < ApplicationRecord
       if auth.info.email
         user.email = auth.info.email
       else
-        user.email = user.info.first_name + user.info.first_name + '@fb.com'
+        user.email = user.info.first_name + user.info.last_name + '@fb.com'
       end
       user.password = Devise.friendly_token[0, 20]
       user.image_url = auth.info.image

@@ -1,5 +1,4 @@
 class LineItemsController < ApplicationController
-  before_action :set_cart, only: [:create, :destroy]
   load_and_authorize_resource only: [:update, :destroy]
   authorize_resource only: :create
 

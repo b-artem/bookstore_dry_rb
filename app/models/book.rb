@@ -1,6 +1,4 @@
 class Book < ApplicationRecord
-  CATEGORIES = %w[mobile_development photo web_design web_development].freeze
-
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :categories
   has_many :images, dependent: :destroy
@@ -16,6 +14,10 @@ class Book < ApplicationRecord
   validates :publication_year, inclusion: { in: 1969..Date.today.year }
 
   paginates_per 12
+
+  def self.categories
+    Category.pluck(:name).map { |category| category.downcase.tr(' ', '_') }
+  end
 
   scope :mobile_development, -> do
     Book.joins(:categories).where('categories.name = ?', 'Mobile development')
@@ -34,7 +36,7 @@ class Book < ApplicationRecord
   end
 
   scope :best_seller, ->(category) do
-    return Book.none unless CATEGORIES.include?(category.to_s)
+    return Book.none unless categories.include?(category.to_s)
     return Book.public_send(category).first unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book).merge(Book.send(category))

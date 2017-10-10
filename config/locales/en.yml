@@ -115,8 +115,6 @@ en:
         completed_at: 'Completed at'
         status: ' Status'
         total: 'Total'
-      update:
-        success: 'Order was successfully updated'
       destroy:
         success: 'Order was successfully destroyed'
     checkouts:

@@ -21,18 +21,6 @@ class Orders::OrdersController < ApplicationController
     redirect_to order_checkouts_path(@order)
   end
 
-  def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: t('.success') }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def destroy
     @order.destroy
     respond_to do |format|
@@ -42,10 +30,6 @@ class Orders::OrdersController < ApplicationController
   end
 
   private
-
-    def order_params
-      params.require(:order).permit()
-    end
 
     def sanitize_filter_param
       params[:state] ||= 'in_queue'
