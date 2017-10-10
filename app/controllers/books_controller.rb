@@ -18,7 +18,7 @@ class BooksController < ApplicationController
   private
 
     def set_category
-      return @category = 'all' unless Book::CATEGORIES.include?(params[:category])
+      return @category = 'all' unless Book.categories.include?(params[:category])
       @category = params[:category]
     end
 
