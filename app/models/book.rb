@@ -15,28 +15,8 @@ class Book < ApplicationRecord
 
   paginates_per 12
 
-  def self.categories
-    Category.pluck(:name).map { |category| category.downcase.tr(' ', '_') }
-  end
-
-  scope :mobile_development, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Mobile development')
-  end
-
-  scope :photo, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Photo')
-  end
-
-  scope :web_design, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Web design')
-  end
-
-  scope :web_development, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Web development')
-  end
-
   scope :best_seller, ->(category) do
-    return Book.none unless categories.include?(category.to_s)
+    return Book.none unless Category.pluck(:name).include?(category.to_s)
     return Book.public_send(category).first unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book).merge(Book.send(category))
