@@ -4,7 +4,7 @@
 
 = simple_form_for @order, url: wizard_path, method: :put do |f|
   .visible-xs
-    - shipping_methods.each do |shipping_method|
+    - @shipping_methods.each do |shipping_method|
       .general-cart-item.divider-lg-bottom.mb-30
         %table.table
           %tr
@@ -39,7 +39,7 @@
           %th
             %span.in-grey-600= t '.price'
       %tbody
-        - shipping_methods.each do |shipping_method|
+        - @shipping_methods.each do |shipping_method|
           - checked = false
           - checked = true if @order.shipping_method.id == shipping_method.id
           %tr

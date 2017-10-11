@@ -34,7 +34,7 @@ en:
       best_sellers: 'Best Sellers'
       previous: 'Previous'
       next: 'Next'
-    latest:
+    latest_book:
       buy_now: 'Buy Now'
   books:
     categories:

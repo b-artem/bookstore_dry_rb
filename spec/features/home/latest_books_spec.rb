@@ -43,7 +43,7 @@ shared_examples 'latest books' do
   context 'when user clicks Buy now button' do
     scenario 'adds chosen book to the cart', js: true do
       within '.carousel-inner > .item.active' do
-        click_button(I18n.t('home.latest.buy_now'))
+        click_button(I18n.t('home.latest_book.buy_now'))
       end
       wait_for_ajax
       expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first

@@ -19,6 +19,7 @@ class Orders::CheckoutsController < ApplicationController
     when :delivery
       @order = current_order
       @order.shipping_method ||= ShippingMethod.order(:price).first
+      @shipping_methods = ShippingMethod.order('price ASC')
     when :payment
       @order = current_order
       @payment = Forms::PaymentForm.new
