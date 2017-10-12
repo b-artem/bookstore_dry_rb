@@ -4,14 +4,12 @@ require 'support/devise'
 
 shared_examples 'get started' do
   background do
-    3.times do
-      create :book_mobile_development
-      create :book_photo
-      create :book_web_design
-      create :book_web_development
-    end
+    create :book_mobile_development
+    create :book_photo
+    create :book_web_design
+    create :book_web_development
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
+      .and_return("https://example.com/image.jpg")
     visit home_index_path
   end
 
@@ -20,10 +18,9 @@ shared_examples 'get started' do
       within '.jumbotron' do
         click_button(I18n.t('home.index.get_started'))
       end
-      expect(page).to have_text(Book.mobile_development.first.title)
-      expect(page).to have_text(Book.photo.first.title)
-      expect(page).to have_text(Book.web_design.first.title)
-      expect(page).to have_text(Book.web_development.first.title)
+      Book.all.each do |book|
+        expect(page).to have_text(book.title)
+      end
     end
   end
 end
@@ -33,7 +30,7 @@ feature 'Home page' do
     context 'when user is a guest' do
       it_behaves_like 'get started'
     end
-
+    
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }

@@ -33,32 +33,48 @@ RSpec.describe Book, type: :model do
   end
 
   describe 'scopes' do
-    let!(:books_mobile_development) { create_list(:book_mobile_development, 3) }
-    let!(:books_photo) { create_list(:book_photo, 3) }
-    let!(:books_web_design) { create_list(:book_web_design, 3) }
-    let!(:books_web_development) { create_list(:book_web_development, 3) }
+    let(:bestseller_mob_dev) { create :book_mobile_development }
+    let(:bestseller_photo) { create :book_photo }
+    let(:bestseller_web_design) { create :book_web_design }
+    let(:bestseller_web_dev) { create :book_web_development }
 
-    context 'when .mobile_development' do
-      it 'selects books with proper category' do
-        expect(Book.mobile_development).to eq books_mobile_development
+    before do
+      create(:order, state: 'delivered', line_items: [
+              create(:line_item, book: bestseller_mob_dev),
+              create(:line_item, book: bestseller_photo),
+              create(:line_item, book: bestseller_web_design),
+              create(:line_item, book: bestseller_web_dev) ])
+      3.times do
+        create :book_mobile_development
+        create :book_photo
+        create :book_web_design
+        create :book_web_development
       end
     end
 
-    context 'when .photo' do
-      it 'selects books with proper category' do
-        expect(Book.photo).to eq books_photo
+    context 'best_seller' do
+      context "when category 'Mobile development'" do
+        it 'selects best seller in proper category' do
+          expect(Book.best_seller('Mobile development')).to eq bestseller_mob_dev
+        end
       end
-    end
 
-    context 'when .web_design' do
-      it 'selects books with proper category' do
-        expect(Book.web_design).to eq books_web_design
+      context "When category 'Photo'" do
+        it 'selects best seller in proper category' do
+          expect(Book.best_seller('Photo')).to eq bestseller_photo
+        end
       end
-    end
 
-    context 'when .web_development' do
-      it 'selects books with proper category' do
-        expect(Book.web_development).to eq books_web_development
+      context "When category 'Web design'" do
+        it 'selects best seller in proper category' do
+          expect(Book.best_seller('Web design')).to eq bestseller_web_design
+        end
+      end
+
+      context "When category 'Web development'" do
+        it 'selects best seller in proper category' do
+          expect(Book.best_seller('Web development')).to eq bestseller_web_dev
+        end
       end
     end
   end
