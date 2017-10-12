@@ -12,10 +12,4 @@ module CurrentCart
     def ensure_cart_isnt_empty
       redirect_to(books_url, notice: t('cart_is_empty')) unless @cart.line_items.exists?
     end
-
-    def destroy_cart
-      Cart.destroy(session[:cart_id])
-      session.delete :cart_id
-      session.delete :discount_id
-    end
 end
