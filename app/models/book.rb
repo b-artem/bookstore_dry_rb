@@ -16,10 +16,10 @@ class Book < ApplicationRecord
   paginates_per 12
 
   scope :best_seller, ->(category) do
-    return Book.none unless Category.pluck(:name).include?(category.to_s)
-    return Book.public_send(category).first unless LineItem.exists?
+    return Book.none unless Category.pluck(:name).include?(category)
+    return Category.find_by(name: category).books.first unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
-      .joins(:book).merge(Book.send(category))
+      .joins(book: :categories).where(categories: { name: category })
       .joins(:order).where(orders: { state: 'delivered' })
       .group('line_items.book_id').order('total_quantity DESC').first.book
   end
