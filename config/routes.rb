@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:show, :update]
   resources :line_items, only: [:create, :update, :destroy]
   resources :orders, controller: 'orders/orders', except: [:new, :edit, :update] do
-    resources :checkouts, controller: 'orders/checkouts'
+    resources :checkout, controller: 'orders/checkout', only: [:index, :show, :update]
   end
 
   root 'home#index'

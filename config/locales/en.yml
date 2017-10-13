@@ -117,7 +117,7 @@ en:
         total: 'Total'
       destroy:
         success: 'Order was successfully destroyed'
-    checkouts:
+    checkout:
       steps:
         checkout: 'Checkout'
         address: 'Address'

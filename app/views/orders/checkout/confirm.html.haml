@@ -3,14 +3,14 @@
 .row.mb-20
   .col-sm-3
     %h3.general-subtitle
-      = t 'orders.checkouts.address.shipping_address'
+      = t 'orders.checkout.address.shipping_address'
       = link_to wizard_path(:address, next_step: 'confirm') do
         %span.general-edit= t('.edit')
     = render partial: 'address', object: @order.shipping_address
 
   .col-sm-3
     %h3.general-subtitle
-      = t 'orders.checkouts.address.billing_address'
+      = t 'orders.checkout.address.billing_address'
       = link_to wizard_path(:address, next_step: 'confirm') do
         %span.general-edit= t('.edit')
     = render partial: 'address', object: @order.billing_address

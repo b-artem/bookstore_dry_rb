@@ -1,7 +1,8 @@
-class Orders::CheckoutsController < ApplicationController
+class Orders::CheckoutController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder
 
+  before_action :authenticate_user!
   authorize_resource(Order)
   authorize_resource(Address)
 

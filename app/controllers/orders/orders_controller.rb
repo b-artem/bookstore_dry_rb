@@ -19,7 +19,7 @@ class Orders::OrdersController < ApplicationController
     set_current_order(@order)
     Services::OrderService.new(order: @order, cart: @cart, session: session)
                           .set_order_from_cart
-    redirect_to order_checkouts_path(@order)
+    redirect_to order_checkout_index_path(@order)
   end
 
   def destroy
