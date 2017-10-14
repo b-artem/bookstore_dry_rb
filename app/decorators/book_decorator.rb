@@ -11,7 +11,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def full_description
-    h.truncate(description, length: 10000).gsub(/\s+/, " ")
+    h.truncate(description, length: 10000).gsub(/\s+/, ' ')
   end
 
   def price

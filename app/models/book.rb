@@ -1,6 +1,4 @@
 class Book < ApplicationRecord
-  CATEGORIES = %w[mobile_development photo web_design web_development].freeze
-
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :categories
   has_many :images, dependent: :destroy
@@ -17,33 +15,17 @@ class Book < ApplicationRecord
 
   paginates_per 12
 
-  scope :mobile_development, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Mobile development')
-  end
-
-  scope :photo, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Photo')
-  end
-
-  scope :web_design, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Web design')
-  end
-
-  scope :web_development, -> do
-    Book.joins(:categories).where('categories.name = ?', 'Web development')
-  end
-
   scope :best_seller, ->(category) do
-    return Book.none unless CATEGORIES.include?(category.to_s)
-    return Book.public_send(category).first unless LineItem.any?
+    return Book.none unless Category.pluck(:name).include?(category)
+    return Category.find_by(name: category).books.first unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
-      .joins(:book).merge(Book.send(category))
+      .joins(book: :categories).where(categories: { name: category })
       .joins(:order).where(orders: { state: 'delivered' })
       .group('line_items.book_id').order('total_quantity DESC').first.book
   end
 
   scope :popular_first_ids, -> do
-    return Book.none unless LineItem.any?
+    return Book.none unless LineItem.exists?
     LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
       .joins(:book)
       .joins(:order).where(orders: { state: 'delivered' })

@@ -5,10 +5,10 @@
     %li{'data-target': "#slider", 'data-slide-to': "2"}
   .carousel-inner{role: "listbox"}
     .item.active
-      = render partial: 'latest', object: latest.first
-    - (1..latest.count-1).each do |index|
+      = render partial: 'latest_book', object: @latest_books.first
+    - (1..@latest_books.count-1).each do |index|
       .item
-        = render partial: 'latest', object: latest[index]
+        = render partial: 'latest_book', object: @latest_books[index]
   %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
     %span.icon-prev{'aria-hidden': "true"}
     %span.sr-only= t '.previous'

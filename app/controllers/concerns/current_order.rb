@@ -15,6 +15,6 @@ module CurrentOrder
     end
 
     def empty_current_order
-      session[:order_id] = nil
+      session.delete :order_id
     end
 end

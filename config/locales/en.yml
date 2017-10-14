@@ -9,15 +9,22 @@ en:
         separator: "."
         delimiter: ","
         format:    "%u%n"
+  time:
+    formats:
+      date_long: "%B %e, %Y"
+      date_short: "%Y-%m-%d"
+      date_slashes: "%d/%m/%y"
   layouts:
     application:
-      bookstore: 'Bookstore'
       home: 'Home'
       shop: 'Shop'
       logout: 'Log out'
       my_account: 'My account'
       orders: 'Orders'
       settings: 'Settings'
+    header:
+      bookstore: 'Bookstore'
+    footer:
       support: 'support@bookstore.com'
       phone_number: '(555)-555-5555'
   home:
@@ -29,7 +36,7 @@ en:
       best_sellers: 'Best Sellers'
       previous: 'Previous'
       next: 'Next'
-    latest:
+    latest_book:
       buy_now: 'Buy Now'
   books:
     categories:
@@ -101,7 +108,7 @@ en:
         filter_by: 'Filter by'
         not_completed: 'not completed'
       filter:
-        waiting_for_processing: 'Waiting for processing'
+        in_queue: 'Waiting for processing'
         in_delivery: 'In delivery'
         delivered: 'Delivered'
         canceled: 'Canceled'
@@ -110,11 +117,9 @@ en:
         completed_at: 'Completed at'
         status: ' Status'
         total: 'Total'
-      update:
-        success: 'Order was successfully updated'
       destroy:
         success: 'Order was successfully destroyed'
-    checkouts:
+    checkout:
       steps:
         checkout: 'Checkout'
         address: 'Address'
@@ -131,6 +136,7 @@ en:
         shipping_method: 'Shipping Method'
         method: 'Method'
         days: 'Days'
+        term: "%{days_min} to %{days_max} days"
         price: 'Price'
       payment:
         credit_card: 'Credit Card'

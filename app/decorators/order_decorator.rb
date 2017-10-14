@@ -9,21 +9,20 @@ class OrderDecorator < Draper::Decorator
     h.number_to_currency(object.total)
   end
 
-  def completed_at
-    object.completed_at.strftime("%B %e, %Y")
+  def completed_at_long_date
+    I18n.l(object.completed_at, format: :date_long)
   end
 
-  def completed_at_full_date
+  def completed_at_short_date
     return I18n.t('orders.orders.index.not_completed') unless object.completed_at
-    object.completed_at.strftime("%Y-%m-%d")
+    I18n.l(object.completed_at, format: :date_short)
   end
 
   def discount
-    h.number_to_currency(object.discount)
+    h.number_to_currency(-1 * object.discount)
   end
 
   def state
-    return I18n.t('orders.orders.filter.waiting_for_processing') if object.state == 'in_queue'
-    object.state.titleize
+    I18n.t("orders.orders.filter.#{object.state}")
   end
 end

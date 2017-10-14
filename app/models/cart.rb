@@ -9,13 +9,14 @@ class Cart < ApplicationRecord
     if current_item
       current_item.quantity += Integer(quantity)
     else
-      current_item = line_items.build(book_id: product.id, quantity: quantity)
+      current_item = line_items.build(book_id: product.id, quantity: quantity,
+                                      price: product.price)
     end
     current_item
   end
 
   def subtotal
-    return 0 unless line_items.any?
+    return 0 unless line_items.exists?
     line_items.sum(&:subtotal)
   end
 
@@ -25,7 +26,7 @@ class Cart < ApplicationRecord
   end
 
   def products_quantity
-    return 0 unless line_items.any?
+    return 0 unless line_items.exists?
     line_items.sum(&:quantity)
   end
 end

@@ -28,24 +28,24 @@ class Order < ApplicationRecord
   end
 
   def subtotal
-    return 0 unless line_items.any?
+    return 0 unless line_items.exists?
     line_items.sum(&:subtotal)
   end
 
   def total
     shipping_price = (shipping_method ? shipping_method.price : 0)
-    subtotal + discount + shipping_price
+    subtotal - discount + shipping_price
   end
 
   def discount
     return 0 unless coupon
-    -1 * subtotal * coupon.discount / 100
+    subtotal * coupon.discount / 100
   end
 
   private
 
     def generate_number
-      number = id.to_s.prepend('R' + '0' * (8 - id.to_s.length))
+      number = id.to_s.rjust(9, 'R00000000')
       update_attributes(number: number)
     end
 end

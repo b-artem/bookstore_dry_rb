@@ -51,6 +51,7 @@ group :test do
   gem 'capybara-webkit', '~> 1.14'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'faker', '~> 1.8', '>= 1.8.4'
+  gem 'rack_session_access', '~> 0.1.1'
   gem 'selenium-webdriver', '~> 3.5', '>= 3.5.2'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end

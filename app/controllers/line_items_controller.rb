@@ -1,13 +1,10 @@
 class LineItemsController < ApplicationController
-  before_action :set_cart, only: [:create, :destroy]
-  before_action :set_line_item, only: [:update, :destroy]
-
-  authorize_resource
+  load_and_authorize_resource only: [:update, :destroy]
+  authorize_resource only: :create
 
   def create
     book = Book.find(params[:book_id])
     @line_item = @cart.add_product(book, params[:quantity])
-    @line_item.price = book.price
     respond_to do |format|
       if @line_item.save
         format.html { redirect_back fallback_location: root_path,
@@ -32,7 +29,7 @@ class LineItemsController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
-        format.js { set_line_item }
+        format.js { render :edit }
       end
     end
   end
@@ -47,11 +44,7 @@ class LineItemsController < ApplicationController
 
   private
 
-    def set_line_item
-      @line_item = LineItem.find(params[:id])
-    end
-
     def line_item_params
-      params.require(:line_item).permit(:product_id, :quantity)
+      params.require(:line_item).permit(:quantity)
     end
 end

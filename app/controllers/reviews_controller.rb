@@ -1,11 +1,8 @@
 class ReviewsController < ApplicationController
-  decorates_assigned :book
+  load_and_authorize_resource :book
+  load_and_authorize_resource :review, through: :book
 
   def create
-    @book = Book.find(params[:book_id])
-    @review = Review.new(review_params)
-    @review.book = @book
-    @review.status = 'unprocessed'
     @review.user = current_user
     respond_to do |format|
       if @review.save
@@ -21,7 +18,7 @@ class ReviewsController < ApplicationController
 
   private
 
-  def review_params
-    params.require(:review).permit(:title, :text, :score, :status)
-  end
+    def review_params
+      params.require(:review).permit(:title, :text, :score)
+    end
 end

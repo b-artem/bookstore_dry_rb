@@ -4,7 +4,7 @@
       %p.in-gold-500.font-18= t 'orders.order_summary.order_summary'
   %tr
     %td
-      %p.font-16= t 'orders.checkouts.subtotal'
+      %p.font-16= t 'orders.checkout.subtotal'
     %td
       %p.font-16= @order.decorate.subtotal
   %tr
@@ -20,6 +20,6 @@
         %p.font-16= @order.shipping_method.decorate.price
   %tr
     %td
-      %strong.font-18= t 'orders.checkouts.order_total'
+      %strong.font-18= t 'orders.checkout.order_total'
     %td
       %strong.font-18= @order.decorate.total

@@ -1,14 +1,14 @@
+require 'order_service'
+
 class Orders::OrdersController < ApplicationController
   include CurrentOrder
   before_action :authenticate_user!
   before_action :ensure_cart_isnt_empty, only: [:create]
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :sanitize_filter_param, only: [:index]
-
-  authorize_resource
+  load_and_authorize_resource through: :current_user, except: :create
+  authorize_resource only: :create
 
   def index
-    @orders = current_user.orders.send(params[:state]).order('completed_at DESC')
+    @orders = @orders.where(state: state_filter).order('completed_at DESC')
   end
 
   def show
@@ -17,21 +17,9 @@ class Orders::OrdersController < ApplicationController
   def create
     @order = current_user.orders.create(coupon: @cart.coupon)
     set_current_order(@order)
-    add_line_items_to_order_from_cart(@cart)
-    destroy_cart
-    redirect_to order_checkouts_path(@order)
-  end
-
-  def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: t('.success') }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
+    Services::OrderService.new(order: @order, cart: @cart, session: session)
+                          .set_order_from_cart
+    redirect_to order_checkout_index_path(@order)
   end
 
   def destroy
@@ -44,24 +32,9 @@ class Orders::OrdersController < ApplicationController
 
   private
 
-    def set_order
-      @order = Order.find(params[:id])
-    end
-
-    def order_params
-      params.require(:order).permit()
-    end
-
-    def sanitize_filter_param
-      params[:state] ||= 'in_queue'
-      unless Order.aasm.states.map(&:name).include?(params[:state].to_sym)
-        params[:state] = 'in_queue'
-      end
-    end
-
-    def add_line_items_to_order_from_cart(cart)
-      cart.line_items.each do |item|
-        item.update(cart_id: nil, order_id: @order.id)
-      end
+    def state_filter
+      return 'in_queue' if !params[:state] || !Order.aasm.states.map(&:name)
+                                                .include?(params[:state].to_sym)
+      params[:state]
     end
 end

@@ -1,7 +1,8 @@
-class Orders::CheckoutsController < ApplicationController
+class Orders::CheckoutController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder
 
+  before_action :authenticate_user!
   authorize_resource(Order)
   authorize_resource(Address)
 
@@ -12,13 +13,14 @@ class Orders::CheckoutsController < ApplicationController
     case step
     when :address
       @order = Forms::OrderForm.from_model(current_order)
-      billing_model = current_order.billing_address  || current_user.billing_address
+      billing_model = current_order.billing_address || current_user.billing_address
       shipping_model = current_order.shipping_address || current_user.shipping_address
       @order.billing_address = Forms::BillingAddressForm.from_model(billing_model)
       @order.shipping_address = Forms::ShippingAddressForm.from_model(shipping_model)
     when :delivery
       @order = current_order
       @order.shipping_method ||= ShippingMethod.order(:price).first
+      @shipping_methods = ShippingMethod.order('price ASC')
     when :payment
       @order = current_order
       @payment = Forms::PaymentForm.new
@@ -86,10 +88,10 @@ class Orders::CheckoutsController < ApplicationController
     end
 
     def clear_payment_data
-      session[:card_number] = nil
-      session[:name_on_card] = nil
-      session[:valid_until] = nil
-      session[:cvv] = nil
+      session.delete :card_number
+      session.delete :name_on_card
+      session.delete :valid_until
+      session.delete :cvv
     end
 
     def get_payment_data

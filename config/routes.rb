@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   end
   resources :carts, only: [:show, :update]
   resources :line_items, only: [:create, :update, :destroy]
-  resources :orders, controller: 'orders/orders', except: [:new, :edit] do
-    resources :checkouts, controller: 'orders/checkouts'
+  resources :orders, controller: 'orders/orders', except: [:new, :edit, :update] do
+    resources :checkout, controller: 'orders/checkout', only: [:index, :show, :update]
   end
 
   root 'home#index'

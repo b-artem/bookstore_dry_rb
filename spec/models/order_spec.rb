@@ -52,9 +52,10 @@ RSpec.describe Order, type: :model do
 
     describe '#subtotal' do
       it 'sums line_items subtotals' do
-        line_item1 = build :line_item, price: 10, quantity: 1
-        line_item2 = build :line_item, price: 20, quantity: 3
+        line_item1 = create :line_item, price: 10, quantity: 1
+        line_item2 = create :line_item, price: 20, quantity: 3
         order.line_items = [line_item1, line_item2]
+        order.save
         expect(order.subtotal).to eq 70
       end
     end
@@ -74,6 +75,23 @@ RSpec.describe Order, type: :model do
           allow(order).to receive_message_chain(:shipping_method, :price)
             .and_return(20)
           expect(order.total).to eq 120
+        end
+      end
+    end
+
+    describe '#discont' do
+      context 'when :coupon is not set' do
+        it 'returns 0' do
+          expect(order.discount).to eq 0
+        end
+      end
+
+      context 'when :coupon is set' do
+        it 'returns discount amount' do
+          allow(order).to receive(:subtotal).and_return(100)
+          allow(order).to receive_message_chain(:coupon, :discount)
+            .and_return(20)
+          expect(order.discount).to eq 20
         end
       end
     end

@@ -14,7 +14,7 @@
     .row
       .col-xs-12.col-md-4
         %p.h1.in-gold-500.mt-10
-          = number_to_currency(@book.price)
+          = @book.decorate.price
       .col-xs-5.col-md-3
         .input-group.general-position
           = form_tag line_items_path(book_id: @book.id), id: 'line-item-form' do
@@ -50,27 +50,21 @@
         %p.lead.small.pull-right= @book.materials
 .mb-80
   %h3.in-gold-500.mb-25= "#{t '.reviews'} (#{@book.reviews.approved.count})"
-  - if @book.reviews.approved.any?
+  - if @book.reviews.approved.exists?
     = render @book.reviews.approved.order('created_at DESC')
 
   - if user_signed_in?
     = t '.write_a_review'
-    = form_for [@book, @book.reviews.build] do |f|
-      - if flash[:errors]
-        #error_explanation
-          %ul
-            - flash[:errors].each do |error|
-              %li= error.join ' '
-      .field
-        = f.label :score
-        #star-rating
-      .field
-        = f.label t('.review_title')
-        = f.text_field :title
-      .field
-        = f.label t('.review_text')
-        = f.text_area :text
-      .actions
-        = f.submit t('.post_review')
+    %br
+    %br
+    = simple_form_for [@book, @book.reviews.build], class: 'res-mb-100',
+      defaults: { label_html: { class: 'control-label input-label' } } do |f|
+      = f.label :score
+      #star-rating
+      %br
+      = f.input :title, label: t('.review_title')
+      = f.input :text, label: t('.review_text')
+      = f.button :submit, t('.post_review'), class: 'btn'
+
   - else
     = t '.sign_in_to_write_a_review'

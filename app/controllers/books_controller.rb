@@ -1,15 +1,15 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show]
-  before_action :set_category, only: :index
+  load_and_authorize_resource
   decorates_assigned :book
-
-  authorize_resource
 
   def index
     if sort_condition == 'popularity'
-      books = Book.where(id: Book.popular_first_ids)
+      books = @books.where(id: Book.popular_first_ids)
+    elsif category_name == 'all'
+      books = @books.order(sort_condition + ' ' + sort_direction)
     else
-      books = Book.public_send(@category).order(sort_condition + ' ' + sort_direction)
+      books = Category.find_by(name: category_name)
+        .books.order(sort_condition + ' ' + sort_direction)
     end
     @books = books.page(params[:page])
   end
@@ -19,17 +19,8 @@ class BooksController < ApplicationController
 
   private
 
-    def set_book
-      @book = Book.find(params[:id])
-    end
-
-    def book_params
-      params.require(:book).permit(:title, :description, :price, :publication_year, :dimensions, :materials)
-    end
-
-    def set_category
-      return @category = 'all' unless Book::CATEGORIES.include?(params[:category])
-      @category = params[:category]
+    def category_name
+      Category.pluck(:name).include?(params[:category]) ? params[:category] : 'all'
     end
 
     def sort_condition
