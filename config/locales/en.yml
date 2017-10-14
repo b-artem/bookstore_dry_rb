@@ -16,13 +16,15 @@ en:
       date_slashes: "%d/%m/%y"
   layouts:
     application:
-      bookstore: 'Bookstore'
       home: 'Home'
       shop: 'Shop'
       logout: 'Log out'
       my_account: 'My account'
       orders: 'Orders'
       settings: 'Settings'
+    header:
+      bookstore: 'Bookstore'
+    footer:
       support: 'support@bookstore.com'
       phone_number: '(555)-555-5555'
   home:

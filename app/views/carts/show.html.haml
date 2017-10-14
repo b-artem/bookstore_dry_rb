@@ -2,7 +2,7 @@
 
 .visible-xs
   = render partial: 'line_items/form_visible_xs',
-          collection: @cart.line_items, as: :line_item
+                    collection: @cart.line_items, as: :line_item
 
 .hidden-xs
   %table.table.table-hover
@@ -18,7 +18,7 @@
         %span.in-grey-600= t '.sub_total'
       %th.col-close
     = render partial: 'line_items/form_hidden_xs',
-            collection: @cart.line_items, as: :line_item
+                      collection: @cart.line_items, as: :line_item
 
 .general-order-wrap
   .row

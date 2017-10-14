@@ -3,7 +3,6 @@ class BooksController < ApplicationController
   decorates_assigned :book
 
   def index
-    @categories = Category.all
     if sort_condition == 'popularity'
       books = @books.where(id: Book.popular_first_ids)
     elsif category_name == 'all'
