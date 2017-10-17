@@ -14,14 +14,15 @@
       .visible-xs.visible-sm
         %h3.general-subtitle= t '.billing_address'
         %p.general-info-text= t '.all_fields_are_required'
-      = order.simple_fields_for @order.billing_address do |b|
-        = b.input :first_name
-        = b.input :last_name
-        = b.input :address
-        = b.input :city
-        = b.input :zip
-        = b.input :country
-        = b.input :phone
+      #billing-address-form
+        = order.simple_fields_for @order.billing_address do |b|
+          = b.input :first_name
+          = b.input :last_name
+          = b.input :address
+          = b.input :city
+          = b.input :zip
+          = b.input :country
+          = b.input :phone
 
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm

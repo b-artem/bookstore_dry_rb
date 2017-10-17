@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :author do
-    first_name { Faker::Name.first_name.gsub("'", '') }
-    last_name { Faker::Name.last_name.gsub("'", '') }
+    first_name { Faker::Name.first_name.tr("' ", '') }
+    last_name { Faker::Name.last_name.tr("' ", '') }
   end
 
   factory :author_with_description, parent: :author do

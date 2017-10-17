@@ -1,12 +1,12 @@
 FactoryGirl.define do
   factory :address_form, class: Forms::AddressForm do
     type { %w(BillingAddress ShippingAddress).sample }
-    first_name { Faker::Name.first_name.gsub("'", '') }
-    last_name { Faker::Name.last_name.gsub("'", '') }
+    first_name { Faker::Name.first_name.tr("' ", '') }
+    last_name { Faker::Name.last_name.tr("' ", '') }
     address { Faker::Address.street_address }
-    city { Faker::Address.city }
+    city { Faker::Address.city.tr("-'", '') }
     zip { Faker::Address.zip }
-    country { Faker::Address.country.gsub('-', '') }
+    country { Faker::Address.country.tr("-'", '') }
     phone '+380123456789'
     order_id { create(:order).id }
   end
