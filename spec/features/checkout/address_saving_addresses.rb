@@ -87,7 +87,7 @@ shared_examples 'renders address form again' do
   end
 end
 
-feature 'Checkout Address saves addresses from forms' do
+feature 'Checkout Address step' do
   let!(:user) { create :user }
   let!(:order) { create :order, user: user }
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
