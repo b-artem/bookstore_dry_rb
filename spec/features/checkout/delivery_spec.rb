@@ -66,5 +66,11 @@ feature 'Checkout Delivery step' do
     scenario 'saves chosen shipping method', js: true do
       expect(Order.find(order.id).shipping_method).to eq shipping_method
     end
+
+    scenario 'proceeds to Checkout Payment step', js: true do
+      expect(page).to have_content(t('orders.checkout.payment.name_on_card'))
+      expect(page).to have_content(t('orders.checkout.payment.cvv'))
+      expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
+    end
   end
 end

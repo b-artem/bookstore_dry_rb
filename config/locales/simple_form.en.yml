@@ -19,6 +19,11 @@ en:
         zip: 'Zip'
         country: 'Country'
         phone: 'Phone'
+        name_on_card: 'Name on Card'
+        credit_card: 'Credit Card'
+        card_number: 'Card Number'
+        valid_until: 'MM/YY'
+        cvv: 'CVV'
     placeholders:
       defaults:
         first_name: 'First Name'
@@ -27,6 +32,10 @@ en:
         city: 'City'
         zip: 'Zip'
         phone: 'Example +355 66 123 4567'
+        name_on_card: 'Name on Card'
+        credit_card: 'Credit Card'
+        card_number: 'Card Number'
+        valid_until: 'MM/YY'
     prompts:
       defaults:
         country: 'Select a country'

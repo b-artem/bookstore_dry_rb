@@ -142,7 +142,7 @@ en:
         credit_card: 'Credit Card'
         card_number: 'Card Number'
         name_on_card: 'Name on Card'
-        mm_yy: 'MM/YY'
+        valid_until: 'MM/YY'
         cvv: 'CVV'
       confirm:
         edit: 'edit'
