@@ -57,18 +57,14 @@ feature 'Checkout Delivery step' do
     let(:shipping_method) { shipping_methods.sample }
     background do
       within 'table#shipping-methods' do
-        binding.pry
-        find("span.radio-text[innerHTML='#{shipping_method.name}']").click
+        find('span.radio-text', text: shipping_method.name).click
       end
+      click_button t('orders.checkout.save_and_continue')
+      wait_for_ajax
     end
 
-    scenario 'saves chosen shipping method' do
-      within 'table#shipping-methods' do
-        input = find("input.radio-input[value=#{shipping_method.id}]", visible: false)
-        expect(input).to be_checked
-      end
+    scenario 'saves chosen shipping method', js: true do
+      expect(Order.find(order.id).shipping_method).to eq shipping_method
     end
   end
-
-
 end
