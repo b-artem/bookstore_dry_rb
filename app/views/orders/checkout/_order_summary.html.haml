@@ -28,7 +28,7 @@
         %p.font-16= t '.order_total'
       - else
         %strong.font-18= t '.order_total'
-    %td
+    %td#total
       - if step == :address
         %p.font-16= @current_order.decorate.total
       - else

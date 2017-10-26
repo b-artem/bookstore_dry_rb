@@ -20,6 +20,9 @@ shared_examples 'than returns to confirm page' do
       expect(page).to have_content(t('orders.checkout.confirm.shipments'))
       expect(page).to have_content(t('orders.checkout.confirm.payment_information'))
       expect(page).to have_button(t('orders.checkout.confirm.place_order'))
+      within '#total' do
+        expect(page).to have_content(order.decorate.total)
+      end
     end
   end
 end
@@ -61,7 +64,6 @@ feature 'Checkout Payment step' do
       it_behaves_like 'checkout address page opens'
       it_behaves_like 'than returns to confirm page'
     end
-
 
     context 'when user clicks Edit Billing Address link' do
       background do
@@ -107,4 +109,15 @@ feature 'Checkout Payment step' do
       it_behaves_like 'than returns to confirm page'
     end
   end
+
+  context 'when user clicks Place Order button' do
+    background { click_button t('orders.checkout.confirm.place_order') }
+    scenario 'Checkout Complete page opens' do
+      expect(page).to have_content(t('orders.checkout.complete.thank_you_for_your_order'))
+      expect(page).to have_content(t('orders.checkout.complete.order_confirmation_has_been_sent'))
+      expect(page).to have_button(t('orders.checkout.complete.back_to_store'))
+    end
+  end
+
+  context 'when user clicks '
 end
