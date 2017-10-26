@@ -14,7 +14,7 @@ feature 'Signup' do
 
   context 'when password confirmation valid' do
     scenario 'User registers successfully via register form' do
-      background { create_list(:book, 3) }
+      create_list(:book, 3)
       within 'form#new_user' do
         fill_in 'email', with: Faker::Internet.email
         fill_in 'password', with: password
