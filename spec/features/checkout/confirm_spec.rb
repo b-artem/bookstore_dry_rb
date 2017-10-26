@@ -2,7 +2,6 @@ require 'support/factory_girl'
 require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
-require 'support/wait_for_ajax'
 
 shared_examples 'checkout address page opens' do
   scenario 'Checkout Address page opens' do
@@ -13,12 +12,15 @@ shared_examples 'checkout address page opens' do
   end
 end
 
-shared_examples 'returns to confirm page', js: true do
-  scenario 'returns to Checkout Confirm page' do
-    expect(page).to have_content(t('orders.checkout.confirm.edit'))
-    expect(page).to have_content(t('orders.checkout.confirm.shipments'))
-    expect(page).to have_content(t('orders.checkout.confirm.payment_information'))
-    expect(page).to have_button(t('orders.checkout.confirm.place_order'))
+shared_examples 'than returns to confirm page' do
+  context 'when user than clicks Save and Continue button' do
+    background { click_button(t('orders.checkout.save_and_continue')) }
+    scenario 'returns to Checkout Confirm page' do
+      expect(page).to have_content(t('orders.checkout.confirm.edit'))
+      expect(page).to have_content(t('orders.checkout.confirm.shipments'))
+      expect(page).to have_content(t('orders.checkout.confirm.payment_information'))
+      expect(page).to have_button(t('orders.checkout.confirm.place_order'))
+    end
   end
 end
 
@@ -57,16 +59,7 @@ feature 'Checkout Payment step' do
         end
       end
       it_behaves_like 'checkout address page opens'
-
-      context 'after that user clicks Save and Continue button' do
-        background do
-          # within '#shipping-address' do
-          #   click_link(t('orders.checkout.confirm.edit'))
-          # end
-          click_button(t('orders.checkout.save_and_continue'))
-        end
-        it_behaves_like 'returns to confirm page'
-      end
+      it_behaves_like 'than returns to confirm page'
     end
 
 
@@ -77,6 +70,7 @@ feature 'Checkout Payment step' do
         end
       end
       it_behaves_like 'checkout address page opens'
+      it_behaves_like 'than returns to confirm page'
     end
 
     context 'when user clicks Edit Shipment link' do
@@ -85,12 +79,15 @@ feature 'Checkout Payment step' do
           click_link(t('orders.checkout.confirm.edit'))
         end
       end
+
       scenario 'Checkout Delivery page opens' do
         expect(page).to have_content(t('orders.checkout.delivery.method'))
         expect(page).to have_content(t('orders.checkout.delivery.days'))
         expect(page).to have_content(t('orders.checkout.delivery.price'))
         expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
       end
+
+      it_behaves_like 'than returns to confirm page'
     end
 
     context 'when user clicks Edit Payment information link' do
@@ -99,12 +96,15 @@ feature 'Checkout Payment step' do
           click_link(t('orders.checkout.confirm.edit'))
         end
       end
+
       scenario 'Checkout Payment page opens' do
         expect(page).to have_content(t('orders.checkout.payment.name_on_card'))
         expect(page).to have_content(t('orders.checkout.payment.card_number'))
         expect(page).to have_content(t('orders.checkout.payment.cvv'))
         expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
       end
+
+      it_behaves_like 'than returns to confirm page'
     end
   end
 end
