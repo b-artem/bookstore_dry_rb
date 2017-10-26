@@ -15,7 +15,7 @@
       %br
       = @order.shipping_address.decorate.city_zip
       %br
-      = @order.shipping_address.country
+      = @order.shipping_address.decorate.country
       %br
       = @order.shipping_address.decorate.phone
   .col-sm-6.hidden-xs.text-right

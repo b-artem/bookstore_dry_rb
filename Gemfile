@@ -8,8 +8,8 @@ end
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.1'
-gem 'country_select', '~> 3.1'
 gem 'coffee-rails', '~> 4.2'
+gem 'country_select', '~> 3.1'
 gem 'devise', '~> 4.3'
 gem 'draper', '~> 3.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
@@ -40,10 +40,10 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring', '~> 2.0', '>= 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do

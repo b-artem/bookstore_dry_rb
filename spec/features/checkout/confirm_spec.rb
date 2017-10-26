@@ -13,6 +13,15 @@ shared_examples 'checkout address page opens' do
   end
 end
 
+shared_examples 'returns to confirm page', js: true do
+  scenario 'returns to Checkout Confirm page' do
+    expect(page).to have_content(t('orders.checkout.confirm.edit'))
+    expect(page).to have_content(t('orders.checkout.confirm.shipments'))
+    expect(page).to have_content(t('orders.checkout.confirm.payment_information'))
+    expect(page).to have_button(t('orders.checkout.confirm.place_order'))
+  end
+end
+
 feature 'Checkout Payment step' do
   let!(:user) { create :user }
   let(:billing_address) { build :billing_address }
@@ -48,7 +57,18 @@ feature 'Checkout Payment step' do
         end
       end
       it_behaves_like 'checkout address page opens'
+
+      context 'after that user clicks Save and Continue button' do
+        background do
+          # within '#shipping-address' do
+          #   click_link(t('orders.checkout.confirm.edit'))
+          # end
+          click_button(t('orders.checkout.save_and_continue'))
+        end
+        it_behaves_like 'returns to confirm page'
+      end
     end
+
 
     context 'when user clicks Edit Billing Address link' do
       background do
@@ -59,5 +79,32 @@ feature 'Checkout Payment step' do
       it_behaves_like 'checkout address page opens'
     end
 
+    context 'when user clicks Edit Shipment link' do
+      background do
+        within '#shipment' do
+          click_link(t('orders.checkout.confirm.edit'))
+        end
+      end
+      scenario 'Checkout Delivery page opens' do
+        expect(page).to have_content(t('orders.checkout.delivery.method'))
+        expect(page).to have_content(t('orders.checkout.delivery.days'))
+        expect(page).to have_content(t('orders.checkout.delivery.price'))
+        expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
+      end
+    end
+
+    context 'when user clicks Edit Payment information link' do
+      background do
+        within '#payment' do
+          click_link(t('orders.checkout.confirm.edit'))
+        end
+      end
+      scenario 'Checkout Payment page opens' do
+        expect(page).to have_content(t('orders.checkout.payment.name_on_card'))
+        expect(page).to have_content(t('orders.checkout.payment.card_number'))
+        expect(page).to have_content(t('orders.checkout.payment.cvv'))
+        expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
+      end
+    end
   end
 end

@@ -32,7 +32,6 @@ shared_examples 'billing_address form has proper values' do
   scenario 'Billing Address form is filled with proper values' do
     within 'div#billing-address-form' do
       address_fields.each do |field|
-        next if field == 'country'
         expect(find_field(t("simple_form.labels.defaults.#{field}"))
                           .value).to eq billing_address.public_send(field)
       end
@@ -45,7 +44,6 @@ shared_examples 'shipping_address form has proper values' do
   scenario 'Shipping Address form is filled with proper values' do
     within 'div#shipping-address-form' do
       address_fields.each do |field|
-        next if field == 'country'
         expect(find_field(t("simple_form.labels.defaults.#{field}"))
                           .value).to eq shipping_address.public_send(field)
       end

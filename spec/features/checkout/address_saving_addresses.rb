@@ -12,8 +12,7 @@ shared_examples 'billing address is saved' do
 
   scenario 'billing address is saved from a form fields', js: true do
     address_fields.each do |field|
-      next if field == 'country'
-      expect(order.billing_address.public_send(field))
+      expect(Order.find(order.id).billing_address.public_send(field))
         .to eq billing_address.public_send(field)
     end
   end
@@ -27,7 +26,6 @@ shared_examples 'shipping address is saved' do
 
   scenario 'shipping address is saved from a form fields', js: true do
     address_fields.each do |field|
-      next if field == 'country'
       expect(Order.find(order.id).shipping_address.public_send(field))
         .to eq shipping_address.public_send(field)
     end
@@ -42,7 +40,6 @@ shared_examples 'billing address is used as shipping' do
 
   scenario 'Billing Address is used as Shipping Address', js: true do
     address_fields.each do |field|
-      next if field == 'country'
       expect(Order.find(order.id).shipping_address.public_send(field))
         .to eq billing_address.public_send(field)
     end
@@ -163,7 +160,8 @@ feature 'Checkout Address step' do
     def fill_address(address)
       address_fields.each do |field|
         if field == 'country'
-          select(address.public_send(field), from: t("simple_form.labels.defaults.#{field}"))
+          select(address.decorate.public_send(field),
+                 from: t("simple_form.labels.defaults.#{field}"))
           next
         end
         fill_in(t("simple_form.labels.defaults.#{field}"),
