@@ -15,12 +15,17 @@
         = link_to '#', id: "minus-#{line_item.id}", class: 'input-link',
                   onclick: "decrementQuantity(); return false;" do
           %i.fa.fa-minus.line-height-40 &nbsp
-        = f.text_field :quantity, class: 'form-control quantity-input',
-                        id: "input-line-item-#{line_item.id}",
-                        onchange: "updateQuantity(#{line_item.id})"
+        = f.text_field :quantity,
+                        class: 'form-control quantity-input'
         = link_to '#', id: "plus-#{line_item.id}", class: 'input-link',
                   onclick: "incrementQuantity(); return false;" do
           %i.fa.fa-plus.line-height-40 &nbsp
+        -# = f.text_field :quantity, class: 'form-control quantity-input',
+        -#                 id: "input-line-item-#{line_item.id}",
+        -#                 onchange: "updateQuantity(#{line_item.id})"
+        -# = link_to '#', id: "plus-#{line_item.id}", class: 'input-link',
+        -#           onclick: "incrementQuantity(); return false;" do
+        -#   %i.fa.fa-plus.line-height-40 &nbsp
         = f.submit '#', id: "update-line-item-#{line_item.id}", hidden: true
 
   %td

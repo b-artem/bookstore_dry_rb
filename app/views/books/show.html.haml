@@ -33,9 +33,9 @@
       %p.lead.small.line-height-2
         = book.short_description
         - if @book.description.length > 500
-          = link_to t('.read_more'), '#', id: "read-more-#{@book.id}",
-                    class: 'in-gold-500 ml-10',
-                    onclick: "readMore('#{book.full_description}'); return false;"
+          = hidden_field_tag(:full_description, book.full_description)
+          = link_to t('.read_more'), '#', id: 'read-more',
+                    class: 'in-gold-500 ml-10'
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left= t '.publication_year'
