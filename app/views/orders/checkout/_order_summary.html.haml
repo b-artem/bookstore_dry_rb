@@ -21,7 +21,10 @@
       %td
         %p.font-16= t '.shipping'
       %td
-        %p.font-16= @order.shipping_method.decorate.price
+        - if @current_order.shipping_method
+          %p.font-16= @current_order.shipping_method.decorate.price
+        - else
+          %p.font-16= @order.shipping_method.decorate.price
   %tr
     %td
       - if step == :address

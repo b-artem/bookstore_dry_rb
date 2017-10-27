@@ -6,23 +6,23 @@
 .row.mb-20
   .col-sm-6
     .visible-xs
-      %p.general-order-number.mb-0= "#{t('.order')} ##{@order.number}"
-      %p.general-address.mb-30= @order.decorate.completed_at_short_date
+      %p.general-order-number.mb-0= "#{t('.order')} ##{@current_order.number}"
+      %p.general-address.mb-30= @current_order.decorate.completed_at_short_date
     %p.general-address
-      = @order.shipping_address.decorate.full_name
+      = @current_order.shipping_address.decorate.full_name
       %br
-      = @order.shipping_address.address
+      = @current_order.shipping_address.address
       %br
-      = @order.shipping_address.decorate.city_zip
+      = @current_order.shipping_address.decorate.city_zip
       %br
-      = @order.shipping_address.decorate.country
+      = @current_order.shipping_address.decorate.country
       %br
-      = @order.shipping_address.decorate.phone
+      = @current_order.shipping_address.decorate.phone
   .col-sm-6.hidden-xs.text-right
-    %p.general-order-number.mb-0= "#{t('.order')} ##{@order.number}"
-    %p.general-address.mb-30= @order.decorate.completed_at_long_date
+    %p.general-order-number.mb-0= "#{t('.order')} ##{@current_order.number}"
+    %p.general-address.mb-30= @current_order.decorate.completed_at_long_date
 
-= render partial: 'line_items', object: @order.line_items
+= render partial: 'line_items', object: @current_order.line_items
 
 .text-center.general-text-right
   = render 'order_summary'
