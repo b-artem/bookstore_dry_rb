@@ -29,7 +29,7 @@ class LineItemsController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
-        format.js { render :edit }
+        format.js { redirect_to @cart }
       end
     end
   end
