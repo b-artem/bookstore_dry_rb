@@ -4,14 +4,14 @@
 
 = simple_form_for @payment, url: wizard_path, method: :put, class: 'max-600 mb-80',
         defaults: { label_html: { class: 'control-label input-label' } } do |f|
-  = f.input :card_number, as: :integer, placeholder: t('.card_number')
+  = f.input :card_number, as: :integer
   .row
     .col-sm-6
-      = f.input :name_on_card, placeholder: t('.name_on_card')
+      = f.input :name_on_card
     .col-sm-3
-      = f.input :valid_until, placeholder: t('.mm_yy')
+      = f.input :valid_until
     .col-sm-3
-      = f.input :cvv, as: :integer, placeholder: t('.cvv'),
+      = f.input :cvv, as: :integer,
                 wrapper_html: { class: 'form-group relative' }
 
   .general-text-align

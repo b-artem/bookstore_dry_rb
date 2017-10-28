@@ -3,15 +3,9 @@ require 'support/factory_girl'
 
 RSpec.describe Forms::AddressForm, type: :model do
   let(:address_form) { build :address_form }
-  before do
-    # allow(address_form).to receive_message_chain(:context,
-    #                         :use_billing_address_as_shipping).and_return(false)
-  end
 
   it 'has a valid factory' do
     allow(address_form).to receive(:need_shipping_address?).and_return(true)
-    # allow(address_form).to receive_message_chain(:context,
-    #                         :use_billing_address_as_shipping).and_return(false)
     expect(address_form).to be_valid
   end
 
@@ -24,8 +18,6 @@ RSpec.describe Forms::AddressForm, type: :model do
     it { is_expected.to validate_presence_of(:zip) }
     it { is_expected.to validate_presence_of(:country) }
     it { is_expected.to validate_presence_of(:phone) }
-    # it { is_expected.to validate_inclusion_of(:type)
-    #                     .in_array(%w(BillingAddress ShippingAddress)) }
 
     it { is_expected.to allow_value('Elon').for(:first_name) }
     it { is_expected.not_to allow_value('Anna-Maria').for(:first_name)

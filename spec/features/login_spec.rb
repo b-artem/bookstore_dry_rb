@@ -8,14 +8,12 @@ feature 'Login' do
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
+      .and_return("https://example.com/image.jpg")
     visit new_user_session_path
   end
 
   context 'when email and password are valid' do
-    background do
-      3.times { create :book }
-    end
+    background { create_list(:book, 3) }
     scenario 'logs user in' do
       within 'form#new_user' do
         fill_in 'email', with: user.email

@@ -14,14 +14,12 @@ shared_examples 'best sellers' do
             create(:line_item, book: bestseller_photo),
             create(:line_item, book: bestseller_web_design),
             create(:line_item, book: bestseller_web_dev) ])
-    3.times do
-      create :book_mobile_development
-      create :book_photo
-      create :book_web_design
-      create :book_web_development
-    end
+    create_list(:book_mobile_development, 3)
+    create_list(:book_photo, 3)
+    create_list(:book_web_design, 3)
+    create_list(:book_web_development, 3)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
+      .and_return("https://example.com/image.jpg")
     visit home_index_path
   end
 

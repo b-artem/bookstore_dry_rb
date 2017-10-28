@@ -6,7 +6,7 @@
   .visible-xs
     - @shipping_methods.each do |shipping_method|
       .general-cart-item.divider-lg-bottom.mb-30
-        %table.table
+        %table#shipping-methods-xs.table
           %tr
             %td.col-half
               %span.in-grey-600= t '.method'
@@ -29,7 +29,7 @@
               %span.font-16.in-gold-500= shipping_method.decorate.price
 
   .hidden-xs.mb-res-50
-    %table.table.table-hover
+    %table#shipping-methods.table.table-hover
       %thead
         %tr
           %th.col-method

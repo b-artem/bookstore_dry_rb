@@ -4,10 +4,10 @@ require 'support/devise'
 
 shared_examples 'latest books' do
   background do
-    5.times { create :book }
+    create_list(:book, 5)
     allow(Book).to receive(:best_seller).and_return(Book.first)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")
+      .and_return("https://example.com/image.jpg")
     visit home_index_path
   end
 

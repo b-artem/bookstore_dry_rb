@@ -44,12 +44,10 @@ RSpec.describe Book, type: :model do
               create(:line_item, book: bestseller_photo),
               create(:line_item, book: bestseller_web_design),
               create(:line_item, book: bestseller_web_dev) ])
-      3.times do
-        create :book_mobile_development
-        create :book_photo
-        create :book_web_design
-        create :book_web_development
-      end
+      create_list(:book_mobile_development, 3)
+      create_list(:book_photo, 3)
+      create_list(:book_web_design, 3)
+      create_list(:book_web_development, 3)
     end
 
     context 'best_seller' do

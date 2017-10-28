@@ -18,12 +18,10 @@
       .col-xs-5.col-md-3
         .input-group.general-position
           = form_tag line_items_path(book_id: @book.id), id: 'line-item-form' do
-            = link_to ' ', class: 'input-link',
-                      onclick: "decrementQuantity(); return false;" do
+            = link_to ' ', class: 'input-link quantity-input-minus' do
               %i.fa.fa-minus.line-height-40
             %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}
-            = link_to ' ', class: 'input-link',
-                      onclick: "incrementQuantity(); return false;" do
+            = link_to ' ', class: 'input-link quantity-input-plus' do
               %i.fa.fa-plus.line-height-40
       .col-xs-7.col-md-5
         %button.btn.btn-default.pull-right.general-position{type: 'submit', form: 'line-item-form'}
@@ -33,9 +31,9 @@
       %p.lead.small.line-height-2
         = book.short_description
         - if @book.description.length > 500
-          = link_to t('.read_more'), '#', id: "read-more-#{@book.id}",
-                    class: 'in-gold-500 ml-10',
-                    onclick: "readMore('#{book.full_description}'); return false;"
+          = hidden_field_tag(:full_description, book.full_description)
+          = link_to t('.read_more'), '#', id: 'read-more',
+                    class: 'in-gold-500 ml-10'
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left= t '.publication_year'
