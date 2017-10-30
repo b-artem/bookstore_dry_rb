@@ -196,6 +196,7 @@ en:
       verified_reviewer: 'Verified Reviewer'
     create:
       success: 'Thanks for Review. It will be published as soon as Admin will approve it'
+      fail: "Review wasn't saved"
   settings:
     edit:
       settings: 'Settings'
