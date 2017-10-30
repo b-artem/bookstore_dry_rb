@@ -15,7 +15,7 @@ RSpec.describe BooksController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      get :show, params: { id: book.to_param }, session: valid_session
+      get :show, params: { id: book.id }, session: valid_session
       expect(response).to have_http_status 200
     end
   end
