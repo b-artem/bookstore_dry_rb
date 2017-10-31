@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
 
-shared_examples 'change quantity' do
+shared_examples 'changes quantity' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
@@ -79,13 +79,13 @@ end
 feature 'Cart' do
   feature 'Edit' do
     context 'when user is a guest' do
-      it_behaves_like 'change quantity'
+      include_examples 'change quantity'
     end
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }
-      it_behaves_like 'change quantity'
+      include_examples 'change quantity'
     end
   end
 end

@@ -75,11 +75,11 @@ feature 'Checkout Address loads addresses from user Settings' do
   end
 
   context 'when user has not filled Billing Address in Settings page' do
-    it_behaves_like 'billing_address form is empty'
+    include_examples 'billing_address form is empty'
   end
 
   context 'when user has not filled Shipping Address in Settings page' do
-    it_behaves_like 'shipping_address form is empty'
+    include_examples 'shipping_address form is empty'
   end
 
   context 'when user has filled only Billing Address in Settings page' do
@@ -89,8 +89,8 @@ feature 'Checkout Address loads addresses from user Settings' do
       visit order_checkout_index_path(order)
     end
 
-    it_behaves_like 'billing_address form has proper values'
-    it_behaves_like 'shipping_address form is empty'
+    include_examples 'billing_address form has proper values'
+    include_examples 'shipping_address form is empty'
   end
 
   context 'when user has filled only Shipping Address in Settings page' do
@@ -100,8 +100,8 @@ feature 'Checkout Address loads addresses from user Settings' do
       visit order_checkout_index_path(order)
     end
 
-    it_behaves_like 'billing_address form is empty'
-    it_behaves_like 'shipping_address form has proper values'
+    include_examples 'billing_address form is empty'
+    include_examples 'shipping_address form has proper values'
   end
 
   context 'when user has filled both Billing and Shipping Addresses in Settings page' do
@@ -113,7 +113,7 @@ feature 'Checkout Address loads addresses from user Settings' do
       visit order_checkout_index_path(order)
     end
 
-    it_behaves_like 'billing_address form has proper values'
-    it_behaves_like 'shipping_address form has proper values'
+    include_examples 'billing_address form has proper values'
+    include_examples 'shipping_address form has proper values'
   end
 end

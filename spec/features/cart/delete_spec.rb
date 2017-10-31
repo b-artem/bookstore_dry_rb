@@ -31,13 +31,13 @@ end
 feature 'Cart' do
   feature 'Delete' do
     context 'when user is a guest' do
-      it_behaves_like 'delete'
+      include_examples 'delete'
     end
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }
-      it_behaves_like 'delete'
+      include_examples 'delete'
     end
   end
 end

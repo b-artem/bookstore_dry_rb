@@ -61,8 +61,8 @@ feature 'Checkout Payment step' do
           click_link(t('orders.checkout.confirm.edit'))
         end
       end
-      it_behaves_like 'checkout address page opens'
-      it_behaves_like 'than returns to confirm page'
+      include_examples 'checkout address page opens'
+      include_examples 'than returns to confirm page'
     end
 
     context 'when user clicks Edit Billing Address link' do
@@ -71,8 +71,8 @@ feature 'Checkout Payment step' do
           click_link(t('orders.checkout.confirm.edit'))
         end
       end
-      it_behaves_like 'checkout address page opens'
-      it_behaves_like 'than returns to confirm page'
+      include_examples 'checkout address page opens'
+      include_examples 'than returns to confirm page'
     end
 
     context 'when user clicks Edit Shipment link' do
@@ -89,7 +89,7 @@ feature 'Checkout Payment step' do
         expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
       end
 
-      it_behaves_like 'than returns to confirm page'
+      include_examples 'than returns to confirm page'
     end
 
     context 'when user clicks Edit Payment information link' do
@@ -106,7 +106,7 @@ feature 'Checkout Payment step' do
         expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
       end
 
-      it_behaves_like 'than returns to confirm page'
+      include_examples 'than returns to confirm page'
     end
   end
 
