@@ -97,8 +97,6 @@ en:
       success: 'Line item was successfully added to a cart'
       fail: 'Line item was not created'
       enter_positive_integer: 'Line item was not added. Please enter positive integer quantity'
-    update:
-      success: 'Line item was successfully updated'
     destroy:
       success: 'Product was successfully removed'
   orders:

@@ -1,98 +1,89 @@
 require 'rails_helper'
 require 'support/devise'
+require 'support/factory_girl'
 
 RSpec.describe LineItemsController, type: :controller do
+  let(:cart) { create :cart }
+  let(:book) { create :book }
+  let(:valid_attributes) { { quantity: 1 } }
+  let(:invalid_attributes) { { quantity: 2.3 } }
+  let(:valid_session) { { cart_id: cart.id } }
+  let(:line_item) { create :line_item, cart: cart }
 
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  let(:valid_session) { {} }
-
-  describe "GET #edit" do
-    it "returns a success response" do
-      line_item = LineItem.create! valid_attributes
-      get :edit, params: {id: line_item.to_param}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "POST #create" do
-    let(:line_item) { create :line_item }
-
-    it "creates a new LineItem" do
-      expect {
-        post :create, params: {line_item: valid_attributes}, session: valid_session
-      }.to change(LineItem, :count).by(1)
-    end
-
-    context "with valid params" do
-      it "creates a new LineItem" do
-        expect {
-          post :create, params: {line_item: valid_attributes}, session: valid_session
-        }.to change(LineItem, :count).by(1)
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new LineItem' do
+        expect do
+          post :create, params: valid_attributes.merge(book_id: book.id),
+                        session: valid_session
+        end.to change(LineItem, :count).by(1)
       end
 
-      it "redirects to the created line_item" do
-        post :create, params: {line_item: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(LineItem.last)
+      it 'redirects back' do
+        post :create, params: valid_attributes.merge(book_id: book.id),
+                      session: valid_session
+        expect(response).to redirect_to(root_path)
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {line_item: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+    context 'with invalid params' do
+      it 'does not create a new LineItem' do
+        expect do
+          post :create, params: invalid_attributes.merge(book_id: book.id),
+                        session: valid_session
+        end.not_to change(LineItem, :count)
+      end
+
+      it 'redirects back' do
+        post :create, params: invalid_attributes.merge(book_id: book.id),
+                      session: valid_session
+        expect(response).to redirect_to(root_path)
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested line_item" do
-        line_item = LineItem.create! valid_attributes
-        put :update, params: {id: line_item.to_param, line_item: new_attributes}, session: valid_session
-        line_item.reload
-        skip("Add assertions for updated state")
+  describe 'PUT #update' do
+    context 'with valid params' do
+      before do
+        put :update, format: 'js', session: valid_session,
+            params: { id: line_item.id, line_item: { quantity: 5 } }
       end
 
-      it "redirects to the line_item" do
-        line_item = LineItem.create! valid_attributes
-        put :update, params: {id: line_item.to_param, line_item: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(line_item)
+      it 'updates the requested line_item' do
+        expect(line_item.reload.quantity).to eq 5
+      end
+      it 'returns status code 200' do
+        expect(response).to have_http_status 200
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        line_item = LineItem.create! valid_attributes
-        put :update, params: {id: line_item.to_param, line_item: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+    context 'with invalid params' do
+      before do
+        put :update, format: 'js', session: valid_session,
+            params: { id: line_item.id, line_item: { quantity: '2.43' } }
+      end
+
+      it 'does not update the requested line_item' do
+        expect(line_item.reload.quantity).to eq 1
+      end
+      it 'redirects to the Cart' do
+        expect(response).to redirect_to cart_url(cart)
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested line_item" do
-      line_item = LineItem.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: line_item.to_param}, session: valid_session
-      }.to change(LineItem, :count).by(-1)
+  describe 'DELETE #destroy' do
+    let!(:line_item) { create :line_item, cart: cart }
+
+    it 'destroys the requested line_item' do
+      expect do
+        delete :destroy, params: { id: line_item.id }, session: valid_session
+      end.to change(LineItem, :count).by(-1)
     end
 
-    it "redirects to the line_items list" do
-      line_item = LineItem.create! valid_attributes
-      delete :destroy, params: {id: line_item.to_param}, session: valid_session
-      expect(response).to redirect_to(line_items_url)
+    it 'redirects to the Cart' do
+      delete :destroy, params: { id: line_item.id }, session: valid_session
+      expect(response).to redirect_to cart_url(cart)
     end
   end
-
 end
