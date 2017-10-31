@@ -79,13 +79,13 @@ end
 feature 'Cart' do
   feature 'Edit' do
     context 'when user is a guest' do
-      include_examples 'change quantity'
+      include_examples 'changes quantity'
     end
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }
-      include_examples 'change quantity'
+      include_examples 'changes quantity'
     end
   end
 end
