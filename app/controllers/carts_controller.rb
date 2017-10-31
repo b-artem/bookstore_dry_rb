@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-
   authorize_resource
 
   def show
@@ -8,16 +7,9 @@ class CartsController < ApplicationController
 
   def update
     coupon = Coupon.find_by(code: params[:cart][:coupon][:code])
-    respond_to do |format|
-      if coupon
-        @cart.update(coupon: coupon)
-        format.html { redirect_to @cart, notice: t('.success') }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { redirect_to @cart, alert: t('.fail') }
-        format.json { render :show, status: :unprocessable_entity, location: @cart }
-      end
-    end
+    return redirect_to(@cart, alert: t('.fail')) unless coupon
+    @cart.update(coupon: coupon)
+    redirect_to @cart, notice: t('.success')
   end
 
   private

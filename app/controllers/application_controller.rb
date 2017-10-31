@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     redirect_to main_app.root_path, alert: exception.message
   end
 
+  def self.default_url_options(options={})
+    options.merge({ :locale => I18n.locale })
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -28,7 +32,7 @@ class ApplicationController < ActionController::Base
       I18n.locale = params[:locale]
     else
       flash.now[:notice] = t('application.translation_not_available',
-                            locale: params[:locale])
+                             locale: params[:locale])
       logger.error flash.now[:notice]
     end
   end

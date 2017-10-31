@@ -22,14 +22,6 @@ class Orders::OrdersController < ApplicationController
     redirect_to order_checkout_index_path(@order)
   end
 
-  def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: t('.success') }
-      format.json { head :no_content }
-    end
-  end
-
   private
 
     def state_filter
