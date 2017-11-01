@@ -3,7 +3,4 @@ $(document).on 'turbolinks:load', ->
     text = $(this).text()
     setTimeout (->
       $('span#text').text text
-      return
     ), 300
-    return
-  return

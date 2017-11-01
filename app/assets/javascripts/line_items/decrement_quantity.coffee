@@ -9,5 +9,3 @@ $(document).on 'turbolinks:load', ->
       quantity--
     input.val quantity
     input.trigger 'change'
-    return
-  return

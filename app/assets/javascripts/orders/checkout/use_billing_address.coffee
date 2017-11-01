@@ -6,5 +6,3 @@ $(document).on 'turbolinks:load', ->
   $("#use_billing_address").change ->
     checked = $(this).prop('checked')
     $('#shipping-address-form').prop 'hidden', checked
-    return
-  return
