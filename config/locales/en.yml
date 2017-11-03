@@ -101,9 +101,6 @@ en:
       enter_positive_integer: 'Line item was not added. Please enter positive integer quantity'
     destroy:
       success: 'Product was successfully removed'
-  mailers:
-    user:
-      welcome: 'Welcome to our Amazing Bookstore!'
   orders:
     orders:
       index:
@@ -229,12 +226,6 @@ en:
     update_email:
       success: 'Your email was successfully changed'
       fail: "Your email wasn't changed"
-  user_mailer:
-    successfully_signed_up: "You have successfully signed up to Bookstore,
-      your email is: %{email}"
-    thanks: 'Thanks for joining and have a great day!'
-    to_login_follow_link: "To login to the site, just follow this link: %{link}"
-    welcome: 'Welcome to our Amazing Bookstore!'
   users:
     omniauth_callbacks:
       no_email_provided: "No email provided by facebook. Custom email created. Please change it in settings"
