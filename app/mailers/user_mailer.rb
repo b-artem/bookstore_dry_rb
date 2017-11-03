@@ -1,9 +1,6 @@
-class UserMailer < ApplicationMailer
+class UserMailer < Devise::Mailer
+  default template_path: 'devise/mailer'
   default from: 'bookstore-notifications@example.com'
 
-  def welcome_email(user)
-    @user = user
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: t('mailers.user.welcome'))
-  end
+  layout 'mailer'
 end

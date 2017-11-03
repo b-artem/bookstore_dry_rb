@@ -24,6 +24,8 @@ en:
       settings: 'Settings'
     header:
       bookstore: 'Bookstore'
+    mailer:
+      bookstore: 'Bookstore'
     footer:
       support: 'support@bookstore.com'
       phone_number: '(555)-555-5555'
