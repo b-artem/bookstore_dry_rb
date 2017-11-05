@@ -24,6 +24,8 @@ en:
       settings: 'Settings'
     header:
       bookstore: 'Bookstore'
+    mailer:
+      bookstore: 'Bookstore'
     footer:
       support: 'support@bookstore.com'
       phone_number: '(555)-555-5555'
@@ -222,7 +224,7 @@ en:
       success: 'Address was successfully updated'
       fail: "Address wasn't updated"
     update_email:
-      success: 'Your email was successfully changed'
+      success: 'A message with a confirmation link has been sent to your new email address. Please follow the link to confirm your new email'
       fail: "Your email wasn't changed"
   users:
     omniauth_callbacks:
