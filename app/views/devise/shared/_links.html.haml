@@ -8,7 +8,7 @@
 
 - if devise_mapping.confirmable? && controller_name != 'confirmations'
   = link_to t('.did_not_receive_confirmation_instructions'),
-            new_confirmation_path(resource_name)
+            new_confirmation_path(resource_name), class: "in-gold-500"
   %br
 
 - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email)
