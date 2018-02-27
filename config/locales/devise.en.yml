@@ -87,7 +87,7 @@ en:
         did_not_receive_unlock_instructions: "Didn't receive unlock instructions?"
         log_in: "Log in"
         sign_up: 'Sign up'
-      did_not_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
+        did_not_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
       forgot_password:
         forgot_your_password: "Forgot password?"
     unlocks:

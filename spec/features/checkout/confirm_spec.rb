@@ -118,6 +118,4 @@ feature 'Checkout Payment step' do
       expect(page).to have_button(t('orders.checkout.complete.back_to_store'))
     end
   end
-
-  context 'when user clicks '
 end

@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.1'
 gem 'coffee-rails', '~> 4.2'
@@ -14,8 +15,10 @@ gem 'devise', '~> 4.3'
 gem 'draper', '~> 3.0'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'fog-aws', '~> 1.4', '>= 1.4.1'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
 gem 'mini_magick', '~> 4.8'
 gem 'omniauth', '~> 1.6', '>= 1.6.1'

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :confirmable, 
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   ROLES = %i[admin user].freeze
@@ -17,8 +17,9 @@ class User < ApplicationRecord
       if auth.info.email
         user.email = auth.info.email
       else
-        user.email = user.info.first_name + user.info.last_name + '@fb.com'
+        user.email = auth.info.first_name + auth.info.last_name + '@fb.com'
       end
+      user.skip_confirmation!
       user.password = Devise.friendly_token[0, 20]
       user.image_url = auth.info.image
     end

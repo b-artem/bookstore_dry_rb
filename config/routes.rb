@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :books, only: [:index, :show] do
+  resources :books, only: %i[index show] do
     resources :reviews, only: :create
   end
-  resources :carts, only: [:show, :update]
-  resources :line_items, only: [:create, :update, :destroy]
-  resources :orders, controller: 'orders/orders', except: [:new, :edit, :update] do
-    resources :checkout, controller: 'orders/checkout', only: [:index, :show, :update]
+  resources :carts, only: %i[show update]
+  resources :line_items, only: %i[create update destroy]
+  resources :orders, controller: 'orders/orders', only: %i[index show create] do
+    resources :checkout, controller: 'orders/checkout', only: %i[index show update]
   end
 
   root 'home#index'
