@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title= t 'layouts.header.bookstore'
+
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    = render 'layouts/header'
+
+    %main.container.general-main-wrap
+      - if flash.any?
+        %p#notice= notice
+        %p#alert= alert
+
+      = yield
+
+    = render 'layouts/footer'

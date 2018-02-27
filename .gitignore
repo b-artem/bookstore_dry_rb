@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/public/uploads/*
 
 /node_modules
 /yarn-error.log
@@ -19,3 +20,8 @@
 .byebug_history
 
 .ruby-gemset
+.secrets.sh
+
+# Ignore application configuration
+/config/application.yml
+/config/initializers/figaro.rb

@@ -10,7 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+require 'fog/aws'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,5 +27,10 @@ module Bookstore
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators do |g|
+      g.test_framework :rspec
+    end
+    config.i18n.default_locale = :en
   end
 end
