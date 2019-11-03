@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap-sass', '~> 3.4'
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.1'
 gem 'coffee-rails', '~> 4.2'
