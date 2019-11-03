@@ -2,13 +2,13 @@ require 'rails_helper'
 require 'support/devise'
 require 'support/factory_girl'
 
-shared_examples 'redirects to login page' do
+RSpec.shared_examples 'redirects to login page' do
   it 'redirects to login page' do
     expect(response).to redirect_to(new_user_session_path)
   end
 end
 
-shared_examples 'returns code 200' do
+RSpec.shared_examples 'returns code 200' do
   it 'returns http status code 200' do
     expect(response).to have_http_status 200
   end

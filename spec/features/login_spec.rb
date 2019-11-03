@@ -2,13 +2,13 @@ require 'rails_helper'
 require 'support/factory_girl'
 require 'support/i18n'
 
-feature 'Login' do
+RSpec.feature 'Login' do
   let(:user) { create :user }
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.path')
+      .and_return("seeds/covers/Agile1.jpg")
     visit new_user_session_path
   end
 

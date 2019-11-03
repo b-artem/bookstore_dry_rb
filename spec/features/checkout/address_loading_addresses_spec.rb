@@ -3,7 +3,7 @@ require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
 
-shared_examples 'billing_address form is empty' do
+RSpec.shared_examples 'billing_address form is empty' do
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
   scenario 'fields in Billing Address form are empty' do
     within 'div#billing-address-form' do
@@ -15,7 +15,7 @@ shared_examples 'billing_address form is empty' do
   end
 end
 
-shared_examples 'shipping_address form is empty' do
+RSpec.shared_examples 'shipping_address form is empty' do
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
   scenario 'fields in Shipping Address form are empty' do
     within 'div#shipping-address-form' do
@@ -27,7 +27,7 @@ shared_examples 'shipping_address form is empty' do
   end
 end
 
-shared_examples 'billing_address form has proper values' do
+RSpec.shared_examples 'billing_address form has proper values' do
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
   scenario 'Billing Address form is filled with proper values' do
     within 'div#billing-address-form' do
@@ -39,7 +39,7 @@ shared_examples 'billing_address form has proper values' do
   end
 end
 
-shared_examples 'shipping_address form has proper values' do
+RSpec.shared_examples 'shipping_address form has proper values' do
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
   scenario 'Shipping Address form is filled with proper values' do
     within 'div#shipping-address-form' do
@@ -51,7 +51,7 @@ shared_examples 'shipping_address form has proper values' do
   end
 end
 
-feature 'Checkout Address loads addresses from user Settings' do
+RSpec.feature 'Checkout Address loads addresses from user Settings' do
   let!(:user) { create :user }
   let!(:order) { create :order, user: user }
   background do

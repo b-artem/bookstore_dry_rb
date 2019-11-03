@@ -3,7 +3,7 @@ require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
 
-shared_examples 'checkout address page opens' do
+RSpec.shared_examples 'checkout address page opens' do
   scenario 'Checkout Address page opens' do
     expect(page).to have_content(t('orders.checkout.address.shipping_address'))
     expect(page).to have_content(t('orders.checkout.address.all_fields_are_required'))
@@ -12,7 +12,7 @@ shared_examples 'checkout address page opens' do
   end
 end
 
-shared_examples 'than returns to confirm page' do
+RSpec.shared_examples 'than returns to confirm page' do
   context 'when user than clicks Save and Continue button' do
     background { click_button(t('orders.checkout.save_and_continue')) }
     scenario 'returns to Checkout Confirm page' do
@@ -27,7 +27,7 @@ shared_examples 'than returns to confirm page' do
   end
 end
 
-feature 'Checkout Payment step' do
+RSpec.feature 'Checkout Payment step' do
   let!(:user) { create :user }
   let(:billing_address) { build :billing_address }
   let(:shipping_address) { build :shipping_address }
@@ -49,8 +49,8 @@ feature 'Checkout Payment step' do
     payment_fields.each do |field|
       page.set_rack_session(field => payment_info.public_send(field))
     end
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.thumb.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.thumb.file.path')
+      .and_return("seeds/covers/Agile1.jpg")
     visit(order_checkout_index_path(order) + '/confirm')
   end
 

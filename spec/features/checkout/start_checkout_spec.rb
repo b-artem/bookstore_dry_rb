@@ -4,12 +4,12 @@ require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
 
-feature 'Start checkout' do
+RSpec.feature 'Start checkout' do
   let!(:cart) { create :cart, line_items: [create(:line_item, cart: Cart.last)] }
   background do
     page.set_rack_session(cart_id: cart.id)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.path')
+      .and_return("seeds/covers/Agile1.jpg")
   end
 
   context 'when user clicks Checkout button' do
