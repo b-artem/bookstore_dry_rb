@@ -4,14 +4,14 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch("DB_HOST") { 'db' } %>
+  host: <%= ENV.fetch("DB_HOST") { 'localhost' } %>
   port: 5432
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 development: &development
   <<: *default
-  database: bookstore_development
-  username: bookstore
-  password: bookstore_password
+  database: bookstore_dry_rb_development
+  username: rails_user
 
   # Minimum log levels, in increasing order:
   #   debug5, debug4, debug3, debug2, debug1,
@@ -21,7 +21,8 @@ development: &development
 
 test:
   <<: *development
-  database: bookstore_test
+  database: bookstore_dry_rb_test
+  username: rails_user
 
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
@@ -37,4 +38,3 @@ production:
   <<: *default
   database: bookstore_production
   username: bookstore
-  password: <%= ENV['DATABASE_PASSWORD'] %>

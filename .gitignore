@@ -21,7 +21,6 @@ spec/examples.txt
 
 .byebug_history
 
-.ruby-gemset
 .secrets.sh
 
 # Ignore application configuration
