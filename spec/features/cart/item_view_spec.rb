@@ -7,7 +7,7 @@ RSpec.shared_examples 'item view' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.path')
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
       .and_return("seeds/covers/Agile1.jpg")
   end
 

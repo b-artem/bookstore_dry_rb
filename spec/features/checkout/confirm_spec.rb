@@ -49,7 +49,7 @@ RSpec.feature 'Checkout Payment step' do
     payment_fields.each do |field|
       page.set_rack_session(field => payment_info.public_send(field))
     end
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.thumb.file.path')
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.thumb')
       .and_return("seeds/covers/Agile1.jpg")
     visit(order_checkout_index_path(order) + '/confirm')
   end
