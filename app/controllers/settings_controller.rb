@@ -23,7 +23,7 @@ class SettingsController < ApplicationController
                   notice: t('.success')
     else
       redirect_to settings_edit_path(tab: 'privacy'),
-                  alert: t('fail')
+                  alert: t('.fail')
     end
   end
 
