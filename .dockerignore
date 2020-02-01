@@ -1,0 +1,22 @@
+.dockerdev
+.dockerignore
+.env
+.git
+log/*
+!log/.keep
+public/assets/*
+public/uploads
+spec/coverage
+spec/examples.txt
+tmp/*
+!tmp/.keep
+!tmp/pids/.keep
+
+# Webpack
+# public/packs
+# public/packs-staging
+# public/packs-test
+# node_modules/*
+# yarn-error.log
+# yarn-debug.log*
+# .yarn-integrity
