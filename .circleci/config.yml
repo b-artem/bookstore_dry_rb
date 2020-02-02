@@ -17,7 +17,7 @@ executors:
           POSTGRES_PASSWORD: 'bookstore_password'
 
 caches:
-  - &bundle_cache_strict v1-repo-{{ checksum "Gemfile.lock" }}
+  - &bundle_cache_strict v1-repo-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
   - &bundle_cache_fallback v1-repo-
 
 commands:
@@ -30,11 +30,14 @@ commands:
       #       sudo apt-get update -qq && \
       #       sudo apt-get install -y --no-install-recommends chromedriver
       - run: chromedriver -v
+      - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)" --no-doc
       - restore_cache:
           keys:
             - *bundle_cache_strict
             - *bundle_cache_fallback
-      - run: bundle install --jobs $(nproc) --retry 3 --path vendor/bundle
+      - run: |
+          bundle config set path 'vendor/bundle'
+          bundle install --jobs $(nproc) --retry 3
       - save_cache:
           key: *bundle_cache_strict
           paths:
