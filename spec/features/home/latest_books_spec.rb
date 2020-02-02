@@ -1,13 +1,14 @@
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
+require 'capybara/rspec'
 
-shared_examples 'latest books' do
+RSpec.shared_examples 'latest books' do
   background do
     create_list(:book, 5)
     allow(Book).to receive(:best_seller).and_return(Book.first)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
+      .and_return("seeds/covers/Agile1.jpg")
     visit home_index_path
   end
 
@@ -51,7 +52,7 @@ shared_examples 'latest books' do
   end
 end
 
-feature 'Home page' do
+RSpec.feature 'Home page' do
   feature 'latest books' do
     context 'when user is a guest' do
       it_behaves_like 'latest books'

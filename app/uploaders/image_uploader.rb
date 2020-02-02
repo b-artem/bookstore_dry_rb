@@ -1,9 +1,14 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :fog
+
+  if Rails.env.in? %w[development test]
+    storage :file
+  else
+    storage :fog
+  end
 
   def store_dir
-    "bookstore/public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   def default_url(*args)

@@ -4,7 +4,7 @@ require 'support/i18n'
 require 'rack_session_access/capybara'
 require 'support/wait_for_ajax'
 
-shared_examples 'saves billing address' do
+RSpec.shared_examples 'saves billing address' do
   background do
     click_button t('orders.checkout.save_and_continue')
     wait_for_ajax
@@ -18,7 +18,7 @@ shared_examples 'saves billing address' do
   end
 end
 
-shared_examples 'saves shipping address' do
+RSpec.shared_examples 'saves shipping address' do
   background do
     click_button t('orders.checkout.save_and_continue')
     wait_for_ajax
@@ -32,7 +32,7 @@ shared_examples 'saves shipping address' do
   end
 end
 
-shared_examples 'uses billing address as shipping' do
+RSpec.shared_examples 'uses billing address as shipping' do
   background do
     click_button t('orders.checkout.save_and_continue')
     wait_for_ajax
@@ -46,7 +46,7 @@ shared_examples 'uses billing address as shipping' do
   end
 end
 
-shared_examples 'does not save addresses' do
+RSpec.shared_examples 'does not save addresses' do
   background do
     click_button t('orders.checkout.save_and_continue')
     wait_for_ajax
@@ -58,7 +58,7 @@ shared_examples 'does not save addresses' do
   end
 end
 
-shared_examples 'proceeds to next step' do
+RSpec.shared_examples 'proceeds to next step' do
   context 'when user clicks Save and Continue button' do
     background do
       click_button t('orders.checkout.save_and_continue')
@@ -73,7 +73,7 @@ shared_examples 'proceeds to next step' do
   end
 end
 
-shared_examples 'renders address form again' do
+RSpec.shared_examples 'renders address form again' do
   background do
     click_button t('orders.checkout.save_and_continue')
     wait_for_ajax
@@ -86,7 +86,7 @@ shared_examples 'renders address form again' do
   end
 end
 
-feature 'Checkout Address step' do
+RSpec.feature 'Checkout Address step' do
   let!(:user) { create :user }
   let!(:order) { create :order, user: user }
   let(:address_fields) { %w[first_name last_name address city zip country phone] }

@@ -1,10 +1,10 @@
 require 'rails_helper'
 require 'support/factory_girl'
 
-RSpec.describe Book, type: :model do
+RSpec.describe Book do
   let(:book) { build(:book) }
 
-  it "has a valid factory" do
+  it 'has a valid factory' do
     expect(book).to be_valid
   end
 
@@ -15,7 +15,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_many(:line_items) }
   end
 
-  describe "ActiveModel validations" do
+  describe 'ActiveModel validations' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_presence_of(:price) }
@@ -30,27 +30,40 @@ RSpec.describe Book, type: :model do
     end
     it { is_expected.to validate_inclusion_of(:publication_year).
                         in_range(1969..Date.today.year) }
+
+    describe 'destroy' do
+      let(:book) { create(:book) }
+
+      context 'when line items exist' do
+        before { create(:line_item, book: book) }
+
+        it 'adds does NOT destroy a book' do
+          expect(book.destroy).to be false
+          expect(book.errors[:base]).to contain_exactly(I18n.t('models.book.referenced_by_line_items'))
+        end
+      end
+    end
   end
 
   describe 'scopes' do
-    let(:bestseller_mob_dev) { create :book_mobile_development }
-    let(:bestseller_photo) { create :book_photo }
-    let(:bestseller_web_design) { create :book_web_design }
-    let(:bestseller_web_dev) { create :book_web_development }
-
-    before do
-      create(:order, state: 'delivered', line_items: [
-              create(:line_item, book: bestseller_mob_dev),
-              create(:line_item, book: bestseller_photo),
-              create(:line_item, book: bestseller_web_design),
-              create(:line_item, book: bestseller_web_dev) ])
-      create_list(:book_mobile_development, 3)
-      create_list(:book_photo, 3)
-      create_list(:book_web_design, 3)
-      create_list(:book_web_development, 3)
-    end
-
     context 'best_seller' do
+      let(:bestseller_mob_dev) { create :book_mobile_development }
+      let(:bestseller_photo) { create :book_photo }
+      let(:bestseller_web_design) { create :book_web_design }
+      let(:bestseller_web_dev) { create :book_web_development }
+
+      before do
+        create(:order, state: 'delivered', line_items: [
+                create(:line_item, book: bestseller_mob_dev),
+                create(:line_item, book: bestseller_photo),
+                create(:line_item, book: bestseller_web_design),
+                create(:line_item, book: bestseller_web_dev) ])
+        create_list(:book_mobile_development, 3)
+        create_list(:book_photo, 3)
+        create_list(:book_web_design, 3)
+        create_list(:book_web_development, 3)
+      end
+
       context "when category 'Mobile development'" do
         it 'selects best seller in proper category' do
           expect(Book.best_seller('Mobile development')).to eq bestseller_mob_dev
@@ -72,6 +85,16 @@ RSpec.describe Book, type: :model do
       context "When category 'Web development'" do
         it 'selects best seller in proper category' do
           expect(Book.best_seller('Web development')).to eq bestseller_web_dev
+        end
+      end
+    end
+
+    describe '.popular_first_ids' do
+      before { create(:book) }
+
+      context 'when no line items exist' do
+        it 'returns empty relation' do
+          expect(Book.popular_first_ids).to eq Book.none
         end
       end
     end

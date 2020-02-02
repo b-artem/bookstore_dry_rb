@@ -13,13 +13,14 @@
 !/log/.keep
 !/tmp/.keep
 /public/uploads/*
+spec/coverage
+spec/examples.txt
 
 /node_modules
 /yarn-error.log
 
 .byebug_history
 
-.ruby-gemset
 .secrets.sh
 
 # Ignore application configuration

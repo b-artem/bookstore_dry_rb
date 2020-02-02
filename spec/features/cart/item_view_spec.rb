@@ -3,12 +3,12 @@ require 'support/factory_girl'
 require 'support/devise'
 require 'support/i18n'
 
-shared_examples 'item view' do
+RSpec.shared_examples 'item view' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
+      .and_return("seeds/covers/Agile1.jpg")
   end
 
   context 'when user clicks Cart icon in top right corner' do
@@ -48,7 +48,7 @@ shared_examples 'item view' do
   end
 end
 
-feature 'Cart' do
+RSpec.feature 'Cart' do
   feature 'Item view' do
     context 'when user is a guest' do
       it_behaves_like 'item view'

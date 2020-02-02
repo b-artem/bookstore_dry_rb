@@ -2,14 +2,14 @@ require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
 
-shared_examples 'get started' do
+RSpec.shared_examples 'get started' do
   background do
     create :book_mobile_development
     create :book_photo
     create :book_web_design
     create :book_web_development
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
+      .and_return("seeds/covers/Agile1.jpg")
     visit home_index_path
   end
 
@@ -25,12 +25,12 @@ shared_examples 'get started' do
   end
 end
 
-feature 'Home page' do
+RSpec.feature 'Home page' do
   feature 'Get started' do
     context 'when user is a guest' do
       it_behaves_like 'get started'
     end
-    
+
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }
