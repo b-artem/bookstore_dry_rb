@@ -3,12 +3,12 @@ require 'support/factory_girl'
 require 'support/devise'
 require 'support/i18n'
 
-shared_examples 'home page' do
+RSpec.shared_examples 'home page' do
   background do
     create_list(:book, 5)
     allow(Book).to receive(:best_seller).and_return(Book.first)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
+      .and_return("seeds/covers/Agile1.jpg")
     visit home_index_path
   end
 
@@ -26,7 +26,7 @@ shared_examples 'home page' do
   end
 end
 
-feature 'Home page' do
+RSpec.feature 'Home page' do
   context 'when user is a guest' do
     it_behaves_like 'home page'
   end

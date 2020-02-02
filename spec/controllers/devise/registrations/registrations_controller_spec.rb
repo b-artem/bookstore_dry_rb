@@ -1,7 +1,7 @@
 require 'support/devise'
 require 'support/factory_girl'
 
-describe Devise::RegistrationsController, type: :controller do
+RSpec.describe Devise::RegistrationsController, type: :controller do
   before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end

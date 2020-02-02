@@ -2,12 +2,12 @@ require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
 
-shared_examples 'delete' do
+RSpec.shared_examples 'delete' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
+      .and_return("seeds/covers/Agile1.jpg")
     visit home_index_path
   end
 
@@ -28,7 +28,7 @@ shared_examples 'delete' do
   end
 end
 
-feature 'Cart' do
+RSpec.feature 'Cart' do
   feature 'Delete' do
     context 'when user is a guest' do
       include_examples 'delete'

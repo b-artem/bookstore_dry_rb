@@ -4,7 +4,7 @@ require 'support/i18n'
 require 'rack_session_access/capybara'
 require 'support/wait_for_ajax'
 
-feature 'Checkout Payment step' do
+RSpec.feature 'Checkout Payment step' do
   let!(:user) { create :user }
   let(:billing_address) { build :billing_address }
   let(:shipping_address) { build :shipping_address }

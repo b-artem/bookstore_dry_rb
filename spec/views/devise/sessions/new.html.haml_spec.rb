@@ -1,7 +1,7 @@
 require 'support/factory_girl'
 require 'support/i18n'
 
-describe 'devise/sessions/new.html.haml', type: :view do
+RSpec.describe 'devise/sessions/new.html.haml', type: :view do
   before :all do
     RSpec.configure do |config|
       config.mock_with :rspec do |mocks|

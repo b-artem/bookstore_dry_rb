@@ -1,7 +1,7 @@
 # README
 
-## Bookstore task
+## Simple Bookstore app
 
-https://bookstore-artem.herokuapp.com/
+Simple Bookstore app
 
 Valid coupon code: 12345678
