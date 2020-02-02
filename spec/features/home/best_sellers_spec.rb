@@ -46,7 +46,7 @@ RSpec.shared_examples 'best sellers' do
   context 'when user clicks Cart icon' do
     scenario 'adds chosen book to the cart', js: true do
       within '#bestsellers' do
-        click_link("add-book-#{bestseller_photo.id}-to-cart")
+        click_link("add-book-#{bestseller_photo.id}-to-cart", visible: false)
       end
       wait_for_ajax
       expect(Cart.last.line_items.first.book).to eq bestseller_photo

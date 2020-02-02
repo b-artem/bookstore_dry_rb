@@ -52,12 +52,12 @@ end
 
 group :test do
   gem 'capybara', '~> 2.13'
-  gem 'capybara-webkit', '~> 1.14'
+  gem 'capybara-screenshot'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'faker', '~> 1.8', '>= 1.8.4'
   gem 'rack_session_access', '~> 0.1.1'
   gem 'rspec_junit_formatter', '~> 0.4.1'
-  gem 'selenium-webdriver', '~> 3.5', '>= 3.5.2'
+  gem 'selenium-webdriver', '~> 3.142'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'simplecov', '~> 0.17.1', require: false
 end
