@@ -1,113 +1,76 @@
-version: 2
+version: 2.1
 
-jobs:
-  build:
-    # parallelism: 2
+executors:
+  default:
+    working_directory: ~/repo
+    description: The official CircleCI Ruby Docker image
     docker:
       - image: circleci/ruby:2.6-node-browsers
         environment:
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          DB_HOST: localhost
           RAILS_ENV: test
-          RAKE_ENV: test
-          FACEBOOK_KEY: ""
-          FACEBOOK_SECRET: ""
+          FACEBOOK_KEY: ''
+          FACEBOOK_SECRET: ''
+          DATABASE_PASSWORD: 'bookstore_password'
       - image: circleci/postgres:12-alpine
         environment:
-          POSTGRES_USER: bookstore
-          POSTGRES_PASSWORD: ""
+          POSTGRES_USER: rails_user
+          POSTGRES_PASSWORD: 'bookstore_password'
+
+caches:
+  - &bundle_cache_strict v1-repo-{{ checksum "Gemfile.lock" }}
+  - &bundle_cache_fallback v1-repo-
+
+commands:
+  prepare:
     steps:
       - checkout
-
-      # Needed for building gem capybara-webkit
-      # - restore_cache:
-      #     keys:
-      #       - bookstore-webkit-v1-{{ checksum "Gemfile.lock" }}
-      #       - bookstore-webkit-v1-
-      - run:
-          name: Install WebKit from QT
-          # command: sudo apt-get update && sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-          command: |
-            sudo apt-get update && sudo apt-get install -y --no-install-recommends \
-            qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-      # - save_cache:
-      #     key: bookstore-webkit-v1-{{ checksum "Gemfile.lock" }}
-      #     paths:
-      #       - ????????????
-
-      - run:
-          name: Ruby version
-          command: ruby -v
-      - run:
-          name: Bundler version
-          command: bundle -v
+      # - run:
+      #     name: Install package dependencies
+      #     command: |
+      #       sudo apt-get update -qq && \
+      #       sudo apt-get install -y --no-install-recommends chromedriver
+      - run: chromedriver -v
       - restore_cache:
           keys:
-            - bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - bookstore-bundle-v2-
-      - run:
-          name: Bundle install
-          command: bundle check || bundle install
+            - *bundle_cache_strict
+            - *bundle_cache_fallback
+      - run: bundle install --jobs $(nproc) --retry 3 --path vendor/bundle
       - save_cache:
-          key: bookstore-bundle-v2-{{ checksum "Gemfile.lock" }}
+          key: *bundle_cache_strict
           paths:
             - vendor/bundle
-
-      # Only necessary if app uses webpacker or yarn in some other way
-      # - restore_cache:
-      #     keys:
-      #       - bookstore-yarn-v1-{{ checksum "yarn.lock" }}
-      #       - bookstore-yarn-v1-
-      # - run:
-      #     name: Yarn Install
-      #     command: yarn install --cache-folder ~/.cache/yarn
-      # Store yarn / webpacker cache
-      # - save_cache:
-      #     key: bookstore-yarn-v1-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - ~/.cache/yarn
-
-      # If databse.yml is in .gitignore
-      # - run:
-      #     name: Prepare DB configuration file
-      #     command: |
-      #       mkdir -p config && echo 'test:
-      #         adapter: postgresql
-      #         encoding: unicode
-      #         pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-      #         username: bookstore
-      #         database: bookstore_test
-      #         host: localhost
-      #       ' > config/database.yml
-
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Database setup
+          name: Set up DB
           command: |
-            bin/rails db:create
-            bin/rails db:schema:load --trace
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
 
+  run_specs:
+    steps:
       - run:
-          name: Run RSpec
+          name: Run specs
           command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-
-            bundle exec rspec \
-              $TEST_FILES \
-              --profile 10 \
-              --format progress \
-              --format RspecJunitFormatter \
-              --out /tmp/test-results/rspec.xml \
-              --format progress
-
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format RspecJunitFormatter \
+                              --out test-results/rspec/results.xml \
+                              --format progress \
+                              $TEST_FILES
       - store_test_results:
-          path: /tmp/test-results
+          path: test-results
       - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+          path: ~/repo/spec/coverage
+      - store_artifacts:
+          path: ~/repo/tmp/capybara
+
+jobs:
+  run_specs:
+    executor: default
+    steps:
+      - prepare
+      - run_specs
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - run_specs
