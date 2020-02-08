@@ -1,10 +1,6 @@
 en:
   dry_validation:
     errors:
-      # # Example without namespace
-      # rules:
-      #   first_name:
-      #     format?: 'Only allows letters'
       address:
         rules:
           address:
@@ -15,6 +11,8 @@ en:
             format?: 'Only allows letters'
           last_name:
             format?: 'Only allows letters'
+          no_association:
+            'Either order_id or user_id must be present'
           phone:
             format?: "Only allows '+', 0-9"
           zip:

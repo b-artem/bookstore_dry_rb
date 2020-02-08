@@ -9,8 +9,8 @@ class AddressContract < ApplicationContract
 
   params do
     required(:type).filled(included_in?: %w[BillingAddress ShippingAddress])
-    optional(:order_id).filled(:integer)
-    optional(:user_id).filled(:integer)
+    optional(:order_id).maybe(:integer)
+    optional(:user_id).maybe(:integer)
 
     required(:first_name).filled(format?: NAME_FORMAT, max_size?: 49)
     required(:last_name).filled(format?: NAME_FORMAT, max_size?: 49)
@@ -19,5 +19,9 @@ class AddressContract < ApplicationContract
     required(:zip).filled(format?: ZIP_FORMAT, max_size?: 10)
     required(:country).filled(format?: CITY_FORMAT, max_size?: 49)
     required(:phone).filled(format?: PHONE_FORMAT, max_size?: 15)
+  end
+
+  rule(:order_id, :user_id) do
+    base.failure(:no_association) if !value && !values[:user_id]
   end
 end

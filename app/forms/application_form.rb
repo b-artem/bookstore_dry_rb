@@ -12,6 +12,6 @@ class ApplicationForm < Dry::Struct
   end
 
   def to_key
-    defined?(id) ? [id] : [nil]
+    defined?(id) ? id : nil
   end
 end

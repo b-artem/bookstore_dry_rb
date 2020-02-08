@@ -27,54 +27,41 @@ class SettingsController < ApplicationController
   end
 
   def update
-    if params[:billing_address]
-      address = AddressForm.new(params[:billing_address].to_unsafe_h.merge(type: 'BillingAddress'))
-    elsif params[:shipping_address]
-      address = Forms::ShippingAddressForm.from_params(params[:shipping_address])
-                .with_context(use_billing_address_as_shipping: false)
-    end
+    address = AddressForm.new(params[:address].to_unsafe_h.merge(user_id: @user.id))
     if address.save
-      addr = Address.find_or_create_by(user_id: @user.id, type: address.type)
-      addr.update(address.attributes)
       redirect_to settings_edit_path, notice: t('.success')
     else
-      redirect_to settings_edit_path(settings_params),
-                  alert: t('.fail')
+      redirect_to settings_edit_path(settings_params), alert: t('.fail')
     end
   end
 
   private
 
-    def set_user
-      @user = current_user
+  def set_user
+    @user = current_user
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :current_password, :password, :password_confirmation)
+  end
+
+  def settings_params
+    params.permit(address: %i[type first_name last_name address city zip country phone])
+  end
+
+  def set_addresses
+    if params.dig(:address, :type) == 'BillingAddress'
+      @billing_address = AddressForm.new(params[:address].to_unsafe_h)
+      @billing_address.valid?
+    else
+      @billing_address = @user.billing_address
     end
 
-    def user_params
-      params.require(:user).permit(:email, :current_password,
-                                    :password, :password_confirmation)
+    if params.dig(:address, :type) == 'ShippingAddress'
+      @shipping_address = AddressForm.new(params[:address].to_unsafe_h)
+      @shipping_address.valid?
+    else
+      @shipping_address = @user.shipping_address
     end
-
-    def settings_params
-      params.permit(billing_address: [:first_name, :last_name, :address, :city,
-                                      :zip, :country, :phone],
-                    shipping_address: [:first_name, :last_name, :address, :city,
-                                      :zip, :country, :phone])
-    end
-
-    def set_addresses
-      if params[:billing_address]
-        @billing_address = AddressForm.new(params[:billing_address].to_unsafe_h.merge(type: 'BillingAddress'))
-        @billing_address.valid?
-      else
-        @billing_address = Forms::BillingAddressForm.from_model(@user.billing_address)
-      end
-
-      if params[:shipping_address]
-        @shipping_address = Forms::ShippingAddressForm.from_params(params[:shipping_address])
-                            .with_context(use_billing_address_as_shipping: false)
-        @shipping_address.valid?
-      else
-        @shipping_address = Forms::ShippingAddressForm.from_model(@user.shipping_address)
-      end
-    end
+  end
 end

@@ -11,18 +11,17 @@ class AddressForm < ApplicationForm
   attribute :country?, Types::String
   attribute :phone?, Types::String
 
-  attr_reader :address, :errors
+  attr_reader :errors
 
   def save
     return false unless valid?
 
-    @address = attributes[:id] ? Address.find_by(id: attributes[:id]) : Address.new
-    address.attributes = attributes.except(:id)
-    address.save
+    address = Address.find_or_initialize_by(order_id: order_id, user_id: user_id, type: type)
+    address.update(attributes.except(:order_id, :user_id, :type))
   end
 
   def valid?
-    @errors = AddressContract.new.call(to_hash).errors.to_hash
+    @errors = AddressContract.new.call(attributes).errors.to_h
     errors.empty?
   end
 end
