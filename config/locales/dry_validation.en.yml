@@ -7,6 +7,8 @@ en:
             format?: "Only allows a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’"
           city:
             format?: "Only allows a-z, ' ', A-Z"
+          country:
+            format?: "Only allows a-z, ' ', A-Z"
           first_name:
             format?: 'Only allows letters'
           last_name:
