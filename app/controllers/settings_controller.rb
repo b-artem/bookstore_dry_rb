@@ -1,10 +1,9 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:edit, :update, :update_email, :change_password]
+  before_action :set_user, only: %i[edit update update_email change_password]
   before_action :set_addresses, only: :edit
 
-  def edit
-  end
+  def edit; end
 
   def update_email
     if @user.update(user_params)
@@ -29,14 +28,14 @@ class SettingsController < ApplicationController
 
   def update
     if params[:billing_address]
-      address = Forms::BillingAddressForm.from_params(params[:billing_address])
+      address = AddressForm.new(params[:billing_address].to_unsafe_h.merge(type: 'BillingAddress'))
     elsif params[:shipping_address]
       address = Forms::ShippingAddressForm.from_params(params[:shipping_address])
                 .with_context(use_billing_address_as_shipping: false)
     end
-    if address.valid?
+    if address.save
       addr = Address.find_or_create_by(user_id: @user.id, type: address.type)
-      addr.update_attributes(address.attributes)
+      addr.update(address.attributes)
       redirect_to settings_edit_path, notice: t('.success')
     else
       redirect_to settings_edit_path(settings_params),
@@ -64,7 +63,7 @@ class SettingsController < ApplicationController
 
     def set_addresses
       if params[:billing_address]
-        @billing_address = Forms::BillingAddressForm.from_params(params[:billing_address])
+        @billing_address = AddressForm.new(params[:billing_address].to_unsafe_h.merge(type: 'BillingAddress'))
         @billing_address.valid?
       else
         @billing_address = Forms::BillingAddressForm.from_model(@user.billing_address)

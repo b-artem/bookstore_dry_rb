@@ -17,8 +17,8 @@ executors:
           POSTGRES_PASSWORD: 'bookstore_password'
 
 caches:
-  - &bundle_cache_strict v1-repo-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-  - &bundle_cache_fallback v1-repo-
+  - &bundle_cache_strict v1-bundle-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+  - &bundle_cache_fallback v1-bundle
 
 commands:
   prepare:

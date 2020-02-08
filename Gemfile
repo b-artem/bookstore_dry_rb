@@ -5,6 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# dry-rb libraries
+gem 'dry-struct', '~> 1.2'
+gem 'dry-validation', '~> 1.4'
+
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'cancancan', '~> 2.0'

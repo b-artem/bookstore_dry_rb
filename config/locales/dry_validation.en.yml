@@ -1,0 +1,21 @@
+en:
+  dry_validation:
+    errors:
+      # # Example without namespace
+      # rules:
+      #   first_name:
+      #     format?: 'Only allows letters'
+      address:
+        rules:
+          address:
+            format?: "Only allows a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’"
+          city:
+            format?: "Only allows a-z, ' ', A-Z"
+          first_name:
+            format?: 'Only allows letters'
+          last_name:
+            format?: 'Only allows letters'
+          phone:
+            format?: "Only allows '+', 0-9"
+          zip:
+            format?: "Only allows 0-9 '-'"
