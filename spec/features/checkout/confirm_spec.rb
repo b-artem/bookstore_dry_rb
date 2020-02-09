@@ -2,6 +2,7 @@ require 'support/factory_girl'
 require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
+require 'support/dry_validation/payment_info'
 
 RSpec.shared_examples 'checkout address page opens' do
   scenario 'Checkout Address page opens' do
@@ -41,13 +42,16 @@ RSpec.feature 'Checkout Payment step' do
            billing_address: billing_address, shipping_address: shipping_address,
            shipping_method: shipping_method)
   end
-  let(:payment_info) { build :payment_form }
-  let(:payment_fields) { %w[card_number name_on_card valid_until cvv] }
+
+  include_context :payment_info
+  let(:payment_information) { payment_info }
+
+  let(:payment_fields) { %i[card_number name_on_card valid_until cvv] }
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
     payment_fields.each do |field|
-      page.set_rack_session(field => payment_info.public_send(field))
+      page.set_rack_session(field => payment_information[field])
     end
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.thumb')
       .and_return("seeds/covers/Agile1.jpg")
