@@ -3,6 +3,7 @@ require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
 require 'support/wait_for_ajax'
+require 'support/dry_validation/payment_info'
 
 RSpec.feature 'Checkout Payment step' do
   let!(:user) { create :user }
@@ -13,8 +14,11 @@ RSpec.feature 'Checkout Payment step' do
     create(:order, user: user, billing_address: billing_address,
            shipping_address: shipping_address, shipping_method: shipping_method)
   end
-  let(:payment_info) { build :payment_form }
-  let(:fields) { %w[card_number name_on_card valid_until cvv] }
+
+  include_context :payment_info
+  let(:payment_information) { payment_info }
+  let(:fields) { %i[card_number name_on_card valid_until cvv] }
+
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
@@ -59,8 +63,7 @@ RSpec.feature 'Checkout Payment step' do
     def fill_payment_form
       within 'form.new_payment' do
         fields.each do |field|
-          fill_in(t("orders.checkout.payment.#{field}"),
-                  with: payment_info.public_send(field))
+          fill_in(t("orders.checkout.payment.#{field}"), with: payment_information[field])
         end
       end
     end
