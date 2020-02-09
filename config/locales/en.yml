@@ -178,19 +178,6 @@ en:
       coupon_symbols: 'Only allows letters and numbers'
     review:
       title_symbols: "Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. "
-    payment:
-      invalid_term: 'Invalid term'
-    forms:
-      address_form:
-        only_letters: 'Only allows letters'
-        address_symbols: "Only allows a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’"
-        city_symbols: "Only allows a-z, ' ', A-Z"
-        zip_symbols: "Only allows 0-9 '-'"
-        phone_symbols: "Only allows '+', 0-9"
-      payment_form:
-        card_number_symbols: 'Only allows 0-9'
-        name_on_card_symbols: 'Only allows letters and spaces'
-        cvv_symbols: 'Only allows 0-9'
   reviews:
     review:
       verified_reviewer: 'Verified Reviewer'

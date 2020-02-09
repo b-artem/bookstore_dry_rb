@@ -53,8 +53,9 @@ class Orders::CheckoutController < ApplicationController
   end
 
   def load_payment
-    @payment = Forms::PaymentForm.new
-    @payment.attributes.each { |key, _| @payment[key] = session[key] }
+    keys = PaymentForm.schema.keys.map(&:name)
+    attrs = keys.each_with_object({}) { |key, hash| hash[key] = session[key] }
+    @payment = PaymentForm.new(attrs)
   end
 
   def save_addresses
@@ -74,7 +75,7 @@ class Orders::CheckoutController < ApplicationController
   end
 
   def process_payment
-    @payment = Forms::PaymentForm.from_params(params[:payment])
+    @payment = PaymentForm.new(params[:payment].to_unsafe_h)
     set_payment_data if @payment.valid?
     render_next_step @payment
   end
@@ -98,6 +99,6 @@ class Orders::CheckoutController < ApplicationController
   end
 
   def clear_payment_data
-    Forms::PaymentForm.new.attributes.each { |key, _| session.delete(key) }
+    PaymentForm.schema.keys.map(&:name).each { |key| session.delete(key) }
   end
 end

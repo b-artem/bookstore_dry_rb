@@ -21,3 +21,12 @@ en:
             not_shipping: 'Type must be ShippingAddress'
           zip:
             format?: "Only allows 0-9 '-'"
+      payment:
+        rules:
+          card_number:
+            format?: 'Only allows 0-9'
+          cvv:
+            format?: 'Only allows 0-9'
+            invalid_term: 'Invalid term'
+          name_on_card:
+            format?: 'Only allows letters and spaces'
