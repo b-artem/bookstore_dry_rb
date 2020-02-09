@@ -11,8 +11,6 @@ class AddressForm < ApplicationForm
   attribute :country?, Types::String
   attribute :phone?, Types::String
 
-  attr_reader :errors
-
   def save
     return false unless valid?
 

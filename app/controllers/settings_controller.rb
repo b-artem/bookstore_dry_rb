@@ -54,14 +54,14 @@ class SettingsController < ApplicationController
       @billing_address = AddressForm.new(params[:address].to_unsafe_h)
       @billing_address.valid?
     else
-      @billing_address = @user.billing_address
+      @billing_address = AddressForm.new(@user.billing_address.attributes)
     end
 
     if params.dig(:address, :type) == 'ShippingAddress'
       @shipping_address = AddressForm.new(params[:address].to_unsafe_h)
       @shipping_address.valid?
     else
-      @shipping_address = @user.shipping_address
+      @shipping_address = AddressForm.new(@user.shipping_address.attributes)
     end
   end
 end

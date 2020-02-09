@@ -35,6 +35,16 @@ RSpec.describe AddressForm do
     end
   end
 
+  context 'Type' do
+    it 'allows only BillingAddress or ShippingAddress' do
+      expect(form.new(attributes.merge(type: %w[BillingAddress ShippingAddress].sample))).to be_valid
+
+      invalid_form = form.new(attributes.merge(type: Faker::Lorem.word))
+      invalid_form.valid?
+      expect(invalid_form.errors.keys).to contain_exactly :type
+    end
+  end
+
   context 'Presence' do
     include_examples :validates_presence_of, :type
     include_examples :validates_presence_of, :first_name
