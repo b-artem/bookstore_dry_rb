@@ -27,6 +27,7 @@ en:
             format?: 'Only allows 0-9'
           cvv:
             format?: 'Only allows 0-9'
-            invalid_term: 'Invalid term'
           name_on_card:
             format?: 'Only allows letters and spaces'
+          valid_until:
+            invalid_term: 'Invalid term'

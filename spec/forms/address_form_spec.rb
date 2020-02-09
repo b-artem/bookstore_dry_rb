@@ -1,29 +1,5 @@
-require 'rails_helper'
 require 'support/factory_girl'
-require 'support/i18n'
-
-RSpec.shared_examples :validates_presence_of do |attr|
-  it "validates presence of #{attr}" do
-    attrs = attributes.except(attr)
-    expect(form.new(attrs)).not_to be_valid
-  end
-end
-
-RSpec.shared_examples :allows_value do |attr, value|
-  it "allows value #{value} for #{attr}" do
-    form = described_class.new(attributes.merge(attr => value))
-    form.valid?
-    expect(form.errors).to eq({})
-  end
-end
-
-RSpec.shared_examples :not_allow_value do |attr, value|
-  it "does not allow value #{value} for #{attr}" do
-    form = described_class.new(attributes.merge(attr => value))
-    form.valid?
-    expect(form.errors).to eq(attr => [t("dry_validation.errors.address.rules.#{attr}.format?")])
-  end
-end
+require 'support/dry_validation/shared_examples'
 
 RSpec.describe AddressForm do
   let(:form) { described_class }
