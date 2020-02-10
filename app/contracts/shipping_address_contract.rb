@@ -1,5 +1,3 @@
-require_relative '../schemas/address_schema'
-
 class ShippingAddressContract < AddressContract
   # Contracts don't inherit schema from a parent
   params(AddressSchema, AddressFormSchema)

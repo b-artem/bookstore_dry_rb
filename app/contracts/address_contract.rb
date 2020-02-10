@@ -1,5 +1,3 @@
-require_relative '../schemas/address_schema'
-
 class AddressContract < ApplicationContract
   config.messages.namespace = :address
 

@@ -1,5 +1,3 @@
-require_relative '../schemas/payment_schema'
-
 class PaymentContract < ApplicationContract
   config.messages.namespace = :payment
 

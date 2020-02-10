@@ -6,7 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 # dry-rb libraries
+gem 'dry-schema', '~> 1.4'
 gem 'dry-struct', '~> 1.2'
+gem 'dry-types', '~> 1.2'
 gem 'dry-validation', '~> 1.4'
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'

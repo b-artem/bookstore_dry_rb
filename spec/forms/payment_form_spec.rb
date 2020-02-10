@@ -28,19 +28,19 @@ RSpec.describe PaymentForm do
     include_examples :allows_value, :name_on_card, 'Elon Musk'
     include_examples :not_allow_value, :name_on_card, 'Elon-Musk'
 
-    include_examples :allows_value, :valid_until, Time.zone.today.strftime('%m/%y').to_s
-    include_examples :allows_value, :valid_until, (Time.zone.today + 120.months).strftime('%m/%y').to_s
+    include_examples :allows_value, :valid_until, Time.zone.today.strftime('%m/%y')
+    include_examples :allows_value, :valid_until, (Time.zone.today + 120.months).strftime('%m/%y')
     include_examples :not_allow_value,
-                     :valid_until, (Time.zone.today + 121.months).strftime('%m/%y').to_s,
+                     :valid_until, (Time.zone.today + 121.months).strftime('%m/%y'),
                      :invalid_term
     include_examples :not_allow_value,
-                     :valid_until, (Time.zone.today - 1.month).strftime('%m/%y').to_s,
+                     :valid_until, (Time.zone.today - 1.month).strftime('%m/%y'),
                      :invalid_term
     include_examples :not_allow_value,
-                     :valid_until, Time.zone.today.strftime('%m/%Y').to_s,
+                     :valid_until, Time.zone.today.strftime('%m/%Y'),
                      :invalid_term
     include_examples :not_allow_value,
-                     :valid_until, Time.zone.today.strftime('%m%y').to_s,
+                     :valid_until, Time.zone.today.strftime('%m%y'),
                      :invalid_term
 
     include_examples :allows_value, :cvv, '123'
