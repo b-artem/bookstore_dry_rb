@@ -16,7 +16,7 @@ class OrderForm < ApplicationForm
     billing_address.valid?
     shipping_address&.valid? unless use_billing_address_as_shipping
 
-    attrs = attributes.transform_values { |val| val.is_a?(Dry::Struct) ? val.to_h : val }
+    attrs = NestedStructsToHash.call(attributes)
     errors = OrderContract.new.call(attrs).errors.to_h
     errors = errors.except(:shipping_address) if use_billing_address_as_shipping
 

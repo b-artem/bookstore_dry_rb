@@ -15,7 +15,7 @@ class ApplicationForm < Dry::Struct
   end
 
   def model_name
-    ActiveModel::Name.new(self.class.to_s.gsub('Form', '').constantize)
+    ActiveModel::Name.new(self.class.to_s.chomp('Form').constantize)
   end
 
   def to_key

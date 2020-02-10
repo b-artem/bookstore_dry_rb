@@ -22,7 +22,7 @@ RSpec.shared_examples :not_allow_value do |attr, value, rule_key|
     form.valid?
 
     key = rule_key || :format?
-    i18n_path = "dry_validation.errors.#{described_class.to_s.gsub('Form', '').underscore}.rules.#{attr}.#{key}"
+    i18n_path = "dry_validation.errors.#{described_class.to_s.chomp('Form').underscore}.rules.#{attr}.#{key}"
     expect(form.errors).to eq(attr => [t(i18n_path)])
   end
 end
