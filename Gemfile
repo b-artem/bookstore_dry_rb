@@ -5,6 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# dry-rb libraries
+gem 'dry-monads', '~> 1.3'
+gem 'dry-schema', '~> 1.4'
+gem 'dry-struct', '~> 1.2'
+gem 'dry-transformer', '~> 0.1'
+gem 'dry-types', '~> 1.2'
+gem 'dry-validation', '~> 1.4'
+
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'cancancan', '~> 2.0'
@@ -28,7 +36,6 @@ gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1', '>= 5.1.7'
 gem 'rails_admin', '1.3.0'
 gem 'rails_admin_aasm', '~> 0.1.1'
-gem 'rectify', '~> 0.10.0'
 gem 'sass-rails', '~> 5.0'
 gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 gem 'simple_form', '~> 5.0'

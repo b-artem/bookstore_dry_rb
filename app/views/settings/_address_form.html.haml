@@ -1,7 +1,9 @@
 = simple_form_for address,
+        as: :address,
         url: settings_update_path, method: :put,
         class: 'res-mb-100',
         defaults: { label_html: { class: 'control-label input-label' } } do |f|
+  = f.input :type, as: :hidden
   = f.input :first_name
   = f.input :last_name
   = f.input :address

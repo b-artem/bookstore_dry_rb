@@ -68,8 +68,8 @@ RSpec.describe SettingsController do
     let(:user) { create(:user, billing_address: create(:billing_address)) }
     let(:billing_address) { build(:billing_address) }
 
-    let(:valid_params) { { billing_address: billing_address.attributes } }
-    let(:invalid_params) { { billing_address: billing_address.attributes.except('city') } }
+    let(:valid_params) { { address: billing_address.attributes.except('user_id', 'order_id') } }
+    let(:invalid_params) { { address: billing_address.attributes.except('city') } }
 
     before { sign_in user }
 
