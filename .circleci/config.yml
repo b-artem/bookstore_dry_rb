@@ -5,7 +5,7 @@ executors:
     working_directory: ~/repo
     description: The official CircleCI Ruby Docker image
     docker:
-      - image: circleci/ruby:2.6-node-browsers
+      - image: circleci/ruby:2.6-node
         environment:
           RAILS_ENV: test
           FACEBOOK_KEY: ''
@@ -19,6 +19,7 @@ executors:
 caches:
   - &bundle_cache_strict v1-bundle-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
   - &bundle_cache_fallback v1-bundle
+  - &yarn_cache yarn-v10
 
 commands:
   prepare:
@@ -29,7 +30,7 @@ commands:
       #     command: |
       #       sudo apt-get update -qq && \
       #       sudo apt-get install -y --no-install-recommends chromedriver
-      - run: chromedriver -v
+      # - run: chromedriver -v
       - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)" --no-doc
       - restore_cache:
           keys:
@@ -42,28 +43,54 @@ commands:
           key: *bundle_cache_strict
           paths:
             - vendor/bundle
+
+# Add global yarn package
+###################################################################
+      - restore_cache:
+          keys:
+            - *yarn_cache
       - run:
-          name: Set up DB
+          name: Add yarn global package
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
+            export PATH="$(yarn global bin):$PATH"
+            snowboard -v || yarn global add snowboard@3.7.3
+      - save_cache:
+          key: *yarn_cache
+          paths:
+            - ~/.config/yarn/global/node_modules
+            - ~/.yarn/bin
+###################################################################
+
+
+      # - run:
+      #     name: Set up DB
+      #     command: |
+      #       bundle exec rake db:create
+      #       bundle exec rake db:schema:load
 
   run_specs:
     steps:
+      # - run:
+      #     name: Run specs
+      #     command: |
+      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+      #       bundle exec rspec --format RspecJunitFormatter \
+      #                         --out test-results/rspec/results.xml \
+      #                         --format progress \
+      #                         $TEST_FILES
+      # - store_test_results:
+      #     path: test-results
+      # - store_artifacts:
+      #     path: ~/repo/spec/coverage
+      # - store_artifacts:
+      #     path: ~/repo/tmp/capybara
+
       - run:
-          name: Run specs
+          name: Use yarn global package
           command: |
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format RspecJunitFormatter \
-                              --out test-results/rspec/results.xml \
-                              --format progress \
-                              $TEST_FILES
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: ~/repo/spec/coverage
-      - store_artifacts:
-          path: ~/repo/tmp/capybara
+            export PATH="$(yarn global bin):$PATH"
+            snowboard -v
+            bin/rails snowboard:version
 
 jobs:
   run_specs:
