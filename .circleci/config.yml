@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  gcp-cli: circleci/gcp-cli@1.8.4
+
 executors:
   default:
     working_directory: ~/repo
@@ -92,12 +95,22 @@ commands:
             snowboard -v
             bin/rails snowboard:version
 
+  apidoc:
+    steps:
+      - gcp-cli/install
+      - gcp-cli/initialize
+      - run:
+          name: Upload API documentation
+          command: |
+            gsutil cp ~/repo/public/422.html gs://apidoc-test/
+
 jobs:
   run_specs:
     executor: default
     steps:
       - prepare
       - run_specs
+      - apidoc
 
 workflows:
   version: 2.1
