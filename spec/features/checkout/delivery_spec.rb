@@ -24,6 +24,7 @@ RSpec.feature 'Checkout Delivery step' do
                                days_max: 3, price: 15.0)
     ]
   end
+
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
@@ -32,6 +33,7 @@ RSpec.feature 'Checkout Delivery step' do
 
   context 'when Order has shipping method' do
     let(:shipping_method) { shipping_methods.sample }
+
     background do
       order.update_attributes(shipping_method: shipping_method)
       visit(order_checkout_index_path(order) + '/delivery')
@@ -57,6 +59,7 @@ RSpec.feature 'Checkout Delivery step' do
 
   context 'when user cliks Save and Continue button' do
     let(:shipping_method) { shipping_methods.sample }
+
     background do
       within 'table#shipping-methods' do
         find('span.radio-text', text: shipping_method.name).click

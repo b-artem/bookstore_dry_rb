@@ -7,17 +7,18 @@ require 'support/i18n'
 RSpec.feature 'Signup' do
   let(:password) { Faker::Internet.password(8) }
   let(:book) { create :book }
+
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
     visit new_user_registration_path
   end
 
   context 'when password confirmation valid' do
     scenario 'User registers successfully via register form' do
       create_list(:book, 3)
-      allow_any_instance_of(User).to receive(:confirmed_at).and_return(Time.now - 1.hours)
+      allow_any_instance_of(User).to receive(:confirmed_at).and_return(Time.zone.now - 1.hour)
       within 'form#new_user' do
         fill_in 'email', with: Faker::Internet.email
         fill_in 'password', with: password

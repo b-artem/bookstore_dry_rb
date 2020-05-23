@@ -7,10 +7,11 @@ require 'support/i18n'
 RSpec.feature 'Login' do
   let(:user) { create :user }
   let(:book) { create :book }
+
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
     visit new_user_session_path
   end
 

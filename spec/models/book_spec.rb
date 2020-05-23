@@ -25,13 +25,19 @@ RSpec.describe Book do
     it { is_expected.to validate_presence_of(:dimensions) }
     it { is_expected.to validate_presence_of(:materials) }
 
-    it { is_expected.to validate_numericality_of(:price).
-                        is_greater_than_or_equal_to(0.01) }
+    it {
+      is_expected.to validate_numericality_of(:price)
+        .is_greater_than_or_equal_to(0.01)
+    }
+
     it 'validates uniqueness of :title' do
       expect(book).to validate_uniqueness_of(:title).case_insensitive
     end
-    it { is_expected.to validate_inclusion_of(:publication_year).
-                        in_range(1969..Date.today.year) }
+
+    it {
+      is_expected.to validate_inclusion_of(:publication_year)
+        .in_range(1969..Date.today.year)
+    }
 
     describe 'destroy' do
       let(:book) { create(:book) }
@@ -56,10 +62,11 @@ RSpec.describe Book do
 
       before do
         create(:order, state: 'delivered', line_items: [
-                create(:line_item, book: bestseller_mob_dev),
-                create(:line_item, book: bestseller_photo),
-                create(:line_item, book: bestseller_web_design),
-                create(:line_item, book: bestseller_web_dev) ])
+                 create(:line_item, book: bestseller_mob_dev),
+                 create(:line_item, book: bestseller_photo),
+                 create(:line_item, book: bestseller_web_design),
+                 create(:line_item, book: bestseller_web_dev)
+               ])
         create_list(:book_mobile_development, 3)
         create_list(:book_photo, 3)
         create_list(:book_web_design, 3)
@@ -68,25 +75,25 @@ RSpec.describe Book do
 
       context "when category 'Mobile development'" do
         it 'selects best seller in proper category' do
-          expect(Book.best_seller('Mobile development')).to eq bestseller_mob_dev
+          expect(described_class.best_seller('Mobile development')).to eq bestseller_mob_dev
         end
       end
 
-      context "When category 'Photo'" do
+      context "when category 'Photo'" do
         it 'selects best seller in proper category' do
-          expect(Book.best_seller('Photo')).to eq bestseller_photo
+          expect(described_class.best_seller('Photo')).to eq bestseller_photo
         end
       end
 
-      context "When category 'Web design'" do
+      context "when category 'Web design'" do
         it 'selects best seller in proper category' do
-          expect(Book.best_seller('Web design')).to eq bestseller_web_design
+          expect(described_class.best_seller('Web design')).to eq bestseller_web_design
         end
       end
 
-      context "When category 'Web development'" do
+      context "when category 'Web development'" do
         it 'selects best seller in proper category' do
-          expect(Book.best_seller('Web development')).to eq bestseller_web_dev
+          expect(described_class.best_seller('Web development')).to eq bestseller_web_dev
         end
       end
     end
@@ -96,7 +103,7 @@ RSpec.describe Book do
 
       context 'when no line items exist' do
         it 'returns empty relation' do
-          expect(Book.popular_first_ids).to eq Book.none
+          expect(described_class.popular_first_ids).to eq described_class.none
         end
       end
     end

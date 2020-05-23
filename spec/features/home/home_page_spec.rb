@@ -35,6 +35,7 @@ RSpec.feature 'Home page' do
 
   context 'when user is logged in' do
     let(:user) { create(:user) }
+
     background { sign_in user }
     it_behaves_like 'home page'
   end

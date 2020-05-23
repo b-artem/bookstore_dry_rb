@@ -19,7 +19,7 @@ class Order < ApplicationRecord
     event :pay do
       transitions from: :in_progress, to: :in_queue
       after do
-        update_attributes(completed_at: Time.now)
+        update(completed_at: Time.zone.now)
       end
     end
   end
@@ -51,6 +51,6 @@ class Order < ApplicationRecord
 
   def generate_number
     number = id.to_s.rjust(9, 'R00000000')
-    update_attributes(number: number)
+    update(number: number)
   end
 end

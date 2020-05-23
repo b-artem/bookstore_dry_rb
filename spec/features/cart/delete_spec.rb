@@ -39,6 +39,7 @@ RSpec.feature 'Cart' do
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
+
       background { sign_in user }
       include_examples 'delete'
     end

@@ -18,8 +18,11 @@ RSpec.describe LineItem, type: :model do
 
   describe 'ActiveModel validations' do
     it { is_expected.to validate_presence_of(:quantity) }
-    it { is_expected.to validate_numericality_of(:quantity)
-                        .only_integer.is_greater_than_or_equal_to(1) }
+
+    it {
+      is_expected.to validate_numericality_of(:quantity)
+        .only_integer.is_greater_than_or_equal_to(1)
+    }
   end
 
   describe '#subtotal' do

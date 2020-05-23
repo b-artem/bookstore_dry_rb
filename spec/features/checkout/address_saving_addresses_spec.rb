@@ -94,6 +94,7 @@ RSpec.feature 'Checkout Address step' do
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
   let(:billing_address) { build :billing_address }
   let(:shipping_address) { build :shipping_address }
+
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)

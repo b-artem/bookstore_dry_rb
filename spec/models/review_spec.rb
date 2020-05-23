@@ -18,12 +18,19 @@ RSpec.describe Review, type: :model do
   describe 'ActiveModel validations' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:text) }
-    it {is_expected.to allow_value("Az7!#$%&'*+ -/=?^_`{|}~.").for(:title) }
-    it {is_expected.to allow_value("Az7!#$%&'*+ -/=?^_`{|}~.").for(:title) }
-    it { is_expected.not_to allow_value("@").for(:title)
-        .with_message("Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. ") }
-    it { is_expected.not_to allow_value("@").for(:text)
-        .with_message("Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. ") }
+    it { is_expected.to allow_value("Az7!#$%&'*+ -/=?^_`{|}~.").for(:title) }
+    it { is_expected.to allow_value("Az7!#$%&'*+ -/=?^_`{|}~.").for(:title) }
+
+    it {
+      is_expected.not_to allow_value('@').for(:title)
+                                         .with_message("Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. ")
+    }
+
+    it {
+      is_expected.not_to allow_value('@').for(:text)
+                                         .with_message("Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. ")
+    }
+
     it { is_expected.to validate_length_of(:title).is_at_most(79) }
     it { is_expected.to validate_length_of(:text).is_at_most(499) }
   end
@@ -35,13 +42,13 @@ RSpec.describe Review, type: :model do
 
     context 'when .new_' do
       it "selects reviews with status 'unprocessed'" do
-        expect(Review.new_).to eq unprocessed
+        expect(described_class.new_).to eq unprocessed
       end
     end
 
     context 'when .processed' do
       it "selects reviews with status 'approved' or 'rejected'" do
-        expect(Review.processed).to eq(approved + rejected)
+        expect(described_class.processed).to eq(approved + rejected)
       end
     end
   end
@@ -53,15 +60,15 @@ RSpec.describe Review, type: :model do
 
     describe '#approve' do
       it "changes state from 'unprocessed' to 'approved'" do
-        expect { review.approve }.to change { review.status }
-                .from('unprocessed').to('approved')
+        expect { review.approve }.to change(review, :status)
+          .from('unprocessed').to('approved')
       end
     end
 
     describe '#reject' do
       it "changes state from 'unprocessed' to 'rejected'" do
-        expect { review.reject }.to change { review.status }
-                .from('unprocessed').to('rejected')
+        expect { review.reject }.to change(review, :status)
+          .from('unprocessed').to('rejected')
       end
     end
   end

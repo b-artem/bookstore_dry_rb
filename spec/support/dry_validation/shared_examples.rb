@@ -3,14 +3,14 @@
 require 'rails_helper'
 require 'support/i18n'
 
-RSpec.shared_examples :validates_presence_of do |attr|
+RSpec.shared_examples 'validates presence of' do |attr|
   it "validates presence of #{attr}" do
     attrs = attributes.except(attr)
     expect(form.new(attrs)).not_to be_valid
   end
 end
 
-RSpec.shared_examples :allows_value do |attr, value|
+RSpec.shared_examples 'allows value' do |attr, value|
   it "allows value #{value} for #{attr}" do
     form = described_class.new(attributes.merge(attr => value))
     form.valid?
@@ -18,7 +18,7 @@ RSpec.shared_examples :allows_value do |attr, value|
   end
 end
 
-RSpec.shared_examples :not_allow_value do |attr, value, rule_key|
+RSpec.shared_examples 'not allow value' do |attr, value, rule_key|
   it "does not allow value #{value} for #{attr}" do
     form = described_class.new(attributes.merge(attr => value))
     form.valid?

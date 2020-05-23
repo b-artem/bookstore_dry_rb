@@ -56,6 +56,7 @@ end
 RSpec.feature 'Checkout Address loads addresses from user Settings' do
   let!(:user) { create :user }
   let!(:order) { create :order, user: user }
+
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
@@ -86,6 +87,7 @@ RSpec.feature 'Checkout Address loads addresses from user Settings' do
 
   context 'when user has filled only Billing Address in Settings page' do
     let(:billing_address) { create :billing_address }
+
     background do
       user.billing_address = billing_address
       visit order_checkout_index_path(order)
@@ -97,6 +99,7 @@ RSpec.feature 'Checkout Address loads addresses from user Settings' do
 
   context 'when user has filled only Shipping Address in Settings page' do
     let(:shipping_address) { create :shipping_address }
+
     background do
       user.shipping_address = shipping_address
       visit order_checkout_index_path(order)
@@ -109,6 +112,7 @@ RSpec.feature 'Checkout Address loads addresses from user Settings' do
   context 'when user has filled both Billing and Shipping Addresses in Settings page' do
     let(:billing_address) { create :billing_address }
     let(:shipping_address) { create :shipping_address }
+
     background do
       user.billing_address = billing_address
       user.shipping_address = shipping_address

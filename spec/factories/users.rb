@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
     password { '12345678' }
-    confirmed_at { Time.now }
+    confirmed_at { Time.zone.now }
 
     factory :admin do
       role { 'admin' }

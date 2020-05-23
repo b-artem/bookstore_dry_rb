@@ -23,7 +23,8 @@ RSpec.describe Cart, type: :model do
         context 'when product is not in cart yet' do
           it 'adds product to cart' do
             expect { cart.add_product(book, 3) }.to change {
-              cart.line_items.length }.by 1
+                                                      cart.line_items.length
+                                                    }.by 1
           end
         end
 
@@ -31,7 +32,8 @@ RSpec.describe Cart, type: :model do
           it 'increase quantity of product in cart' do
             cart.add_product(book, 1).save
             expect { cart.add_product(book, 2).save }.to change {
-              cart.line_items.first.quantity }.from(1).to(3)
+                                                           cart.line_items.first.quantity
+                                                         }.from(1).to(3)
           end
         end
       end
@@ -39,14 +41,16 @@ RSpec.describe Cart, type: :model do
       context 'when number is negative' do
         it 'does not add product' do
           expect { cart.add_product(book, -3) }.not_to change {
-            cart.line_items.length }
+                                                         cart.line_items.length
+                                                       }
         end
       end
 
       context 'when number is not integer' do
         it 'does not add product' do
           expect { cart.add_product(book, 3.27) }.not_to change {
-            cart.line_items.length }
+                                                           cart.line_items.length
+                                                         }
         end
       end
     end
@@ -62,7 +66,9 @@ RSpec.describe Cart, type: :model do
 
     describe '#total' do
       let(:coupon) { build :coupon, discount: '30' }
+
       before { cart.coupon = coupon }
+
       it 'calculates (subtotal - discount)' do
         allow(cart).to receive(:subtotal).and_return(100)
         expect(cart.total).to eq 70
