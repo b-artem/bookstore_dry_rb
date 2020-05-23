@@ -68,7 +68,7 @@ commands:
   save-coverage:
     steps:
       - store_artifacts:
-          path: ~/repo/spec/coverage
+          path: ~/repo/coverage
           destination: coverage
   save-capybara-artifacts:
     steps:
