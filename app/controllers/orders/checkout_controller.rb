@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Orders::CheckoutController < ApplicationController
   include Wicked::Wizard
   include CurrentOrder

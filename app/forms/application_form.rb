@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationForm < Dry::Struct
   module Types
     include Dry::Types(default: :nominal)

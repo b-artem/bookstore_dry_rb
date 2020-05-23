@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/factory_girl'
 require 'support/dry_validation/shared_examples'
 

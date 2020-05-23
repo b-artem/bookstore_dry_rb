@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentForm < ApplicationForm
   attribute :card_number?, Types::String
   attribute :name_on_card?, Types::String

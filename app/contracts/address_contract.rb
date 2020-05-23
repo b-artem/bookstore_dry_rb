@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddressContract < ApplicationContract
   config.messages.namespace = :address
 

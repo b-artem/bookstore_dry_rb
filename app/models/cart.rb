@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cart < ApplicationRecord
   include Validations
   belongs_to :coupon, optional: true

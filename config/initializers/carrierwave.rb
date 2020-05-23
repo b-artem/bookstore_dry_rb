@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if Rails.env.in? %w[development test]
   CarrierWave.configure do |config|
     config.storage = :file

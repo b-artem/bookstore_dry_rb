@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LineItemsController < ApplicationController
   load_and_authorize_resource only: %i[update destroy]
   authorize_resource only: :create

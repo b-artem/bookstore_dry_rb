@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/devise'
 require 'support/factory_girl'
 

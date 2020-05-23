@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/dry_validation/shared_examples'
 require 'support/dry_validation/payment_info'
 

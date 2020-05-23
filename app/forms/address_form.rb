@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddressForm < ApplicationForm
   attribute :type?, Types::String
   attribute :user_id?, Types::Integer

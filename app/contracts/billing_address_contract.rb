@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BillingAddressContract < AddressContract
   # Contracts don't inherit schema from a parent
   params(AddressSchema, AddressFormSchema)

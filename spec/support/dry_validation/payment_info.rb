@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context :payment_info, shared_context: :metadata do
   def payment_info
     {

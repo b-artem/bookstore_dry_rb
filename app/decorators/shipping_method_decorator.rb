@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShippingMethodDecorator < Draper::Decorator
   delegate_all
 

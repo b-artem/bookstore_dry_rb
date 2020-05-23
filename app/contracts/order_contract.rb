@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderContract < ApplicationContract
   config.messages.namespace = :order
 

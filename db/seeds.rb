@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 unless User.exists?
   User.create!([
     {email: "adm@adm.ua", password: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2017-12-01 14:29:44", last_sign_in_at: "2017-12-01 14:29:44", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", role: "admin", omniauth_provider: nil, omniauth_uid: nil, image_url: nil, confirmation_token: "xgtTrnfheZUgxBw9uDJR", confirmed_at: "2017-12-01 14:30:41", confirmation_sent_at: "2017-12-01 14:29:42", unconfirmed_email: nil},
