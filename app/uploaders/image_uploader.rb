@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
@@ -11,8 +13,8 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def default_url(*args)
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  def default_url(*_args)
+    ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default.png'].compact.join('_'))
   end
 
   process resize_to_fit: [600, 800]
@@ -26,6 +28,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(jpg gif png)
+    %w[jpg gif png]
   end
 end

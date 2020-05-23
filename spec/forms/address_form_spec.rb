@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/factory_girl'
 require 'support/dry_validation/shared_examples'
 
@@ -22,39 +24,39 @@ RSpec.describe AddressForm do
   end
 
   context 'Presence' do
-    include_examples :validates_presence_of, :type
-    include_examples :validates_presence_of, :first_name
-    include_examples :validates_presence_of, :last_name
-    include_examples :validates_presence_of, :address
-    include_examples :validates_presence_of, :city
-    include_examples :validates_presence_of, :zip
-    include_examples :validates_presence_of, :country
-    include_examples :validates_presence_of, :phone
+    include_examples 'validates presence of', :type
+    include_examples 'validates presence of', :first_name
+    include_examples 'validates presence of', :last_name
+    include_examples 'validates presence of', :address
+    include_examples 'validates presence of', :city
+    include_examples 'validates presence of', :zip
+    include_examples 'validates presence of', :country
+    include_examples 'validates presence of', :phone
   end
 
   context 'Format' do
-    include_examples :allows_value, :first_name, 'Anna'
-    include_examples :not_allow_value, :first_name, 'Anna-Maria'
+    include_examples 'allows value', :first_name, 'Anna'
+    include_examples 'not allow value', :first_name, 'Anna-Maria'
 
-    include_examples :allows_value, :last_name, 'Musk'
-    include_examples :not_allow_value, :last_name, 'Musk2'
+    include_examples 'allows value', :last_name, 'Musk'
+    include_examples 'not allow value', :last_name, 'Musk2'
 
-    include_examples :allows_value, :address, 'a-z, A-Z, 0-9'
-    include_examples :not_allow_value, :address, '/'
+    include_examples 'allows value', :address, 'a-z, A-Z, 0-9'
+    include_examples 'not allow value', :address, '/'
 
-    include_examples :allows_value, :city, 'Buenos Aires'
-    include_examples :not_allow_value, :city, 'Buenos-Aires'
+    include_examples 'allows value', :city, 'Buenos Aires'
+    include_examples 'not allow value', :city, 'Buenos-Aires'
 
-    include_examples :allows_value, :zip, '123-456'
-    include_examples :not_allow_value, :zip, '123 456'
+    include_examples 'allows value', :zip, '123-456'
+    include_examples 'not allow value', :zip, '123 456'
 
-    include_examples :allows_value, :country, 'South Africa'
-    include_examples :not_allow_value, :country, 'South-Africa'
+    include_examples 'allows value', :country, 'South Africa'
+    include_examples 'not allow value', :country, 'South-Africa'
 
-    include_examples :allows_value, :phone, '+380123456789'
-    include_examples :not_allow_value, :phone, '380123456789'
-    include_examples :not_allow_value, :phone, '+380 12 345 67 89'
-    include_examples :not_allow_value, :phone, '+380(12)3456789'
-    include_examples :not_allow_value, :phone, '+380-12-345-67-89'
+    include_examples 'allows value', :phone, '+380123456789'
+    include_examples 'not allow value', :phone, '380123456789'
+    include_examples 'not allow value', :phone, '+380 12 345 67 89'
+    include_examples 'not allow value', :phone, '+380(12)3456789'
+    include_examples 'not allow value', :phone, '+380-12-345-67-89'
   end
 end

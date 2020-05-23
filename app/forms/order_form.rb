@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderForm < ApplicationForm
   attribute :id, Types::Integer
   attribute :billing_address?, BillingAddressForm

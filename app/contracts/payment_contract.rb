@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentContract < ApplicationContract
   config.messages.namespace = :payment
 

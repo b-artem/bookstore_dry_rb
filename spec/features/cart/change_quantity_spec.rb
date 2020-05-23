@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
@@ -7,12 +9,13 @@ RSpec.shared_examples 'changes quantity' do
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
     visit home_index_path
   end
 
   context 'when product quantity = 1', js: true do
     let(:line_item) { create(:line_item, cart: Cart.last, book: book) }
+
     background { visit cart_path(line_item.cart) }
 
     context "user clicks '+' button" do
@@ -22,7 +25,8 @@ RSpec.shared_examples 'changes quantity' do
       scenario 'increments quantity value in cart' do
         within "#line-item-#{line_item.id}" do
           expect { subject }.to change {
-            page.find_by_id("input-line-item-#{line_item.id}").value.to_i }.by(1)
+                                  page.find_by_id("input-line-item-#{line_item.id}").value.to_i # rubocop:disable Rails/DynamicFindBy
+                                }.by(1)
         end
       end
 
@@ -40,7 +44,8 @@ RSpec.shared_examples 'changes quantity' do
       scenario 'does NOT decrement quantity value in cart' do
         within "#line-item-#{line_item.id}" do
           expect { subject }.not_to change {
-            page.find_by_id("input-line-item-#{line_item.id}").value.to_i }
+                                      page.find_by_id("input-line-item-#{line_item.id}").value.to_i # rubocop:disable Rails/DynamicFindBy
+                                    }
         end
       end
 
@@ -56,6 +61,7 @@ RSpec.shared_examples 'changes quantity' do
     let!(:line_item) do
       create(:line_item, cart: Cart.last, book: book, quantity: 2)
     end
+
     background { visit cart_path(Cart.last) }
 
     context "user clicks '-' button" do
@@ -65,7 +71,8 @@ RSpec.shared_examples 'changes quantity' do
       scenario 'decrements quantity value in cart' do
         within "#line-item-#{line_item.id}" do
           expect { subject }.to change {
-            page.find_by_id("input-line-item-#{line_item.id}").value.to_i }.by(-1)
+                                  page.find_by_id("input-line-item-#{line_item.id}").value.to_i # rubocop:disable Rails/DynamicFindBy
+                                }.by(-1)
         end
       end
 
@@ -84,6 +91,7 @@ RSpec.feature 'Cart' do
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
+
       background { sign_in user }
       include_examples 'changes quantity'
     end

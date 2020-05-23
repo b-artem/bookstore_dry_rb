@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 AddressSchema = Dry::Schema.Params do
   NAME_FORMAT = /\A[a-zA-Z]+\z/.freeze
   ADDRESS_FORMAT = /\A[A-Za-z0-9, -]+\z/.freeze

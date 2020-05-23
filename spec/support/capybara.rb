@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/wait_for_ajax'
 require 'support/selenium_webdriver'
 require 'support/capybara_screenshot'

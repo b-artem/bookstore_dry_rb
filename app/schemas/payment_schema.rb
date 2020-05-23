@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 PaymentSchema = Dry::Schema.Params do
   CARD_NUMBER_FORMAT = /\A[0-9]{8,19}\z/.freeze
   NAME_ON_CARD_FORMAT = /\A[A-Z a-z]+\z/.freeze

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :books, only: %i[index show] do
     resources :reviews, only: :create
@@ -16,5 +18,5 @@ Rails.application.routes.draw do
   patch 'settings/change_password'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

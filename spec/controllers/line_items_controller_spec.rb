@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/devise'
 require 'support/factory_girl'
@@ -46,12 +48,13 @@ RSpec.describe LineItemsController, type: :controller do
     context 'with valid params' do
       before do
         put :update, format: 'js', session: valid_session,
-            params: { id: line_item.id, line_item: { quantity: 5 } }
+                     params: { id: line_item.id, line_item: { quantity: 5 } }
       end
 
       it 'updates the requested line_item' do
         expect(line_item.reload.quantity).to eq 5
       end
+
       it 'returns status code 200' do
         expect(response).to have_http_status 200
       end
@@ -60,12 +63,13 @@ RSpec.describe LineItemsController, type: :controller do
     context 'with invalid params' do
       before do
         put :update, format: 'js', session: valid_session,
-            params: { id: line_item.id, line_item: { quantity: '2.43' } }
+                     params: { id: line_item.id, line_item: { quantity: '2.43' } }
       end
 
       it 'does not update the requested line_item' do
         expect(line_item.reload.quantity).to eq 1
       end
+
       it 'redirects to the Cart' do
         expect(response).to redirect_to cart_url(cart)
       end

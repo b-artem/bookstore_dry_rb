@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
@@ -8,7 +10,7 @@ RSpec.shared_examples 'item view' do
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
   end
 
   context 'when user clicks Cart icon in top right corner' do
@@ -24,14 +26,14 @@ RSpec.shared_examples 'item view' do
   context 'when user wants to see Book details' do
     background do
       visit home_index_path
-      create(:line_item, cart: Cart.last, book: book )
+      create(:line_item, cart: Cart.last, book: book)
       visit cart_path(Cart.last)
     end
 
     context 'user clicks Photo' do
       scenario 'Book view page opens' do
         click_link "photo-view-#{book.id}"
-        expect(current_path).to eq book_path(book)
+        expect(page).to have_current_path book_path(book), ignore_query: true
         expect(page).to have_text(book.decorate.authors_names)
         expect(page).to have_text(book.publication_year)
       end
@@ -40,7 +42,7 @@ RSpec.shared_examples 'item view' do
     context 'user clicks Title' do
       scenario 'Book view page opens' do
         click_link "title-view-#{book.id}-xs"
-        expect(current_path).to eq book_path(book)
+        expect(page).to have_current_path book_path(book), ignore_query: true
         expect(page).to have_text(book.decorate.authors_names)
         expect(page).to have_text(book.publication_year)
       end
@@ -56,6 +58,7 @@ RSpec.feature 'Cart' do
 
     context 'when user is logged in' do
       let(:user) { create(:user) }
+
       background { sign_in user }
       it_behaves_like 'item view'
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Coupon < ApplicationRecord
   has_many :carts
   has_many :orders

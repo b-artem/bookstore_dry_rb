@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    @user = User.from_omniauth(request.env["omniauth.auth"])
-    unless request.env["omniauth.auth"].info.email
-      flash[:warning] = t '.no_email_provided'
-    end
+    @user = User.from_omniauth(request.env['omniauth.auth'])
+    flash[:warning] = t '.no_email_provided' unless request.env['omniauth.auth'].info.email
     sign_in_and_redirect @user
   end
 
