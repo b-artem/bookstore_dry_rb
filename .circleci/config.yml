@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  ruby: circleci/ruby@1.0.0
+
 executors:
   default:
     working_directory: ~/repo
@@ -17,7 +20,7 @@ executors:
           POSTGRES_PASSWORD: 'bookstore_password'
 
 caches:
-  - &bundle_cache_strict v1-bundle-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+  - &bundle_cache_strict v1-bundle-{{ checksum "Gemfile.lock" }}
   - &bundle_cache_fallback v1-bundle
 
 commands:
@@ -30,6 +33,11 @@ commands:
       #       sudo apt-get update -qq && \
       #       sudo apt-get install -y --no-install-recommends chromedriver
       - run: chromedriver -v
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
       - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)" --no-doc
       - restore_cache:
           keys:
@@ -45,35 +53,42 @@ commands:
       - run:
           name: Set up DB
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
-
-  run_specs:
+            bin/rails db:create
+            bin/rails db:schema:load
+  cc-before-build:
     steps:
       - run:
-          name: Run specs
           command: |
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format RspecJunitFormatter \
-                              --out test-results/rspec/results.xml \
-                              --format progress \
-                              $TEST_FILES
-      - store_test_results:
-          path: test-results
+            ./cc-test-reporter before-build
+  cc-after-build:
+    steps:
+      - run:
+          command: |
+            ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
+  save-coverage:
+    steps:
       - store_artifacts:
-          path: ~/repo/spec/coverage
+          path: ~/repo/coverage
+          destination: coverage
+  save-capybara-artifacts:
+    steps:
       - store_artifacts:
           path: ~/repo/tmp/capybara
+          destination: capybara
 
 jobs:
-  run_specs:
+  build-test-coverage:
     executor: default
     steps:
       - prepare
-      - run_specs
+      - cc-before-build
+      - ruby/rspec-test
+      - cc-after-build
+      - save-capybara-artifacts
+      - save-coverage
 
 workflows:
   version: 2.1
   build:
     jobs:
-      - run_specs
+      - build-test-coverage

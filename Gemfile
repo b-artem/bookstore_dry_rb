@@ -1,3 +1,5 @@
+ruby '2.6.6'
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -48,7 +50,9 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do

@@ -1,19 +1,22 @@
 require:
   - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
 
 AllCops:
-  NewCops: enable
   TargetRubyVersion: 2.6
   TargetRailsVersion: 5.1
+
+  NewCops: enable
   Exclude:
-    - 'db/schema.rb'
+    - db/schema.rb
 
 Layout/LineLength:
   Max: 120
 
 Rails:
   Enabled: true
-
+  
 Rails/UnknownEnv:
   Environments:
     - development
