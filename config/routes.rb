@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   patch 'settings/change_password'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

@@ -7,12 +7,13 @@ RSpec.shared_examples 'changes quantity' do
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
     visit home_index_path
   end
 
   context 'when product quantity = 1', js: true do
     let(:line_item) { create(:line_item, cart: Cart.last, book: book) }
+
     background { visit cart_path(line_item.cart) }
 
     context "user clicks '+' button" do
@@ -56,6 +57,7 @@ RSpec.shared_examples 'changes quantity' do
     let!(:line_item) do
       create(:line_item, cart: Cart.last, book: book, quantity: 2)
     end
+
     background { visit cart_path(Cart.last) }
 
     context "user clicks '-' button" do

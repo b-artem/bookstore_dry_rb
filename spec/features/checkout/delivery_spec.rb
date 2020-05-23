@@ -13,14 +13,14 @@ RSpec.feature 'Checkout Delivery step' do
                    shipping_address: shipping_address
   end
   let!(:shipping_methods) do
-  [
-    create(:shipping_method, name: 'Pick Up In-Store', days_min: 5,
-                             days_max: 20, price: 10.0),
-    create(:shipping_method, name: 'Delivery Next Day!', days_min: 3,
-                             days_max: 7, price: 5.0),
-    create(:shipping_method, name: 'Expressit', days_min: 2,
-                             days_max: 3, price: 15.0)
-  ]
+    [
+      create(:shipping_method, name: 'Pick Up In-Store', days_min: 5,
+                               days_max: 20, price: 10.0),
+      create(:shipping_method, name: 'Delivery Next Day!', days_min: 3,
+                               days_max: 7, price: 5.0),
+      create(:shipping_method, name: 'Expressit', days_min: 2,
+                               days_max: 3, price: 15.0)
+    ]
   end
   background do
     sign_in user

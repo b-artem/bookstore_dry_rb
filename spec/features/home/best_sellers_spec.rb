@@ -10,16 +10,17 @@ RSpec.shared_examples 'best sellers' do
 
   background do
     create(:order, state: 'delivered', line_items: [
-            create(:line_item, book: bestseller_mob_dev),
-            create(:line_item, book: bestseller_photo),
-            create(:line_item, book: bestseller_web_design),
-            create(:line_item, book: bestseller_web_dev) ])
+             create(:line_item, book: bestseller_mob_dev),
+             create(:line_item, book: bestseller_photo),
+             create(:line_item, book: bestseller_web_design),
+             create(:line_item, book: bestseller_web_dev)
+           ])
     create_list(:book_mobile_development, 3)
     create_list(:book_photo, 3)
     create_list(:book_web_design, 3)
     create_list(:book_web_development, 3)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
     visit home_index_path
   end
 

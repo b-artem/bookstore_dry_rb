@@ -14,11 +14,7 @@ class User < ApplicationRecord
           omniauth_uid: auth.uid).first_or_create do |user|
       user.omniauth_provider = auth.provider
       user.omniauth_uid = auth.uid
-      if auth.info.email
-        user.email = auth.info.email
-      else
-        user.email = auth.info.first_name + auth.info.last_name + '@fb.com'
-      end
+      user.email = (auth.info.email || auth.info.first_name + auth.info.last_name + '@fb.com')
       user.skip_confirmation!
       user.password = Devise.friendly_token[0, 20]
       user.image_url = auth.info.image

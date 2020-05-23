@@ -20,8 +20,8 @@ RSpec.shared_examples 'shipping_address form is empty' do
   scenario 'fields in Shipping Address form are empty' do
     within 'div#shipping-address-form' do
       address_fields.each do |field|
-      expect(find_field(t("simple_form.labels.defaults.#{field}"))
-                        .value).to be_blank
+        expect(find_field(t("simple_form.labels.defaults.#{field}"))
+                          .value).to be_blank
       end
     end
   end

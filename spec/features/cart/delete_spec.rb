@@ -7,12 +7,13 @@ RSpec.shared_examples 'delete' do
   background do
     allow(Book).to receive(:best_seller).and_return(book)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
     visit home_index_path
   end
 
   context "user clicks 'x' button", js: true do
     let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
+
     background { visit cart_path(Cart.last) }
 
     scenario 'removes product from Cart view' do
@@ -23,7 +24,7 @@ RSpec.shared_examples 'delete' do
 
     scenario 'decrements number of products in Cart' do
       expect { click_button("delete-#{line_item.id}"); wait_for_ajax }
-                .to change { Cart.last.line_items.count }.by(-1)
+        .to change { Cart.last.line_items.count }.by(-1)
     end
   end
 end

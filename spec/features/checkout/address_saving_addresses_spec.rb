@@ -147,27 +147,27 @@ RSpec.feature 'Checkout Address step' do
 
   private
 
-    def fill_billing_address(address)
-      within '#billing-address-form' do
-        fill_address(address)
-      end
+  def fill_billing_address(address)
+    within '#billing-address-form' do
+      fill_address(address)
     end
+  end
 
-    def fill_shipping_address(address)
-      within '#shipping-address-form' do
-        fill_address(address)
-      end
+  def fill_shipping_address(address)
+    within '#shipping-address-form' do
+      fill_address(address)
     end
+  end
 
-    def fill_address(address)
-      address_fields.each do |field|
-        if field == 'country'
-          select(address.decorate.public_send(field),
-                 from: t("simple_form.labels.defaults.#{field}"))
-          next
-        end
-        fill_in(t("simple_form.labels.defaults.#{field}"),
-                with: address.public_send(field))
+  def fill_address(address)
+    address_fields.each do |field|
+      if field == 'country'
+        select(address.decorate.public_send(field),
+               from: t("simple_form.labels.defaults.#{field}"))
+        next
       end
+      fill_in(t("simple_form.labels.defaults.#{field}"),
+              with: address.public_send(field))
     end
+  end
 end

@@ -11,8 +11,7 @@ class Orders::OrdersController < ApplicationController
     @orders = @orders.where(state: state_filter).order('completed_at DESC')
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @order = current_user.orders.create(coupon: @cart.coupon)
@@ -24,9 +23,10 @@ class Orders::OrdersController < ApplicationController
 
   private
 
-    def state_filter
-      return 'in_queue' if !params[:state] || !Order.aasm.states.map(&:name)
-                                                .include?(params[:state].to_sym)
-      params[:state]
-    end
+  def state_filter
+    return 'in_queue' if !params[:state] || !Order.aasm.states.map(&:name)
+                                                  .include?(params[:state].to_sym)
+
+    params[:state]
+  end
 end

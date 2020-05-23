@@ -14,6 +14,7 @@ RSpec.describe Category, type: :model do
 
   describe 'ActiveModel validations' do
     it { is_expected.to validate_presence_of(:name) }
+
     it 'validates uniqueness of :name' do
       expect(category).to validate_uniqueness_of(:name).case_insensitive
     end

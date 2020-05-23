@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     redirect_to main_app.root_path, alert: exception.message
   end
 
-  def self.default_url_options(options={})
-    options.merge({ :locale => I18n.locale })
+  def self.default_url_options(options = {})
+    options.merge({ locale: I18n.locale })
   end
 
   protected
@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale_from_params
     return unless params[:locale]
+
     if I18n.available_locales.map(&:to_s).include?(params[:locale])
       I18n.locale = params[:locale]
     else
@@ -51,11 +52,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def storable_location?
-      request.get? && !devise_controller? && !request.xhr?
-    end
+  def storable_location?
+    request.get? && !devise_controller? && !request.xhr?
+  end
 
-    def store_user_location
-      store_location_for(:user, request.fullpath)
-    end
+  def store_user_location
+    store_location_for(:user, request.fullpath)
+  end
 end

@@ -3,6 +3,6 @@ FactoryGirl.define do
     book { build(:book) }
     cart { build(:cart) }
     price { book.price }
-    quantity 1
+    quantity { 1 }
   end
 end

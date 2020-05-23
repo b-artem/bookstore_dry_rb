@@ -6,7 +6,7 @@ class Review < ApplicationRecord
 
   validates :title, :text,
             presence: true,
-            format: { with: /\A[a-zA-Z0-9 !#\$%&'\*\+-=\/\?\^\_`\{\}\|~\.]+\z/,
+            format: { with: %r{\A[a-zA-Z0-9 !#\$%&'\*\+-=/\?\^\_`\{\}\|~\.]+\z},
                       message: I18n.t('models.review.title_symbols') }
   validates :title, length: { maximum: 79 }
   validates :text, length: { maximum: 499 }
@@ -24,11 +24,11 @@ class Review < ApplicationRecord
     end
   end
 
-  scope :new_, -> do
+  scope :new_, lambda {
     Review.where('status = ?', 'unprocessed')
-  end
+  }
 
-  scope :processed, -> do
+  scope :processed, lambda {
     Review.where('status = ? OR status = ?', 'approved', 'rejected')
-  end
+  }
 end

@@ -24,11 +24,13 @@ class Order < ApplicationRecord
 
   def shipping_address
     return super unless self[:use_billing_address_as_shipping]
+
     billing_address
   end
 
   def subtotal
     return 0 unless line_items.exists?
+
     line_items.sum(&:subtotal)
   end
 
@@ -39,13 +41,14 @@ class Order < ApplicationRecord
 
   def discount
     return 0 unless coupon
+
     subtotal * coupon.discount / 100
   end
 
   private
 
-    def generate_number
-      number = id.to_s.rjust(9, 'R00000000')
-      update_attributes(number: number)
-    end
+  def generate_number
+    number = id.to_s.rjust(9, 'R00000000')
+    update_attributes(number: number)
+  end
 end

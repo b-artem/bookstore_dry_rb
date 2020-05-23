@@ -15,29 +15,31 @@ class Book < ApplicationRecord
 
   paginates_per 12
 
-  scope :best_seller, ->(category) do
+  scope :best_seller, lambda { |category|
     return Book.none unless Category.pluck(:name).include?(category)
     return Category.find_by(name: category).books.first unless LineItem.exists?
-    LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
-      .joins(book: :categories).where(categories: { name: category })
-      .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.book_id').order('total_quantity DESC').first.book
-  end
 
-  scope :popular_first_ids, -> do
+    LineItem.select('line_items.book_id, sum(quantity) as total_quantity')
+            .joins(book: :categories).where(categories: { name: category })
+            .joins(:order).where(orders: { state: 'delivered' })
+            .group('line_items.book_id').order('total_quantity DESC').first.book
+  }
+
+  scope :popular_first_ids, lambda {
     return Book.none unless LineItem.exists?
-    LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
-      .joins(:book)
-      .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.book_id').order('total_quantity DESC').map(&:book_id)
-  end
+
+    LineItem.select('line_items.book_id, sum(quantity) as total_quantity')
+            .joins(:book)
+            .joins(:order).where(orders: { state: 'delivered' })
+            .group('line_items.book_id').order('total_quantity DESC').map(&:book_id)
+  }
 
   private
 
-    def ensure_not_referenced_by_any_line_item
-      if line_items.exists?
-        errors.add(:base, I18n.t('models.book.referenced_by_line_items'))
-        throw :abort
-      end
+  def ensure_not_referenced_by_any_line_item
+    if line_items.exists?
+      errors.add(:base, I18n.t('models.book.referenced_by_line_items'))
+      throw :abort
     end
+  end
 end

@@ -19,6 +19,7 @@ RSpec.describe 'devise/registrations/new.html.haml', type: :view do
   end
 
   let(:user) { build :user }
+
   before do
     allow(view).to receive(:resource).and_return(user)
     allow(view).to receive(:resource_name).and_return(:user)

@@ -51,7 +51,7 @@ Devise.setup do |config|
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:email, :password]
+  config.strip_whitespace_keys = %i[email password]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -164,7 +164,6 @@ Devise.setup do |config|
   # to give user feedback and not to assert the e-mail validity.
   config.email_regexp =
     /\A[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})\z/
-
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this

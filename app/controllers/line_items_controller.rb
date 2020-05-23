@@ -1,5 +1,5 @@
 class LineItemsController < ApplicationController
-  load_and_authorize_resource only: [:update, :destroy]
+  load_and_authorize_resource only: %i[update destroy]
   authorize_resource only: :create
 
   def create
@@ -10,7 +10,7 @@ class LineItemsController < ApplicationController
     else
       redirect_back fallback_location: root_path, alert: t('.fail')
     end
-  rescue
+  rescue StandardError
     redirect_back fallback_location: root_path,
                   alert: t('.enter_positive_integer')
   end
@@ -32,7 +32,7 @@ class LineItemsController < ApplicationController
 
   private
 
-    def line_item_params
-      params.require(:line_item).permit(:quantity)
-    end
+  def line_item_params
+    params.require(:line_item).permit(:quantity)
+  end
 end
