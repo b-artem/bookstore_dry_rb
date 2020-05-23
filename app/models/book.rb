@@ -13,7 +13,7 @@ class Book < ApplicationRecord
             :dimensions, :materials, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :title, uniqueness: { case_sensitive: false }
-  validates :publication_year, inclusion: { in: 1969..Date.today.year }
+  validates :publication_year, inclusion: { in: 1969..Time.zone.today.year }
 
   paginates_per 12
 

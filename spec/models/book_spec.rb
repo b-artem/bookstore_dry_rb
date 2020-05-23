@@ -36,7 +36,7 @@ RSpec.describe Book do
 
     it {
       is_expected.to validate_inclusion_of(:publication_year)
-        .in_range(1969..Date.today.year)
+        .in_range(1969..Time.zone.today.year)
     }
 
     describe 'destroy' do
