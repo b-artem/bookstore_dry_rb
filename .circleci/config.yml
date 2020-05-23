@@ -33,6 +33,11 @@ commands:
       #       sudo apt-get update -qq && \
       #       sudo apt-get install -y --no-install-recommends chromedriver
       - run: chromedriver -v
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
       - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)" --no-doc
       - restore_cache:
           keys:
@@ -50,6 +55,16 @@ commands:
           command: |
             bin/rails db:create
             bin/rails db:schema:load
+  cc-before-build:
+    steps:
+      - run:
+          command: |
+            ./cc-test-reporter before-build
+  cc-after-build:
+    steps:
+      - run:
+          command: |
+            ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
   save-coverage:
     steps:
       - store_artifacts:
@@ -66,7 +81,9 @@ jobs:
     executor: default
     steps:
       - prepare
+      - cc-before-build
       - ruby/rspec-test
+      - cc-after-build
       - save-capybara-artifacts
       - save-coverage
 
