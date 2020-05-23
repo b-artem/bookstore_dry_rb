@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  ruby: circleci/ruby@1.0.0
+
 executors:
   default:
     working_directory: ~/repo
@@ -17,7 +20,7 @@ executors:
           POSTGRES_PASSWORD: 'bookstore_password'
 
 caches:
-  - &bundle_cache_strict v1-bundle-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+  - &bundle_cache_strict v1-bundle-{{ checksum "Gemfile.lock" }}
   - &bundle_cache_fallback v1-bundle
 
 commands:
@@ -45,35 +48,30 @@ commands:
       - run:
           name: Set up DB
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
-
-  run_specs:
+            bin/rails db:create
+            bin/rails db:schema:load
+  save-coverage:
     steps:
-      - run:
-          name: Run specs
-          command: |
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format RspecJunitFormatter \
-                              --out test-results/rspec/results.xml \
-                              --format progress \
-                              $TEST_FILES
-      - store_test_results:
-          path: test-results
       - store_artifacts:
           path: ~/repo/spec/coverage
+          destination: coverage
+  save-capybara-artifacts:
+    steps:
       - store_artifacts:
           path: ~/repo/tmp/capybara
+          destination: capybara
 
 jobs:
-  run_specs:
+  build-test-coverage:
     executor: default
     steps:
       - prepare
-      - run_specs
+      - ruby/rspec-test
+      - save-capybara-artifacts
+      - save-coverage
 
 workflows:
   version: 2.1
   build:
     jobs:
-      - run_specs
+      - build-test-coverage
