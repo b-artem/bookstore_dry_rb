@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
@@ -9,6 +11,7 @@ class Ability
       can :manage, :all
     else
       return unless session
+
       can :read, Book
       can :create, Review
       can :read, Review, status: 'approved'

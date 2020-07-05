@@ -16,6 +16,7 @@
         %p.general-info-text= t '.all_fields_are_required'
       #billing-address-form
         = order.simple_fields_for @order.billing_address do |b|
+          = b.input :type, as: :hidden, input_html: { value: 'BillingAddress' }
           = b.input :first_name
           = b.input :last_name
           = b.input :address
@@ -29,6 +30,7 @@
         %h3.general-subtitle= t '.shipping_address'
       #shipping-address-form
         = order.simple_fields_for @order.shipping_address do |s|
+          = s.input :type, as: :hidden, input_html: { value: 'ShippingAddress' }
           = s.input :first_name
           = s.input :last_name
           = s.input :address

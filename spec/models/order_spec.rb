@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/factory_girl'
 
@@ -23,7 +25,7 @@ RSpec.describe Order, type: :model do
 
     describe '#pay' do
       it "changes state from 'in_progress' to 'in_queue'" do
-        expect { order.pay }.to change { order.state }
+        expect { order.pay }.to change(order, :state)
           .from('in_progress').to('in_queue')
       end
     end
@@ -99,14 +101,14 @@ RSpec.describe Order, type: :model do
 
   describe 'private methods' do
     describe '#generate_number' do
+      after { order.send(:generate_number) }
+
       it 'assigns :number' do
         expect(order.number).to be_nil
         order.send(:generate_number)
         expect(order.number).not_to be_nil
       end
 
-
-      after { order.send(:generate_number) }
       context 'when id is 123' do
         it 'generates :number R00000123' do
           allow(order).to receive(:id).and_return(123)
@@ -117,7 +119,7 @@ RSpec.describe Order, type: :model do
 
       context 'when id is 12345678' do
         it 'generates :number R12345678' do
-          allow(order).to receive(:id).and_return(12345678)
+          allow(order).to receive(:id).and_return(12_345_678)
           order.send(:generate_number)
           expect(order.number).to eq 'R12345678'
         end

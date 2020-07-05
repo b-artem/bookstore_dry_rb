@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookDecorator < Draper::Decorator
   delegate_all
   decorates_association :authors
@@ -11,7 +13,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def full_description
-    h.truncate(description, length: 10000).gsub(/\s+/, ' ')
+    h.truncate(description, length: 10_000).gsub(/\s+/, ' ')
   end
 
   def price

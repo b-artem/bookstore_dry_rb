@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/factory_girl'
 
@@ -15,13 +17,14 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_one(:shipping_address) }
   end
 
-
   context 'ActiveModel validations' do
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:password) }
+
     it 'validates uniqueness of :email' do
       expect(user).to validate_uniqueness_of(:email).case_insensitive
     end
+
     it { is_expected.not_to allow_value('http://foo.com').for(:email) }
     it { is_expected.to validate_length_of(:password).is_at_least(8) }
     it { is_expected.to validate_confirmation_of(:password) }

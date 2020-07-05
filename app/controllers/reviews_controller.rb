@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :book
@@ -14,7 +16,7 @@ class ReviewsController < ApplicationController
 
   private
 
-    def review_params
-      params.require(:review).permit(:title, :text, :score)
-    end
+  def review_params
+    params.require(:review).permit(:title, :text, :score)
+  end
 end

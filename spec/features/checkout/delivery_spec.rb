@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'support/factory_girl'
 require 'support/devise'
 require 'support/i18n'
@@ -13,15 +15,16 @@ RSpec.feature 'Checkout Delivery step' do
                    shipping_address: shipping_address
   end
   let!(:shipping_methods) do
-  [
-    create(:shipping_method, name: 'Pick Up In-Store', days_min: 5,
-                             days_max: 20, price: 10.0),
-    create(:shipping_method, name: 'Delivery Next Day!', days_min: 3,
-                             days_max: 7, price: 5.0),
-    create(:shipping_method, name: 'Expressit', days_min: 2,
-                             days_max: 3, price: 15.0)
-  ]
+    [
+      create(:shipping_method, name: 'Pick Up In-Store', days_min: 5,
+                               days_max: 20, price: 10.0),
+      create(:shipping_method, name: 'Delivery Next Day!', days_min: 3,
+                               days_max: 7, price: 5.0),
+      create(:shipping_method, name: 'Expressit', days_min: 2,
+                               days_max: 3, price: 15.0)
+    ]
   end
+
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
@@ -30,6 +33,7 @@ RSpec.feature 'Checkout Delivery step' do
 
   context 'when Order has shipping method' do
     let(:shipping_method) { shipping_methods.sample }
+
     background do
       order.update_attributes(shipping_method: shipping_method)
       visit(order_checkout_index_path(order) + '/delivery')
@@ -55,6 +59,7 @@ RSpec.feature 'Checkout Delivery step' do
 
   context 'when user cliks Save and Continue button' do
     let(:shipping_method) { shipping_methods.sample }
+
     background do
       within 'table#shipping-methods' do
         find('span.radio-text', text: shipping_method.name).click

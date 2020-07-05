@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/devise'
 require 'support/factory_girl'
@@ -21,10 +23,10 @@ RSpec.describe ReviewsController, type: :controller do
       before { sign_in user }
 
       it 'creates a new Review' do
-        expect {
+        expect do
           post :create, params: { book_id: book.id, review: valid_attributes },
                         session: valid_session
-        }.to change(Review, :count).by(1)
+        end.to change(Review, :count).by(1)
       end
 
       it 'redirects to Book url' do

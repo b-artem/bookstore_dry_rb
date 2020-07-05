@@ -1,9 +1,21 @@
+# frozen_string_literal: true
+
+ruby '2.6.6'
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
+
+# dry-rb libraries
+gem 'dry-monads', '~> 1.3'
+gem 'dry-schema', '~> 1.4'
+gem 'dry-struct', '~> 1.2'
+gem 'dry-transformer', '~> 0.1'
+gem 'dry-types', '~> 1.2'
+gem 'dry-validation', '~> 1.4'
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
@@ -19,16 +31,15 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
-gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'kaminari', '~> 1.2'
 gem 'mini_magick', '~> 4.9'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.1', '>= 5.1.7'
 gem 'rails_admin', '1.3.0'
 gem 'rails_admin_aasm', '~> 0.1.1'
-gem 'rectify', '~> 0.10.0'
 gem 'sass-rails', '~> 5.0'
 gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 gem 'simple_form', '~> 5.0'
@@ -40,6 +51,10 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 3.5'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -62,4 +77,4 @@ group :test do
   gem 'simplecov', '~> 0.17.1', require: false
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

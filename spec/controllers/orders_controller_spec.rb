@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/devise'
 require 'support/factory_girl'
@@ -24,6 +26,7 @@ RSpec.describe Orders::OrdersController, type: :controller do
   describe 'GET #index' do
     context 'when user is a guest' do
       before { get :index, params: {}, session: valid_session }
+
       include_examples 'redirects to login page'
     end
 
@@ -32,6 +35,7 @@ RSpec.describe Orders::OrdersController, type: :controller do
         sign_in user
         get :index, params: {}, session: valid_session
       end
+
       include_examples 'returns code 200'
     end
   end
@@ -39,6 +43,7 @@ RSpec.describe Orders::OrdersController, type: :controller do
   describe 'GET #show' do
     context 'when user is a guest' do
       before { get :show, params: { id: order.id }, session: valid_session }
+
       include_examples 'redirects to login page'
     end
 
@@ -47,6 +52,7 @@ RSpec.describe Orders::OrdersController, type: :controller do
         sign_in user
         get :show, params: { id: order.id }, session: valid_session
       end
+
       include_examples 'returns code 200'
     end
   end
@@ -56,8 +62,11 @@ RSpec.describe Orders::OrdersController, type: :controller do
     let(:valid_session) { { cart_id: cart.id } }
 
     context 'when user is a guest' do
-      before { post :create, params: { order: valid_attributes },
-                             session: valid_session }
+      before do
+        post :create, params: { order: valid_attributes },
+                      session: valid_session
+      end
+
       include_examples 'redirects to login page'
     end
 
@@ -66,10 +75,10 @@ RSpec.describe Orders::OrdersController, type: :controller do
 
       context 'when cart is NOT empty' do
         it 'creates a new Order' do
-          expect {
+          expect do
             post :create, params: { order: valid_attributes },
                           session: valid_session
-          }.to change(Order, :count).by(1)
+          end.to change(Order, :count).by(1)
         end
 
         it 'redirects to Checkout' do

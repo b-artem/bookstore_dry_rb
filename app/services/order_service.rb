@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Services
   class OrderService
     def initialize(order:, cart:, session:)
@@ -13,16 +15,16 @@ module Services
 
     private
 
-      def add_line_items_to_order_from_cart
-        @cart.line_items.each do |item|
-          item.update(cart_id: nil, order_id: @order.id)
-        end
+    def add_line_items_to_order_from_cart
+      @cart.line_items.each do |item|
+        item.update(cart_id: nil, order_id: @order.id)
       end
+    end
 
-      def destroy_cart
-        Cart.destroy(@session[:cart_id])
-        @session.delete :cart_id
-        @session.delete :discount_id
-      end
+    def destroy_cart
+      Cart.destroy(@session[:cart_id])
+      @session.delete :cart_id
+      @session.delete :discount_id
+    end
   end
 end

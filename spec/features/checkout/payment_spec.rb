@@ -1,20 +1,26 @@
+# frozen_string_literal: true
+
 require 'support/factory_girl'
 require 'support/devise'
 require 'support/i18n'
 require 'rack_session_access/capybara'
 require 'support/wait_for_ajax'
+require 'support/dry_validation/payment_info'
 
 RSpec.feature 'Checkout Payment step' do
   let!(:user) { create :user }
+  let(:payment_information) { payment_info }
+  let(:fields) { %i[card_number name_on_card valid_until cvv] }
   let(:billing_address) { build :billing_address }
   let(:shipping_address) { build :shipping_address }
   let(:shipping_method) { create :shipping_method }
   let!(:order) do
     create(:order, user: user, billing_address: billing_address,
-           shipping_address: shipping_address, shipping_method: shipping_method)
+                   shipping_address: shipping_address, shipping_method: shipping_method)
   end
-  let(:payment_info) { build :payment_form }
-  let(:fields) { %w[card_number name_on_card valid_until cvv] }
+
+  include_context 'payment info'
+
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
@@ -51,17 +57,15 @@ RSpec.feature 'Checkout Payment step' do
       expect(page).to have_content(t('orders.checkout.payment.cvv'))
       expect(page).not_to have_button(t('orders.checkout.confirm.place_order'))
     end
-
   end
 
   private
 
-    def fill_payment_form
-      within 'form.new_payment' do
-        fields.each do |field|
-          fill_in(t("orders.checkout.payment.#{field}"),
-                  with: payment_info.public_send(field))
-        end
+  def fill_payment_form
+    within 'form.new_payment' do
+      fields.each do |field|
+        fill_in(t("orders.checkout.payment.#{field}"), with: payment_information[field])
       end
     end
+  end
 end

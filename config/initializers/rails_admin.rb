@@ -1,5 +1,6 @@
-RailsAdmin.config do |config|
+# frozen_string_literal: true
 
+RailsAdmin.config do |config|
   ### Popular gems integration
 
   ## == Devise ==
@@ -42,7 +43,7 @@ RailsAdmin.config do |config|
 
   config.model 'Review' do
     list do
-      scopes [:new_, :processed]
+      scopes %i[new_ processed]
       field :user
       field :book
       field :title
@@ -52,9 +53,9 @@ RailsAdmin.config do |config|
     end
 
     state({
-      events: {approve: 'btn-success', reject: 'btn-danger'},
-      states: {unprocessed: 'label-warning', rejected: 'label-danger', approved: 'label-success'}
-      # disable: [:dead] # disable some events so they are not shown.
-    })
+            events: { approve: 'btn-success', reject: 'btn-danger' },
+            states: { unprocessed: 'label-warning', rejected: 'label-danger', approved: 'label-success' }
+            # disable: [:dead] # disable some events so they are not shown.
+          })
   end
 end

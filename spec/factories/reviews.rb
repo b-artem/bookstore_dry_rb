@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :review do
     sequence(:title) { |n| "Review no. #{n}" }

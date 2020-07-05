@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   include AASM
 
@@ -17,18 +19,20 @@ class Order < ApplicationRecord
     event :pay do
       transitions from: :in_progress, to: :in_queue
       after do
-        update_attributes(completed_at: Time.now)
+        update(completed_at: Time.zone.now)
       end
     end
   end
 
   def shipping_address
     return super unless self[:use_billing_address_as_shipping]
+
     billing_address
   end
 
   def subtotal
     return 0 unless line_items.exists?
+
     line_items.sum(&:subtotal)
   end
 
@@ -39,13 +43,14 @@ class Order < ApplicationRecord
 
   def discount
     return 0 unless coupon
+
     subtotal * coupon.discount / 100
   end
 
   private
 
-    def generate_number
-      number = id.to_s.rjust(9, 'R00000000')
-      update_attributes(number: number)
-    end
+  def generate_number
+    number = id.to_s.rjust(9, 'R00000000')
+    update(number: number)
+  end
 end

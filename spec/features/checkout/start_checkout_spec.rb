@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'support/factory_girl'
 require 'support/devise'
@@ -6,10 +8,11 @@ require 'rack_session_access/capybara'
 
 RSpec.feature 'Start checkout' do
   let!(:cart) { create :cart, line_items: [create(:line_item, cart: Cart.last)] }
+
   background do
     page.set_rack_session(cart_id: cart.id)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return("seeds/covers/Agile1.jpg")
+      .and_return('seeds/covers/Agile1.jpg')
   end
 
   context 'when user clicks Checkout button' do

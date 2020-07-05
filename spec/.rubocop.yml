@@ -1,0 +1,22 @@
+inherit_from: ../.rubocop.yml
+
+Capybara/FeatureMethods:
+  EnabledMethods:
+    - background
+    - feature
+    - scenario
+
+Metrics/BlockLength:
+  Max: 50
+
+Rails/HttpStatus:
+  EnforcedStyle: numeric
+
+RSpec/ImplicitSubject:
+  EnforcedStyle: single_statement_only
+
+RSpec/MultipleExpectations:
+  Max: 2
+
+RSpec/NestedGroups:
+  Max: 4

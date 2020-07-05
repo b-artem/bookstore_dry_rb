@@ -2,7 +2,7 @@
 
 %h3.general-subtitle= t '.credit_card'
 
-= simple_form_for @payment, url: wizard_path, method: :put, class: 'max-600 mb-80',
+= simple_form_for @payment, as: :payment, url: wizard_path, method: :put, class: 'max-600 mb-80',
         defaults: { label_html: { class: 'control-label input-label' } } do |f|
   = f.input :card_number, as: :integer
   .row

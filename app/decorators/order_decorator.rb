@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderDecorator < Draper::Decorator
   delegate_all
 
@@ -15,6 +17,7 @@ class OrderDecorator < Draper::Decorator
 
   def completed_at_short_date
     return I18n.t('orders.orders.index.not_completed') unless object.completed_at
+
     I18n.l(object.completed_at, format: :date_short)
   end
 
