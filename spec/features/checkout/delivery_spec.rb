@@ -35,7 +35,7 @@ RSpec.feature 'Checkout Delivery step' do
     let(:shipping_method) { shipping_methods.sample }
 
     background do
-      order.update_attributes(shipping_method: shipping_method)
+      order.update(shipping_method: shipping_method)
       visit(order_checkout_index_path(order) + '/delivery')
     end
 

@@ -27,10 +27,10 @@ class Review < ApplicationRecord
   end
 
   scope :new_, lambda {
-    Review.where('status = ?', 'unprocessed')
+    self.where('status = ?', 'unprocessed')
   }
 
   scope :processed, lambda {
-    Review.where('status = ? OR status = ?', 'approved', 'rejected')
+    self.where('status = ? OR status = ?', 'approved', 'rejected')
   }
 end

@@ -28,7 +28,7 @@ class Book < ApplicationRecord
   }
 
   scope :popular_first_ids, lambda {
-    return Book.none unless LineItem.exists?
+    return self.none unless LineItem.exists?
 
     LineItem.select('line_items.book_id, sum(quantity) as total_quantity')
             .joins(:book)
