@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module Bookstore
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults '6.0'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Don't generate system test files.
@@ -22,6 +22,9 @@ module Bookstore
     end
 
     config.i18n.default_locale = :en
+
+    # https://guides.rubyonrails.org/autoloading_and_reloading_constants.html#%24load-path
+    config.add_autoload_paths_to_load_path = false
 
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

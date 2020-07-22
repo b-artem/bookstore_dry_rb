@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'order_service'
-
 class Orders::OrdersController < ApplicationController
   include CurrentOrder
   before_action :authenticate_user!
@@ -18,8 +16,8 @@ class Orders::OrdersController < ApplicationController
   def create
     @order = current_user.orders.create(coupon: @cart.coupon)
     set_current_order(@order)
-    Services::OrderService.new(order: @order, cart: @cart, session: session)
-                          .set_order_from_cart
+    OrderService.new(order: @order, cart: @cart, session: session)
+                .set_order_from_cart
     redirect_to order_checkout_index_path(@order)
   end
 
