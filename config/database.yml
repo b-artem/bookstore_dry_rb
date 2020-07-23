@@ -6,7 +6,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV.fetch("DB_HOST") { 'localhost' } %>
   port: 5432
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.credentials.database_password %>
 
 development: &development
   <<: *default
@@ -23,6 +23,7 @@ test:
   <<: *development
   database: bookstore_dry_rb_test
   username: rails_user
+  password: <%= ENV['DATABASE_PASSWORD'] || Rails.application.credentials.database_password %>
 
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:

@@ -26,5 +26,6 @@ spec/examples.txt
 .secrets.sh
 
 # Ignore application configuration
-/config/application.yml
-/config/initializers/figaro.rb
+/config/credentials/production.key
+/config/credentials/development.key
+/config/credentials/test.key

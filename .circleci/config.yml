@@ -11,8 +11,6 @@ executors:
       - image: circleci/ruby:2.6-node-browsers
         environment:
           RAILS_ENV: test
-          FACEBOOK_KEY: ''
-          FACEBOOK_SECRET: ''
           DATABASE_PASSWORD: 'bookstore_password'
       - image: circleci/postgres:12-alpine
         environment:
