@@ -14,9 +14,17 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Metrics/AbcSize:
+  Exclude:
+    - db/migrate/*
+
 Metrics/BlockLength:
   Exclude:
     - config/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*
 
 Rails:
   Enabled: true

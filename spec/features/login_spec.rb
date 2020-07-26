@@ -6,17 +6,15 @@ require 'support/i18n'
 
 RSpec.feature 'Login' do
   let(:user) { create :user }
-  let(:book) { create :book }
+  let(:book) { create :book, :with_cover }
 
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return('seeds/covers/Agile1.jpg')
     visit new_user_session_path
   end
 
   context 'when email and password are valid' do
-    background { create_list(:book, 3) }
+    background { create_list(:book, 3, :with_cover) }
     scenario 'logs user in' do
       within 'form#new_user' do
         fill_in 'email', with: user.email

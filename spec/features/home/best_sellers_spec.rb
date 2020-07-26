@@ -5,10 +5,10 @@ require 'support/factory_girl'
 require 'support/devise'
 
 RSpec.shared_examples 'best sellers' do
-  let(:bestseller_mob_dev) { create :book_mobile_development }
-  let(:bestseller_photo) { create :book_photo }
-  let(:bestseller_web_design) { create :book_web_design }
-  let(:bestseller_web_dev) { create :book_web_development }
+  let(:bestseller_mob_dev) { create :book_mobile_development, :with_cover }
+  let(:bestseller_photo) { create :book_photo, :with_cover }
+  let(:bestseller_web_design) { create :book_web_design, :with_cover }
+  let(:bestseller_web_dev) { create :book_web_development, :with_cover }
 
   background do
     create(:order, state: 'delivered', line_items: [
@@ -17,12 +17,10 @@ RSpec.shared_examples 'best sellers' do
              create(:line_item, book: bestseller_web_design),
              create(:line_item, book: bestseller_web_dev)
            ])
-    create_list(:book_mobile_development, 3)
-    create_list(:book_photo, 3)
-    create_list(:book_web_design, 3)
-    create_list(:book_web_development, 3)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return('seeds/covers/Agile1.jpg')
+    create_list(:book_mobile_development, 3, :with_cover)
+    create_list(:book_photo, 3, :with_cover)
+    create_list(:book_web_design, 3, :with_cover)
+    create_list(:book_web_development, 3, :with_cover)
     visit home_index_path
   end
 
