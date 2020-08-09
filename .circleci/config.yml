@@ -20,6 +20,7 @@ executors:
 caches:
   - &bundle_cache_strict v1-bundle-{{ checksum "Gemfile.lock" }}
   - &bundle_cache_fallback v1-bundle
+  - &yarn_cache v1-yarn
 
 commands:
   prepare:
@@ -36,6 +37,7 @@ commands:
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
+
       - run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)" --no-doc
       - restore_cache:
           keys:
@@ -48,6 +50,16 @@ commands:
           key: *bundle_cache_strict
           paths:
             - vendor/bundle
+
+      - restore_cache:
+          keys:
+            - *yarn_cache
+      - run: yarn install
+      - save_cache:
+          key: *yarn_cache
+          paths:
+            - node_modules
+
       - run:
           name: Set up DB
           command: |

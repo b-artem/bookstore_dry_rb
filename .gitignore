@@ -18,9 +18,6 @@
 coverage
 spec/examples.txt
 
-/node_modules
-/yarn-error.log
-
 .byebug_history
 
 .secrets.sh
@@ -31,3 +28,10 @@ spec/examples.txt
 /config/credentials/test.key
 
 /storage
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
