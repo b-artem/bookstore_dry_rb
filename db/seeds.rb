@@ -181,10 +181,10 @@ end
 unless Review.exists?
   Review.create!(
     [
-      { title: 'New review', text: 'Very cool book', score: 5, status: 'approved', book_id: 11, user_id: 2 },
-      { title: 'Review', text: 'Got 4 score', score: 4, status: 'approved', book_id: 11, user_id: 2 },
-      { title: 'Not a very good', text: 'Not a good', score: 3, status: 'rejected', book_id: 11, user_id: 2 },
-      { title: 'Nice book', text: 'Very nice book', score: 5, status: 'unprocessed', book_id: 11, user_id: 2 }
+      { title: 'New review', content: 'Very cool book', score: 5, status: 'approved', book_id: 11, user_id: 2 },
+      { title: 'Review', content: 'Got 4 score', score: 4, status: 'approved', book_id: 11, user_id: 2 },
+      { title: 'Not a very good', content: 'Not a good', score: 3, status: 'rejected', book_id: 11, user_id: 2 },
+      { title: 'Nice book', content: 'Very nice book', score: 5, status: 'unprocessed', book_id: 11, user_id: 2 }
     ]
   )
 end

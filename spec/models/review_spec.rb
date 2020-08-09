@@ -17,7 +17,7 @@ RSpec.describe Review, type: :model do
 
   describe 'ActiveModel validations' do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:text) }
+    it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to allow_value("Az7!#$%&'*+ -/=?^_`{|}~.").for(:title) }
     it { is_expected.to allow_value("Az7!#$%&'*+ -/=?^_`{|}~.").for(:title) }
 
@@ -26,13 +26,9 @@ RSpec.describe Review, type: :model do
                                          .with_message("Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. ")
     }
 
-    it {
-      is_expected.not_to allow_value('@').for(:text)
-                                         .with_message("Only allows letters, numbers or !#$%&'*+-/=?^_`{|}~. ")
-    }
+    it { is_expected.to allow_value('@').for(:content) }
 
     it { is_expected.to validate_length_of(:title).is_at_most(79) }
-    it { is_expected.to validate_length_of(:text).is_at_most(499) }
   end
 
   describe 'scopes' do

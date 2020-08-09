@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@rails/actiontext": "^6.0.3-2",
     "@rails/ujs": "^6.0.3-2",
     "@rails/webpacker": "5.1.1",
     "bootstrap": "3",
@@ -7,6 +8,7 @@
     "coffeescript": "1.12.7",
     "jquery": "^3.5.1",
     "raty-js": "^2.9.0",
+    "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {

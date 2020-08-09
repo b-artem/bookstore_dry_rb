@@ -37,3 +37,6 @@ import 'src/orders/checkout/use_billing_address'
 import 'src/orders/orders/filter'
 import 'src/reviews/raty'
 import 'src/settings/remove_account'
+
+require('trix')
+require('@rails/actiontext')
