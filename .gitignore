@@ -12,17 +12,26 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
 /public/uploads/*
 coverage
 spec/examples.txt
-
-/node_modules
-/yarn-error.log
 
 .byebug_history
 
 .secrets.sh
 
 # Ignore application configuration
-/config/application.yml
-/config/initializers/figaro.rb
+/config/credentials/production.key
+/config/credentials/development.key
+/config/credentials/test.key
+
+/storage
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

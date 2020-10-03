@@ -129,28 +129,29 @@ unless Book.exists?
   Author.find(14).books << Book.find(14)
 
   IMAGES_PATH = File.expand_path('app/assets/images/seeds/covers', Rails.root)
-  Image.create!(
-    [
-      { book_id: 11, image_url: File.open(IMAGES_PATH + '/Agile1.jpg') },
-      { book_id: 11, image_url: File.open(IMAGES_PATH + '/Agile2.jpg') },
-      { book_id: 11, image_url: File.open(IMAGES_PATH + '/Agile3.jpg') },
-      { book_id: 11, image_url: File.open(IMAGES_PATH + '/Agile4.jpg') },
-      { book_id: 14, image_url: File.open(IMAGES_PATH + '/Faded.jpg') },
-      { book_id: 15, image_url: File.open(IMAGES_PATH + '/Photos_changed.jpg') },
-      { book_id: 13, image_url: File.open(IMAGES_PATH + '/Photo_ark.jpg') },
-      { book_id: 12, image_url: File.open(IMAGES_PATH + '/Rails_Angular.jpg') },
-      { book_id: 10, image_url: File.open(IMAGES_PATH + '/html_css.jpg') },
-      { book_id: 9, image_url: File.open(IMAGES_PATH + '/web_design_html.jpg') },
-      { book_id: 7, image_url: File.open(IMAGES_PATH + '/Android_programming.jpg') },
-      { book_id: 6, image_url: File.open(IMAGES_PATH + '/Building_ecom.jpg') },
-      { book_id: 5, image_url: File.open(IMAGES_PATH + '/Learning_java.jpg') },
-      { book_id: 4, image_url: File.open(IMAGES_PATH + '/Learning_mobile_app.jpg') },
-      { book_id: 3, image_url: File.open(IMAGES_PATH + '/Xamarin.jpg') },
-      { book_id: 2, image_url: File.open(IMAGES_PATH + '/Mobile_app_dev.jpg') },
-      { book_id: 1, image_url: File.open(IMAGES_PATH + '/Hello_Android.jpg') },
-      { book_id: 8, image_url: File.open(IMAGES_PATH + '/javascript_jquery.jpg') }
-    ]
-  )
+
+  Book.find(1).images.attach(io: File.open("#{IMAGES_PATH}/hello_android.jpg" + ''), filename: 'hello_android.jpg')
+  Book.find(2).images.attach(io: File.open("#{IMAGES_PATH}/mobile_app_dev.jpg" + ''), filename: 'mobile_app_dev.jpg')
+  Book.find(3).images.attach(io: File.open("#{IMAGES_PATH}/xamarin.jpg" + ''), filename: 'xamarin.jpg')
+  Book.find(4).images.attach(io: File.open("#{IMAGES_PATH}/learning_mobile_app.jpg" + ''),
+                             filename: 'learning_mobile_app.jpg')
+  Book.find(5).images.attach(io: File.open("#{IMAGES_PATH}/learning_java.jpg" + ''), filename: 'learning_java.jpg')
+  Book.find(6).images.attach(io: File.open("#{IMAGES_PATH}/building_ecom.jpg" + ''), filename: 'building_ecom.jpg')
+  Book.find(7).images.attach(io: File.open("#{IMAGES_PATH}/android_programming.jpg" + ''),
+                             filename: 'android_programming.jpg')
+  Book.find(8).images.attach(io: File.open("#{IMAGES_PATH}/javascript_jquery.jpg" + ''),
+                             filename: 'javascript_jquery.jpg')
+  Book.find(9).images.attach(io: File.open("#{IMAGES_PATH}/web_design_html.jpg" + ''),
+                             filename: 'web_design_html.jpg')
+  Book.find(10).images.attach(io: File.open("#{IMAGES_PATH}/html_css.jpg" + ''), filename: 'html_css.jpg')
+  Book.find(11).images.attach(io: File.open("#{IMAGES_PATH}/agile1.jpg" + ''), filename: 'agile1.jpg')
+  Book.find(11).images.attach(io: File.open("#{IMAGES_PATH}/agile2.jpg" + ''), filename: 'agile2.jpg')
+  Book.find(11).images.attach(io: File.open("#{IMAGES_PATH}/agile3.jpg" + ''), filename: 'agile3.jpg')
+  Book.find(11).images.attach(io: File.open("#{IMAGES_PATH}/agile4.jpg" + ''), filename: 'agile4.jpg')
+  Book.find(12).images.attach(io: File.open("#{IMAGES_PATH}/rails_angular.jpg" + ''), filename: 'rails_angular.jpg')
+  Book.find(13).images.attach(io: File.open("#{IMAGES_PATH}/photo_ark.jpg" + ''), filename: 'photo_ark.jpg')
+  Book.find(14).images.attach(io: File.open("#{IMAGES_PATH}/faded.jpg" + ''), filename: 'faded.jpg')
+  Book.find(15).images.attach(io: File.open("#{IMAGES_PATH}/photos_changed.jpg" + ''), filename: 'photos_changed.jpg')
 end
 
 unless Order.exists?
@@ -180,10 +181,10 @@ end
 unless Review.exists?
   Review.create!(
     [
-      { title: 'New review', text: 'Very cool book', score: 5, status: 'approved', book_id: 11, user_id: 2 },
-      { title: 'Review', text: 'Got 4 score', score: 4, status: 'approved', book_id: 11, user_id: 2 },
-      { title: 'Not a very good', text: 'Not a good', score: 3, status: 'rejected', book_id: 11, user_id: 2 },
-      { title: 'Nice book', text: 'Very nice book', score: 5, status: 'unprocessed', book_id: 11, user_id: 2 }
+      { title: 'New review', content: 'Very cool book', score: 5, status: 'approved', book_id: 11, user_id: 2 },
+      { title: 'Review', content: 'Got 4 score', score: 4, status: 'approved', book_id: 11, user_id: 2 },
+      { title: 'Not a very good', content: 'Not a good', score: 3, status: 'rejected', book_id: 11, user_id: 2 },
+      { title: 'Nice book', content: 'Very nice book', score: 5, status: 'unprocessed', book_id: 11, user_id: 2 }
     ]
   )
 end

@@ -7,10 +7,8 @@ require 'capybara/rspec'
 
 RSpec.shared_examples 'latest books' do
   background do
-    create_list(:book, 5)
+    create_list(:book, 5, :with_cover)
     allow(Book).to receive(:best_seller).and_return(Book.first)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return('seeds/covers/Agile1.jpg')
     visit home_index_path
   end
 

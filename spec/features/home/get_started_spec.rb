@@ -6,12 +6,10 @@ require 'support/devise'
 
 RSpec.shared_examples 'get started' do
   background do
-    create :book_mobile_development
-    create :book_photo
-    create :book_web_design
-    create :book_web_development
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return('seeds/covers/Agile1.jpg')
+    create :book_mobile_development, :with_cover
+    create :book_photo, :with_cover
+    create :book_web_design, :with_cover
+    create :book_web_development, :with_cover
     visit home_index_path
   end
 

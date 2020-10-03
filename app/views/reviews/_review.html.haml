@@ -12,4 +12,5 @@
       - if review.score
         - review.score.times do
           %i.fa.fa-star.rate-star
-      %p= review.text
+      %p= review.title
+      = review.content

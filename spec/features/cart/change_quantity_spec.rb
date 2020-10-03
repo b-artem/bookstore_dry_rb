@@ -5,11 +5,9 @@ require 'support/factory_girl'
 require 'support/devise'
 
 RSpec.shared_examples 'changes quantity' do
-  let(:book) { create :book }
+  let(:book) { create :book, :with_cover }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return('seeds/covers/Agile1.jpg')
     visit home_index_path
   end
 

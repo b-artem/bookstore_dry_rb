@@ -37,7 +37,7 @@ RSpec.feature 'Checkout Payment step' do
   let(:billing_address) { build :billing_address }
   let(:shipping_address) { build :shipping_address }
   let(:shipping_method) { create :shipping_method }
-  let(:books) { build_list(:book, 2) }
+  let(:books) { create_list(:book, 2, :with_cover) }
   let(:line_items) do
     [create(:line_item, book: books[0]), create(:line_item, book: books[1])]
   end
@@ -55,8 +55,6 @@ RSpec.feature 'Checkout Payment step' do
     payment_fields.each do |field|
       page.set_rack_session(field => payment_information[field])
     end
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.thumb')
-      .and_return('seeds/covers/Agile1.jpg')
     visit(order_checkout_index_path(order) + '/confirm')
   end
 

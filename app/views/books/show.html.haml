@@ -61,7 +61,9 @@
       #star-rating
       %br
       = f.input :title, label: t('.review_title')
-      = f.input :text, label: t('.review_text')
+      = f.label t('.review_text')
+      = f.rich_text_area :content
+      %br
       = f.button :submit, t('.post_review'), class: 'btn'
 
   - else

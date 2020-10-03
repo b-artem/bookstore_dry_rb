@@ -7,12 +7,10 @@ require 'support/i18n'
 require 'rack_session_access/capybara'
 
 RSpec.feature 'Start checkout' do
-  let!(:cart) { create :cart, line_items: [create(:line_item, cart: Cart.last)] }
+  let!(:cart) { create :cart, line_items: [create(:line_item, :with_cover, cart: Cart.last)] }
 
   background do
     page.set_rack_session(cart_id: cart.id)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url')
-      .and_return('seeds/covers/Agile1.jpg')
   end
 
   context 'when user clicks Checkout button' do

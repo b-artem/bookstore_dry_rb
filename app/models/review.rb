@@ -6,12 +6,15 @@ class Review < ApplicationRecord
   belongs_to :book
   belongs_to :user
 
-  validates :title, :text,
+  has_rich_text :content
+
+  validates :title,
             presence: true,
+            length: { maximum: 79 },
             format: { with: %r{\A[a-zA-Z0-9 !#\$%&'\*\+-=/\?\^\_`\{\}\|~\.]+\z},
                       message: I18n.t('models.review.title_symbols') }
-  validates :title, length: { maximum: 79 }
-  validates :text, length: { maximum: 499 }
+
+  validates :content, presence: true, length: { maximum: 1000 }
 
   aasm column: 'status' do
     state :unprocessed, initial: true
@@ -27,10 +30,10 @@ class Review < ApplicationRecord
   end
 
   scope :new_, lambda {
-    Review.where('status = ?', 'unprocessed')
+    where('status = ?', 'unprocessed')
   }
 
   scope :processed, lambda {
-    Review.where('status = ? OR status = ?', 'approved', 'rejected')
+    where('status = ? OR status = ?', 'approved', 'rejected')
   }
 end
